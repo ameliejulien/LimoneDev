@@ -40,6 +40,8 @@
     public $mail;
     public $nomUtilisateur;
     public $motDePasse;
+
+    
   }
   
 
