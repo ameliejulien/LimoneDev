@@ -101,7 +101,7 @@ class Panier
         foreach ($this->listeProduit as $produit) {
             if (!in_array($produit, $listProduitBDDNonSupprimer)) {
                 // Supprime le produit du panier car il n'est plus présent
-                $this->supprimerPanier($produit);
+                $this->supprimerProduit($produit);
                 $listeProduitSupprime = $produit;
             }
         }
