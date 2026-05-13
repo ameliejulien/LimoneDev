@@ -111,4 +111,9 @@ class Panier
 
         return json_encode($listeRetournee);
     }
+
+    public function getPanier()
+    {
+        return json_decode($_COOKIE['panier']);
+    }
 }
