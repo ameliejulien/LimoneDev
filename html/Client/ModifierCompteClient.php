@@ -15,7 +15,7 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img src="johncena.jpeg" alt="Photo de profil" class="profile-picture">
+        <img src="johncena.jpeg" alt="Photo de profil" class="profile-picture" onclick="document.getElementById('willChangeImage').src='henriche.png'">
       </div>
 
       <div class="divForm">
