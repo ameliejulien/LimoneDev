@@ -57,7 +57,7 @@ class Panier
      * Supprimer un produit du panier et du cookie
      * @param int $produitId id du produit à supprimer
      */
-    public function supprimerPanier(int $produitId)
+    public function supprimerProduit(int $produitId)
     {
         if ($_COOKIE['panier'] != null) {
             $this->listeProduit = (array) json_decode($_COOKIE['panier']);
