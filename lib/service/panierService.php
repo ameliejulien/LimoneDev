@@ -73,4 +73,41 @@ class Panier
             setcookie('panier', json_encode($this->listeProduit));
         }
     }
+
+    /**
+     * Valide le panier, verifie tous les produits pour voir si tous les produits du panier sont encore dans la BDD et sépare les valides des invalides.
+     * @return JSON retourne un JSON de fromat : {"valide":["id_1", "id_2", ..."], "manquants":["id_1", ...]}
+     */
+    public function validerPanier() {
+        $listeProduit = json_decode($_COOKIE['panier']);
+
+        // Recupére la table des produits pour vérifier si tous les produits du panier sont présent dans la BDD
+        $query = "SELECT id_produit, produit_supprime FROM Produit";
+        // Todo récup le tableau d'id produit 
+        $produitBDD = [];
+        $listProduitBDDNonSupprimer = [];
+
+        // Garde seuelement les id qui ne sont pas supprimer
+        foreach ($produitBDD as $valueBDD) {
+            // Vérifie si le produit n'est pas supprimé
+            if ($valueBDD['produit_supprime'] == false) {
+                $listProduitBDDNonSupprimer = $valueBDD['id_produit'];
+            }
+        }       
+
+        $listeProduitSupprime = [];
+
+        foreach ($this->listeProduit as $produit) {
+            if (!in_array($produit, $listProduitBDDNonSupprimer)) {
+                // Supprime le produit du panier car il n'est plus présent
+                $this->supprimerPanier($produit);
+                $listeProduitSupprime = $produit;
+            }
+        }
+
+        $listeRetournee['valides'] = $this->listeProduit;
+        $listeRetournee['manquants'] = "$listeProduitSupprime";
+
+        return json_encode($listeRetournee);
+    }
 }
