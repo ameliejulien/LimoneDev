@@ -1,0 +1,42 @@
+:root {
+  --titre-font: "Lovelo";
+  --sous-titre-font: "Alatsi";
+  --texte-font: "Farro";
+}
+
+body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    border:solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em, 5em;
+    gap: 1em;
+    margin: 0;
+    padding: 2em 5em;
+    width: fit-content;
+    font-family: var(--texte-font);
+    
+
+}
+
+label{
+    font-size: 1.5em;
+}
+
+
+.divForm {
+    display: flex;
+    flex-direction: column;
+    gap:0.25em;
+}
+
+h1{
+    font-size: 3em;
+}
+
