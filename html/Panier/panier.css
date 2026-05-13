@@ -1,0 +1,65 @@
+.cart,
+.article {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1em;
+}
+
+.cart {
+    padding-left: 1em;
+}
+
+:root {
+    --titre-font: "Lovelo";
+    --sous-titre-font: "Alatsi";
+    --texte-font: "Farro";
+}
+
+form {
+    border: solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em, 5em;
+    gap: 1em;
+    margin: 0;
+    padding: 2em 5em;
+    width: fit-content;
+    font-family: var(--texte-font);
+}
+
+label {
+    font-size: 1.5em;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.article-name {
+    font-size: 1.5em;
+}
+
+.article-container {
+    padding: 1em;
+}
+
+.article-description {
+    font-size: 1.2em;
+}
+
+.article-price {
+    font-size: 2em;
+    align-self: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-self: flex-end;
+}
+
+.article {
+    display: flex;
+}
