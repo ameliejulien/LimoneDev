@@ -15,7 +15,8 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img src="johncena.jpeg" alt="Photo de profil" class="profile-picture" onclick="document.getElementById('willChangeImage').src='henriche.png'">
+        <img id="changementImage" src="johncena.jpeg" alt="Photo de profil" class="profile-picture">
+        <input type="file" name="picture" accept="image/*" onchange="document.getElementById('changementImage')">
       </div>
 
       <div class="divForm">
@@ -47,6 +48,7 @@
         <label for="address">Ville</label>
         <input type="text" name="address" required>
       </div>
+      <input type="submit" value="Enregistrer les modifications"/>
     </form>
   </body>
 </html>
