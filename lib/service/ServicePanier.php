@@ -1,14 +1,9 @@
 <?php
-include './html/Produit/Produit.php';
+include '../../html/Produit/Produit.php';
 include './connect_params.php';
 
 $listeProduit = [];
 $utilisateurId;
-
-function __construct(int $utilisateurId)
-{
-    $utilisateurId = $utilisateurId;
-}
 
 /**
  * Prend en paramètre un produit déjà initialisé
