@@ -78,7 +78,8 @@ class Panier
      * Valide le panier, verifie tous les produits pour voir si tous les produits du panier sont encore dans la BDD et sépare les valides des invalides.
      * @return JSON retourne un JSON de fromat : {"valide":["id_1", "id_2", ..."], "manquants":["id_1", ...]}
      */
-    public function validerPanier() {
+    public function validerPanier()
+    {
         $listeProduit = json_decode($_COOKIE['panier']);
 
         // Recupére la table des produits pour vérifier si tous les produits du panier sont présent dans la BDD
@@ -93,7 +94,7 @@ class Panier
             if ($valueBDD['produit_supprime'] == false) {
                 $listProduitBDDNonSupprimer = $valueBDD['id_produit'];
             }
-        }       
+        }
 
         $listeProduitSupprime = [];
 
