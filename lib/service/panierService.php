@@ -1,0 +1,113 @@
+<?php
+include './html/Produit/Produit.php';
+include './connect_params.php';
+
+class Panier
+{
+    private $listeProduit = [];
+    private $utilisateurId;
+
+    public function __construct(int $utilisateurId)
+    {
+        $this->utilisateurId = $utilisateurId;
+    }
+
+    /**
+     * Prend en paramètre un produit déjà initialisé
+     * @param int $produitId La variable produitId qui est à ajouter
+     */
+    public function ajouterProduit(int $produitId)
+    {
+
+        // todo finir la querry pour verifier si le produit est encore là
+        $query = "SELECT * from ";
+
+        // todo Requete bdd pour verifier si le produit est encoer dans la bdd   
+        $res = null;
+
+        if ($res == true) {
+            // Save dans les cookies
+            if ($_COOKIE['panier'] == null) { // cookie pas encore créé
+                $this->listeProduit[] = $produitId;
+            } else { // cookie créé
+                $this->listeProduit = (array) json_decode($_COOKIE['panier']);
+            }
+
+            // Modifie la liste de produit dans le cookie
+            setcookie('panier', json_encode($this->listeProduit));
+
+            // Save dans la BDD
+            /*
+            if ($userId != null) {
+                $quantite = 0;
+                foreach ($listeProduit as $produitDansList) {
+                    if ($produitId == $produitDansList) {
+                        $quantite++;
+                    }
+                }
+
+                // Préparation de la query pour ajout à la bdd
+                $query = "INSERT INTO Panier (product_id, user_id, quantity) VALUES($produitId, $this->utilisateurId, $quantite)";
+            }
+            */
+        }
+    }
+
+    /**
+     * Supprimer un produit du panier et du cookie
+     * @param int $produitId id du produit à supprimer
+     */
+    public function supprimerPanier(int $produitId)
+    {
+        if ($_COOKIE['panier'] != null) {
+            $this->listeProduit = (array) json_decode($_COOKIE['panier']);
+
+            // Passe à traver toutes valeurs de la liste de produit et supprime ceux qui sont égale au produit id
+            for ($i = 0; $i < sizeof($this->listeProduit); $i++) {
+                if ($this->listeProduit[$i] == $produitId) {
+                    unset($this->listeProduit[$i]);
+                }
+            }
+
+            // Sauvegarde le cookie avec le produit supprimer
+            setcookie('panier', json_encode($this->listeProduit));
+        }
+    }
+
+    /**
+     * Valide le panier, verifie tous les produits pour voir si tous les produits du panier sont encore dans la BDD et sépare les valides des invalides.
+     * @return JSON retourne un JSON de fromat : {"valide":["id_1", "id_2", ..."], "manquants":["id_1", ...]}
+     */
+    public function validerPanier() {
+        $listeProduit = json_decode($_COOKIE['panier']);
+
+        // Recupére la table des produits pour vérifier si tous les produits du panier sont présent dans la BDD
+        $query = "SELECT id_produit, produit_supprime FROM Produit";
+        // Todo récup le tableau d'id produit 
+        $produitBDD = [];
+        $listProduitBDDNonSupprimer = [];
+
+        // Garde seuelement les id qui ne sont pas supprimer
+        foreach ($produitBDD as $valueBDD) {
+            // Vérifie si le produit n'est pas supprimé
+            if ($valueBDD['produit_supprime'] == false) {
+                $listProduitBDDNonSupprimer = $valueBDD['id_produit'];
+            }
+        }       
+
+        $listeProduitSupprime = [];
+
+        foreach ($this->listeProduit as $produit) {
+            if (!in_array($produit, $listProduitBDDNonSupprimer)) {
+                // Supprime le produit du panier car il n'est plus présent
+                $this->supprimerPanier($produit);
+                $listeProduitSupprime = $produit;
+            }
+        }
+
+        $listeRetournee['valides'] = $this->listeProduit;
+        $listeRetournee['manquants'] = "$listeProduitSupprime";
+
+        return json_encode($listeRetournee);
+    }
+}
