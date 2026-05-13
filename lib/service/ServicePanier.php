@@ -3,7 +3,7 @@ include '../../html/Produit/Produit.php';
 include './connect_params.php';
 
 $listeProduit = [];
-$utilisateurId;
+$utilisateurId = null;
 
 /**
  * Prend en paramètre un produit déjà initialisé
