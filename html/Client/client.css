@@ -21,8 +21,13 @@ form{
     padding: 2em 5em;
     width: fit-content;
     font-family: var(--texte-font);
+    background-color: #b3d3bc;
     
 
+}
+.submit { 
+    background-color: #fffdea;
+    padding: 0.3em;
 }
 
 label{
@@ -38,5 +43,10 @@ label{
 
 h1{
     font-size: 3em;
+    color: #1C6D80;
+}
+
+body{
+    background-color: #fffdea;
 }
 

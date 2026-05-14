@@ -36,7 +36,7 @@
       <label for="confMdp">Confirmation du mot de passe</label>
       <input type="password" name="confMdp" required  minlength="8">
     </div>
-    <input type="submit" value="S'inscrire"/>
+    <input type="submit" value="S'inscrire" class="submit"/>
   </form>
 
 </body>

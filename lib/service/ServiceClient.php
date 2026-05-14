@@ -69,7 +69,6 @@
         $inputVide = champVide($client);
 
 
-
         if ($mdpEgaux) {
             $code_retour = ajouterClientBdd($client);
             
