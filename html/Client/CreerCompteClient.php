@@ -21,6 +21,11 @@
       <label for="username">Nom d'utilisateur</label>
       <input type="text" name="username" required>
     </div>
+
+    <div class="divForm">
+      <label for="telephone">Numéro de téléphone</label>
+      <input type="tel" name="telephone" required placeholder="exemple : 0606060606">
+    </div>
     
     <div class="divForm">
       <label for="mdp">Mot de passe</label>
@@ -34,55 +39,5 @@
     <input type="submit" value="S'inscrire"/>
   </form>
 
-
-
-<?php
-
-  // méthodes liées aux informations bancaires ?
-  
-  
-
-  /**
-   * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription,
-   * cette fonction redirige vers la page de connexion
-   
-   * @Return Un object Client en base de données
-   */
-  function confimerInscirption() {
-
-    // Récupération des champs du formulaire
-    $mail = strtolower($_POST["mail"]);
-    $nomUtilisateur = $_POST["username"];
-    $mdp = $_POST["mdp"];
-    $confMdp = $_POST["confMdp"];
-
-    // Comparaison des mots de passe
-    $mdpEgaux = ($mdp == $confMdp);
-
-    if ($mdpEgaux) {
-      $client = new Client($mail, $nomUtilisateur, $mdp);
-    ?>
-      <script>alert('compte créé avec succès')</script>
-      
-    <?php
-
-      echo "mail : $mail";
-      // TODO : changer pour mettre le chemin de la page de connexion
-      //header("Location: https://fr.wiktionary.org/wiki/jaaj");
-      //exit;
-    
-      } else {
-        ?>
-        <script>alert('échec de création du compte')</script>";
-        <?php
-    }
-  }
-
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    confimerInscirption();
-  }
-
-
-?>
 </body>
 </html>
