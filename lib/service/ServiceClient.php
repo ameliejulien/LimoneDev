@@ -65,12 +65,15 @@
 
         // Comparaison des mots de passe
         $mdpEgaux = ($mdp == $confMdp);
-        $client = new Client($mail, $nomUtilisateur, $mdp, $numTelephone);
+
+        // hash du mot de passe
+        $hashMdp =  hash('sha256', $client->motDePasse);
+        $client = new Client($mail, $nomUtilisateur, $hashMdp, $numTelephone);
         $inputVide = champVide($client);
 
 
         if ($mdpEgaux) {
-            $code_retour = ajouterClientBdd($client);
+            // TODO : repo -> ajouterClientBdd($client);
             
         } else {
             $code_retour = 400;
@@ -96,30 +99,18 @@
     }
 
     /**
-     * @Brief ajoute une instance dans utilisateur et client en bdd
-     * @Params prends un instance de client en paramètre
-     * @Returns un code rest retourné en cas d'erreur
+     * @Brief récupère le mail et le mot de passe au client et transfère les informations au service
+     * @Returns booléen de connexion et un message si la connexion échoue
      */
-    function ajouterClientBdd(Client $client) {
-
-        $mdpHash =  hash('sha256', $client->motDePasse);
-        $retour; // a ajuster en fonction de la valeur du code
-
-        // requête création Client (dans la table utilisateur)
-        $requeteUtilisateur =   "INSERT INTO limone.Utilisateur (email_utilisateur, mdp_utilisateur, type_utilisateur)".
-                                "VALUES ('{$client->mail}','$mdpHash','{$client->type}') RETURNING id_utilisateur;";
-
-        // récupération du client
-        $idClient;
+    function connexionClient() {
         
-        // requête création Client (dans la table Client)
-        $requeteClient = "INSERT INTO limone.Client (id_client)".
-        "VALUES ('$idClient');";
+        // récupération du login + mdp
+        $mail = strtolower($_POST["mail"]);
+        $mdp = $_POST["mdp"];
+        $hashMdp = hash('sha256', $client->motDePasse);
 
-        return $retour;
-        
-    }
-
+        // TODO : repo -> getClient($mail, $hashMdp);
     
+    }
 
 ?>
