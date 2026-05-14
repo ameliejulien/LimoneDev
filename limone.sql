@@ -74,7 +74,6 @@ CREATE TABLE limone.Vendeur (
     id_vendeur int,
     denomination_vendeur varchar(30),
     siret_vendeur bigint,
-    ca_vendeur numeric,
     addresse_vendeur int,
     CONSTRAINT fk1_vendeur FOREIGN KEY (id_vendeur) REFERENCES limone.Utilisateur(id_utilisateur),
     CONSTRAINT fk2_vendeur FOREIGN KEY (addresse_vendeur) REFERENCES limone.Adresse(id_adresse),
