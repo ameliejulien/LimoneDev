@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fffdea;
+}
+body h1 {
+  font-size: 3em;
+  color: #1C6D80;
+  font-family: "Lovelo";
+}
+
+form {
+  border: solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 5em;
+  gap: 1em;
+  margin: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: "Farro", sans-serif;
+  background-color: #b3d3bc;
+}
+form .submit {
+  background-color: #fffdea;
+  padding: 0.3em;
+}
+form label {
+  font-size: 1.5em;
+  font-family: "Farro";
+}
+form .divForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+form .divForm h2 {
+  font-family: "Alatsi";
+}/*# sourceMappingURL=paiement.css.map */

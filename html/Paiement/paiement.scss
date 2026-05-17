@@ -1,0 +1,57 @@
+// Variables à placer dans un autre fichier
+$font-titre: "Lovelo";
+$font-sous-titre: "Alatsi";
+$font-texte: "Farro";
+
+$bg-body: #fffdea;
+$bg-form: #b3d3bc;
+$bg-submit: #fffdea;
+$text-color: #1C6D80;
+
+// Body
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: $bg-body;
+
+  h1 {
+    font-size: 3em;
+    color: $text-color;
+    font-family: $font-titre;
+  }
+}
+
+// Form
+form {
+  border: solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 5em; 
+  gap: 1em;
+  margin: 0;
+  width: fit-content;
+  font-family: $font-texte, sans-serif; 
+  background-color: $bg-form;
+
+  .submit {
+    background-color: $bg-submit;
+    padding: 0.3em;
+  }
+
+  label {
+    font-size: 1.5em;
+    font-family: $font-texte;
+  }
+
+  .divForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    
+    h2 {
+      font-family: $font-sous-titre;
+    }
+  }
+}
