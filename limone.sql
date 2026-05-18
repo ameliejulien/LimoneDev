@@ -190,17 +190,6 @@ CREATE TABLE limone.Categorie_Produit (
 );
 
 
--- =================================
--- ======= Liste_Produits ==========
--- =================================
-CREATE TABLE limone.Liste_Produits (
-    id_client int,
-    id_produit int,
-    CONSTRAINT fk1_liste_produit FOREIGN KEY(id_client) REFERENCES limone.Client(id_client),
-    CONSTRAINT fk2_liste_produit FOREIGN KEY(id_produit) REFERENCES limone.Produit(id_produit),
-    CONSTRAINT pk_liste_produit PRIMARY KEY (id_client, id_produit)
-);
-
 -- =======================
 -- ======= Etat ==========
 -- =======================
@@ -211,9 +200,9 @@ CREATE TABLE limone.Etat (
 );
 
 
--- =================================
--- ======= Liste Produits ==========
--- =================================
+-- ===========================
+-- ======= Commande ==========
+-- ===========================
 CREATE TABLE limone.Commande (
     id_commande serial,
     etat int,
