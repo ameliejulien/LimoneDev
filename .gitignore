@@ -1,3 +1,4 @@
 .env
 .vscode
 images
+connect_params.php
