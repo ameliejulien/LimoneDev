@@ -3,11 +3,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="paiement.css">
-    <title>Compte Client</title>
+    <title>Paiement</title>
 </head>
 <main>
     <h1>Paiement</h1>
-    <form method="POST" action="../API/validerPaiement.php">
+    <form method="POST" action="./PaiementValider.php">
         <div class="divForm">
             <h2>Contact</h2>
             <label for="prenom">Prénom</label>
