@@ -7,8 +7,8 @@ CREATE SCHEMA limone;
 -- =======================
 CREATE TABLE limone.Adresse (
     id_adresse serial PRIMARY KEY,
-    addresse varchar(30),
-    ville_addresse varchar (20),
+    adresse varchar(30),
+    ville_adresse varchar (30),
     code_postal_adresse varchar(5),
     facturation_adresse boolean
 );
@@ -39,7 +39,7 @@ CREATE TABLE limone.Type (
 -- ===========================
 CREATE TABLE limone.Utilisateur (
     id_utilisateur serial PRIMARY KEY,
-    email_utilisateur varchar(20),
+    email_utilisateur varchar(320),
     mdp_utilisateur varchar(72),
     pp_utiisateur bytea,
     type_utilisateur int,
@@ -86,7 +86,7 @@ CREATE TABLE limone.Vendeur (
 -- =========================
 CREATE TABLE limone.Produit (
     id_produit serial PRIMARY KEY,
-    nom_produit varchar(30),
+    nom_produit varchar(100),
     description_produit text,
     prix_ht_produit numeric,
     stock_produit int,
