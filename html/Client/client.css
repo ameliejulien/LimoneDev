@@ -16,15 +16,20 @@ form{
     display: flex;
     flex-direction: column;
     padding: 1em, 5em;
-    gap: 1em;
+    gap: 1.75em;
     margin: 0;
     padding: 2em 5em;
     width: fit-content;
     font-family: var(--texte-font);
-    background-color: #b3d3bc;
-    
-
+    background-color: #b3d3bc; 
 }
+
+
+.divForm input{
+    height: 2em;
+}
+
+
 .submit { 
     background-color: #fffdea;
     padding: 0.3em;
