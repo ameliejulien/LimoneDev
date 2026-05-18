@@ -16,4 +16,24 @@ function connecterBDD() {
     }
 }
 
+/**
+ * Permet d'envoyer une requete à la base de donner en lui indiquant la table à affecter
+ * @param String $query requete à envoyer à la BDD
+ * @return String[] Retourne le résultat de la requete
+ */
+function faireRequeteBDD(String $query) {
+    $dbh = connecterBDD();
+
+    $resultat[] = "";
+
+    // Évite les injections SQL
+    $requetePreparee = $dbh->prepare($query);
+
+    foreach($dbh->query($requetePreparee) as $row) {
+        $resultat[] = $row;
+    }
+
+    return $resultat;
+}
+
 ?>
