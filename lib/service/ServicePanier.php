@@ -109,4 +109,3 @@ function getPanier()
 {
     return json_decode($_COOKIE['panier']);
 }
-

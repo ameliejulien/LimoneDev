@@ -3,7 +3,7 @@ require "../../lib/service/servicePanier.php";
 
 header('Content-Type: application/json');
 // autoriser les requêtes cross-origin
-header('Access-Control-Allow-Origin: *'); // todo Verifier 
+header('Access-Control-Allow-Origin: *'); 
 
 $data = getPanier();
 

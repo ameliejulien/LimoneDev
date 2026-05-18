@@ -7,7 +7,9 @@ function validerFormulaire() {
     $champsVide = false;
 
     foreach ($valeurs as $valeur) {
-        if ($valeur.trim().empty()) {
+        $estVide = trim($valeur) === "";
+
+        if ($estVide) {
             $champsVide = true;
             return false;
         }
@@ -15,8 +17,9 @@ function validerFormulaire() {
 
     if ($champsVide) {
         return false;
-    } else {
+    } else { // Valider la commande (la mettre en BDD)
         // Todo Verification plus profonde : chaque champs un par un
+        $_POST[''];
 
         // Communication avec la banque
         return true;
