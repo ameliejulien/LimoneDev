@@ -15,18 +15,18 @@
         $mdp = $client["motDePasse"];
         $confMdp = $client["confMotDePasse"];
         $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
-        $code_retour;
+        $codeRetour;
 
         // Comparaison des mots de passe
         $mdpEgaux = ($mdp == $confMdp);
 
         if ($mdpEgaux && !champVide($client)) {
-            $code_retour = creerClientBdd($client);
+            $codeRetour = creerClientBdd($client);
             
         } else {
-            $code_retour = 400; 
+            $codeRetour = 400; 
         }
-        return $code_retour;
+        return $codeRetour;
     }
 
     /**
@@ -41,5 +41,24 @@
             }
         }
         return false;
+    }
+
+    /**
+     * @Brief renvoie une requête dans la BDD pour vérifier si le client peut se connecter
+     * @Param une map avec les valeurs du formulaire
+     * @Retuns un code de réussite ou d'erreur (200 ou 400)
+     */
+    function connexionClient($client) {
+        $client["mail"] = strtolower($client["mail"]);
+        $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
+        $retour = connecterClient($client);
+
+        if ($retour == false ) {
+            $codeRetour = 400;
+        } else {
+            $codeRetour = 200;
+        }
+
+        return $codeRetour;
     }
 ?>

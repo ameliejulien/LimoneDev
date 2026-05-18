@@ -7,27 +7,45 @@
      * @Returns un code rest retourné en cas d'erreur
      */
     function creerClientBdd($client) {
-        $connectBDD = connecterBDD();
-        $requeteUtilisateur =   "INSERT INTO limone.Utilisateur (email_utilisateur, mdp_utilisateur, type_utilisateur)".
+        if (!chercherClient($client)) {
+            $codeRetour = 200;
+            $connectBDD = connecterBDD();
+            $requeteUtilisateur =   "INSERT INTO limone.Utilisateur (email_utilisateur, mdp_utilisateur, type_utilisateur)".
                                 "VALUES ('{$client["mail"]}','{$client["motDePasse"]}','1') RETURNING id_utilisateur;";
         
         
        
-        $requetePreparee = $connectBDD->prepare($requeteUtilisateur);
-        $requetePreparee->execute(); // faire un return pour un cas différent
+            $requetePreparee = $connectBDD->prepare($requeteUtilisateur);
+            try {
+                $requetePreparee->execute(); 
+            } catch (Exception $e){
+                echo "code erreur recuperation : ". $e->getCode();
+                $codeRetour = $e->getCode();
+            }
+        
     
     
-        // récupération du client avec le returning
-        $row = $requetePreparee->fetch(PDO::FETCH_ASSOC);
-        $id = $row['id_utilisateur'];
-        
-        // requête création Client (dans la table Client)
-        $requeteClient = "INSERT INTO limone.Client (id_client) VALUES ('$id');";
-        
-        $requeteClientPreparee = $connectBDD->prepare($requeteClient);
-        $requeteClientPreparee->execute();
+            // récupération du client avec le returning
+            $row = $requetePreparee->fetch(PDO::FETCH_ASSOC);
+            $id = $row['id_utilisateur'];
+            
+            // requête création Client (dans la table Client)
+            $requeteClient = "INSERT INTO limone.Client (id_client) VALUES ('$id');";
+            
+            $requeteClientPreparee = $connectBDD->prepare($requeteClient);
+            
+            try {
+                $requeteClientPreparee->execute();
+            } catch (Exception $e){
+                echo "code erreur insertion : ". $e->getCode();
+                $codeRetour = $e->getCode();
+            }
 
-        return 200;
+        } else {
+            $codeRetour = 409;
+        }
+        
+        return $codeRetour;
     }
 
 
@@ -36,10 +54,38 @@
      * @Params prends un mail en paramètre
      * @Returns le résultat de la requête
      */
-    function connecterClient($mail, $hashMdp) {
-        $requete =   "SELECT email_utilisateur FROM limone.Utilisateur WHERE email_utilisateur = '$mail' AND mdp_utilisateur = '$hashMdp'";
+    function connecterClient($client) {
+        
+        $connectBDD = connecterBDD();
+        // requête
+        $requete =   "SELECT email_utilisateur FROM limone.Utilisateur".
+        " WHERE email_utilisateur = '{$client["mail"]}' AND mdp_utilisateur = '{$client["motDePasse"]}'";
+        $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->execute(); 
+        
+        // résultat de la requête
+        $row = $requetePreparee->fetch(PDO::FETCH_ASSOC);
 
-        // TODO : sauvegarder le retour de la requête
+        return $row !== false;
 
+    }
+
+    /**
+     * @Brief cherche l'existence d'un client via son email
+     * @Params prends un mail en paramètre
+     * @Returns booléen dépendant de l'existance du client
+     */
+    function chercherClient($client) {
+        $connectBDD = connecterBDD();
+        // requête
+        $requete =   "SELECT email_utilisateur FROM limone.Utilisateur".
+        " WHERE email_utilisateur = '{$client["mail"]}'";
+        $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->execute(); 
+        
+        // résultat de la requête
+        $row = $requetePreparee->fetch(PDO::FETCH_ASSOC);
+
+        return $row !== false;
     }
 ?>

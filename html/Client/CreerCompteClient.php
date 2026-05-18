@@ -62,9 +62,22 @@
       .then(response => response.json())  // transforme la réponse http en json exploitable
       .then(json => {
         console.log(json);      // test affichage retour
-        alert("Compte créé !"); // alert de la création du compte
+        if (json.reponse == 200) {
+          alert("Compte créé !"); // alert de la création du compte
+          window.location.href = "ConnexionCompteClient.php";
+        
+        } else if (json.reponse == 409) {
+          alert("Echec de création de compte : email déjà utilisé");
+        
+        } else {
+          alert("Echec de création de compte");
+        } 
+        
       
       })
+      .catch(err => {
+        console.error("Erreur :", err); 
+      });
     });
 </script>
 </body>
