@@ -1,5 +1,5 @@
 <?php
-  include "ClassClient.php";
+  include "ServiceClient.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
