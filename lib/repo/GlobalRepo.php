@@ -12,6 +12,7 @@ function connecterBDD(): PDO {
 
         if ($dbh === null) {
             $dbh = new PDO("$driver:host=$server;dbname=$dbName", $dbUser, $dbPassword);
+            $dbh->exec("SET SCHEMA 'limone';");
         }
 
         return $dbh;
