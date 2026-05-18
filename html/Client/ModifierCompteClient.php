@@ -15,8 +15,8 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img id="changementImage" src="johncena.jpeg" alt="Photo de profil" class="profile-picture">
-        <input type="file" name="picture" accept="image/*" onchange="document.getElementById('changementImage')">
+        <img id="changementImage" src="johncena.jpeg" alt="Photo de profil" class="photoProfil">
+        <input type="file" name="picture" accept="image/*" onchange="changerImage(event)">
       </div>
 
       <div class="divForm">
@@ -52,3 +52,16 @@
     </form>
   </body>
 </html>
+
+<script>
+  function changerImage(event) {
+    const fichier = event.target.files[0];
+    if (fichier) {
+      const lecture = new FileReader();
+      lecture.onload = function(selec) {
+        document.getElementById('changementImage').src = selec.target.result;
+      }
+      lecture.readAsDataURL(fichier);
+    }
+  }
+</script>
