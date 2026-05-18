@@ -48,6 +48,7 @@
         console.log(json);      // test affichage retour
         if (json.reponse == 200) {
           alert("Connexion réussie !"); // alerte de la création du compte
+          window.location.href = "../Catalogue/Catalogue.php";
         
         } else {
           alert("Connexion échouée !"); // alerte de l'échec de la connexion
