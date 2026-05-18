@@ -1,6 +1,3 @@
-<?php
-  include "ClassClient.php";
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -38,6 +35,35 @@
     </div>
     <input type="submit" value="S'inscrire" class="submit"/>
   </form>
+  <script>
+    const form = document.querySelector("form");
 
+    // écouteur des requêtes du formulaire
+    form.addEventListener("submit", function (event) {
+      
+      // empêche l'envoi du formulaire sans exécuter le code qui suit
+      event.preventDefault(); 
+
+      // récupération des infos du formulaire
+      const formData = {
+        mail: form.mail.value,
+        nomUtilisateur: form.username.value,
+        telephone: form.telephone.value,
+        motDePasse : form.mdp.value,
+
+      }
+
+      // fetch vers le dossier API de création client
+      fetch("../API/CreerClient.php", {
+        method: "POST",
+        body: JSON.stringify(formData)  // fait une string JSON du tableau
+      })
+      .then(response => response.json())  // transforme la réponse http en json exploitable
+      .then(json => {
+        console.log(json);      // test affichage retour
+        alert("Compte créé !"); // alert de la création du compte
+      })
+    });
+</script>
 </body>
 </html>
