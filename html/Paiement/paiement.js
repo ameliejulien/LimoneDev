@@ -11,6 +11,8 @@ function validerFormulaire() {
         }
     });
 
+    // TODO Verifier le format du telephone
+
     return !probleme;
 }
 
