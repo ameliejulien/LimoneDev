@@ -50,7 +50,8 @@
         nomUtilisateur: form.username.value,
         telephone: form.telephone.value,
         motDePasse : form.mdp.value,
-
+        confMotDePasse: form.confMdp.value,
+        typeRequete: "creation"
       }
 
       // fetch vers le dossier API de création client
@@ -62,6 +63,7 @@
       .then(json => {
         console.log(json);      // test affichage retour
         alert("Compte créé !"); // alert de la création du compte
+      
       })
     });
 </script>
