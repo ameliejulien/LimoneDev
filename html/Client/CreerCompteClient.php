@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="client.css">
+  <link rel="stylesheet" href="../Global.css">
   <title>Compte Client</title>
 </head>
 <body>
@@ -34,6 +35,13 @@
       <input type="password" name="confMdp" required  minlength="8">
     </div>
     <input type="submit" value="S'inscrire" class="submit"/>
+
+    <div class="snackbar">
+      <h3 class="snackbarTitle"></h3>
+      <p class="snackbarText"></p>
+    </div>
+
+    <script src="../snackbar.js"></script>
   </form>
   <script>
     const form = document.querySelector("form");
@@ -67,10 +75,10 @@
           window.location.href = "ConnexionCompteClient.php";
         
         } else if (json.reponse == 409) {
-          alert("Echec de création de compte : email déjà utilisé");
+          afficherSnackBar('Notification','Echec de création de compte : email déjà utilisé !');
         
         } else {
-          alert("Echec de création de compte");
+          afficherSnackBar('Notification','Echec de création de compte !');
         } 
         
       

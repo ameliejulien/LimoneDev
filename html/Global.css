@@ -1,1 +1,14 @@
 /*# sourceMappingURL=Global.css.map */
+
+.snackbar {
+    background-color: #b3d3bc;
+    color: #000000;
+    padding: 0.75em 1.5em;
+    justify-content: center;
+    position: fixed;
+    top: 3em;
+    right: 5px;
+    border-radius: 10px;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;  
+}
