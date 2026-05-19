@@ -7,7 +7,7 @@
 </head>
 <main>
     <h1>Paiement</h1>
-    <form method="POST" action="./PaiementValider.php">
+    <form method="POST" action="./PaiementValide.php">
         <div class="divForm">
             <h2>Contact</h2>
             <label for="prenom">Prénom</label>
@@ -16,8 +16,8 @@
             <label for="nom">Nom</label>
             <input type="text" name="nom" required>
 
-            <label for="mail">Adresse mail</label>
-            <input type="email" name="mail" required>
+            <label for="email">Adresse mail</label>
+            <input type="email" name="email" required>
 
             <label for="telephone">Numéro de téléphone</label>
             <input type="tel" name="telephone" required placeholder="exemple : 0606060606">
@@ -34,8 +34,14 @@
             <label for="codePostal">Code postal</label>
             <input type="text" name="codePostal" required>
 
-            <label for="adresseFacturation">Adresse de facturation</label>
-            <input type="text" name="adresseFacturation" required>
+            <label for="villeFacturation">Ville</label>
+            <input type="text" name="villeFacturation" required>
+
+            <label for="adressePostalFacturation">Adresse de facturation</label>
+            <input type="text" name="adressePostalFacturation" required>
+
+            <label for="codePostalFacturation">Code postal</label>
+            <input type="text" name="codePostalFacturation" required>
         </div>
 
         <div class="divForm">

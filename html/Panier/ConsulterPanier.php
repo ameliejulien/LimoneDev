@@ -9,9 +9,12 @@
     <title>Compte Client</title>
 </head>
 
-
 <?php
-
+require_once __DIR__ . '/../../lib/service/ServicePanier.php';
+setcookie('panier', json_encode($listeProduit));
+$panier = getPanierIDs();
+print_r(getPanierArticles($panier));
+print_r("COOKIE PANIER = " . $_COOKIE['panier']);
 ?>
 
 <body>
@@ -21,41 +24,41 @@
     <div class="cart">
         <h2>Articles du panier</h2>
 
+        <?php
+        foreach ((array) $panier as $value) {
+        ?>
         <div class="article-container">
-            <?php
-            foreach ($val as $panier) {
-                ?>
+            <div class="article">
 
-                <div class="article">
+                <div class="article-image">
+                    <img src="./beurre.png" />
+                </div>
 
-                    <div class="article-image">
-                        <img src="./beurre.png" />
-                    </div>
+                <div class="article-content">
 
-                    <div class="article-content">
+                    <h3 class="article-name">Beurre demi-sel</h3>
 
-                        <h3 class="article-name">Beurre demi-sel</h3>
+                    <span class="article-description">
 
-                        <span class="article-description">
+                        Le beurre salé est l'une des trois variétés de beurre les plus consommées,
+                        avec le beurre doux et le beurre demi-sel.
+                        Il est à la fois utilisé en cuisine et consommé en tartines, seul ou
+                        accommodé d'autres éléments.
 
-                            Le beurre salé est l'une des trois variétés de beurre les plus consommées,
-                            avec le beurre doux et le beurre demi-sel.
-                            Il est à la fois utilisé en cuisine et consommé en tartines, seul ou
-                            accommodé d'autres éléments.
+                    </span>
 
-                        </span>
+                    <div class="article-price">
 
-                        <div class="article-price">
+                        <span>2.54€</span>
 
-                            <span>2.54€</span>
-
-                        </div>
                     </div>
                 </div>
-                <?
-            }
-            ?>
+
+            </div>
         </div>
+        <?php
+        }
+        ?>
     </div>
 </body>
 

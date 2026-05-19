@@ -9,9 +9,39 @@ function validerFormulaire() {
             probleme = true;
             return false;
         }
-    });
 
-    // TODO Verifier le format du telephone
+        var regex;
+
+        // Switch pour les differentes vérifications par regex
+        switch (input.name) {
+            case "telephone":
+                regex = /0[0-9] ?([0-9]{2} ?){4}/g;
+                if (!regex.test(input.value)) {
+                    alert("Veuillez remplir ce champ correctement : " + input.name);
+                    probleme = true;
+                    return;
+                }
+                break;
+            case "carteBancaire":
+                regex = /[0-9]{16}/g;
+                if (!regex.test(input.value)) {
+                    alert("Veuillez remplir ce champ correctement : " + input.name);
+                    probleme = true;
+                    return;
+                }
+                break;
+            case "codeSecretCB":
+                regex = /[0-9]{3}/g;
+                if (!regex.test(input.value)) {
+                    alert("Veuillez remplir ce champ correctement : " + input.name);
+                    probleme = true;
+                    return;
+                }
+                break;
+            default:
+                break;
+        }
+    });
 
     return !probleme;
 }
