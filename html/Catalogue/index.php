@@ -10,14 +10,14 @@
         <title>Catalogue</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
-    <body>
+    <body class="bg-[#fffdea]">
         <div class="grid grid-cols-5 m-auto">
             <?php 
                 foreach($images as $row) {
                     $imageData = stream_get_contents($row['photo_produit']);
                     $base64 = base64_encode($imageData);  
             ?>
-                <div class="flex flex-col">
+                <div class="flex flex-col justify-center">
                     <img src=<?="data:image/jpeg;base64,$base64" ?> class="w-50 h-50">
                     <h3><?= $row['nom_produit'] ?></h3>
                 </div>

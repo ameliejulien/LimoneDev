@@ -38,8 +38,9 @@ CREATE TABLE limone.Utilisateur (
     id_utilisateur serial PRIMARY KEY,
     nom_utilisateur varchar(30),
     email_utilisateur varchar(320),
+    telephone_utilisateur varchar(15),
     mdp_utilisateur varchar(72),
-    pp_utiisateur bytea,
+    pp_utilisateur bytea,
     type_utilisateur int,
 
     CONSTRAINT fk_utilisateur FOREIGN KEY(type_utilisateur) REFERENCES limone.Type(id_type)
@@ -216,7 +217,7 @@ CREATE TABLE limone.Facture (
     code_postal_client_facture varchar(5),
     adresse_facturation_client_facture varchar(50),
     ville_facturation_client_facture varchar(30),
-    code_postal_facturation_client_facture(5),
+    code_postal_facturation_client_facture varchar(5),
     adresse_alizon_facture varchar(50),
     ville_alizon_facture varchar(30),
     code_postal_alizon_facture varchar(5)
