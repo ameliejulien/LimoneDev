@@ -1,11 +1,50 @@
 <?php
-require('./lib/repo/GlobalRepo.php');
+chdir(__DIR__ . '/../../');
+require('lib/repo/GlobalRepo.php');
 
-function enregistrerFacture(String $name, String $email, String $telephone, String $adresse, String $adressFacturation, String $codePostal, String $ville) {
-    $query = "INSERT INTO limone.Facture(nom_client_facture, email_facture, telephone_facture, adresse_facture, adresse_facturation_facture, code_postal_facture, ville_facture)
-    VALUE ($name, $email, $telephone, $adresse, $adressFacturation, $codePostal, $ville)";
+function enregistrerFacture(String $nom, 
+                            String $email, 
+                            String $telephone, 
+                            String $ville,
+                            String $adresse, 
+                            String $codePostal, 
+                            String $villeFacturation,
+                            String $adressePostalFacturation,
+                            String $codePostalFacturation) {
+    $query = 
+    "INSERT INTO Facture(nom_client_facture, 
+                         email_client_facture, 
+                         telephone_client_facture, 
+                         ville_client_facture, 
+                         adresse_client_facture, 
+                         code_postal_client_facture, 
+                         ville_facturation_client_facture,
+                         adresse_facturation_client_facture,
+                         code_postal_facturation_client_facture)
+    VALUES (:nom, 
+            :email, 
+            :telephone, 
+            :ville,
+            :adresse, 
+            :codePostal,
+            :villeFacturation,
+            :adresseFacturation,
+            :codePostalFacturation)";
 
-    faireRequeteBDD($query);
+    $dbh = connecterBDD();
+    $stmt = $dbh->prepare($query);
+
+    $stmt->bindValue(":nom", $nom);
+    $stmt->bindValue(":email", $email);
+    $stmt->bindValue(":telephone", $telephone);
+    $stmt->bindValue(":ville", $ville);
+    $stmt->bindValue(":adresse", $adresse);
+    $stmt->bindValue(":codePostal", $codePostal);
+    $stmt->bindValue(":villeFacturation", $villeFacturation);
+    $stmt->bindValue(":adresseFacturation", $adressePostalFacturation);
+    $stmt->bindValue(":codePostalFacturation", $codePostalFacturation);
+
+    $stmt->execute();
 }
 
 ?>

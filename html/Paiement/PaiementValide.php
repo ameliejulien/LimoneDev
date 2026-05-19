@@ -7,7 +7,8 @@
 </head>
 <main>
     <?php
-    require('./lib/service/ServicePaiement.php');
+    chdir(__DIR__ . '/../../');
+    require('lib/service/ServicePaiement.php');
     if (validerPaiement()) { ?>
         Paiement vaildé
     <?php } else {?>

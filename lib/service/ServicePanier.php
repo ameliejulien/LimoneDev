@@ -11,12 +11,8 @@ $utilisateurId = null;
  */
 function ajouterProduit(int $produitId)
 {
-
-    // todo finir la querry pour verifier si le produit est encore là
-    $query = "SELECT * from ";
-
-    // todo Requete bdd pour verifier si le produit est encoer dans la bdd   
-    $res = null;
+    // todo verifier si l'article existe
+    $res = true;
 
     if ($res == true) {
         // Save dans les cookies
@@ -28,21 +24,6 @@ function ajouterProduit(int $produitId)
 
         // Modifie la liste de produit dans le cookie
         setcookie('panier', json_encode($listeProduit));
-
-        // Save dans la BDD
-        /*
-        if ($userId != null) {
-            $quantite = 0;
-            foreach ($listeProduit as $produitDansList) {
-                if ($produitId == $produitDansList) {
-                    $quantite++;
-                }
-            }
-
-            // Préparation de la query pour ajout à la bdd
-            $query = "INSERT INTO Panier (product_id, user_id, quantity) VALUES($produitId, $utilisateurId, $quantite)";
-        }
-        */
     }
 }
 
