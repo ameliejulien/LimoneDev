@@ -94,7 +94,12 @@
 
         $PDO = connecterBDD();
 
-        $requete = "SELECT pp_utilisateur, nom_utilisateur, email_utilisateur, telephone_utilisateur FROM Utilisateur INNER JOIN adresse, code_postal_adresse, ville_adresse on Adresse;";
+        $requete = "SELECT Utilisateur.id_utilisateur, id_client, Adresse.id_adresse, ".
+        "pp_utilisateur, nom_utilisateur, email_utilisateur, telephone_utilisateur, ".
+        "adresse, code_postal_adresse, ville_adresse FROM Utilisateur INNER JOIN ".
+        "Client ON Utilisateur.id_utilisateur = Client.id_client INNER JOIN ".
+        "Adresse_Client ON Utilisateur.id_utilisateur = Adresse_Client.id_utilisateur ".
+        "INNER JOIN Adresse ON Adresse_Client.id_adresse = Adresse.id_adresse;";
 
         return $PDO->query($requete)->fetchAll();
     }
