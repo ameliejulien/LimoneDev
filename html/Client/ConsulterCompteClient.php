@@ -22,7 +22,7 @@
       </div>
 
       <div class="divForm">
-        <label for="username">Surnom utilisateur</label>
+        <label for="username">Nom utilisateur</label>
         <output type="text" name="username" required value="<?php echo($infosClient['nom_utilisateur']); ?>">Pseudo</output>
       </div>
     

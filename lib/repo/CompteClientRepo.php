@@ -94,7 +94,7 @@
 
         $PDO = connecterBDD();
 
-        $requete = "SELECT * FROM produit INNER JOIN photo_produit on id_produit = id_photo_produit;";
+        $requete = "SELECT pp_utilisateur, nom_utilisateur, email_utilisateur, telephone_utilisateur FROM Utilisateur INNER JOIN adresse, code_postal_adresse, ville_adresse on Adresse;";
 
         return $PDO->query($requete)->fetchAll();
     }
