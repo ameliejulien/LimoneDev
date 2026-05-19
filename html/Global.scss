@@ -1,0 +1,31 @@
+// ============================================================
+//  Global.sass  –  Feuille de style principale du projet Alizon
+// ============================================================
+
+// VARIABLES DE COULEUR
+$bleu-fonce   : #1C6D80;
+$vert-fonce   : #208068;
+$blanc        : #FFFFFF;
+$noir         : #000000;
+$bleu-clair   : #47c1d7;
+$vert-clair   : #b3d3bc;
+$beige-fonce  : #9ac821;
+$beige-clair  : #fffdea;
+
+// TYPOGRAPHIE
+$police-titre     : 'Lovelo', sans-serif;  // Titres principaux
+$police-soustitre : 'Alatsi', sans-serif;  // Sous-titres
+$police-generale  : 'Farro', sans-serif;   // Texte général
+
+.snackbar {
+    background-color: #b3d3bc;
+    color: #000000;
+    padding: 0.75em 1.5em;
+    justify-content: center;
+    position: fixed;
+    top: 3em;
+    right: 5px;
+    border-radius: 10px;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;  
+}
