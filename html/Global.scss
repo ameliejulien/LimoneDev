@@ -3,34 +3,39 @@
 // ============================================================
 
 // VARIABLES DE COULEUR
-$bleu-fonce   : #1C6D80;
-$vert-fonce   : #208068;
-$blanc        : #FFFFFF;
-$noir         : #000000;
-$bleu-clair   : #47c1d7;
-$vert-clair   : #9ac821;
-$beige-fonce  : #b3d3bc;
-$beige-clair  : #fffdea;
+$bleu-fonce : #1C6D80;
+$vert-fonce : #208068;
+$blanc : #FFFFFF;
+$noir : #000000;
+$bleu-clair : #47c1d7;
+$vert-clair : #9ac821;
+$beige-fonce : #b3d3bc;
+$beige-clair : #fffdea;
 
-$encre        : #1C2D30;
+$encre : #1C2D30;
 $encre-claire : #4a5b5e;
 $encre-tres-claire: #7d8a8c;
 
-$bordure        : #e6e1d2;
-$bordure-fonce  : #d5cfbd;
+$bordure : #e6e1d2;
+$bordure-fonce : #d5cfbd;
 
-$arrondi        : 14px;
-$arrondi-petit  : 8px;
-$arrondi-grand  : 22px;
+$arrondi : 14px;
+$arrondi-petit : 8px;
+$arrondi-grand : 22px;
 
-$ombre-petite   : 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
-$ombre-moyenne  : 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
-$ombre-grande   : 0 14px 40px rgba(28, 45, 48, 0.12);
+$ombre-petite : 0 1px 2px rgba(28, 45, 48, 0.06),
+0 1px 1px rgba(28, 45, 48, 0.04);
+$ombre-moyenne : 0 4px 18px rgba(28, 45, 48, 0.08),
+0 2px 6px rgba(28, 45, 48, 0.05);
+$ombre-grande : 0 14px 40px rgba(28, 45, 48, 0.12);
 
 // TYPOGRAPHIE
-$police-titre     : 'Lovelo', sans-serif;  // Titres principaux
-$police-soustitre : 'Alatsi', sans-serif;  // Sous-titres
-$police-generale  : 'Farro', sans-serif;   // Texte général
+$police-titre : 'Lovelo',
+sans-serif; // Titres principaux
+$police-soustitre : 'Alatsi',
+sans-serif; // Sous-titres
+$police-generale : 'Farro',
+sans-serif; // Texte général
 
 // Exportation pour d'autres CSS
 :root {
@@ -63,6 +68,24 @@ $police-generale  : 'Farro', sans-serif;   // Texte général
     --police-generale: #{$police-generale};
 }
 
+@font-face {
+    font-family: Lovelo;
+    src:
+        url("../fonts/Lovelo\ Black.otf") format("opentype")
+}
+
+@font-face {
+    font-family: Farro;
+    src:
+        url("../fonts/Farro-Regular.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: Alatsi;
+    src:
+        url("../fonts/Alatsi-Regular.ttf") format("truetype")
+}
+
 .snackbar {
     background-color: #b3d3bc;
     color: #000000;
@@ -73,5 +96,5 @@ $police-generale  : 'Farro', sans-serif;   // Texte général
     right: 5px;
     border-radius: 10px;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;  
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }

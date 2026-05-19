@@ -1,5 +1,7 @@
+@import "../Global.css";
+
 .cart,
-.article {
+.article-grid {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 1em;
@@ -7,25 +9,6 @@
 
 .cart {
     padding-left: 1em;
-}
-
-:root {
-    --titre-font: "Lovelo";
-    --sous-titre-font: "Alatsi";
-    --texte-font: "Farro";
-}
-
-form {
-    border: solid;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 1em, 5em;
-    gap: 1em;
-    margin: 0;
-    padding: 2em 5em;
-    width: fit-content;
-    font-family: var(--texte-font);
 }
 
 label {
@@ -54,26 +37,35 @@ h2 {
 
 .article-price {
     font-size: 2em;
-    align-self: flex-end;
-    align-items: flex-end;
-    align-content: flex-end;
-    justify-self: flex-end;
+    grid-column: 3;
+    grid-row: 3;
 }
 
 .article {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
-:root {
-    --titre-font: "Lovelo";
-    --sous-titre-font: "Alatsi";
-    --texte-font: "Farro";
+.article-image
+{
+    width: 40em;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
 }
 
 body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    font-family: var(--police-generale);
+}
+
+h1 {
+    font-family: var(--police-titre);
 }
 
 form {

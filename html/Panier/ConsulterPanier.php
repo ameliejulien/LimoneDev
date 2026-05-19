@@ -34,7 +34,7 @@ print_r("COOKIE PANIER = " . $_COOKIE['panier']);
             ?>
 
             <div class="article-container">
-                <div class="article">
+                <div class="article-grid">
 
                     <div class="article-image">
                         <img src=<?= "data:image/jpeg;base64,$base64" ?> class="image">

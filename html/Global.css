@@ -23,6 +23,18 @@
   --police-generale: Farro, sans-serif;
 }
 
+@font-face {
+  font-family: Lovelo;
+  src: url("../fonts/Lovelo Black.otf") format("opentype");
+}
+@font-face {
+  font-family: Farro;
+  src: url("../fonts/Farro-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: Alatsi;
+  src: url("../fonts/Alatsi-Regular.ttf") format("truetype");
+}
 .snackbar {
   background-color: #b3d3bc;
   color: #000000;
