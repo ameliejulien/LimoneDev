@@ -88,4 +88,15 @@
 
         return $row !== false;
     }
+
+
+    function trouverInfosClient(): array {
+
+        $PDO = connecterBDD();
+
+        $requete = "SELECT * FROM produit INNER JOIN photo_produit on id_produit = id_photo_produit;";
+
+        return $PDO->query($requete)->fetchAll();
+    }
+
 ?>
