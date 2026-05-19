@@ -9,7 +9,7 @@ $utilisateurId = null;
  * Prend en paramètre un produit déjà initialisé
  * @param int $produitId La variable produitId qui est à ajouter
  */
-function ajouterProduit(int $produitId)
+function ajouterProduitToCookie(int $produitId)
 {
     // todo verifier si l'article existe
     $res = true;
@@ -90,3 +90,4 @@ function getPanier()
 {
     return json_decode($_COOKIE['panier']);
 }
+
