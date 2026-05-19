@@ -8,14 +8,60 @@ $vert-fonce   : #208068;
 $blanc        : #FFFFFF;
 $noir         : #000000;
 $bleu-clair   : #47c1d7;
-$vert-clair   : #b3d3bc;
-$beige-fonce  : #9ac821;
+$vert-clair   : #9ac821;
+$beige-fonce  : #b3d3bc;
 $beige-clair  : #fffdea;
+
+$encre        : #1C2D30;
+$encre-claire : #4a5b5e;
+$encre-tres-claire: #7d8a8c;
+
+$bordure        : #e6e1d2;
+$bordure-fonce  : #d5cfbd;
+
+$arrondi        : 14px;
+$arrondi-petit  : 8px;
+$arrondi-grand  : 22px;
+
+$ombre-petite   : 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
+$ombre-moyenne  : 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
+$ombre-grande   : 0 14px 40px rgba(28, 45, 48, 0.12);
 
 // TYPOGRAPHIE
 $police-titre     : 'Lovelo', sans-serif;  // Titres principaux
 $police-soustitre : 'Alatsi', sans-serif;  // Sous-titres
 $police-generale  : 'Farro', sans-serif;   // Texte général
+
+// Exportation pour d'autres CSS
+:root {
+    --bleu-fonce: #{$bleu-fonce};
+    --vert-fonce: #{$vert-fonce};
+    --blanc: #{$blanc};
+    --noir: #{$noir};
+    --bleu-clair: #{$bleu-clair};
+    --vert-clair: #{$vert-clair};
+    --beige-fonce: #{$beige-fonce};
+    --beige-clair: #{$beige-clair};
+
+    --encre: #{$encre};
+    --encre-claire: #{$encre-claire};
+    --encre-tres-claire: #{$encre-tres-claire};
+
+    --bordure: #{$bordure};
+    --bordure-fonce: #{$bordure-fonce};
+
+    --arrondi: #{$arrondi};
+    --arrondi-petit: #{$arrondi-petit};
+    --arrondi-grand: #{$arrondi-grand};
+
+    --ombre-petite: #{$ombre-petite};
+    --ombre-moyenne: #{$ombre-moyenne};
+    --ombre-grande: #{$ombre-grande};
+
+    --police-titre: #{$police-titre};
+    --police-soustitre: #{$police-soustitre};
+    --police-generale: #{$police-generale};
+}
 
 .snackbar {
     background-color: #b3d3bc;
