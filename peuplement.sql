@@ -35,15 +35,6 @@ VALUES
 (2, 'BRETAGNE-UNIVERS', 12458409162345, 7),
 (3, 'IEV-CORP', 08678429865878, 8);
 
-INSERT INTO Client
-(id_client)
-VALUES
-(1);
-
-INSERT INTO gestionnaire
-(id_gestionnaire)
-VALUES
-(3);
 
 DELETE FROM produit;
 INSERT INTO produit 
