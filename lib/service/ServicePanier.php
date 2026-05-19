@@ -1,8 +1,10 @@
 <?php
 chdir(__DIR__ . '/../../');
-require_once 'html/Produit/Produit.php';
-include 'connect_params.php';
 require_once 'lib/repo/PanierRepo.php';
+include 'connect_params.php';
+
+$listeProduit = [];
+$utilisateurId = null;
 
 /**
  * Prend en paramètre un produit déjà initialisé
@@ -10,21 +12,23 @@ require_once 'lib/repo/PanierRepo.php';
  */
 function ajouterProduitToCookie(int $produitId)
 {
-    // todo verifier si l'article existe
-    $res = true;
+    // Verifier si l'article existe
+    $tousLesProduits = getStatusDuProduit($produitId);
+    $res = !$tousLesProduits[0];
 
-    if ($res == true) {
+    if ($res) {
         // Save dans les cookies
-        if ($_COOKIE['panier'] == null) { // cookie pas encore créé
-            $listeProduit[] = $produitId;
-        } else { // cookie créé
+        if ($_COOKIE['panier'] != null) { // cookie déjà créé
             $listeProduit = (array) json_decode($_COOKIE['panier']);
         }
+
+        $listeProduit[] = $produitId;
 
         // Modifie la liste de produit dans le cookie
         setcookie('panier', json_encode($listeProduit));
     }
 }
+
 
 /**
  * Supprimer un produit du panier et du cookie

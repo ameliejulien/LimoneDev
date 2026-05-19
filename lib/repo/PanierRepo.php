@@ -26,11 +26,39 @@ function getDBProduitsFromPanier(Array $panier)
     return $retour;
 }
 
+function getTousLesProduitsBDD() {
+    $dbh = connecterBDD();
+
+    $query = "select id_produit, produit_supprime from produit";
+
+    $stmt = $dbh->prepare($query);
+
+    $stmt->execute();
+
+    $retour = $stmt->fetchAll();
+
+    return $retour;
+}
+
+function getStatusDuProduit(String $productId) {
+    $dbh = connecterBDD();
+
+    $query = "select produit_supprime from produit where id_produit = $productId";
+
+    $stmt = $dbh->prepare($query);
+
+    $stmt->execute();
+
+    $retour = $stmt->fetch();
+
+    return $retour;
+}
+
 /**
  * Prend en paramètre un produit déjà initialisé
  * @param Produit $produit La variable Produit qui a permis de remplir la page produit detaillée
  */
-function ajouterProduit(Produit $produit, $userId = null)
+/*function ajouterProduit(Produit $produit, $userId = null)
 {
     $productId = $produit->getProduitId();
 
@@ -57,5 +85,5 @@ function ajouterProduit(Produit $produit, $userId = null)
         }
 
     }
-}
+}*/
 ?>
