@@ -13,11 +13,8 @@
 chdir(__DIR__ . '/../../');
 require_once 'lib/service/ServicePanier.php';
 
-// setcookie('panier', json_encode([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); // TODO Penser à changer ça =)
-
 $panier = getPanierIDs();
 $arts = getPanierArticles($panier);
-print_r("COOKIE PANIER = " . $_COOKIE['panier']);
 ?>
 
 <body>
@@ -40,21 +37,18 @@ print_r("COOKIE PANIER = " . $_COOKIE['panier']);
                         <img src=<?= "data:image/jpeg;base64,$base64" ?> class="image">
                     </div>
 
-                    <div class="article-content">
+                    <h3 class="article-name"><?= $art["nom_produit"] ?></h3>
 
-                        <h3 class="article-name"><?= $art["nom_produit"] ?></h3>
+                    <span class="article-description">
 
-                        <span class="article-description">
+                        <?= $art["description_produit"] ?>
 
-                            <?= $art["description_produit"] ?>
+                    </span>
 
-                        </span>
+                    <div class="article-price">
 
-                        <div class="article-price">
+                        <span><?= $art["prix_ht_produit"] ?>€</span>
 
-                            <span><?= $art["prix_ht_produit"] ?>€</span>
-
-                        </div>
                     </div>
 
                 </div>

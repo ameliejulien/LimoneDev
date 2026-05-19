@@ -25,6 +25,10 @@ h2 {
 
 .article-name {
     font-size: 1.5em;
+    grid-column: 2 / 3;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
 }
 
 .article-container {
@@ -33,28 +37,34 @@ h2 {
 
 .article-description {
     font-size: 1.2em;
+    grid-row: 2;
+    grid-column: 2;
 }
 
 .article-price {
     font-size: 2em;
     grid-column: 3;
     grid-row: 3;
+    align-self: self-end;
+    justify-self: self-end;
 }
 
-.article {
+.article-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 3fr 1fr;
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
 }
 
 .article-image
 {
-    width: 40em;
+    display:flex;
     align-items: center;
     align-content: center;
     justify-content: center;
     justify-items: center;
+    grid-column: 1;
+    grid-row: 1 / 4;
 }
 
 body {
