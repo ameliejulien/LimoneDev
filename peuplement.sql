@@ -22,11 +22,11 @@ VALUES
 ('GESTIONNAIRE');
 
 INSERT INTO utilisateur
-(email_utilisateur, mdp_utilisateur, type_utilisateur)
+(email_utilisateur, nom_utilisateur, mdp_utilisateur, type_utilisateur, telephone_utilisateur)
 VALUES
-('breizhshop@contact.com', 'd501584ae0f8c23b0db121b36dba1d80a4ec27964e8248efe8b7fa55414b953c', 1),
-('bretagneunivers@contact.com', 'd501584ae0f8c23b0db121b36dba1d80a4ec27964e8248efe8b7fa55414b953c', 2),
-('ievcorp@contact.com', 'd501584ae0f8c23b0db121b36dba1d80a4ec27964e8248efe8b7fa55414b953c', 3);
+('breizhshop@contact.com','breizhShop', 'd501584ae0f8c23b0db121b36dba1d80a4ec27964e8248efe8b7fa55414b953c', 1,0605040302),
+('bretagneunivers@contact.com', 'bretagne_univers', 'd501584ae0f8c23b0db121b36dba1d80a4ec27964e8248efe8b7fa55414b953c', 2,0708090100),
+('ievcorp@contact.com', 'IveCorp', 'd501584ae0f8c23b0db121b36dba1d80a4ec27964e8248efe8b7fa55414b953c', 3,0203040506);
 
 INSERT INTO vendeur
 (id_vendeur, denomination_vendeur, siret_vendeur, addresse_vendeur)
@@ -34,6 +34,16 @@ VALUES
 (1, 'BREIZH-SHOP', 67676767676767, 6),
 (2, 'BRETAGNE-UNIVERS', 12458409162345, 7),
 (3, 'IEV-CORP', 08678429865878, 8);
+
+INSERT INTO Client
+(id_client)
+VALUES
+(1);
+
+INSERT INTO gestionnaire
+(id_gestionnaire)
+VALUES
+(3);
 
 DELETE FROM produit;
 INSERT INTO produit 
