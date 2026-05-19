@@ -65,19 +65,19 @@ h2 {
 }
 
 :root {
-  --titre-font: "Lovelo";
-  --sous-titre-font: "Alatsi";
-  --texte-font: "Farro";
+    --titre-font: "Lovelo";
+    --sous-titre-font: "Alatsi";
+    --texte-font: "Farro";
 }
 
-body{
+body {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-form{
-    border:solid;
+form {
+    border: solid;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -87,21 +87,21 @@ form{
     padding: 2em 5em;
     width: fit-content;
     font-family: var(--texte-font);
-    background-color: #b3d3bc; 
+    background-color: #b3d3bc;
 }
 
 
-.divForm input{
+.divForm input {
     height: 2em;
 }
 
 
-.submit { 
+.submit {
     background-color: #fffdea;
     padding: 0.3em;
 }
 
-label{
+label {
     font-size: 1.5em;
 }
 
@@ -109,15 +109,19 @@ label{
 .divForm {
     display: flex;
     flex-direction: column;
-    gap:0.25em;
+    gap: 0.25em;
 }
 
-h1{
+h1 {
     font-size: 3em;
     color: #1C6D80;
 }
 
-body{
+body {
     background-color: #fffdea;
 }
 
+.image {
+    max-width: 30em;
+    max-height: 30em;
+}

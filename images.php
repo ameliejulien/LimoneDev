@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
     try {
-        $PDO = new PDO("pgsql:host=localhost;dbname=limone", "squidos", "limone");
+        $PDO = new PDO("pgsql:host=localhost;dbname=saedb", "sae", "LimoneDev.121");
 
         print("Connection successful\n");
 

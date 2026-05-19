@@ -1,9 +1,8 @@
 <?php
-include '../../html/Produit/Produit.php';
-include './connect_params.php';
-
-$listeProduit = [];
-$utilisateurId = null;
+chdir(__DIR__ . '/../../');
+require_once 'html/Produit/Produit.php';
+include 'connect_params.php';
+require_once 'lib/repo/PanierRepo.php';
 
 /**
  * Prend en paramètre un produit déjà initialisé
@@ -86,8 +85,12 @@ function validerPanier()
     return json_encode($listeRetournee);
 }
 
-function getPanier()
+function getPanierIDs()
 {
     return json_decode($_COOKIE['panier']);
 }
 
+function getPanierArticles(Array $articlesIDs)
+{
+    return(getDBProduitsFromPanier($articlesIDs));
+}

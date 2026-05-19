@@ -5,13 +5,17 @@ require_once 'connect_params.php';
 require_once 'lib/repo/PanierRepo.php';
 require_once 'lib/repo/GlobalRepo.php';
 
-function getProduitsFromPanier(array $panier)
+function getDBProduitsFromPanier(Array $panier)
 {
-
     $dbh = connecterBDD();
     $stringListe = "(" . implode(", ", $panier) . ")";
 
-    $query = "select * from produit where id_produit in $stringListe";
+    $query = "select produit.id_produit, nom_produit, description_produit, prix_ht_produit,
+    stock_produit, catalogue_produit, promotion_produit, reduction_produit, tva_produit, produit_supprime, photo_produit
+    from produit
+    join photo_produit on produit.id_produit = photo_produit.id_photo_produit
+    where produit.id_produit in $stringListe";
+    
 
     $stmt = $dbh->prepare($query);
 

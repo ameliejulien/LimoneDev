@@ -10,10 +10,13 @@
 </head>
 
 <?php
-require_once __DIR__ . '/../../lib/service/ServicePanier.php';
-setcookie('panier', json_encode($listeProduit));
+chdir(__DIR__ . '/../../');
+require_once 'lib/service/ServicePanier.php';
+
+// setcookie('panier', json_encode([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); // TODO Penser à changer ça =)
+
 $panier = getPanierIDs();
-print_r(getPanierArticles($panier));
+$arts = getPanierArticles($panier);
 print_r("COOKIE PANIER = " . $_COOKIE['panier']);
 ?>
 
@@ -25,38 +28,38 @@ print_r("COOKIE PANIER = " . $_COOKIE['panier']);
         <h2>Articles du panier</h2>
 
         <?php
-        foreach ((array) $panier as $value) {
-        ?>
-        <div class="article-container">
-            <div class="article">
+        foreach ($arts as $art) {
+            $imageData = stream_get_contents($art['photo_produit']);
+            $base64 = base64_encode($imageData);
+            ?>
 
-                <div class="article-image">
-                    <img src="./beurre.png" />
-                </div>
+            <div class="article-container">
+                <div class="article">
 
-                <div class="article-content">
-
-                    <h3 class="article-name">Beurre demi-sel</h3>
-
-                    <span class="article-description">
-
-                        Le beurre salé est l'une des trois variétés de beurre les plus consommées,
-                        avec le beurre doux et le beurre demi-sel.
-                        Il est à la fois utilisé en cuisine et consommé en tartines, seul ou
-                        accommodé d'autres éléments.
-
-                    </span>
-
-                    <div class="article-price">
-
-                        <span>2.54€</span>
-
+                    <div class="article-image">
+                        <img src=<?= "data:image/jpeg;base64,$base64" ?> class="image">
                     </div>
-                </div>
 
+                    <div class="article-content">
+
+                        <h3 class="article-name"><?= $art["nom_produit"] ?></h3>
+
+                        <span class="article-description">
+
+                            <?= $art["description_produit"] ?>
+
+                        </span>
+
+                        <div class="article-price">
+
+                            <span><?= $art["prix_ht_produit"] ?>€</span>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <?php
+            <?php
         }
         ?>
     </div>
