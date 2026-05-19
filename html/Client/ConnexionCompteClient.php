@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="client.css">
+  <link rel="stylesheet" href="../Global.css">
   <title>Compte Client</title>
 </head>
 <body>
@@ -21,6 +22,13 @@
     
     <input type="submit" value="Se connecter" class="submit"/>
   </form>
+
+  <div class="snackbar">
+    <h3 class="snackbarTitle"></h3>
+    <p class="snackbarText"></p>
+  </div>
+
+  <script src="../snackbar.js"></script>
 
   <script>
     const form = document.querySelector("form");
@@ -47,11 +55,11 @@
       .then(json => {
         console.log(json);      // test affichage retour
         if (json.reponse == 200) {
-          alert("Connexion réussie !"); // alerte de la création du compte
+          afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
           window.location.href = "../Catalogue/Catalogue.php";
         
         } else {
-          alert("Connexion échouée !"); // alerte de l'échec de la connexion
+          afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion
         }
       })
     });
