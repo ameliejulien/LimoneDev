@@ -15,7 +15,7 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img id="changementImage" src="johncena.jpeg" alt="Photo de profil" class="photoProfil">
+        <img id="changementImage" src="johncena.jpeg" alt="Photo de profil" class="photoProfil" height="200" width="200">
         <input type="file" name="picture" accept="image/*" onchange="changerImage(event)">
       </div>
 

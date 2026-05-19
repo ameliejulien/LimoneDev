@@ -61,4 +61,8 @@
 
         return $codeRetour;
     }
+
+    function recupererInfosClient(): array {
+        return trouverInfosClient();
+    }
 ?>
