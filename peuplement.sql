@@ -139,3 +139,11 @@ VALUES
 ('Panier Gourmand - Bulles et Gourmandises à la Bretonne', 'A travers ce panier gourmand, nous vous invitons à partir à la découverte de la gastronomie sucrée bretonne avec un cidre doux artisanal , une délicieuse confiture de fraise de Plougastel riche en fruits et en goût, des palets et galettes bretonnes au beurre de baratte frais, une boîte de tendres caramels au beurre salé, de délicieux florentins, ainsi que des petites sardines au chocolat au lait fraichement pêchées pour le plus grand plaisir des gourmands !', 41, 78, true, false, 0.0, 20.0, false, 1),
 ('Box - Chandeleur Gourmande', 'Régalez vous en tartinant sur vos crêpes une délicieuse confiture de lait noisette et beurre salé, une onctueuse crème de salidou, une délicate crème de caramel au chocolat et fleur de sel et pour finir une somptueuse combinaison de pomme, caramel à la bretonne. Pour plus de goût et de partage, un jus de pomme artisanal accompagne ces douceurs.', 33.9, 65, true, false, 0.0, 20.0, false, 1),
 ('Panier Garni Breton - L''Original', 'Rafraîchissez vous avec un cidre fermier demi-sec et régalez vous avec les fameux Crakou Bretons, une délicieuse préparation de fruits, de croustillantes palourdes au caramel croustillant et praliné , une onctueuse crème caramel à la noisette grillée, pour le reste, nous vous laissons la surprise !', 50.9, 40, true, false, 0.0, 20.0, false, 1);
+
+
+
+INSERT INTO Cle_Authentification
+(clee, utilisee)
+VALUES
+('100100100',false),
+('200200200',false);

@@ -253,3 +253,13 @@ create table limone.Ligne_Commande (
     CONSTRAINT fk1_ligne_commande FOREIGN KEY (id_commande) REFERENCES limone.Commande(id_commande),
     CONSTRAINT fk2_ligne_commande FOREIGN KEY (id_produit_commande) REFERENCES limone.Produit(id_produit)
 );
+
+
+
+-- =======================================
+-- ======= Clé authentification ==========
+-- =======================================
+create table limone.Cle_Authentification (
+    clee VARCHAR(10) PRIMARY KEY,
+    utilisee BOOLEAN
+);
