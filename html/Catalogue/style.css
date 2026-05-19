@@ -1,0 +1,113 @@
+@import '../Global.css';
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 20px;
+  font-family: var(--police-generale), var(--police-titre), var(--police-soustitre);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--encre);
+  background: var(--beige-clair);
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, select { font-family: inherit; color: inherit; }
+
+.grille-produit {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.carte-produit {
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: var(--arrondi);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.carte-produit:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ombre-moyenne);
+  border-color: var(--bordure-fonce);
+}
+
+.info-produit {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.info-produit .producteur {
+  font-family: 'Alatsi', sans-serif;
+  font-size: 0.72rem;
+  color: var(--encre-claire);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.info-produit .producteur i { color: var(--vert-clair); font-size: 0.7rem; }
+.info-produit h3 {
+  font-family: 'Alatsi', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  color: var(--encre);
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.info-produit .stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--encre-claire)
+}
+.info-produit .stock i { font-size: 0.45rem; color: var(--vert-clair); }
+.info-produit .stock.rupture i { color: #c44; }
+
+.pied-produit {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pied-produit {
+  display: flex;
+  flex-direction: column;
+}
+.prix-produit .montant {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 1.35rem;
+  color: var(--encre);
+  line-height: 1;
+}
+.prix-produit .montant .monnaie {
+  font-size: 0.7em;
+  margin-left: 1px;
+}
+
+.bouton-ajouter {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--vert-clair);
+  color: var(--beige-clair);
+  display: grid;
+  place-items: center;
+  transition: background .2s, transform .15s;
+  flex-shrink: 0;
+}
+.bouton-ajouter:hover { background: var(--vert-fonce); transform: scale(1.06); }
+.bouton-ajouter:active { transform: scale(0.96); }
