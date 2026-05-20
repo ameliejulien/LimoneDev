@@ -28,7 +28,7 @@ h2 {
     grid-column: 2 / 3;
     grid-row: 1;
     align-self: center;
-    justify-self: center;
+    justify-self: left;
 }
 
 .article-container {
@@ -54,6 +54,7 @@ h2 {
     grid-template-columns: 2fr 3fr 1fr;
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
+    padding: 1em 0;
 }
 
 .article-image

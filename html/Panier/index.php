@@ -10,8 +10,8 @@
 </head>
 
 <?php
-chdir(__DIR__ . '/../../');
-require_once 'lib/service/ServicePanier.php';
+
+require_once '../../lib/service/ServicePanier.php';
 
 $panier = getPanierIDs();
 $arts = getPanierArticles($panier);

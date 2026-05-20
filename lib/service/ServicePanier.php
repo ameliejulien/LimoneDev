@@ -1,7 +1,6 @@
 <?php
-chdir(__DIR__ . '/../../');
-require_once 'lib/repo/PanierRepo.php';
-include 'connect_params.php';
+require_once '../../lib/repo/PanierRepo.php';
+include '../../connect_params.php';
 
 $listeProduit = [];
 $utilisateurId = null;
