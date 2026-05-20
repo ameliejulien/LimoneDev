@@ -6,6 +6,8 @@
     $prix = array_column($images, 'prix_ht_produit');
     $prixMin = (int) floor(min($prix));
     $prixMax = (int) ceil(max($prix));
+
+    $categories = array_unique(array_column($images, 'nom_categorie'));
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +48,16 @@
                     <div class="card-titre">
                         <h4>Catégories</h4>
                     </div>
+                    <div class="categories">
+                        <?php 
+                            foreach ($categories as $c) {
+                        ?>
+                            <div>
+                                <input type="checkbox" id="cat-<?= $c ?>" name="<?= $c ?>">
+                                <label for="cat-<?= $c ?>"><?= $c ?></label>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
                 
@@ -55,10 +67,10 @@
                         $imageData = stream_get_contents($row['photo_produit']);
                         $base64 = base64_encode($imageData);  
                 ?>
-                    <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>" data-prix="<?= $row['prix_ht_produit'] ?>">
+                    <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>" data-prix="<?= $row['prix_ht_produit'] ?>" categorie="<?= $row['id_categorie'] ?>">
                         <img src=<?="data:image/jpeg;base64,$base64" ?> class="w-50 h-50 object-contain m-auto mt-3">
                         <div class="info-produit">
-                            <span class="producteur"><i class="fa-solid fa-location-dot"></i>BRETON</span>
+                            <span class="producteur"><i class="fa-solid fa-location-dot"></i><?= $row['denomination_vendeur'] ?></span>
                             <h3><?= $row['nom_produit'] ?></h3>
                             <span class="stock <?= $row['stock_produit'] < 1 ? "rupture" : "" ?>">
                                 <i class="fa-solid fa-circle"></i>
@@ -95,7 +107,11 @@
             
             valMin.textContent = min;
             valMax.textContent = max;
-            filtrerProduits(min, max);
+
+            document.querySelectorAll('.carte-produit').forEach(carte => {
+                const prix = parseFloat(carte.dataset.prix);
+                carte.style.display = (prix >= min && prix <= max) ? '' : 'none';
+            });
         }
 
         sliderMin.addEventListener('input', () => {
@@ -109,13 +125,6 @@
                 sliderMax.value = sliderMin.value;
             updateSlider();
         });
-
-        function filtrerProduits(min, max) {
-            document.querySelectorAll('.carte-produit').forEach(carte => {
-                const prix = parseFloat(carte.dataset.prix);
-                carte.style.display = (prix >= min && prix <= max) ? '' : 'none';
-            });
-        }
 
         updateSlider();
 

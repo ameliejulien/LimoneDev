@@ -167,7 +167,7 @@ CREATE TABLE limone.Carte_Client (
 -- ============================
 CREATE TABLE limone.Categorie (
     id_categorie serial PRIMARY KEY,
-    nom_categorie varchar(10)
+    nom_categorie varchar(30)
 );
 
 -- ====================================
