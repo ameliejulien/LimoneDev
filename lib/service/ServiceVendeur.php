@@ -86,4 +86,21 @@
         ajouterCleeBDD($clee);
         return $clee;
     }
+
+
+    /**
+     * @Brief génère un cookie pour la connexion vendeur
+     */
+    function creerCookieVendeur($vendeur) {
+        if ($_COOKIE['vendeur'] != null) { // cookie déjà créé
+            $client = json_decode($_COOKIE['vendeur']);
+        }
+        $id = getVendeurId($vendeur);
+
+        $tab["mail"] = $client["mail"];
+        $tab["idVendeur"] = $id;
+
+        // Modifie la liste de produit dans le cookie
+        setcookie('vendeur', json_encode($tab), time() + 3*24*60*60, "/");
+    }
 ?>
