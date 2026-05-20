@@ -49,6 +49,7 @@ label{
 h1{
     font-size: 3em;
     color: #1C6D80;
+    font-family: var(--titre-font);
 }
 
 body{

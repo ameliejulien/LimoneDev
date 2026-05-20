@@ -56,7 +56,7 @@
         console.log(json);      // test affichage retour
         if (json.reponse == 200) {
           afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
-          window.location.href = "../Catalogue/Catalogue.php";
+          window.location.href = "../Catalogue/";
         
         } else {
           afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion

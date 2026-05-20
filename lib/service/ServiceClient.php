@@ -65,4 +65,18 @@
     function recupererInfosClient(): array {
         return trouverInfosClient();
     }
+
+
+    function ajouterClientCookie($client) {
+        if ($_COOKIE['client'] != null) { // cookie déjà créé
+            $client = json_decode($_COOKIE['client']);
+        }
+        $id = getIdClient($client);
+
+        $tab["mail"] = $client["mail"];
+        $tab["idClient"] = $id;
+
+        // Modifie la liste de produit dans le cookie
+        setcookie('client', json_encode($listeProduit), time() + 3*24*60*60, "/");
+    }
 ?>

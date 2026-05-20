@@ -6,6 +6,9 @@ header('Content-Type: application/json');
 $fetchData = file_get_contents("php://input"); 
 $data = json_decode($fetchData, true);
 $retour;
+
+// ajoute un cookie client
+ajouterClientCookie($data);
 if ($data["typeRequete"] == "creation") {
     $retour=confimerInscirption($data);
     $data["reponse"] = $retour;

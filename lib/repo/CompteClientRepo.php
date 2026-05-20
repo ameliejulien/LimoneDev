@@ -10,8 +10,8 @@
         if (!chercherClient($client)) {
             $codeRetour = 200;
             $connectBDD = connecterBDD();
-            $requeteUtilisateur =   "INSERT INTO limone.Utilisateur (email_utilisateur, mdp_utilisateur, type_utilisateur)".
-                                "VALUES ('{$client["mail"]}','{$client["motDePasse"]}','1') RETURNING id_utilisateur;";
+            $requeteUtilisateur =   "INSERT INTO limone.Utilisateur (email_utilisateur, nom_utilisateur, mdp_utilisateur, type_utilisateur, telephone_utilisateur)".
+                                "VALUES ('{$client["mail"]}','{$client["nomUtilisateur"]}','{$client["motDePasse"]}','1','{$client["telephone"]}') RETURNING id_utilisateur;";
         
         
        
@@ -102,6 +102,21 @@
         "INNER JOIN Adresse ON Adresse_Client.id_adresse = Adresse.id_adresse;";
 
         return $PDO->query($requete)->fetchAll();
+    }
+
+
+    function getIdClient($client){
+        $connectBDD = connecterBDD();
+
+        $requete =  "SELECT id_client FROM Client INNER JOIN Utilisateur ".
+                    "ON Utilisateur.id_utilisateur = Client.id_client ".
+                    "WHERE email_utilisateur = '{$client["mail"]}';";
+
+        $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->execute(); 
+        $id = $requetePreparee->fetch(PDO::FETCH_ASSOC);
+        return $id;
+
     }
 
 ?>
