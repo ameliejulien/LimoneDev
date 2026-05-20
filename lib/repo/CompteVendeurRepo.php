@@ -139,4 +139,12 @@
         return $row !== false;
     }
 
+    function ajouterCleeBDD($clee) {
+        $connectBDD = connecterBDD();
+        $requete = "INSERT INTO Cle_Authentification (clee, utilisee)".
+                   "VALUES ('{$clee}', false)"; 
+        $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->execute();
+    }
+
 ?>

@@ -10,17 +10,18 @@
     */
     function confimerInscirption($vendeur) {
 
-        // Transformation champs formulaires
+        // tests ou transformations des champs du formulaire
         $vendeur["mail"] = strtolower($vendeur["mail"]);
         $mdp = $vendeur["motDePasse"];
         $confMdp = $vendeur["confMotDePasse"];
         $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
+        $codePostal = intval($vendeur["codePostalVendeur"]);
         $codeRetour;
 
         // Comparaison des mots de passe
         $mdpEgaux = ($mdp == $confMdp);
 
-        if ($mdpEgaux && !champVide($vendeur) && certifierClee($vendeur["cleAuth"])) {
+        if ($mdpEgaux && !champVide($vendeur) && certifierClee($vendeur["cleAuth"]) && ($codePostal != 0)) {
             $codeRetour = creerVendeurBdd($vendeur);
             
         } else {
@@ -69,5 +70,20 @@
      */
     function certifierClee($clee) {
         return certifierCleeBDD($clee);
+    }
+
+    /**
+     * @Brief génère une clée d'authentification vendeur
+     * @Returns la clée générée
+     */
+    function creerCleeAuth() {
+        $clee = "";
+        
+        for ($i = 1; $i <= 9; $i++) {
+            $clee .= rand(0, 9);
+        }
+
+        ajouterCleeBDD($clee);
+        return $clee;
     }
 ?>
