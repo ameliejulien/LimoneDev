@@ -59,6 +59,7 @@ h2 {
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
     padding: 2em 2em;
+    background-color: var();
 }
 
 .article-image {
