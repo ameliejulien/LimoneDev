@@ -16,6 +16,7 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "connexion") {
     $retour=connexionClient($data);
     $data["reponse"] = $retour;
+    ajouterClientCookie($data);
 }
 
 

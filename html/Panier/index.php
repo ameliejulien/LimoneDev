@@ -50,7 +50,6 @@ $arts = getPanierArticles($panier);
                         <span><?= $art["prix_ht_produit"] ?>€</span>
 
                     </div>
-
                 </div>
             </div>
             <?php
