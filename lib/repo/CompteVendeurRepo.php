@@ -213,7 +213,7 @@
 
         // MAJ de l'utilisateur
         $requeteUtilisateur =   "UPDATE Utilisateur ".
-                            "SET nom_utilisateur = '{$vendeur["denomination"]}', email_utilisateur = '{$vendeur["email_utilisateur"]}', ".
+                            "SET nom_utilisateur = '{$vendeur["denomination"]}', email_utilisateur = '{$vendeur["mail"]}', ".
                             "telephone_utilisateur = '{$vendeur["telephone_utilisateur"]}' WHERE id_utilisateur = '{$idVendeur}'";
         
         $requeteUpdateUtilisateur = $connectBDD->prepare($requeteUtilisateur);

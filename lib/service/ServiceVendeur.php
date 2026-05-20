@@ -129,8 +129,18 @@
      * @Return retourne un tableau contenant les informations du vendeur
      */
     function modificationVendeur($vendeur) {
-        modifierVendeurBDD($vendeur);
+        // TODO : uniformiser les valeurs entre les CRU vendeur
+        $existant = getVendeurId($vendeur);
+
+        if ($existant && $existant["id_vendeur"] != $idVendeur) {
+            return 409;
+        } else {
+            modifierVendeurBDD($vendeur);
+        }
+
         return 200;
+         
+        
     }  
 
 ?>

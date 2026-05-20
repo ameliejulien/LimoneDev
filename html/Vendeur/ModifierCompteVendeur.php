@@ -68,7 +68,7 @@
 
       // récupération des infos du formulaire
       const formData = {
-        email_utilisateur: form.mail.value,
+        mail: form.mail.value,
         denomination: form.denomination.value,
         telephone_utilisateur: form.telephone.value,
         adresse: form.adresseVendeur.value,
@@ -87,6 +87,10 @@
         console.log(json);      // test affichage retour
         if (json.reponse == 200) {
           alert("Compte modifié !"); // alert de la création du compte
+          window.location.href = "ConsulterCompteVendeur.php";
+        
+        } else  if (json.reponse == 409) {
+          afficherSnackBar('Notification','Echec de modification : email déjà utilisé !'); // alert de la création du compte
           window.location.href = "ConsulterCompteVendeur.php";
         
         } else {
