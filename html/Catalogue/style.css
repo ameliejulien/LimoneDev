@@ -16,7 +16,18 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 input, select { font-family: inherit; color: inherit; }
 
+/* div principal */
+
+.main-frame {
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+}
+
+/* Produits */
+
 .grille-produit {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 22px;
@@ -55,7 +66,7 @@ input, select { font-family: inherit; color: inherit; }
   align-items: center;
   gap: 6px;
 }
-.info-produit .producteur i { color: var(--vert-clair); font-size: 0.7rem; }
+.info-produit .producteur i { color: var(--vert-fonce); font-size: 0.7rem; }
 .info-produit h3 {
   font-family: 'Alatsi', sans-serif;
   font-size: 1rem;
@@ -72,7 +83,7 @@ input, select { font-family: inherit; color: inherit; }
   font-size: 0.72rem;
   color: var(--encre-claire)
 }
-.info-produit .stock i { font-size: 0.45rem; color: var(--vert-clair); }
+.info-produit .stock i { font-size: 0.45rem; color: var(--vert-fonce); }
 .info-produit .stock.rupture i { color: #c44; }
 
 .pied-produit {
@@ -102,7 +113,7 @@ input, select { font-family: inherit; color: inherit; }
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: var(--vert-clair);
+  background: var(--vert-fonce);
   color: var(--beige-clair);
   display: grid;
   place-items: center;
@@ -111,3 +122,110 @@ input, select { font-family: inherit; color: inherit; }
 }
 .bouton-ajouter:hover { background: var(--vert-fonce); transform: scale(1.06); }
 .bouton-ajouter:active { transform: scale(0.96); }
+
+/* Slider */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background: white;
+  width: 460px;
+  padding: 28px 36px 32px;
+  border-radius: 18px;
+  box-shadow: var(--ombre-moyenne);
+  align-self: start;
+  top: 20px;
+  position: sticky;
+}
+
+.card-titre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.card-titre h4 {
+  font-family: var(--police-soustitre);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--encre-claire);
+  margin: 0;
+}
+
+.card-prix-display {
+  font-family: var(--police-generale);
+  font-size: 0.95rem;
+  color: var(--encre);
+}
+
+.range-slider {
+  position: relative;
+  height: 6px;
+  background: var(--bordure);
+  border-radius: 3px;
+  margin: 6px 0 8px;
+}
+
+.range-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: var(--vert-fonce);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.range-slider input[type="range"] {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 6px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--blanc);
+  border: 2.5px solid var(--vert-fonce);
+  box-shadow: 0 2px 6px rgba(28, 45, 48, 0.18);
+  pointer-events: all;
+  cursor: pointer;
+  transition: border-color .2s, transform .15s;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb:hover {
+  border-color: var(--vert-fonce);
+  transform: scale(1.18);
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.08);
+}
+
+.range-slider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--blanc);
+  border: 2.5px solid var(--vert-fonce);
+  box-shadow: 0 2px 6px rgba(28, 45, 48, 0.18);
+  pointer-events: all;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+
+.range-slider input[type="range"]::-moz-range-thumb:hover {
+  border-color: var(--vert-fonce);
+}

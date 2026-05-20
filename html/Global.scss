@@ -67,17 +67,22 @@ sans-serif; // Texte général
     --police-soustitre: #{$police-soustitre};
     --police-generale: #{$police-generale};
 }
-
 @font-face {
     font-family: Lovelo;
     src:
-        url("../fonts/Lovelo\ Black.otf") format("opentype")
+        url("/fonts/Lovelo\ Black.otf") format("opentype")
 }
 
 @font-face {
     font-family: Farro;
     src:
-        url("../fonts/Farro-Regular.ttf") format("truetype")
+        url("/fonts/farro-v15-latin-regular.woff2") format("woff2")
+}
+
+@font-face {
+    font-family: Farro-Bold;
+    src:
+        url("/fonts/Farro-Bold.ttf") format("truetype")
 }
 
 @font-face {
@@ -85,18 +90,60 @@ sans-serif; // Texte général
     src:
         url("../fonts/Alatsi-Regular.ttf") format("truetype")
 }
-
 .snackbar {
     background-color: #b3d3bc;
     color: #000000;
     padding: 0.75em 1.5em;
     justify-content: center;
     position: fixed;
-    top: 3em;
-    right: 5px;
+    top: 50px;
+    right: 50px;
     border-radius: 10px;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 11;
+
+    &.show {
+        visibility: visible;
+        animation: apparition-snackbar 0.4s ease-out;
+    }
+}
+
+@keyframes apparition-snackbar {
+    0% {transform: translate(200% , 0%);}
+    100% {transform: translate(0% , 0%);}
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: absolute;
+    animation: rotate 1s linear infinite;
+    top: calc(50% - 48px);
+    left: calc(50% - 48px);
+    z-index: 10;
+}
+
+.loader::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #4a7c59;
+    animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+    100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }
 
 @mixin flex-centre {

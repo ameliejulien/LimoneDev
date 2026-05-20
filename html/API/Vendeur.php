@@ -13,6 +13,11 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "connexion") {
     $retour=connexionVendeur($data);
     $data["reponse"] = $retour;
+    creerCookieVendeur($data);
+
+} else if ($data["typeRequete"] == "modification") {
+    $retour=modificationVendeur($data);
+    $data["reponse"] = $retour;
 }
 
 

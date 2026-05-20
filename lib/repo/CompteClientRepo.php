@@ -101,7 +101,10 @@
         "Adresse_Client ON Utilisateur.id_utilisateur = Adresse_Client.id_utilisateur ".
         "INNER JOIN Adresse ON Adresse_Client.id_adresse = Adresse.id_adresse;";
 
-        return $PDO->query($requete)->fetchAll();
+        $requetePreparee = $PDO->prepare($requete);
+        $requetePreparee->execute();
+        $tab = $requetePreparee->fetchAll();
+        return $tab;
     }
 
 

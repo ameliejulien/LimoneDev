@@ -86,4 +86,61 @@
         ajouterCleeBDD($clee);
         return $clee;
     }
+
+
+    /**
+     * @Brief génère un cookie pour la connexion vendeur
+     */
+    function creerCookieVendeur($vendeur) {
+        if ($_COOKIE['vendeur'] != null) { // cookie déjà créé
+            $vendeur = json_decode($_COOKIE['vendeur'],true);
+        }
+        error_log("vendeur reçu : " . var_export($vendeur, true));
+        $id = getVendeurId($vendeur);
+        error_log("id trouvé : " . var_export($id, true));
+
+
+        $tab["mail"] = $vendeur["mail"];
+        $tab["idVendeur"] = $id["id_vendeur"];
+
+        // Modifie la liste de produit dans le cookie
+        setcookie('vendeur', json_encode($tab), time() + 3*24*60*60, "/");
+    }
+
+
+    /**
+     * @Brief récupère les informations du vendeur connecté
+     * @Return retourne un tableau contenant les informations du vendeur
+     */
+    function recupererInfosVendeur() {
+        
+        if ($_COOKIE['vendeur'] != null) { // cookie déjà créé
+            $vendeur = json_decode($_COOKIE['vendeur'],true); 
+        }
+        $idVendeur = $vendeur["idVendeur"];
+
+        $infos = infosVendeurBDD($idVendeur);
+        return $infos;
+    }
+
+
+    /**
+     * @Brief met à jour les informations du vendeur
+     * @Return retourne un tableau contenant les informations du vendeur
+     */
+    function modificationVendeur($vendeur) {
+        // TODO : uniformiser les valeurs entre les CRU vendeur
+        $existant = getVendeurId($vendeur);
+
+        if ($existant && $existant["id_vendeur"] != $idVendeur) {
+            return 409;
+        } else {
+            modifierVendeurBDD($vendeur);
+        }
+
+        return 200;
+         
+        
+    }  
+
 ?>

@@ -49,6 +49,7 @@
         <input type="text" name="address" required>
       </div>
       <input type="submit" value="Enregistrer les modifications"/>
+      <a href="ConsulterCompteClient.php"><input type="button" value="Annuler"/></a>
     </form>
   </body>
 </html>

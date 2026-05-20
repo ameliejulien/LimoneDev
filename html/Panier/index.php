@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="panier.css">
+    <link rel="stylesheet" href="style.css">
     <script src="consulterPanier.js"></script>
     <title>Compte Client</title>
 </head>
@@ -50,7 +50,6 @@ $arts = getPanierArticles($panier);
                         <span><?= $art["prix_ht_produit"] ?>€</span>
 
                     </div>
-
                 </div>
             </div>
             <?php

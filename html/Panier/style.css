@@ -8,7 +8,8 @@
 }
 
 .cart {
-    padding-left: 1em;
+    padding: 2em 5em;
+    max-width: 80%;
 }
 
 label {
@@ -29,6 +30,7 @@ h2 {
     grid-row: 1;
     align-self: center;
     justify-self: left;
+    font-family: "Farro-Bold", sans-serif;
 }
 
 .article-container {
@@ -36,17 +38,19 @@ h2 {
 }
 
 .article-description {
-    font-size: 1.2em;
+    font-size: 1em;
     grid-row: 2;
     grid-column: 2;
 }
 
 .article-price {
-    font-size: 2em;
+    font-size: 1.5em;
     grid-column: 3;
     grid-row: 3;
     align-self: self-end;
     justify-self: self-end;
+    font-family: "Alatsi", sans-serif;
+
 }
 
 .article-grid {
@@ -54,16 +58,18 @@ h2 {
     grid-template-columns: 2fr 3fr 1fr;
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
-    padding: 1em 0;
+    padding: 2em 2em;
+    background-color: var();
 }
 
-.article-image
-{
-    display:flex;
+.article-image {
+    display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
     justify-items: center;
+    height: 100%;
+    width: 100%;
     grid-column: 1;
     grid-row: 1 / 4;
 }
@@ -125,6 +131,6 @@ body {
 }
 
 .image {
-    max-width: 30em;
-    max-height: 30em;
+    max-width: 300px;
+    max-height: 100%;
 }

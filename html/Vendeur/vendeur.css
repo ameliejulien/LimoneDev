@@ -23,6 +23,10 @@ form{
     font-family: var(--texte-font);
     background-color: #b3d3bc; 
 }
+.consultDiv span {
+    font-size: 1.5em;
+}
+
 
 
 .divForm input{
