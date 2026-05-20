@@ -25,7 +25,7 @@ function ajouterProduitToCookie(int $produitId)
         $listeProduit[] = $produitId;
 
         // Modifie la liste de produit dans le cookie
-        setcookie('panier', json_encode($listeProduit));
+        setcookie('panier', json_encode($listeProduit), time() + 3*24*60*60, "/");
     }
 }
 
@@ -53,7 +53,7 @@ function supprimerProduit(int $produitId)
 
 /**
  * Valide le panier, verifie tous les produits pour voir si tous les produits du panier sont encore dans la BDD et sépare les valides des invalides.
- * @return JSON retourne un JSON de fromat : {"valide":["id_1", "id_2", ..."], "manquants":["id_1", ...]}
+ * @return mixed retourne un JSON de fromat : {"valide":["id_1", "id_2", ..."], "manquants":["id_1", ...]}
  */
 function validerPanier()
 {
