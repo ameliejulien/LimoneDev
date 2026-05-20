@@ -9,8 +9,8 @@ function trouverTousLesProduits(): array {
     $query = "
     SELECT * 
     FROM produit 
-    INNER JOIN photo_produit on id_produit = id_photo_produit
-    ORDER BY id_produit;";
+    INNER JOIN photo_produit on produit.id_produit = photo_produit.id_photo_produit
+    ORDER BY produit.id_produit;";
 
     return $PDO->query($query)->fetchAll();
 }
