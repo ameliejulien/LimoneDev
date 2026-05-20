@@ -7,11 +7,13 @@ function afficherSnackBar(titre, contenu) {
     snackbarTitle.textContent = titre;
     snackbarText.textContent = contenu;
 
-    // affiche la snackbar
-    snackbar.style.visibility = "visible";
+    // force le re-déclenchement de l'animation si déjà affichée
+    snackbar.classList.remove("show");
+    void snackbar.offsetWidth; // reflow
 
-    // la cache après 4 secondes
+    snackbar.classList.add("show");
+
     setTimeout(function () {
-        snackbar.style.visibility = "hidden";
+        snackbar.classList.remove("show");
     }, 3000);
 }

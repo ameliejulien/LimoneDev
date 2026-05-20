@@ -11,8 +11,28 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="../snackbar.js"></script>
     </head>
     <body class="bg-[#fffdea]">
+        <div id="loader" class="hidden">
+            <span class="loader"></span>
+            <div class="loader-background"></div>
+        </div>
+
+        <div class="snackbar">
+            <h3 class="snackbarTitle"></h3>
+            <p class="snackbarText"></p>
+        </div>
+
+        <div class="card">
+            <div class="range-slider">
+                <div class="range-fill">
+                    <input type="range" class="min-price" min="0" max="500" value="100" step="10">
+                    <input type="range" class="max-price" min="0" max="500" value="250" step="10">
+                </div>
+            </div>
+        </div>
+            
         <div class="grille-produit">
             <?php 
                 foreach($images as $row) {
@@ -46,9 +66,20 @@
 
         for (let i = 0; i < boutonsAjouter.length; i++) {
             boutonsAjouter[i].addEventListener('click', (e) => {
+                const loader = document.getElementById('loader');
+                loader.classList.remove('hidden');
+
                 fetch('../API/AjoutPanier.php', {
                     method: 'POST',
                     body: JSON.stringify({id_produit: e.currentTarget.getAttribute('id_produit')})
+                }).then(response => {
+                    if (response.status === 200) {
+                        afficherSnackBar('Succes', 'Le produit a été ajouté au panier avec succes');
+                    } else {
+                        afficherSnackBar('Erreur', 'Une erreur est survenue');
+                    }
+                }).finally(() => {
+                    loader.classList.add('hidden');
                 });
             })
         }
