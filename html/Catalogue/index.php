@@ -42,28 +42,15 @@
         </div>
     </body>
     <script>
-        let panier = [];
-
-        // On créer une date pour mettre une date d'expiration au cookie
-        // Sans ça le cookie n'est pas sauvegardé
-        const date = new Date();
-        date.setDate(date.getDate() + 3 * 24 * 60 * 60 * 1000);
-
-        // Si un cookie existe, on remplit panier avec
-        if (document.cookie !== "") {
-            panier = JSON.parse(document.cookie.split(';')[0].split('=')[1]);
-        }
-
         let boutonsAjouter = document.getElementsByClassName('bouton-ajouter');
 
         for (let i = 0; i < boutonsAjouter.length; i++) {
             boutonsAjouter[i].addEventListener('click', (e) => {
-                panier.push(parseInt(e.currentTarget.getAttribute('id_produit')));
-
-                // path=/ informe que le cookie est accessible depuis tout le site
-                document.cookie = `panier=[${panier}]; expires=${date.toUTCString()}; path=/`;
-                console.log(document.cookie);
-            });
+                fetch('../API/AjoutPanier.php', {
+                    method: 'POST',
+                    body: JSON.stringify({id_produit: e.currentTarget.getAttribute('id_produit')})
+                });
+            })
         }
     </script>
-</html> 
+</html>
