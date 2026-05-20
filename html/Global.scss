@@ -67,30 +67,22 @@ sans-serif; // Texte général
     --police-soustitre: #{$police-soustitre};
     --police-generale: #{$police-generale};
 }
-
 @font-face {
     font-family: Lovelo;
     src:
-        url("fonts/Lovelo\ Black.otf") format("opentype")
+        url("/fonts/Lovelo\ Black.otf") format("opentype")
 }
 
 @font-face {
     font-family: Farro;
     src:
-        url("fonts/Farro-Regular.ttf") format("truetype")
+        url("/fonts/farro-v15-latin-regular.woff2") format("woff2")
 }
 
 @font-face {
     font-family: Farro-Bold;
     src:
-        url("fonts/Farro-Bold.ttf") format("truetype")
-}
-
-
-@font-face {
-    font-family: Farro;
-    src:
-        url("fonts/Farro-Regular.ttf") format("truetype")
+        url("/fonts/Farro-Bold.ttf") format("truetype")
 }
 
 @font-face {
@@ -98,7 +90,6 @@ sans-serif; // Texte général
     src:
         url("../fonts/Alatsi-Regular.ttf") format("truetype")
 }
-
 .snackbar {
     background-color: #b3d3bc;
     color: #000000;

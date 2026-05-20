@@ -1,7 +1,4 @@
-// Variables à placer dans un autre fichier
-$font-titre: "Lovelo";
-$font-sous-titre: "Alatsi";
-$font-texte: "Farro";
+@import "../Global.scss";
 
 $bg-body: #fffdea;
 $bg-form: #b3d3bc;
@@ -18,21 +15,25 @@ body {
   h1 {
     font-size: 3em;
     color: $text-color;
-    font-family: $font-titre;
+    font-family: $police-titre;
   }
 }
 
 // Form
 form {
-  border: solid;
+  border: solid 1px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  padding: 2em 5em; 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding: 2em 2em;
+  background-color: var();
+  padding: 2em 5em;
   gap: 1em;
   margin: 0;
   width: fit-content;
-  font-family: $font-texte, sans-serif; 
+  font-family: $police-generale, sans-serif;
   background-color: $bg-form;
 
   .submit {
@@ -42,16 +43,30 @@ form {
 
   label {
     font-size: 1.5em;
-    font-family: $font-texte;
+    font-family: $police-generale, sans-serif;
   }
 
   .divForm {
     display: flex;
     flex-direction: column;
     gap: 0.25em;
-    
+
     h2 {
-      font-family: $font-sous-titre;
+      font-family: $police-soustitre;
     }
   }
+}
+
+.input-group {
+  display:flex;
+  flex-direction: column;
+}
+
+.nom-input {
+  
+}
+
+.prenom-input {
+      grid-column: 1;
+    grid-row: 1 / 4;
 }
