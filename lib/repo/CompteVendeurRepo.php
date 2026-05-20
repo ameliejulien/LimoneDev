@@ -139,12 +139,32 @@
         return $row !== false;
     }
 
+    /**
+     * @Brief ajoute une clée d'authentification en BDD
+     */
     function ajouterCleeBDD($clee) {
         $connectBDD = connecterBDD();
         $requete = "INSERT INTO Cle_Authentification (clee, utilisee)".
                    "VALUES ('{$clee}', false)"; 
         $requetePreparee = $connectBDD->prepare($requete);
         $requetePreparee->execute();
+    }
+
+
+    /**
+     * @Brief récup l'id d'un vendeur en fonction de son email
+     */
+    function getVendeurId($vendeur){
+        $connectBDD = connecterBDD();
+
+        $requete =  "SELECT id_vendeur FROM Vendeur INNER JOIN limone.Utilisateur ".
+                    "ON Utilisateur.id_utilisateur = Vendeur.id_vendeur ".
+                    "WHERE email_utilisateur = '{$vendeur["mail"]}';";
+
+        $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->execute(); 
+        $id = $requetePreparee->fetch(PDO::FETCH_ASSOC);
+        return $id;
     }
 
 ?>

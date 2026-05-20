@@ -66,7 +66,9 @@
         return trouverInfosClient();
     }
 
-
+    /**
+     * @Brief création d'un cookie client à la connexion
+     */
     function ajouterClientCookie($client) {
         if ($_COOKIE['client'] != null) { // cookie déjà créé
             $client = json_decode($_COOKIE['client']);
@@ -77,6 +79,6 @@
         $tab["idClient"] = $id;
 
         // Modifie la liste de produit dans le cookie
-        setcookie('client', json_encode($listeProduit), time() + 3*24*60*60, "/");
+        setcookie('client', json_encode($tab), time() + 3*24*60*60, "/");
     }
 ?>

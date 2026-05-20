@@ -10,10 +10,18 @@ function connecterBDD(): PDO {
     try {
         static $dbh = null;
 
+        $dbName="limone";
+        $dbUser="sae";
+        $dbPassword="LimoneDev.121";
+        $driver="pgsql";
+        $server="localhost";
+        $port       = "5433";
+
         if ($dbh === null) {
             $dbh = new PDO("$driver:host=$server;port=$port;dbname=$dbName", $dbUser, $dbPassword);
             $dbh->exec("SET SCHEMA 'limone';");
         }
+
 
         return $dbh;
     } catch (PDOException $e) {
