@@ -39,20 +39,34 @@ function getTousLesProduitsBDD() {
     return $retour;
 }
 
-function getStatusDuProduit(String $productId) {
+/**
+ * Get le status du produit, supprimer ou non (boolean)
+ * @return Boolean si le produit est présent en bdd et non supprimer false, sinon true
+ */
+function getStatusDuProduit(String $id_produit) {
     $dbh = connecterBDD();
 
-    $query = "select produit_supprime from produit where id_produit = $productId";
+    $query = "select produit_supprime from produit where id_produit = $id_produit";
 
     $stmt = $dbh->prepare($query);
 
     $stmt->execute();
 
-    $retour = $stmt->fetch();
+    $retour = $stmt->fetchAll();
 
-    return $retour;
-}
-
+    // C'est pas propre mais ça fonctionne...
+    // Garde que les resultat de id qui existe
+    foreach ($retour[0] as $key => $value) {
+        if ($key != null) {
+            return $value;
+        } else {
+            return true;
+        }
+    }
+    
+    return true;
+ }
+ 
 /**
  * Prend en paramètre un produit déjà initialisé
  * @param Produit $produit La variable Produit qui a permis de remplir la page produit detaillée
