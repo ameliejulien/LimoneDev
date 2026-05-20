@@ -18,22 +18,22 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img src=<?=$infosClient['pp_utilisateur']; ?> alt="Photo de profil" class="profile-picture" width="200" height="200">
+        <img src=<?=$infosClient[4]['pp_utilisateur']; ?> alt="Photo de profil" class="profile-picture" width="200" height="200">
       </div>
 
       <div class="divForm">
         <label for="username">Nom utilisateur</label>
-        <output type="text" name="username" required value="<?=$infosClient['nom_utilisateur']; ?>">Pseudo</output>
+        <output type="text" name="username" required value="<?=$infosClient[1]['nom_utilisateur']; /*print_r($infosClient[0]['nom_utilisateur']);*/ ?>">Pseudo</output>
       </div>
     
       <div class="divForm">
         <label for="mail">Adresse mail</label>
-        <output type="email" name="mail" required value="<?=$infosClient['email_utilisateur']; ?>">mail@example.com</output>
+        <output type="email" name="mail" required value="<?=$infosClient[2]['email_utilisateur']; ?>">mail@example.com</output>
       </div>
 
       <div class="divForm">
         <label for="phone">Numéro de téléphone</label>
-        <output type="tel" name="phone" required value="<?=$infosClient['telephone_utilisateur']; ?>">06 12 34 56 78</output>
+        <output type="tel" name="phone" required value="<?=$infosClient[3]['telephone_utilisateur']; ?>">06 12 34 56 78</output>
       </div>
       
       <div class="divForm">
