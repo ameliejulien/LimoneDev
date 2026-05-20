@@ -109,7 +109,7 @@ sans-serif; // Texte général
 }
 
 @keyframes apparition-snackbar {
-    0% {transform: translate(-200% , -200%);}
+    0% {transform: translate(200% , 0%);}
     100% {transform: translate(0% , 0%);}
 }
 

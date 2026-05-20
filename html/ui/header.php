@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
         <!-- Feuille de style principale du projet -->
-        <link rel="stylesheet" href="Global.css">
+        <link rel="stylesheet" href="../Global.css">
     </head>
     <body>
         <header class="header">
@@ -75,6 +75,6 @@
             </nav>
         </header>
 
-        <script src="header.js" defer></script>
+        <script src="../js/header.js" defer></script>
 </body>
 </html>

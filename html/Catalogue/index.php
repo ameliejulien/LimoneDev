@@ -2,6 +2,10 @@
     include '../../lib/service/ServiceProduit.php';
 
     $images = recupererTouslesProduits();
+
+    $prix = array_column($images, 'prix_ht_produit');
+    $prixMin = (int) floor(min($prix));
+    $prixMax = (int) ceil(max($prix));
 ?>
 
 <!DOCTYPE html>
@@ -24,44 +28,97 @@
             <p class="snackbarText"></p>
         </div>
 
-        <div class="card">
-            <div class="range-slider">
-                <div class="range-fill">
-                    <input type="range" class="min-price" min="0" max="500" value="100" step="10">
-                    <input type="range" class="max-price" min="0" max="500" value="250" step="10">
+        <div class="main-frame">
+            <div class="card">
+                <div>
+                    <div class="card-titre">
+                        <h4>Prix</h4>
+                        <span class="card-prix-display"><span class="prix-min-val"><?= $prixMin ?></span> € — <span class="prix-max-val"><?= $prixMax ?></span> €</span>
+                    </div>
+                    <div class="range-slider">
+                        <div class="range-fill"></div>
+                        <input type="range" class="min-price" min="<?= $prixMin ?>" max="<?= $prixMax ?>" value="<?= $prixMin ?>" step="1">
+                        <input type="range" class="max-price" min="<?= $prixMin ?>" max="<?= $prixMax ?>" value="<?= $prixMax ?>" step="1">
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="card-titre">
+                        <h4>Catégories</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-            
-        <div class="grille-produit">
-            <?php 
-                foreach($images as $row) {
-                    $imageData = stream_get_contents($row['photo_produit']);
-                    $base64 = base64_encode($imageData);  
-            ?>
-                <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>">
-                    <img src=<?="data:image/jpeg;base64,$base64" ?> class="w-50 h-50 object-contain m-auto mt-3">
-                    <div class="info-produit">
-                        <span class="producteur"><i class="fa-solid fa-location-dot"></i>BRETON</span>
-                        <h3><?= $row['nom_produit'] ?></h3>
-                        <span class="stock <?= $row['stock_produit'] < 1 ? "rupture" : "" ?>">
-                            <i class="fa-solid fa-circle"></i>
-                            <?= $row['stock_produit'] > 0 ? "En stock" : "Rupture de stock" ?>
-                        </span>
-                        <div class="pied-produit">
-                        <div class="prix-produit">
-                            <span class="montant"><?= explode(".", strval($row['prix_ht_produit']))[0] ?>,<span style="font-size:0.7em"><?= explode(".", strval($row['prix_ht_produit']))[1] ?><span class="monnaie"> €</span></span></span>
+                
+            <div class="grille-produit">
+                <?php 
+                    foreach($images as $row) {
+                        $imageData = stream_get_contents($row['photo_produit']);
+                        $base64 = base64_encode($imageData);  
+                ?>
+                    <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>" data-prix="<?= $row['prix_ht_produit'] ?>">
+                        <img src=<?="data:image/jpeg;base64,$base64" ?> class="w-50 h-50 object-contain m-auto mt-3">
+                        <div class="info-produit">
+                            <span class="producteur"><i class="fa-solid fa-location-dot"></i>BRETON</span>
+                            <h3><?= $row['nom_produit'] ?></h3>
+                            <span class="stock <?= $row['stock_produit'] < 1 ? "rupture" : "" ?>">
+                                <i class="fa-solid fa-circle"></i>
+                                <?= $row['stock_produit'] > 0 ? "En stock" : "Rupture de stock" ?>
+                            </span>
+                            <div class="pied-produit">
+                            <div class="prix-produit">
+                                <span class="montant"><?= explode(".", strval($row['prix_ht_produit']))[0] ?>,<span style="font-size:0.7em"><?= explode(".", strval($row['prix_ht_produit']))[1] ?><span class="monnaie"> €</span></span></span>
+                            </div>
+                            <button class="bouton-ajouter" aria-label="Ajouter au panier" id_produit="<?= $row['id_produit'] ?>">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </button>
+                            </div>
                         </div>
-                        <button class="bouton-ajouter" aria-label="Ajouter au panier" id_produit="<?= $row['id_produit'] ?>">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </button>
-                        </div>
-                    </div>
-                </article>
-            <?php } ?>
+                    </article>
+                <?php } ?>
+            </div>
         </div>
     </body>
     <script>
+        const sliderMin   = document.querySelector('.min-price');
+        const sliderMax   = document.querySelector('.max-price');
+        const fill        = document.querySelector('.range-fill');
+        const valMin      = document.querySelector('.prix-min-val');
+        const valMax      = document.querySelector('.prix-max-val');
+
+        function updateSlider() {
+            const min   = parseInt(sliderMin.value);
+            const max   = parseInt(sliderMax.value);
+            const total = sliderMin.max - sliderMin.min;
+
+            fill.style.left  = ((min - sliderMin.min) / total) * 100 + '%';
+            fill.style.right = (((sliderMin.max - sliderMax.value) / total) * 100) + '%';
+            
+            valMin.textContent = min;
+            valMax.textContent = max;
+            filtrerProduits(min, max);
+        }
+
+        sliderMin.addEventListener('input', () => {
+            if (parseInt(sliderMin.value) > parseInt(sliderMax.value))
+                sliderMin.value = sliderMax.value;
+            updateSlider();
+        });
+
+        sliderMax.addEventListener('input', () => {
+            if (parseInt(sliderMax.value) < parseInt(sliderMin.value))
+                sliderMax.value = sliderMin.value;
+            updateSlider();
+        });
+
+        function filtrerProduits(min, max) {
+            document.querySelectorAll('.carte-produit').forEach(carte => {
+                const prix = parseFloat(carte.dataset.prix);
+                carte.style.display = (prix >= min && prix <= max) ? '' : 'none';
+            });
+        }
+
+        updateSlider();
+
         let boutonsAjouter = document.getElementsByClassName('bouton-ajouter');
 
         for (let i = 0; i < boutonsAjouter.length; i++) {
