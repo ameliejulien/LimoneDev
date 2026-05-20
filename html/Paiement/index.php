@@ -9,8 +9,8 @@
 <main>
     <h1>Paiement</h1>
     <form method="POST" action="./PaiementValide.php">
-        <div class="divForm">
-            <h2>Contact</h2>
+        <div class="divForm form-contact">
+            <h2 class="contact-titre">Contact</h2>
             <div class="input-group prenom-input">
                 <label for="prenom">Prénom</label>
                 <input type="text" name="prenom" required>
@@ -21,70 +21,73 @@
                 <label for="nom">Nom</label>
                 <input type="text" name="nom" required>
             </div>
-            <div class="input-group mail-group">
+            <div class="input-group mail-input">
 
                 <label for="email">Adresse mail</label>
                 <input type="email" name="email" required>
             </div>
-            <div class="input-group tel-group">
+            <div class="input-group tel-input">
 
                 <label for="telephone">Numéro de téléphone</label>
                 <input type="tel" name="telephone" required placeholder="Format : 0123456789">
             </div>
         </div>
 
-        <div class="divForm">
-            <h2>Livraison</h2>
-            <div class="input-group">
+        <div class="divForm form-livraison">
+            <h2 class="livraison-titre">Livraison</h2>
+            <div class="input-group ville-input">
 
+                <label for="ville">Ville</label>
+                <input type="text" name="ville" required>
             </div>
-            <label for="ville">Ville</label>
-            <input type="text" name="ville" required>
-            <div class="input-group adresse-group">
+            <div class="input-group adresse-input">
                 <label for="adressePostal">Adresse postale</label>
                 <input type="text" name="adressePostal" required>
             </div>
-            <div class="input-group code-postal-group">
+            <div class="input-group code-postal-input">
 
 
                 <label for="codePostal">Code postal</label>
                 <input type="text" name="codePostal" required>
             </div>
 
-            <div class="input-group ville-group">
+            <div class="input-group ville-fac-input">
 
                 <label for="villeFacturation">Ville</label>
                 <input type="text" name="villeFacturation" required>
             </div>
-            <div class="input-group adresse-fac-group">
+            <div class="input-group adresse-fac-input">
 
                 <label for="adressePostalFacturation">Adresse de facturation</label>
                 <input type="text" name="adressePostalFacturation" required>
             </div>
-            <div class="input-group code-postal-fac-group">
+            <div class="input-group code-postal-fac-input">
 
                 <label for="codePostalFacturation">Code postal de facturation</label>
                 <input type="text" name="codePostalFacturation" required>
             </div>
         </div>
 
-        <div class="divForm">
-            <h2>Informations de paiement</h2>
-            <div class="input-group">
+        <div class="divForm form-paiement">
+            <h2 class="paiement-titre">Informations de paiement</h2>
+            <div class="input-group code-cb-input">
 
                 <label for="carteBancaire">Carte bancaire</label>
                 <input type="text" name="carteBancaire" required>
-                <div class="input-group">
+            </div>
+            <div class="input-group nom-titulaire-input">
 
-                    <label for="titulaireCB">Nom du titulaire</label>
-                    <input type="text" name="titulaireCB" required>
-                    <div class="input-group">
+                <label for="titulaireCB">Nom du titulaire</label>
+                <input type="text" name="titulaireCB" required>
+            </div>
+            <div class="input-group cvc-input">
 
-                        <label for="codeSecretCB">Code secret</label>
-                        <input type="text" name="codeSecretCB" required>
-                    </div>
+                <label for="codeSecretCB">Code secret</label>
+                <input type="text" name="codeSecretCB" required>
+            </div>
 
-                    <input type="submit" value="Valider" class="submit" />
+            <input type="submit" value="Valider" class="submit" />
+        </div>
     </form>
 </main>
 
