@@ -284,26 +284,18 @@ input[type="radio"] {
   gap: 5px;
 }
 
-.categories > div {
+.vendeurs > div {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
 }
 
-.categories label {
+.vendeurs label {
   font-family: var(--police-soustitre);
   font-size: 1rem;
   color: var(--encre);
   cursor: pointer;
   user-select: none;
   letter-spacing: 0.02em;
-}
-
-input[type="radio"]:hover {
-  border-color: #555;
-}
-
-input[type="radio"] {
-  accent-color: var(--vert-fonce);
 }

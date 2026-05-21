@@ -191,4 +191,8 @@ function modificationMdpVendeur($data)
     return 200;
 }
 
+function recupererLesVendeurs() {
+    return trouverLesVendeurs();
+}
+
 ?>
