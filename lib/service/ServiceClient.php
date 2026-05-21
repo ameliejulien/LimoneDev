@@ -62,23 +62,38 @@
         return $codeRetour;
     }
 
-    function recupererInfosClient(): array {
-        return trouverInfosClient();
-    }
 
     /**
-     * @Brief création d'un cookie client à la connexion
+     * @Brief Récupérer les informations du client connecté
+     * @Return Un tableau avec les informations du client connecté
      */
+    function recupererInfosClient() {
+        
+        if ($_COOKIE['client'] != null) {
+            $client = json_decode($_COOKIE['client'],true); 
+        }
+        $idClient = $client["idVendeur"];
+
+        $infos = trouverInfosClient($idClient);
+        return $infos;
+    }
+
+
+    /**
+    * @Brief création d'un cookie client à la connexion
+    */
     function ajouterClientCookie($client) {
         if ($_COOKIE['client'] != null) { // cookie déjà créé
-            $client = json_decode($_COOKIE['client']);
+            $client = json_decode($_COOKIE['client'],true);
         }
+
         $id = getIdClient($client);
 
         $tab["mail"] = $client["mail"];
-        $tab["idClient"] = $id;
+        $tab["idVendeur"] = $id["id_client"];
 
         // Modifie la liste de produit dans le cookie
-        setcookie('client', json_encode($tab), time() + 3*24*60*60, "/");
+        setcookie('client', json_encode($tab), time() + 32460*60, "/");
     }
+
 ?>
