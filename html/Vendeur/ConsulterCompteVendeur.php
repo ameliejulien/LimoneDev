@@ -13,6 +13,7 @@
     <title>Profil vendeur</title>
   </head>
   <body>
+    <?php require_once '../ui/header.php'; ?>
     <h1>Profil Vendeur</h1>
     <form>
       <div class="consultDiv">

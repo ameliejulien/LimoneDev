@@ -14,6 +14,7 @@
   <title>Compte Vendeur</title>
 </head>
 <body>
+  <?php require_once '../ui/header.php'; ?>
   <h1>Modification du compte vendeur</h1>
   <form method="POST">
     <div class="divForm">
