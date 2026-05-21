@@ -1,6 +1,6 @@
 <?php
 
-    include "GlobalRepo.php";
+    require_once "GlobalRepo.php";
 
     /**
      * @Brief ajoute une instance dans utilisateur et vendeur en bdd
@@ -239,5 +239,13 @@
         $requeteVendeur = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idVendeur}';";
         $requeteUpdateVendeur = $connectBDD->prepare($requeteVendeur);
         $rowVendeur = $requeteUpdateVendeur->execute();
+    }
+
+    function trouverLesVendeurs() {
+        $PDO = connecterBDD();
+
+        $query = "SELECT * FROM vendeur ORDER BY denomination_vendeur";
+
+        return $PDO->query($query)->fetchall(); 
     }
 ?>

@@ -1,8 +1,8 @@
 <?php 
 
-include 'GlobalRepo.php';
+include_once 'GlobalRepo.php';
 
-function trouverTousLesProduits(): array {
+function trouverLesProduits(): array {
 
     $PDO = connecterBDD();
 
@@ -14,6 +14,19 @@ function trouverTousLesProduits(): array {
     LEFT JOIN photo_produit on produit.id_produit = photo_produit.id_photo_produit
     INNER JOIN vendeur on produit.vendeur_produit = vendeur.id_vendeur
     ORDER BY produit.id_produit;";
+
+    return $PDO->query($query)->fetchAll();
+}
+
+function trouverLesCategories() {
+
+    $PDO = connecterBDD();
+
+    $query = "
+    SELECT * 
+    FROM categorie
+    ORDER BY nom_categorie;
+    ";
 
     return $PDO->query($query)->fetchAll();
 }

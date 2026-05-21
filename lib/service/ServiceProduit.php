@@ -2,8 +2,12 @@
 
 require __DIR__ . '/../repo/ProduitRepo.php';
 
-function recupererTouslesProduits(): array {
-    return trouverTousLesProduits();
+function recupererlesProduits(): array {
+    return trouverLesProduits();
+}
+
+function recupererLesCategories(): array {
+    return trouverLesCategories();
 }
 
 ?>
