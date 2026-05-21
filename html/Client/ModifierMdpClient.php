@@ -14,6 +14,7 @@
   <title>Compte Client</title>
 </head>
 <body>
+  <?php require_once '../ui/header.php'; ?>
   <h1>Modification du mot de passe client</h1>
   <form method="POST">
     
