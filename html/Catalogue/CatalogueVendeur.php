@@ -114,10 +114,6 @@ $vendeurs = recupererLesVendeurs();
                                             style="font-size:0.7em"><?= explode(".", strval($row['prix_ht_produit']))[1] ?><span
                                                 class="monnaie"> €</span></span></span>
                                 </div>
-                                <button class="button" aria-label="Ajouter au panier"
-                                    id_produit="<?= $row['id_produit'] ?>">
-                                    <i class="fa-solid fa-basket-shopping"></i>
-                                </button>
                             </div>
                         </div>
                     </article>
