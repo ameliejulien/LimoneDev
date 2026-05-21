@@ -15,7 +15,7 @@
   </head>
   <body>
     <h1>Profil</h1>
-    <form method="POST">
+    <form method="POST" action="ConsulterCompteClient.php">
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
@@ -44,13 +44,13 @@
       </div>
 
       <div class="divForm">
-        <label for="address">Code postal</label>
-        <input type="text" name="address" required value="<?= $infosClient[0]['code_postal_adresse'];?>">
+        <label for="code">Code postal</label>
+        <input type="text" name="code" required value="<?= $infosClient[0]['code_postal_adresse'];?>">
       </div>
 
       <div class="divForm">
-        <label for="address">Ville</label>
-        <input type="text" name="address" required value="<?= $infosClient[0]['ville_adresse'];?>">
+        <label for="ville">Ville</label>
+        <input type="text" name="ville" required value="<?= $infosClient[0]['ville_adresse'];?>">
       </div>
       <input type="submit" value="Enregistrer les modifications" class="submit"/>
       <a href="ConsulterCompteClient.php"><input type="button" value="Annuler"/></a>
@@ -59,59 +59,75 @@
 </html>
 
 <script>
+
   function changerImage(event) {
+
     const fichier = event.target.files[0];
+
+    // Vérification qu'une image a été choisie
     if (fichier) {
+
       const lecture = new FileReader();
+
       lecture.onload = function(selec) {
+
+        // Changement de la photo de profil avec l'image choisie par l'utilisateur
         document.getElementById('changementImage').src = selec.target.result;
+
       }
+
       lecture.readAsDataURL(fichier);
     }
   }
 
   const form = document.querySelector("form");
 
-  // écouteur des requêtes du formulaire
+  // Ecouteur
   form.addEventListener("submit", function (event) {
     
-    // empêche l'envoi du formulaire sans exécuter le code qui suit
+    // Assure la bonne exécution du code avant l'envoi du formulaire
     event.preventDefault(); 
 
-    // récupération des infos du formulaire
+    // Récupération des données du client
     const formData = {
-      mail: form.mail.value,
+      pp_utilisateur: form.picture.value,
       nom_utilisateur: form.username.value,
+      email_utilisateur: form.mail.value,
       telephone_utilisateur: form.phone.value,
       adresse: form.address.value,
-      ville_adresse: form.ville_adresse.value,
-      code_postal_adresse: form.code_postal_adresse.value,
+      code_postal_adresse: form.code.value,
+      ville_adresse: form.ville.value,
       typeRequete: "modification"
     }
 
+<<<<<<< Updated upstream
     // fetch vers le dossier API de création client
     fetch("../API/Client.php", {
+=======
+    // Fetch vers le dossier API de création client
+    fetch("../API/CreerClient.php", {
+>>>>>>> Stashed changes
       method: "POST",
-      body: JSON.stringify(formData)  // fait une string JSON du tableau
+      body: JSON.stringify(formData)
     })
-    .then(response => response.json())  // transforme la réponse http en json exploitable
+
+    .then(response => response.json()) // http vers json
     .then(json => {
-      console.log(json);      // test affichage retour
+      console.log(json); // Test affichage
+
+      // Compte modifié avec succès
       if (json.reponse == 200) {
-        alert("Compte modifié !"); // alert de la création du compte
+        alert("Compte modifié !");
         window.location.href = "ConsulterCompteClient.php";
-      
-      } else  if (json.reponse == 409) {
-        afficherSnackBar('Notification','Echec de modification : email déjà utilisé !'); // alert de la création du compte
-        window.location.href = "ConsulterCompteClient.php";
-      
-      } else {
-        afficherSnackBar('Notification','Echec de modification !');
-      } 
+        form.submit();
+      }
       
     })
+    
     .catch(err => {
       console.error("Erreur :", err); 
     });
+
   });
+
 </script>

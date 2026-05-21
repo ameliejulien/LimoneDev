@@ -16,6 +16,7 @@ if ($data["typeRequete"] == "creation") {
     $retour = connexionClient($data);
     $data["reponse"] = $retour;
     ajouterClientCookie($data);
+<<<<<<< Updated upstream:html/API/Client.php
 
 } else if ($data["typeRequete"] == "deconnexion") {
     $retour = deconnecterClient();
@@ -24,6 +25,12 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "modificationMdp") {
     $retour = modificationMdpClient($data);
     $data["reponse"] = $retour;
+=======
+} else if ($data["typeRequete"] == "modification") {
+    $retour=modifierClientBDD($data);
+    $data["reponse"] = $retour;
+    ajouterClientCookie($data);
+>>>>>>> Stashed changes:html/API/CreerClient.php
 }
 
 

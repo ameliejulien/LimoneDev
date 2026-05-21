@@ -126,4 +126,36 @@
 
     }
 
+    /**
+     * @Brief Changer les informations du client
+     */
+    function modifierClientBDD($client) {
+
+        $idClient = json_decode($_COOKIE['client'], true)['idClient'];
+        $connectBDD = connecterBDD();
+
+        // Récupération de l'id adresse client
+        $requeteGetIdAdresse = "SELECT id_adresse FROM Adresse WHERE id_utilisateur = '{$idClient}' ;";
+        $requeteIdAdressePreparee = $connectBDD->prepare($requeteGetIdAdresse);
+        $requeteIdAdressePreparee->execute();
+        $rowAdresse = $requeteIdAdressePreparee->fetch(PDO::FETCH_ASSOC);
+        $idAdresse = $rowAdresse['id_adresse'];
+
+        // Modification de l'adresse
+        $requeteAdresse = "UPDATE Adresse ".
+                          "SET adresse = '{$client["adresse"]}', ville_adresse = '{$client["ville_adresse"]}', ".
+                          "code_postal_adresse = '{$client["code_postal_adresse"]}' WHERE id_adresse = '{$idAdresse}'";
+
+        $requeteUpdateAdresse = $connectBDD->prepare($requeteAdresse);
+        $requeteUpdateAdresse->execute();
+
+        // Modification de l'utilisateur
+        $requeteUtilisateur = "UPDATE Utilisateur ".
+                              "SET nom_utilisateur = '{$client["nom_utilisateur"]}', email_utilisateur = '{$client["email_utilisateur"]}', ".
+                              "telephone_utilisateur = '{$client["telephone_utilisateur"]}' WHERE id_utilisateur = '{$idClient}'";
+
+        $requeteUpdateUtilisateur = $connectBDD->prepare($requeteUtilisateur);
+        $requeteUpdateUtilisateur->execute();
+    }
+
 ?>
