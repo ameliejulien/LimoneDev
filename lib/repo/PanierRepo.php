@@ -1,30 +1,33 @@
 <?php
 require_once '../../connect_params.php';
-require_once '../../lib/repo/PanierRepo.php'; 
+require_once '../../lib/repo/PanierRepo.php';
 require_once '../../lib/repo/GlobalRepo.php';
 
-function getDBProduitsFromPanier(Array $panier)
+function getDBProduitsFromPanier(array $panier)
 {
     $dbh = connecterBDD();
-    $stringListe = "(" . implode(", ", $panier) . ")";
+    $retour = [];
+    if ($panier != null) {
+        $stringListe = "(" . implode(", ", $panier) . ")";
 
-    $query = "select produit.id_produit, nom_produit, description_produit, prix_ht_produit,
-    stock_produit, catalogue_produit, promotion_produit, reduction_produit, tva_produit, produit_supprime, photo_produit
-    from produit
-    join photo_produit on produit.id_produit = photo_produit.id_photo_produit
-    where produit.id_produit in $stringListe";
-    
+        $query = "select produit.id_produit, nom_produit, description_produit, prix_ht_produit,
+            stock_produit, catalogue_produit, promotion_produit, reduction_produit, tva_produit, produit_supprime, photo_produit
+            from produit
+            join photo_produit on produit.id_produit = photo_produit.id_photo_produit
+            where produit.id_produit in $stringListe";
 
-    $stmt = $dbh->prepare($query);
+        $stmt = $dbh->prepare($query);
 
-    $stmt->execute();
+        $stmt->execute();
 
-    $retour = $stmt->fetchAll();
+        $retour = $stmt->fetchAll();
+    }
 
     return $retour;
 }
 
-function getTousLesProduitsBDD() {
+function getTousLesProduitsBDD()
+{
     $dbh = connecterBDD();
 
     $query = "select id_produit, produit_supprime from produit";
@@ -42,7 +45,8 @@ function getTousLesProduitsBDD() {
  * Get le status du produit, supprimer ou non (boolean)
  * @return Boolean si le produit est présent en bdd et non supprimer false, sinon true
  */
-function getStatusDuProduit(String $id_produit) {
+function getStatusDuProduit(string $id_produit)
+{
     $dbh = connecterBDD();
 
     $query = "select produit_supprime from produit where id_produit = $id_produit";
@@ -64,11 +68,12 @@ function getStatusDuProduit(String $id_produit) {
             return true;
         }
     }
-    
-    return true;
- }
 
- function getNomProduit(String $id_produit) {
+    return true;
+}
+
+function getNomProduit(string $id_produit)
+{
     $dbh = connecterBDD();
 
     $query = "select distinct nom_produit from produit where id_produit = $id_produit";
@@ -82,10 +87,10 @@ function getStatusDuProduit(String $id_produit) {
     if ($retour !== false) {
         return $retour;
     }
-    
+
     return;
- }
- 
+}
+
 /**
  * Prend en paramètre un produit déjà initialisé
  * @param Produit $produit La variable Produit qui a permis de remplir la page produit detaillée
