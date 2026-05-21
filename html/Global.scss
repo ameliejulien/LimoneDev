@@ -477,6 +477,7 @@ button {
     place-items: center;
     transition: background .2s, transform .15s;
     flex-shrink: 0;
+    cursor: pointer;
   }
 
 button:hover { background: var(--vert-fonce); transform: scale(1.06); }

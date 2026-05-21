@@ -174,7 +174,8 @@ body {
 .header .header-logo-image {
   width: 75px;
   height: 75px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   padding: 3px;
 }
 .header .header-recherche {
@@ -216,6 +217,10 @@ body {
   background: transparent;
   padding: 10px 0;
   min-width: 0;
+}
+.header .header-recherche-champ::-moz-placeholder {
+  color: #999999;
+  opacity: 1;
 }
 .header .header-recherche-champ::placeholder {
   color: #999999;
@@ -385,6 +390,7 @@ button {
   place-items: center;
   transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 button:hover {
@@ -394,6 +400,4 @@ button:hover {
 
 button:active {
   transform: scale(0.96);
-}
-
-/*# sourceMappingURL=Global.css.map */
+}/*# sourceMappingURL=Global.css.map */
