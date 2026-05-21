@@ -21,7 +21,17 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img id="changementImage" src=<?= $infosClient[0]['pp_utilisateur'] == NULL ? "../../images/image-none.jpg" : $infosClient[0]['pp_utilisateur'] ?> alt="Photo de profil" class="profile-picture" width="200" height="200">
+        <?php 
+          $imgData = $infosClient[0]['pp_utilisateur'];
+          if (is_resource($imgData)) {
+              $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
+          } else if (!empty($imgData)) {
+              $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
+          } else {
+              $imgSrc = "../../images/image-none.jpg";
+          }
+        ?>
+        <img id="changementImage" src="<?= $imgSrc ?>" alt="Photo de profil" class="profile-picture" width="200" height="200">
         <input type="file" name="picture" accept="image/*" onchange="changerImage(event)">
       </div>
 
@@ -90,22 +100,37 @@
     // Assure la bonne exécution du code avant l'envoi du formulaire
     event.preventDefault(); 
 
-    // Récupération des données du client
-    const formData = {
-      pp_utilisateur: form.picture.value,
-      nom_utilisateur: form.username.value,
-      email_utilisateur: form.mail.value,
-      telephone_utilisateur: form.phone.value,
-      adresse: form.address.value,
-      code_postal_adresse: form.code.value,
-      ville_adresse: form.ville.value,
-      typeRequete: "modification"
+    const formData = new FormData();
+
+    // Ajout d'une image si l'utilisateur en a choisi une
+    const fileInput = form.picture;
+    if (fileInput.files.length > 0) {
+        formData.append("picture", fileInput.files[0]);
     }
+
+    // Récupération des données du client
+    formData.append("nom_utilisateur", form.username.value);
+    formData.append("email_utilisateur", form.mail.value);
+    formData.append("telephone_utilisateur", form.phone.value);
+    formData.append("adresse", form.address.value);
+    formData.append("code_postal_adresse", form.code.value);
+    formData.append("ville_adresse", form.ville.value);
+    formData.append("typeRequete", "modification");
+    // const formData = {
+    //   pp_utilisateur: form.picture.value,
+    //   nom_utilisateur: form.username.value,
+    //   email_utilisateur: form.mail.value,
+    //   telephone_utilisateur: form.phone.value,
+    //   adresse: form.address.value,
+    //   code_postal_adresse: form.code.value,
+    //   ville_adresse: form.ville.value,
+    //   typeRequete: "modification"
+    // }
 
     // fetch vers le dossier API de création client
     fetch("../API/Client.php", {
       method: "POST",
-      body: JSON.stringify(formData)
+      body: formData //JSON.stringify(formData)
     })
 
     .then(response => response.json()) // http vers json
@@ -116,7 +141,7 @@
       if (json.reponse == 200) {
         alert("Compte modifié !");
         window.location.href = "ConsulterCompteClient.php";
-        form.submit();
+        /*form.submit();*/
       }
       
     })
