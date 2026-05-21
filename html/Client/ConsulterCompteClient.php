@@ -16,6 +16,7 @@
 </head>
 
 <body>
+  <?php require_once '../ui/header.php'; ?>
   <h1>Profil</h1>
   <form method="POST">
 

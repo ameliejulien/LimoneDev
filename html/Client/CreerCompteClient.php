@@ -8,6 +8,7 @@
   <title>Compte Client</title>
 </head>
 <body>
+  <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte client</h1>
   <form method="POST">
     <div class="divForm">
