@@ -26,7 +26,6 @@ form {
   display: flex;
   flex-direction: column;
   padding: 2em 2em;
-  background-color: var();
   padding: 2em 5em;
   gap: 1em;
   margin: 0;
@@ -35,7 +34,6 @@ form {
   background-color: $bg-form;
 
   .submit {
-    background-color: $bg-submit;
     padding: 0.3em;
   }
 
@@ -67,12 +65,13 @@ form .form-paiement {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-}
 
-.contact-titre {
-  grid-column: span 2;
-  grid-row: 1;
+  .code-postal-fac-input {
+    grid-column: 2;
+    grid-row: 5;
+  }
+
+  grid-auto-rows: minmax(50px, auto);
 }
 
 .nom-input {
@@ -95,9 +94,16 @@ form .form-paiement {
   grid-row: 4;
 }
 
-.livraison-titre {
+.category-titre {
   grid-column: span 2;
   grid-row: 1;
+  font-size: 1.5em;
+  font-family: var(--police-soustitre) sans-serif;
+}
+
+.input-group label {
+  font-family: var(--police-generale) sans-serif;
+  font-size: 1em;
 }
 
 .adresse-input {
@@ -130,17 +136,12 @@ form .form-paiement {
   grid-row: 5;
 }
 
-.paiement-titre {
-  grid-column: span 2;
-  grid-row: 1;
-}
-
 .code-cb-input {
   grid-column: 1;
   grid-row: 2;
 }
 
-.cvc-input {
+.cvv-input {
   grid-column: 2;
   grid-row: 2;
 }
@@ -149,3 +150,22 @@ form .form-paiement {
   grid-column: span 2;
   grid-row: 3;
 }
+
+input:invalid
+{
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.bouton-valider {
+  width: 100px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  display: grid;
+  place-items: center;
+  transition: background .2s, transform .15s;
+  flex-shrink: 0;
+}
+.bouton-valider:hover { background: var(--vert-fonce); transform: scale(1.06); }
+.bouton-valider:active { transform: scale(0.96); }

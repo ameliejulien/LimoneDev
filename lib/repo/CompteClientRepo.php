@@ -90,21 +90,25 @@
     }
 
 
-    function trouverInfosClient(): array {
+    /**
+     * @Brief Envoie d'une requête dans la BDD pour récupérer les informations d'un client
+     */
+    function trouverInfosClient($idClient) {
 
-        $PDO = connecterBDD();
+        $connectBDD = connecterBDD();
 
-        $requete = "SELECT Utilisateur.id_utilisateur, id_client, Adresse.id_adresse, ".
-        "pp_utilisateur, nom_utilisateur, email_utilisateur, telephone_utilisateur, ".
-        "adresse, code_postal_adresse, ville_adresse FROM Utilisateur INNER JOIN ".
-        "Client ON Utilisateur.id_utilisateur = Client.id_client INNER JOIN ".
-        "Adresse_Client ON Utilisateur.id_utilisateur = Adresse_Client.id_utilisateur ".
-        "INNER JOIN Adresse ON Adresse_Client.id_adresse = Adresse.id_adresse;";
+        $requete =  "SELECT DISTINCT pp_utilisateur, nom_utilisateur, email_utilisateur, ".
+                    "telephone_utilisateur ". 
+                    //"adresse, code_postal_adresse, ville_adresse ".
+                    "FROM Utilisateur ".
+                    //"JOIN Client ON Utilisateur.id_utilisateur = Client.id_client ".
+                    //"INNER JOIN Adresse on Client.addresse_client = Adresse.id_adresse ".
+                    "WHERE id_utilisateur = '{$idClient}';";
 
-        $requetePreparee = $PDO->prepare($requete);
+        $requetePreparee = $connectBDD->prepare($requete);
         $requetePreparee->execute();
-        $tab = $requetePreparee->fetchAll();
-        return $tab;
+        $infosClient = $requetePreparee->fetchall();
+        return $infosClient;
     }
 
 

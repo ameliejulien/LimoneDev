@@ -152,7 +152,10 @@
         setcookie("vendeur", "", time() - 1, "/");
         unset($_COOKIE["vendeur"]);
         
-        return !isset($_COOKIE["vendeur"]);
+        if (!isset($_COOKIE["vendeur"])) {
+            return 200;
+        }
+        return 400;
     }  
 
     /**

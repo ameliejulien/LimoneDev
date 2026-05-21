@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="client.css">
+    <link rel="stylesheet" href="../Global.css">
     <title>Profil client</title>
   </head>
   <body>
@@ -18,39 +19,70 @@
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>
-        <img src=<?=$infosClient[4]['pp_utilisateur']; ?> alt="Photo de profil" class="profile-picture" width="200" height="200">
+        <img src=<?= $infosClient[0]['pp_utilisateur'] == NULL ? "../../images/image-none.jpg" : $infosClient[0]['pp_utilisateur'] ?> alt="Photo de profil" class="profile-picture" width="200" height="200">
       </div>
 
       <div class="divForm">
         <label for="username">Nom utilisateur</label>
-        <output type="text" name="username" required value="<?=$infosClient[1]['nom_utilisateur']; /*print_r($infosClient[0]['nom_utilisateur']);*/ ?>">Pseudo</output>
+        <span> <?= $infosClient[0]['nom_utilisateur'] == NULL ? "Pseudo non renseigné" : $infosClient[0]['nom_utilisateur'] ?> </span>
       </div>
     
       <div class="divForm">
         <label for="mail">Adresse mail</label>
-        <output type="email" name="mail" required value="<?=$infosClient[2]['email_utilisateur']; ?>">mail@example.com</output>
+        <span> <?= $infosClient[0]['email_utilisateur'] == NULL ? "Mail non renseigné" : $infosClient[0]['email_utilisateur'] ?> </span>
       </div>
 
       <div class="divForm">
         <label for="phone">Numéro de téléphone</label>
-        <output type="tel" name="phone" required value="<?=$infosClient[3]['telephone_utilisateur']; ?>">06 12 34 56 78</output>
+        <span> <?= $infosClient[0]['telephone_utilisateur'] == NULL ? "Téléphone non renseigné" : $infosClient[0]['telephone_utilisateur'] ?> </span>
       </div>
       
       <div class="divForm">
         <label for="address">Adresse postale</label>
-        <output type="text" name="address" required value="<?=$infosClient['adresse']; ?>">5 Rue de la Paix</output>
+        <span> <?= $infosClient[0]['adresse'] == NULL ? "Adresse non renseignée" : $infosClient[0]['adresse'] ?> </span>
       </div>
 
       <div class="divForm">
         <label for="address">Code postal</label>
-        <output type="text" name="address" required value="<?=$infosClient['code_postal_adresse']; ?>">29200</output>
+        <span> <?= $infosClient[0]['code_postal_adresse'] == NULL ? "Code postal non renseigné" : $infosClient[0]['code_postal_adresse'] ?> </span>
       </div>
 
       <div class="divForm">
         <label for="address">Ville</label>
-        <output type="text" name="address" required value="<?=$infosClient['ville_adresse']; ?>">Brest</output>
+        <span> <?= $infosClient[0]['ville_adresse'] == NULL ? "Ville non renseignée" : $infosClient[0]['ville_adresse'] ?> </span>
       </div>
       <a href="ModifierCompteClient.php"><input type="button" value="Modifier"/></a>
+      <div class="divBtnForm">
+        <button type="button" class="buttonForm decoBtn">Déconnexion</button>
+      </div>
     </form>
+
+    <script>
+      const decoBtn = document.querySelector(".decoBtn");
+
+      decoBtn.addEventListener("click", function (event) {
+        console.log("click jaaj");
+        
+        const formData = {
+          typeRequete: "deconnexion"
+        }
+
+        // fetch vers le dossier API de création client
+        fetch("../API/CreerClient.php", {
+          method: "POST",
+          body: JSON.stringify(formData)  // fait une string JSON du tableau
+        })
+        .then(response => response.json())  // transforme la réponse http en json exploitable
+        .then(json => {
+          if (json.reponse == 200) {
+            alert("Compte déconnecté!"); // alert de la création du compte
+            window.location.href = "../Catalogue/";
+          }
+        })
+        .catch(err => {
+          console.error("Erreur :", err); 
+        });
+      });
+    </script>
   </body>
 </html>

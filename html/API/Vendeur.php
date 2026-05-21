@@ -22,6 +22,10 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "modificationMdp") {
     $retour=modificationMdpVendeur($data);
     $data["reponse"] = $retour;  
+
+} else if ($data["typeRequete"] == "deconnexion") {
+    $retour=deconnecterVendeur();
+    $data["reponse"] = $retour;  
 }
 
 

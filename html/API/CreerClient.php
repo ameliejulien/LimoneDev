@@ -8,7 +8,6 @@ $data = json_decode($fetchData, true);
 $retour;
 
 // ajoute un cookie client
-ajouterClientCookie($data);
 if ($data["typeRequete"] == "creation") {
     $retour=confimerInscirption($data);
     $data["reponse"] = $retour;
@@ -17,6 +16,10 @@ if ($data["typeRequete"] == "creation") {
     $retour=connexionClient($data);
     $data["reponse"] = $retour;
     ajouterClientCookie($data);
+
+} else if ($data["typeRequete"] == "deconnexion") {
+    $retour = deconnecterClient();
+    $data["reponse"] = $retour;
 }
 
 
