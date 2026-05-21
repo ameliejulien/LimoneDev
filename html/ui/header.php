@@ -76,7 +76,7 @@
             </a>
         <?php else: ?>
             <!-- Non connecté -->
-            <a href="/Client/ConnexionCompteClient.php" class="header-menu-connexion">
+            <a href="/Connexion" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
                 Se connecter
             </a>
