@@ -1,114 +1,156 @@
 <?php
 
-    include __DIR__ . '/../../connect_params.php';
-    include __DIR__ . '/../repo/CompteClientRepo.php';
-    
-    /**
-     * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription,
-     * cette fonction redirige vers la page de connexion
-     * @Return Un object Client en base de données
-    */
-    function confimerInscription($client) {
+include __DIR__ . '/../../connect_params.php';
+include __DIR__ . '/../repo/CompteClientRepo.php';
 
-        // Transformation champs formulaires
-        $client["mail"] = strtolower($client["mail"]);
-        $mdp = $client["motDePasse"];
-        $confMdp = $client["confMotDePasse"];
-        $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
-        $codeRetour = 0;
+/**
+ * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription,
+ * cette fonction redirige vers la page de connexion
+ * @Return Object Un object Client en base de données
+ */
+function confimerInscription($client)
+{
+    // Transformation champs formulaires
+    $client["mail"] = strtolower($client["mail"]);
+    $mdp = $client["motDePasse"];
+    $confMdp = $client["confMotDePasse"];
+    $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
+    $codeRetour = 0;
 
-        // Comparaison des mots de passe
-        $mdpEgaux = ($mdp == $confMdp);
+    // Comparaison des mots de passe
+    $mdpEgaux = ($mdp == $confMdp);
 
-        if ($mdpEgaux && !champVide($client)) {
-            $codeRetour = creerClientBdd($client);
-            
-        } else {
-            $codeRetour = 400; 
+    if ($mdpEgaux && !champVide($client)) {
+        $codeRetour = creerClientBdd($client);
+
+    } else {
+        $codeRetour = 400;
+    }
+    return $codeRetour;
+}
+
+/**
+ * @Brief regarde si une des valeurs saisie est vide
+ * @Param une instance de la classe client
+ * @Return bool Un booléen confirmant si un des champs est vide
+ */
+function champVide($client)
+{
+    foreach ($client as $value) {
+        if (empty($value)) {
+            return true;
         }
-        return $codeRetour;
+    }
+    return false;
+}
+
+/**
+ * @Brief renvoie une requête dans la BDD pour vérifier si le client peut se connecter
+ * @Param une map avec les valeurs du formulaire
+ * @Return int code de réussite ou d'erreur (200 ou 400)
+ */
+function connexionClient($client)
+{
+    $client["mail"] = strtolower($client["mail"]);
+    $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
+    $retour = connecterClient($client);
+
+    if ($retour == false) {
+        $codeRetour = 400;
+    } else {
+        $codeRetour = 200;
     }
 
-    /**
-     * @Brief regarde si une des valeurs saisie est vide
-     * @Param une instance de la classe client
-     * @Retuns unn booléen confirmant si un des champs est vide
-     */
-    function champVide($client) {
-        foreach ($client as $value) {
-            if (empty($value)) {
-                return true;
-            }
-        }
-        return false;
+    return $codeRetour;
+}
+
+
+/**
+ * @Brief Récupérer les informations du client connecté
+ * @Return Object Un tableau avec les informations du client connecté
+ */
+function recupererInfosClient()
+{
+
+    if ($_COOKIE['client'] != null) {
+        $client = json_decode($_COOKIE['client'], true);
+    }
+    $idClient = $client["idClient"];
+
+    $infos = trouverInfosClient($idClient);
+    return $infos;
+}
+
+
+/**
+ * @Brief création d'un cookie client à la connexion
+ */
+function ajouterClientCookie($client)
+{
+    if ($_COOKIE['client'] != null) { // cookie déjà créé
+        $client = json_decode($_COOKIE['client'], true);
     }
 
-    /**
-     * @Brief renvoie une requête dans la BDD pour vérifier si le client peut se connecter
-     * @Param une map avec les valeurs du formulaire
-     * @Retuns un code de réussite ou d'erreur (200 ou 400)
-     */
-    function connexionClient($client) {
-        $client["mail"] = strtolower($client["mail"]);
-        $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
-        $retour = connecterClient($client);
+    $id = getIdClient($client);
 
-        if ($retour == false ) {
-            $codeRetour = 400;
-        } else {
-            $codeRetour = 200;
-        }
+    $tab["mail"] = $client["mail"];
+    $tab["idClient"] = $id["id_client"];
 
-        return $codeRetour;
+    // Modifie la liste de produit dans le cookie
+    setcookie('client', json_encode($tab), time() + 32460 * 60, "/");
+}
+
+/**
+ * @Brief modfie le mot de passe Client
+ */
+function modificationMdpClient($data)
+{
+    $mdpCourant = hash('sha256', $data["mdpCourant"]);
+    $nouveauMdp = hash('sha256', $data["nouveauMdp"]);
+    $confNouveauMdp = hash('sha256', $data["confNouveauMdp"]);
+
+    // Les deux nouveaux mots de passe ne correspondent pas
+    if ($nouveauMdp !== $confNouveauMdp) {
+        return 401;
     }
 
-
-    /**
-     * @Brief Récupérer les informations du client connecté
-     * @Return Un tableau avec les informations du client connecté
-     */
-    function recupererInfosClient() {
-        
-        if ($_COOKIE['client'] != null) {
-            $client = json_decode($_COOKIE['client'],true); 
-        }
-        $idClient = $client["idVendeur"];
-
-        $infos = trouverInfosClient($idClient);
-        return $infos;
+    // Le nouveau mot de passe est identique à l'ancien
+    if ($mdpCourant === $nouveauMdp) {
+        return 409;
     }
 
+    // Tout est valide → on met à jour
+    modifierMdpClientBDD($nouveauMdp);
+    return 200;
+}
 
-    /**
-    * @Brief création d'un cookie client à la connexion
-    */
-    function ajouterClientCookie($client) {
-        if ($_COOKIE['client'] != null) { // cookie déjà créé
-            $client = json_decode($_COOKIE['client'],true);
-        }
 
-        $id = getIdClient($client);
+/**
+ * @Brief supprime le cookie client pour le déconnecter
+ * @Return bool retourne un booléen confirmant ou non la suppression du cookie
+ */
+function deconnecterClient()
+{
+    setcookie("client", "", time() - 1, "/");
+    unset($_COOKIE["client"]);
 
-        $tab["mail"] = $client["mail"];
-        $tab["idVendeur"] = $id["id_client"];
-
-        // Modifie la liste de produit dans le cookie
-        setcookie('client', json_encode($tab), time() + 32460*60, "/");
+    if (!isset($_COOKIE["client"])) {
+        return 200;
     }
+    return 400;
+}
 
+/**
+ * @Brief modifie le mot de passe client
+ */
+function modifierMdpClientBDD($mdp)
+{
+    $connectBDD = connecterBDD();
+    $idClient = json_decode($_COOKIE['client'], true)['idClient'];
 
-    /**
-     * @Brief supprime le cookie client pour le déconnecter
-     * @Return retourne un booléen confirmant ou non la suppression du cookie
-     */
-    function deconnecterClient() {
-        setcookie("client", "", time() - 1, "/");
-        unset($_COOKIE["client"]);
-        
-        if (!isset($_COOKIE["client"])) {
-            return 200;
-        }
-        return 400;
-    }  
+    $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
+    $requeteUpdateClient = $connectBDD->prepare($requeteClient);
+    $rowClient = $requeteUpdateClient->execute();
+}
 
 ?>
