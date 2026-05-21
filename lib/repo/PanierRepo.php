@@ -1,7 +1,6 @@
 <?php
-require_once '../../html/Produit/Produit.php';
 require_once '../../connect_params.php';
-require_once '../../lib/repo/PanierRepo.php';
+require_once '../../lib/repo/PanierRepo.php'; 
 require_once '../../lib/repo/GlobalRepo.php';
 
 function getDBProduitsFromPanier(Array $panier)
