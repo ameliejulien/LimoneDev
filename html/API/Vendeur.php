@@ -7,7 +7,7 @@ $fetchData = file_get_contents("php://input");
 $data = json_decode($fetchData, true);
 $retour;
 if ($data["typeRequete"] == "creation") {
-    $retour=confimerInscirption($data);
+    $retour=confimerInscription($data);
     $data["reponse"] = $retour;
 
 } else if ($data["typeRequete"] == "connexion") {

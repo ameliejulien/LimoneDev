@@ -63,7 +63,7 @@
       }
 
       // fetch vers le dossier API de création client
-      fetch("../API/CreerClient.php", {
+      fetch("../API/Client.php", {
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
