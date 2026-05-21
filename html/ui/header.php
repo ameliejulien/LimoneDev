@@ -7,11 +7,16 @@
         <?php
             $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
             $nbPanier = count($panier);
+            
+            $clientConnecte = null;
+            if (isset($_COOKIE['client']) && !empty($_COOKIE['client'])) {
+                $clientConnecte = json_decode($_COOKIE['client'], true);
+            }
         ?>
 
         <!-- Logo -->
         <a href="/Catalogue/index.php" class="header-logo">
-            <img src="../ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
+            <img src="/ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
         </a>
 
         <!-- Barre de recherche -->
@@ -26,16 +31,22 @@
         <!-- Actions utilisateur -->
         <nav class="header-actions" aria-label="Actions utilisateur">
 
-            <!-- Connexion -->
-            <a href="/Client/ConnexionCompteClient.php" class="header-action-connexion">
-                <i class="fa-regular fa-user"></i>
-                <span class="header-action-libelle">Se connecter</span>
-            </a>
-
-            <!-- Création de compte -->
-            <a href="/Client/CreerCompteClient.php" class="header-action-connexion">
-                <span class="header-action-libelle">Créer un compte</span>
-            </a>
+            <?php if ($clientConnecte): ?>
+                <!-- Utilisateur connecté -->
+                <a href="/Client/ConsulterCompteClient.php" class="header-action-connexion">
+                    <i class="fa-regular fa-user"></i>
+                    <span class="header-action-libelle"><?= htmlspecialchars($clientConnecte['mail']) ?></span>
+                </a>
+            <?php else: ?>
+                <!-- Non connecté -->
+                <a href="/Client/ConnexionCompteClient.php" class="header-action-connexion">
+                    <i class="fa-regular fa-user"></i>
+                    <span class="header-action-libelle">Se connecter</span>
+                </a>
+                <a href="/Client/CreerCompteClient.php" class="header-action-connexion">
+                    <span class="header-action-libelle">Créer un compte</span>
+                </a>
+            <?php endif; ?>
 
             <!-- Panier -->
             <a href="/Panier/index.php" class="header-panier" aria-label="Mon panier">
@@ -55,13 +66,25 @@
 
     <nav class="header-menu-lateral" id="menu-lateral">
         <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu">
-            <img src="../ui/img/navClose.png" alt="Fermer" />
+            <img src="/ui/img/navClose.png" alt="Fermer" />
         </button>
-        <a href="#" class="header-menu-connexion">
-            <i class="fa-regular fa-user"></i>
-            Se connecter
-        </a>
+        <?php if ($clientConnecte): ?>
+            <!-- Utilisateur connecté -->
+            <a href="/Client/ConsulterCompteClient.php" class="header-menu-connexion">
+                <i class="fa-regular fa-user"></i>
+                <span class="header-action-libelle"><?= htmlspecialchars($clientConnecte['mail']) ?></span>
+            </a>
+        <?php else: ?>
+            <!-- Non connecté -->
+            <a href="/Client/ConnexionCompteClient.php" class="header-menu-connexion">
+                <i class="fa-regular fa-user"></i>
+                Se connecter
+            </a>
+            <a href="/Client/CreerCompteClient.php" class="header-menu-connexion">
+                Créer un compte
+            </a>
+        <?php endif; ?>
     </nav>
 </header>
 
-<script src="../js/header.js" defer></script>
+<script src="/js/header.js" defer></script>
