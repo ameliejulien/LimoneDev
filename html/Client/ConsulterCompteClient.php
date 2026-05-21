@@ -52,6 +52,37 @@
         <span> <?= $infosClient[0]['ville_adresse'] == NULL ? "Ville non renseignée" : $infosClient[0]['ville_adresse'] ?> </span>
       </div>
       <a href="ModifierCompteClient.php"><input type="button" value="Modifier"/></a>
+      <div class="divBtnForm">
+        <button type="button" class="buttonForm decoBtn">Déconnexion</button>
+      </div>
     </form>
+
+    <script>
+      const decoBtn = document.querySelector(".decoBtn");
+
+      decoBtn.addEventListener("click", function (event) {
+        console.log("click jaaj");
+        
+        const formData = {
+          typeRequete: "deconnexion"
+        }
+
+        // fetch vers le dossier API de création client
+        fetch("../API/CreerClient.php", {
+          method: "POST",
+          body: JSON.stringify(formData)  // fait une string JSON du tableau
+        })
+        .then(response => response.json())  // transforme la réponse http en json exploitable
+        .then(json => {
+          if (json.reponse == 200) {
+            alert("Compte déconnecté!"); // alert de la création du compte
+            window.location.href = "../Catalogue/";
+          }
+        })
+        .catch(err => {
+          console.error("Erreur :", err); 
+        });
+      });
+    </script>
   </body>
 </html>

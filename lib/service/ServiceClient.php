@@ -96,4 +96,19 @@
         setcookie('client', json_encode($tab), time() + 32460*60, "/");
     }
 
+
+    /**
+     * @Brief supprime le cookie client pour le déconnecter
+     * @Return retourne un booléen confirmant ou non la suppression du cookie
+     */
+    function deconnecterClient() {
+        setcookie("client", "", time() - 1, "/");
+        unset($_COOKIE["client"]);
+        
+        if (!isset($_COOKIE["client"])) {
+            return 200;
+        }
+        return 400;
+    }  
+
 ?>

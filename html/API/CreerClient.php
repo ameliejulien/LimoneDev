@@ -16,6 +16,10 @@ if ($data["typeRequete"] == "creation") {
     $retour=connexionClient($data);
     $data["reponse"] = $retour;
     ajouterClientCookie($data);
+
+} else if ($data["typeRequete"] == "deconnexion") {
+    $retour = deconnecterClient();
+    $data["reponse"] = $retour;
 }
 
 
