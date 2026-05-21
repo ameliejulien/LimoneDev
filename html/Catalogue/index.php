@@ -1,6 +1,6 @@
 <?php
-include __DIR__ . '/../../lib/service/ServiceProduit.php';
-include __DIR__ . '/../../lib/service/ServiceVendeur.php';
+include '../../lib/service/ServiceProduit.php';
+include '../../lib/service/ServiceVendeur.php';
 
 $produits = recupererlesProduits();
 
@@ -113,13 +113,17 @@ $vendeurs = recupererLesVendeurs();
             <div class="grille-produit">
                 <?php
                 foreach ($produits as $row) {
-                    $imageData = stream_get_contents($row['photo_produit']);
-                    $base64 = base64_encode($imageData);
+                    $base64 = null;
+
+                    if (!empty($row['photo_produit'])) {
+                        $imageData = stream_get_contents($row['photo_produit']);
+                        $base64 = base64_encode($imageData);
+                    }
                     ?>
                     <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>"
                         data-prix="<?= $row['prix_ht_produit'] ?>" data-categorie="<?= $row['id_categorie'] ?>"
                         data-vendeur="<?= $row['id_vendeur'] ?>">
-                        <img src=<?= "data:image/jpeg;base64,$base64" ?> class="w-50 h-50 object-contain m-auto mt-3">
+                        <img src=<?= $base64 ? "data:image/jpeg;base64,$base64" : './placeholder.png' ?> class="w-50 h-50 object-contain m-auto mt-3">
                         <div class="info-produit">
                             <span class="producteur"><i
                                     class="fa-solid fa-location-dot"></i><?= $row['denomination_vendeur'] ?></span>
@@ -168,7 +172,7 @@ $vendeurs = recupererLesVendeurs();
                 body: JSON.stringify({ id_produit: e.currentTarget.getAttribute('id_produit') })
             }).then(response => {
                 if (response.status === 200) {
-                    afficherSnackBar('Succes', 'Le produit a été ajouté au panier avec succes');
+                    afficherSnackBar('Succes', 'Le produit a été ajouté au panier avec succès');
                 } else {
                     afficherSnackBar('Erreur', 'Une erreur est survenue');
                 }
