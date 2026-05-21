@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="paiement.css">
+    <link rel="stylesheet" href="/Paiement/paiement.css">
     <title>Paiement</title>
 </head>
 <main>
     <h1>Paiement</h1>
-    <form method="POST" action="./PaiementValide.php">
+    <form method="POST" action="/Paiement/PaiementValide.php">
         <div class="divForm form-contact">
             <h2 class="category-titre">Contact</h2>
             <div class="input-group prenom-input">
@@ -87,6 +87,6 @@
     </form>
 </main>
 
-<script src="paiement.js"></script>
+<script src="/Paiement/paiement.js"></script>
 
 </html>

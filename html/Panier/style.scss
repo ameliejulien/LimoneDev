@@ -1,0 +1,157 @@
+@import "../Global.css";
+
+// Variables
+
+$color-border: rgba(0, 0, 0, 0.2);
+$color-body-bg: var(--beige-clair);
+$color-h1: var(--bleu-fonce);
+
+$font-size-label: 1.5em;
+$font-size-h1: 3em;
+$font-size-h2: 2em;
+$font-size-article-name: 1.5em;
+$font-size-article-description: 1em;
+$font-size-article-price: 1.5em;
+
+$padding-card: 1em;
+$padding-panier: 2em 5em;
+$padding-article-grid: 2em 2em;
+
+$border-width: 1px;
+$border-radius-card: 8px;
+
+$grid-columns: 2fr 3fr 1fr;
+$grid-gap: 10px;
+$grid-row-min: 100px;
+$grid-row-number-name: 1;
+$grid-column-start-name: 2;
+$grid-column-end-name: 3;
+$grid-row-number-description: 2;
+$grid-column-number-description: 2;
+$grid-row-number-price: 3;
+$grid-column-number-price: 3;
+$grid-row-start-image: 1;
+$grid-row-end-image: 4;
+$grid-column-number-image: 1;
+
+$panier-max-width: 80%;
+$image-max-width: 300px;
+$input-height: 2em;
+$submit-padding: 0.3em;
+$image-max-width: 300px;
+$image-max-height: 100%;
+$panier-option-spacing: 10px;
+$article-price-child-margin: 5px;
+
+// Style
+
+.panier,
+.article-grid,
+.panier-options {
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-card;
+  padding: $padding-card;
+}
+
+.panier {
+  padding: $padding-panier;
+  max-width: $panier-max-width;
+}
+
+label {
+  font-size: $font-size-label;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  color: $color-h1;
+  font-family: var(--police-titre);
+}
+
+h2 {
+  font-size: $font-size-h2;
+  font-family: var(--police-soustitre);
+}
+
+h3 {
+  font-family: var(--police-soustitre);
+}
+
+.article-name {
+  font-size: $font-size-article-name;
+  grid-column: #{$grid-column-start-name}/#{$grid-column-end-name};
+  grid-row: $grid-row-number-name;
+  align-self: center;
+  justify-self: left;
+  font-family: "Farro-Bold", sans-serif;
+}
+
+.article-container {
+  padding: $padding-card;
+}
+
+.article-description {
+  font-size: $font-size-article-description;
+  grid-row: $grid-row-number-description;
+  grid-column: $grid-column-number-description;
+}
+
+.article-price {
+  font-size: $font-size-article-price;
+  grid-row: $grid-row-number-price;
+  grid-column: $grid-column-number-price;
+  align-self: self-end;
+  justify-self: self-end;
+  font-family: "Alatsi", sans-serif;
+
+  * {
+    margin: $article-price-child-margin auto;
+  }
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: $grid-columns;
+  grid-gap: $grid-gap;
+  grid-auto-rows: minmax($grid-row-min, auto);
+  padding: $padding-article-grid;
+  background-color: var(--blanc);
+}
+
+.article-image {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+  width: 100%;
+  grid-row: #{$grid-row-start-image}/#{$grid-row-end-image};
+  grid-column: $grid-column-number-image;
+}
+
+.image {
+  max-width: $image-max-width;
+  max-height: $image-max-height;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: var(--police-generale);
+  background-color: var(--beige-clair);
+}
+
+.panier-options {
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--blanc);
+  width: fit-content;
+  margin: $padding-card;
+
+  * {
+    margin: auto $panier-option-spacing;
+  }
+}
+

@@ -55,6 +55,8 @@ function getStatusDuProduit(String $id_produit) {
     $retour = $stmt->fetchAll();
 
     // C'est pas propre mais ça fonctionne...
+    // Si un produit n'éxiste pas alors la query renvoie false
+    // mais nous voulons récuperer un boolean qui indique si le produit est supprimer donc "false"
     // Garde que les resultat de id qui existe
     foreach ($retour[0] as $key => $value) {
         if ($key != null) {
@@ -65,6 +67,24 @@ function getStatusDuProduit(String $id_produit) {
     }
     
     return true;
+ }
+
+ function getNomProduit(String $id_produit) {
+    $dbh = connecterBDD();
+
+    $query = "select distinct nom_produit from produit where id_produit = $id_produit";
+
+    $stmt = $dbh->prepare($query);
+
+    $stmt->execute();
+
+    $retour = $stmt->fetch();
+
+    if ($retour !== false) {
+        return $retour;
+    }
+    
+    return;
  }
  
 /**

@@ -32,7 +32,7 @@ function ajouterProduitToCookie(int $produitId)
  * Supprimer un produit du panier et du cookie
  * @param int $produitId id du produit à supprimer
  */
-function supprimerProduit(int $produitId)
+function supprimerProduitDesCookies(int $produitId)
 {
     if ($_COOKIE['panier'] != null) {
         $listeProduit = (array) json_decode($_COOKIE['panier']);
@@ -51,45 +51,42 @@ function supprimerProduit(int $produitId)
 
 /**
  * Valide le panier, verifie tous les produits pour voir si tous les produits du panier sont encore dans la BDD et sépare les valides des invalides.
- * @return mixed retourne un JSON de fromat : {"valide":["id_1", "id_2", ..."], "manquants":["id_1", ...]}
+ * @return mixed retourne un JSON de fromat : {"valides":["id_1", "id_2", ..."], "manquants":["nom_1", "nom_2", ...]}
  */
 function validerPanier()
 {
-    $listeProduit = json_decode($_COOKIE['panier']);
+    $listeProduit = (array) json_decode($_COOKIE['panier']);
 
     // Recupére la table des produits pour vérifier si tous les produits du panier sont présent dans la BDD
-    $query = "SELECT id_produit, produit_supprime FROM Produit";
-    // Todo récup le tableau d'id produit 
-    $produitBDD = [];
+    $tousLesProduitsBDD = getTousLesProduitsBDD();
     $listProduitBDDNonSupprimer = [];
+    $listeProduitSupprime = [];
 
-    // Garde seuelement les id qui ne sont pas supprimer
-    foreach ($produitBDD as $valueBDD) {
+    // Garde seuelement les id qui ne sont pas supprimé
+    foreach ($tousLesProduitsBDD as $produitBDD) {
         // Vérifie si le produit n'est pas supprimé
-        if ($valueBDD['produit_supprime'] == false) {
-            $listProduitBDDNonSupprimer = $valueBDD['id_produit'];
+        if ($produitBDD['produit_supprime'] == false) {
+            $listProduitBDDNonSupprimer[] = $produitBDD['id_produit'];
         }
     }
 
-    $listeProduitSupprime = [];
-
+    // Supprime le produit du panier car il n'est plus présent
     foreach ($listeProduit as $produit) {
         if (!in_array($produit, $listProduitBDDNonSupprimer)) {
-            // Supprime le produit du panier car il n'est plus présent
-            supprimerProduit($produit);
-            $listeProduitSupprime = $produit;
+            supprimerProduitDesCookies($produit);
+            $listeProduitSupprime[] = getNomProduit($produit);
         }
     }
 
     $listeRetournee['valides'] = $listeProduit;
-    $listeRetournee['manquants'] = "$listeProduitSupprime";
+    $listeRetournee['manquants'] = $listeProduitSupprime;
 
     return json_encode($listeRetournee);
 }
 
 function getPanierIDs()
 {
-    return json_decode($_COOKIE['panier']);
+    return (array) json_decode($_COOKIE['panier']);
 }
 
 function getPanierArticles(Array $articlesIDs)

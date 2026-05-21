@@ -1,136 +1,109 @@
 @import "../Global.css";
-
-.cart,
-.article-grid {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    padding: 1em;
+.panier,
+.article-grid,
+.panier-options {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 1em;
 }
 
-.cart {
-    padding: 2em 5em;
-    max-width: 80%;
+.panier {
+  padding: 2em 5em;
+  max-width: 80%;
 }
 
 label {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 h1 {
-    font-size: 3em;
+  font-size: 3em;
+  color: var(--bleu-fonce);
+  font-family: var(--police-titre);
 }
 
 h2 {
-    font-size: 2em;
+  font-size: 2em;
+  font-family: var(--police-soustitre);
+}
+
+h3 {
+  font-family: var(--police-soustitre);
 }
 
 .article-name {
-    font-size: 1.5em;
-    grid-column: 2 / 3;
-    grid-row: 1;
-    align-self: center;
-    justify-self: left;
-    font-family: "Farro-Bold", sans-serif;
+  font-size: 1.5em;
+  grid-column: 2/3;
+  grid-row: 1;
+  align-self: center;
+  justify-self: left;
+  font-family: "Farro-Bold", sans-serif;
 }
 
 .article-container {
-    padding: 1em;
+  padding: 1em;
 }
 
 .article-description {
-    font-size: 1em;
-    grid-row: 2;
-    grid-column: 2;
+  font-size: 1em;
+  grid-row: 2;
+  grid-column: 2;
 }
 
 .article-price {
-    font-size: 1.5em;
-    grid-column: 3;
-    grid-row: 3;
-    align-self: self-end;
-    justify-self: self-end;
-    font-family: "Alatsi", sans-serif;
-
+  font-size: 1.5em;
+  grid-row: 3;
+  grid-column: 3;
+  align-self: self-end;
+  justify-self: self-end;
+  font-family: "Alatsi", sans-serif;
+}
+.article-price * {
+  margin: 5px auto;
 }
 
 .article-grid {
-    display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    padding: 2em 2em;
-    background-color: var();
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding: 2em 2em;
+  background-color: var(--blanc);
 }
 
 .article-image {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    justify-items: center;
-    height: 100%;
-    width: 100%;
-    grid-column: 1;
-    grid-row: 1 / 4;
-}
-
-body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-family: var(--police-generale);
-}
-
-h1 {
-    font-family: var(--police-titre);
-}
-
-form {
-    border: solid;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 1em, 5em;
-    gap: 1.75em;
-    margin: 0;
-    padding: 2em 5em;
-    width: fit-content;
-    font-family: var(--texte-font);
-    background-color: #b3d3bc;
-}
-
-
-.divForm input {
-    height: 2em;
-}
-
-
-.submit {
-    background-color: #fffdea;
-    padding: 0.3em;
-}
-
-label {
-    font-size: 1.5em;
-}
-
-
-.divForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25em;
-}
-
-h1 {
-    font-size: 3em;
-    color: #1C6D80;
-}
-
-body {
-    background-color: #fffdea;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+  width: 100%;
+  grid-row: 1/4;
+  grid-column: 1;
 }
 
 .image {
-    max-width: 300px;
-    max-height: 100%;
+  max-width: 300px;
+  max-height: 100%;
 }
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: var(--police-generale);
+  background-color: var(--beige-clair);
+}
+
+.panier-options {
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--blanc);
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 1em;
+}
+.panier-options * {
+  margin: auto 10px;
+}/*# sourceMappingURL=style.css.map */
