@@ -182,6 +182,7 @@ body {
   display: flex;
   align-items: center;
   flex: 1;
+  flex-direction: row;
   max-width: 480px;
   background: #FFFFFF;
   border-radius: 50px;
@@ -189,6 +190,7 @@ body {
   padding: 0 18px 0 14px;
   gap: 8px;
   transition: box-shadow 0.2s ease;
+  border: none;
 }
 .header .header-recherche:focus-within {
   box-shadow: 0 0 0 3px rgba(71, 193, 215, 0.5);

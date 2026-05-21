@@ -1,1 +1,3 @@
-<h1>AliZon</h1>
+<?php
+header("Location: Catalogue")
+?>

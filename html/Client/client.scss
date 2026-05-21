@@ -32,17 +32,16 @@ body{
 }
 
 .formulaire{
-    border:solid;
-    border-radius: 10px;
+    border:1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
-    padding: 1em, 5em;
-    gap: 1.75em;
+    gap: 3em;
     margin: 0;
     padding: 2em 5em;
     width: fit-content;
-    font-family: var(--texte-font);
-    background-color: #b3d3bc; 
+    font-family: var(--police-generale);
+    background-color: white; 
 }
 
 
@@ -70,9 +69,32 @@ label{
 h1{
     font-size: 3em;
     color: #1C6D80;
-    font-family: var(--titre-font);
+    font-family: var(--police-titre);
 }
 
 body{
     background-color: #fffdea;
+}
+
+input.submit {
+  width: auto;
+  height: auto;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  display: grid;
+  place-items: center;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+input.submit:hover {
+  background: var(--vert-fonce);
+  transform: scale(1.06);
+}
+
+input.submit:active {
+  transform: scale(0.96);
 }
