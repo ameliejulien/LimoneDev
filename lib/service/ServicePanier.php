@@ -5,17 +5,16 @@ include '../../connect_params.php';
 $listeProduit = [];
 $utilisateurId = null;
 
-/**
+ /**
  * Prend en paramètre un produit déjà initialisé
  * @param int $produitId La variable produitId qui est à ajouter
  */
 function ajouterProduitToCookie(int $produitId)
 {
     // Verifier si l'article existe
-    $tousLesProduits = getStatusDuProduit($produitId);
-    $res = !$tousLesProduits[0];
+    $produitSupprime = getStatusDuProduit($produitId);
 
-    if ($res) {
+    if (!$produitSupprime) {
         // Save dans les cookies
         if ($_COOKIE['panier'] != null) { // cookie déjà créé
             $listeProduit = (array) json_decode($_COOKIE['panier']);

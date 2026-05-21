@@ -446,3 +446,21 @@ body {
         }
     }
 }
+
+// Bouton 
+
+button {
+    width: auto;
+    height: auto;
+    padding: 15px;
+    border-radius: 12px;
+    background: var(--vert-fonce);
+    color: var(--beige-clair);
+    display: grid;
+    place-items: center;
+    transition: background .2s, transform .15s;
+    flex-shrink: 0;
+  }
+
+button:hover { background: var(--vert-fonce); transform: scale(1.06); }
+button:active { transform: scale(0.96); }
