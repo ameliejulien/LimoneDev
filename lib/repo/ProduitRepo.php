@@ -1,6 +1,17 @@
 <?php 
 
 include_once 'GlobalRepo.php';
+function trouverLesCategories() {
+    
+    $PDO = connecterBDD();
+
+    $query = "SELECT * 
+    FROM categorie
+    ORDER BY nom_categorie;
+    ";
+
+    return $PDO->query($query)->fetchAll();
+}
 
 function trouverLesProduits(): array {
 
@@ -18,23 +29,12 @@ function trouverLesProduits(): array {
     return $PDO->query($query)->fetchAll();
 }
 
-<<<<<<< Updated upstream
-function trouverLesCategories() {
-=======
+
 function trouverProduitParId(int $id): array|false {
->>>>>>> Stashed changes
 
     $PDO = connecterBDD();
 
     $query = "
-<<<<<<< Updated upstream
-    SELECT * 
-    FROM categorie
-    ORDER BY nom_categorie;
-    ";
-
-    return $PDO->query($query)->fetchAll();
-=======
     SELECT p.*, c.nom_categorie, c.id_categorie, ph.photo_produit, v.denomination_vendeur
     FROM limone.produit p
     INNER JOIN limone.categorie_produit cp ON p.id_produit = cp.id_produit
@@ -64,7 +64,6 @@ function trouverPremierProduit(): array|false {
     LIMIT 1;";
 
     return $PDO->query($query)->fetch();
->>>>>>> Stashed changes
 }
 
 ?>
