@@ -28,7 +28,7 @@
     </div>
 
     <div class="divForm">
-      <label for="mail">Confimrmer nouveau mot de passe</label>
+      <label for="mail">Confirmer nouveau mot de passe</label>
       <input type="password" name="confNouveauMdp" required >
     </div>
 
