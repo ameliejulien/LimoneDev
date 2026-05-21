@@ -1,3 +1,3 @@
 <?php
-    include __DIR__ . '../../lib/service/ServiceClient.php';
+    include __DIR__ . '/../../lib/service/ServiceClient.php';
 ?>
