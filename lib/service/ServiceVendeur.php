@@ -8,7 +8,7 @@
      * cette fonction redirige vers la page de connexion
      * @Return Un object Client en base de données
     */
-    function confimerInscirption($vendeur) {
+    function confimerInscription($vendeur) {
 
         // tests ou transformations des champs du formulaire
         $vendeur["mail"] = strtolower($vendeur["mail"]);

@@ -8,14 +8,14 @@
      * cette fonction redirige vers la page de connexion
      * @Return Un object Client en base de données
     */
-    function confimerInscirption($client) {
+    function confimerInscription($client) {
 
         // Transformation champs formulaires
         $client["mail"] = strtolower($client["mail"]);
         $mdp = $client["motDePasse"];
         $confMdp = $client["confMotDePasse"];
         $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
-        $codeRetour;
+        $codeRetour = 0;
 
         // Comparaison des mots de passe
         $mdpEgaux = ($mdp == $confMdp);

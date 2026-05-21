@@ -9,7 +9,7 @@ $retour;
 
 // ajoute un cookie client
 if ($data["typeRequete"] == "creation") {
-    $retour=confimerInscirption($data);
+    $retour=confimerInscription($data);
     $data["reponse"] = $retour;
 
 } else if ($data["typeRequete"] == "connexion") {
