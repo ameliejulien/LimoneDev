@@ -106,7 +106,7 @@ CREATE TABLE limone.Produit (
 CREATE TABLE limone.Photo_Produit (
     id_photo_produit serial PRIMARY KEY,
     id_produit int,
-    photo_produit bytea,
+    photo_produit varchar(30),
     photo_principale boolean,
 
     CONSTRAINT fk_photo_produit FOREIGN KEY (id_produit) REFERENCES limone.Produit(id_produit)

@@ -112,17 +112,11 @@ $vendeurs = recupererLesVendeurs();
                 <div class="grille-produit">
                     <?php
                     foreach ($produits as $row) {
-                        $base64 = null;
-
-                        if (!empty($row['photo_produit'])) {
-                            $imageData = stream_get_contents($row['photo_produit']);
-                            $base64 = base64_encode($imageData);
-                        }
                         ?>
                         <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>"
                             data-prix="<?= $row['prix_ht_produit'] ?>" data-categorie="<?= $row['id_categorie'] ?>"
                             data-vendeur="<?= $row['id_vendeur'] ?>" data-ventes="<?= $row['nb_ventes_produit'] ?>">
-                            <img src=<?= $base64 ? "data:image/jpeg;base64,$base64" : './placeholder.png' ?> class="w-50 h-50 object-contain m-auto mt-3">
+                            <img src=<?= $row['photo_produit'] ? "../imagesProduits/" . $row['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="w-50 h-50 object-contain m-auto mt-3">
                             <div class="info-produit">
                                 <span class="producteur"><i
                                         class="fa-solid fa-location-dot"></i><?= $row['denomination_vendeur'] ?></span>
@@ -163,7 +157,7 @@ $vendeurs = recupererLesVendeurs();
         const searchBar = document.querySelector('.header-recherche-champ');
 
         const params = new URLSearchParams(document.location.search);
-        const search = params.get('q');
+        const searchParam = params.get('q');
 
         produits.forEach(produit => {
             produit.addEventListener('click', (e) => {
@@ -189,6 +183,15 @@ $vendeurs = recupererLesVendeurs();
                     }
                 }).finally(() => {
                     loader.classList.add('hidden');
+
+                    const cookies = Object.fromEntries(
+                        document.cookie.split('; ').map(c => {
+                            const [key, val] = c.split('=');
+                            return [key, JSON.parse(decodeURIComponent(val))];
+                        })
+                    );
+
+                    document.querySelector('.header-panier-compteur').textContent = cookies.panier.length;
                 });
             })
         });
@@ -261,11 +264,11 @@ $vendeurs = recupererLesVendeurs();
             // Recherche //
             ///////////////
 
-            if (search) {
-                searchBar.value = search;
+            if (searchParam) {
+                searchBar.value = searchParam;
 
                 produits.forEach(produit => {
-                    if ((produit.children[1].children[1].textContent.includes(search.toLowerCase())) && produit.style.display !== 'none') {
+                    if ((produit.children[1].children[1].textContent.includes(searchParam.toLowerCase())) && produit.style.display !== 'none') {
                         produit.style.display = '';
                     } else if (produit.style.display === 'none') {
                         produit.style.display = 'none';

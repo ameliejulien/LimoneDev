@@ -15,7 +15,7 @@
             $imageData = file_get_contents("./images/$i.jpg");
 
             $stmt->bindValue(":id", $i);
-            $stmt->bindValue(":data", $imageData, PDO::PARAM_LOB);
+            $stmt->bindValue(":data", $i . '.jpg');
             $stmt->bindValue(":main", true);
 
             $stmt->execute();

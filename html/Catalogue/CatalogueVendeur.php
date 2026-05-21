@@ -99,7 +99,7 @@ $vendeurs = recupererLesVendeurs();
                     <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>"
                         data-prix="<?= $row['prix_ht_produit'] ?>" data-categorie="<?= $row['id_categorie'] ?>"
                         data-vendeur="<?= $row['id_vendeur'] ?>">
-                        <img src=<?= "data:image/jpeg;base64,$base64" ?> class="w-50 h-50 object-contain m-auto mt-3">
+                        <img src=<?= $row['photo_produit'] ? "../imagesProduits/" . $row['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="w-50 h-50 object-contain m-auto mt-3">
                         <div class="info-produit">
                             <span class="producteur"><i
                                     class="fa-solid fa-location-dot"></i><?= $row['denomination_vendeur'] ?></span>

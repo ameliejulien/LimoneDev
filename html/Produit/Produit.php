@@ -15,12 +15,6 @@
         exit;
     }
 
-    $base64 = null;
-    if (!empty($produit['photo_produit'])) {
-        $imageData = stream_get_contents($produit['photo_produit']);
-        $base64    = base64_encode($imageData);
-    }
-
     $prixEntier  = explode(".", strval($produit['prix_ht_produit']))[0];
     $prixDecimal = explode(".", strval($produit['prix_ht_produit']))[1] ?? '00';
 
@@ -73,17 +67,11 @@
                     <?php if ($promotion && $reduction > 0): ?>
                         <span class="badge-promo">-<?= $reduction ?>%</span>
                     <?php endif; ?>
-                    <?php if ($base64): ?>
-                        <img
-                            src="data:image/jpeg;base64,<?= $base64 ?>"
-                            alt="<?= htmlspecialchars($produit['nom_produit']) ?>"
-                            class="image-principale"
-                        >
-                    <?php else: ?>
-                        <div class="image-placeholder">
-                            <i class="fa-solid fa-image"></i>
-                        </div>
-                    <?php endif; ?>
+                    <img
+                        src="<?= $produit['photo_produit'] ? "../imagesProduits/" . $produit['photo_produit'] : '../imagesProduits/placeholder.png' ?>"
+                        alt="<?= htmlspecialchars($produit['nom_produit']) ?>"
+                        class="image-principale"
+                    >
                 </div>
             </section>
 

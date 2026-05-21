@@ -34,8 +34,6 @@ $prixTotal = 0;
 
         <?php
         foreach ($arts as $art) {
-            $imageData = stream_get_contents($art['photo_produit']);
-            $base64 = base64_encode($imageData);
             $prixTotal = $prixTotal + $art["prix_ht_produit"];
             ?>
 
@@ -43,7 +41,7 @@ $prixTotal = 0;
                 <div class="article-grid">
 
                     <div class="article-image">
-                        <img src=<?= "data:image/jpeg;base64,$base64" ?> class="image">
+                        <img src=<?= $art['photo_produit'] ? "../imagesProduits/" . $art['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="image">
                     </div>
 
                     <h3 class="article-name"><?= $art["nom_produit"] ?></h3>
