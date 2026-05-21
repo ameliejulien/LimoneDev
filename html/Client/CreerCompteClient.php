@@ -45,6 +45,8 @@
 
     
   </form>
+
+  <p>Vous êtes vendeur ? : <a href="../Vendeur/CreerCompteVendeur.php">cliquez ici</a></p>
   <!--<script src="../snackbar.js"></script> -->
   <script>
     const form = document.querySelector(".formulaire");
