@@ -246,7 +246,8 @@ CREATE TABLE limone.Achat (
 create table limone.Ligne_Commande (
     id_ligne_commande serial PRIMARY KEY,
     id_commande int,
-    id_produit_commande int, 
+    id_produit_commande int,
+    nom_produit varchar(100), 
     quantite int, 
     prix_ht_commande numeric,
     tva_commande numeric,
