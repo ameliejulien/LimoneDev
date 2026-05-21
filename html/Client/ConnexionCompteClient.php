@@ -35,7 +35,7 @@
   <script src="../snackbar.js"></script>
 
   <script>
-    const form = document.querySelector("form");
+    const form = document.querySelector(".formulaire");
 
     // écouteur des requêtes du formulaire
     form.addEventListener("submit", function (event) {

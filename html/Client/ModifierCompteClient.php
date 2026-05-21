@@ -92,7 +92,7 @@
     }
   }
 
-  const form = document.querySelector("form");
+  const form = document.querySelector(".formulaire");
 
   // Ecouteur
   form.addEventListener("submit", function (event) {
