@@ -91,26 +91,44 @@ sans-serif; // Texte général
         url("../fonts/Alatsi-Regular.ttf") format("truetype")
 }
 .snackbar {
-    background-color: #b3d3bc;
-    color: #000000;
-    padding: 0.75em 1.5em;
-    justify-content: center;
-    position: fixed;
-    top: 50px;
-    right: 50px;
-    border-radius: 10px;
-    visibility: hidden;
-    z-index: 11;
+    background-color: $blanc;
+    border          : 1px solid $bordure;
+    border-left     : 4px solid $vert-fonce;
+    border-radius   : $arrondi;
+    box-shadow      : $ombre-grande;
+    padding         : 14px 18px;
+    display         : flex;
+    flex-direction  : column;
+    gap             : 3px;
+    position        : fixed;
+    top             : 100px;
+    right           : 24px;
+    min-width       : 240px;
+    max-width       : 320px;
+    visibility      : hidden;
+    z-index         : 11;
+
+    .snackbarTitle {
+        font-family: $police-soustitre;
+        font-size  : 0.95rem;
+        color      : $encre;
+    }
+
+    .snackbarText {
+        font-family: $police-generale;
+        font-size  : 0.85rem;
+        color      : $encre-claire;
+    }
 
     &.show {
         visibility: visible;
-        animation: apparition-snackbar 0.4s ease-out;
+        animation : apparition-snackbar 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 }
 
 @keyframes apparition-snackbar {
-    0% {transform: translate(200% , 0%);}
-    100% {transform: translate(0% , 0%);}
+    0%   { transform: translateX(calc(100% + 32px)); opacity: 0; }
+    100% { transform: translateX(0);                 opacity: 1; }
 }
 
 .loader {
