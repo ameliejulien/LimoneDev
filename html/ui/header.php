@@ -25,13 +25,13 @@
             </a>
 
             <!-- Panier -->
-            <a href="#" class="header-panier" aria-label="Mon panier">
+            <a href="/Panier/index.php" class="header-panier" aria-label="Mon panier">
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span class="header-panier-compteur">100</span>
             </a>
 
             <button class="header-burger" id="burger" aria-label="Ouvrir le menu">
-                <img src="../ui/img/navOpen.png" id="burger-img" alt="Menu" />
+                <img src="/ui/img/navOpen.png" id="burger-img" alt="Menu" />
             </button>
 
         </nav>
