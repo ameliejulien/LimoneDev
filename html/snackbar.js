@@ -1,3 +1,8 @@
+/**
+ * Affiche une snack bar dans le haut droit de l'écran pour y placer des informations pour l'utilisateur
+ * @param {String} titre 
+ * @param {String} contenu 
+ */
 function afficherSnackBar(titre, contenu) {
 
     const snackbar = document.getElementsByClassName("snackbar")[0];

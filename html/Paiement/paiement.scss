@@ -7,11 +7,14 @@ $text-color: #1C6D80;
 
 // Body
 body {
+  background-color: $bg-body;
+}
+
+main {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: $bg-body;
-
+  
   h1 {
     font-size: 3em;
     color: $text-color;

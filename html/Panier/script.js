@@ -18,7 +18,7 @@ form.addEventListener('submit', function (event) {
                     }
 
                 } else if (json['valides'].length == 0) {
-                    alert();
+                    afficherSnackBar('Erreur', 'Une erreur est survenue');
                 } else {
                     form.submit();
                 }

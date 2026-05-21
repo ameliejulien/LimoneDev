@@ -1,6 +1,5 @@
 <?php
-chdir(__DIR__ . '/../../');
-require('lib/repo/GlobalRepo.php');
+require_once('../../lib/repo/GlobalRepo.php');
 
 function enregistrerFacture(String $nom, 
                             String $email, 
@@ -29,7 +28,8 @@ function enregistrerFacture(String $nom,
             :codePostal,
             :villeFacturation,
             :adresseFacturation,
-            :codePostalFacturation)";
+            :codePostalFacturation)
+    RETURNING id_facture";
 
     $dbh = connecterBDD();
     $stmt = $dbh->prepare($query);
@@ -45,6 +45,8 @@ function enregistrerFacture(String $nom,
     $stmt->bindValue(":codePostalFacturation", $codePostalFacturation);
 
     $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC)['id_facture'];
 }
 
 ?>

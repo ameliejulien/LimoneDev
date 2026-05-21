@@ -1,6 +1,8 @@
 <?php
-chdir(__DIR__ . '/../../');
-require('lib/repo/FacturationRepo.php');
+include_once('../../lib/repo/FacturationRepo.php');
+include_once('../../lib/repo/CommandeRepo.php');
+include_once('../../lib/repo/AchatRepo.php');
+include_once('../../lib/service/ServicePanier.php');
 
 /**
  * Valide le format des champs de l'utilisateur coté serveur, pour éviter les bypass du JS
@@ -47,7 +49,14 @@ function validerPaiement() {
             return false;
         }
 
-        enregistrerFacture(
+        $panier = getPanierArticles((array) getPanierIDs());
+        $quantiteMap = array_count_values((array) json_decode($_COOKIE['panier']));
+
+        // Crée une commande
+        $commandeId = enregistrerCommande();
+
+        // Créer une facture
+        $factureId = enregistrerFacture(
             $_POST['prenom']." ".$_POST['nom'],
             $_POST['email'],
             $_POST['telephone'],
@@ -58,6 +67,30 @@ function validerPaiement() {
             $_POST['adressePostalFacturation'],
             $_POST['codePostalFacturation']
         );
+
+        $nomArticle = "";
+        $prixHt = 0;
+        $TVA = 0;
+
+        // Créer une ligne de commande par produit
+        foreach ($quantiteMap as $articleId => $quantite) {
+            foreach ($panier as $article) {
+                if ($article['id_produit'] == $articleId) {
+                    $nomArticle = $article["nom_produit"];
+                    $prixHt = $article["prix_ht_produit"];
+                    $TVA = ($article["prix_ht_produit"] * 1.2) - $article["prix_ht_produit"];
+                }
+            }
+
+            enreigstrerLigneCommande($commandeId, $articleId, $nomArticle, $quantite, $prixHt, $TVA);
+
+            if ($_COOKIE['client'] != null) {
+                $client = (array) json_decode($_COOKIE['client']);
+                enregistrerAchat($commandeId, $articleId, $factureId, $client["idClient"]);
+            } else {
+                enregistrerAchat($commandeId, $articleId, $factureId);
+            }
+        }
 
         // Communication avec la banque
         return true;
