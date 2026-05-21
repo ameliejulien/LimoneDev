@@ -28,7 +28,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: --beige-clair;
+  background-color: #fffdea;
 }
 
 .formulaire {
@@ -42,7 +42,7 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   font-family: var(--texte-font);
-  background-color: --beige-fonce;
+  background-color: #b3d3bc;
   margin: 2em auto;
 }
 
@@ -51,7 +51,7 @@ body {
 }
 
 .submit {
-  background-color: --beige-clair;
+  background-color: #fffdea;
   padding: 0.3em;
 }
 
@@ -78,5 +78,5 @@ label {
 
 h1 {
   font-size: 3em;
-  color: --bleu-fonce;
+  color: #1C6D80;
 }/*# sourceMappingURL=vendeur.css.map */
