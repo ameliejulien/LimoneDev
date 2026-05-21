@@ -239,6 +239,7 @@ body {
     .header-recherche {
         @include flex-centre;
         flex         : 1;
+        flex-direction: row;
         max-width    : 480px;
         background   : $blanc;
         border-radius: 50px;
@@ -246,6 +247,7 @@ body {
         padding      : 0 18px 0 14px;
         gap          : 8px;
         transition   : box-shadow 0.2s ease;
+        border: none;
 
         &:focus-within {
             box-shadow: 0 0 0 3px rgba($bleu-clair, 0.5);

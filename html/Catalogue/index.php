@@ -164,7 +164,8 @@ $vendeurs = recupererLesVendeurs();
         produits.forEach(produit => {
             produit.addEventListener('click', (e) => {
                 const id = produit.getAttribute('id_produit');
-                window.location.href = `../Produit/Produit.php?q=${id}`;
+                console.log(id);
+                window.location.href = `../Produit/Produit.php?id=${id}`;
             });
         });
 
