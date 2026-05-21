@@ -4,6 +4,11 @@
 <header class="header">
     <div class="header-interieur">
 
+        <?php
+            $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
+            $nbPanier = count($panier);
+        ?>
+
         <!-- Logo -->
         <a href="/Catalogue/index.php" class="header-logo">
             <img src="../ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
@@ -29,14 +34,13 @@
 
             <!-- Création de compte -->
             <a href="/Client/CreerCompteClient.php" class="header-action-connexion">
-                <!-- <i class="fa-regular fa-user"></i> -->
                 <span class="header-action-libelle">Créer un compte</span>
             </a>
 
             <!-- Panier -->
             <a href="/Panier/index.php" class="header-panier" aria-label="Mon panier">
                 <i class="fa-solid fa-basket-shopping"></i>
-                <span class="header-panier-compteur">100</span>
+                <span class="header-panier-compteur"><?= $nbPanier ?></span>
             </a>
 
             <button class="header-burger" id="burger" aria-label="Ouvrir le menu">
