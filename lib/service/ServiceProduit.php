@@ -10,4 +10,12 @@ function recupererLesCategories(): array {
     return trouverLesCategories();
 }
 
+function recupererProduitParId(int $id): array|false {
+    return trouverProduitParId($id);
+}
+
+function recupererPremierProduit(): array|false {
+    return trouverPremierProduit();
+}
+
 ?>

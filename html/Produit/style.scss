@@ -1,0 +1,357 @@
+// ============================================================
+// PAGE FICHE PRODUIT
+// ============================================================
+
+@use "../Global" as *;
+
+.retour-catalogue {
+    display        : inline-flex;
+    align-items    : center;
+    gap            : 8px;
+    padding        : 16px 48px;
+    font-family    : $police-generale;
+    font-size      : 0.875rem;
+    color          : $vert-fonce;
+    text-decoration: none;
+    font-weight    : 600;
+    transition     : opacity .2s;
+
+    &:hover { opacity: .7; }
+}
+
+.categorie-badge {
+    background   : $beige-fonce;
+    color        : $vert-fonce;
+    padding      : 2px 10px;
+    border-radius: $arrondi-grand;
+    font-size    : 0.8rem;
+    font-weight  : 600;
+}
+
+// Mise en page principale
+.produit-page {
+    display              : grid;
+    grid-template-columns: 1fr 1fr;
+    gap                  : 48px;
+    max-width            : 1100px;
+    margin               : 0 auto;
+    padding              : 24px 48px 64px;
+    align-items          : start;
+}
+
+// Galerie / image
+.produit-galerie {
+    position: sticky;
+    top     : 100px;
+}
+
+.image-principale-wrapper {
+    position       : relative;
+    background     : $blanc;
+    border-radius  : $arrondi-grand;
+    border         : 1px solid $bordure;
+    box-shadow     : $ombre-moyenne;
+    overflow       : hidden;
+    aspect-ratio   : 1 / 1;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    padding        : 24px;
+}
+
+.image-principale {
+    max-width : 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition : transform .4s ease;
+}
+
+.badge-promo {
+    position     : absolute;
+    top          : 16px;
+    left         : 16px;
+    background   : $vert-fonce;
+    color        : $beige-clair;
+    font-family  : $police-soustitre;
+    font-size    : 0.85rem;
+    font-weight  : 700;
+    padding      : 4px 12px;
+    border-radius: $arrondi-grand;
+    z-index      : 2;
+}
+
+// Détails produit
+.produit-details {
+    display       : flex;
+    flex-direction: column;
+    gap           : 24px;
+}
+
+.produit-header {
+    @include flex-centre;
+    gap      : 10px;
+    flex-wrap: wrap;
+}
+
+.vendeur-tag {
+    @include flex-centre;
+    gap        : 6px;
+    font-family: $police-generale;
+    font-size  : 0.85rem;
+    color      : $encre-claire;
+
+    i { color: $vert-fonce; }
+}
+
+.categorie-tag {
+    background   : $beige-fonce;
+    color        : $vert-fonce;
+    padding      : 3px 12px;
+    border-radius: $arrondi-grand;
+    font-family  : $police-generale;
+    font-size    : 0.8rem;
+    font-weight  : 600;
+}
+
+.produit-nom {
+    font-family: $police-soustitre;
+    font-size  : 2rem;
+    color      : $encre;
+    margin     : 0;
+    line-height: 1.2;
+}
+
+// Stock
+.stock-ligne {
+    @include flex-centre;
+    gap        : 7px;
+    font-family: $police-generale;
+    font-size  : 0.875rem;
+
+    i { font-size: 0.6rem; }
+
+    &.en-stock { color: $vert-fonce; }
+    &.rupture  { color: #c0392b; }
+}
+
+.stock-alerte {
+    color     : $encre-claire;
+    font-style: italic;
+}
+
+// Prix
+.prix-bloc {
+    display       : flex;
+    flex-direction: column;
+    gap           : 4px;
+    padding       : 20px;
+    background    : $blanc;
+    border-radius : $arrondi;
+    border        : 1px solid $bordure;
+    box-shadow    : $ombre-petite;
+}
+
+.prix-barre {
+    font-family    : $police-generale;
+    font-size      : 1rem;
+    color          : $encre-tres-claire;
+    text-decoration: line-through;
+}
+
+.prix-principal {
+    display    : flex;
+    align-items: baseline;
+    gap        : 4px;
+    line-height: 1;
+}
+
+.montant-entier {
+    font-family: $police-titre;
+    font-size  : 2.8rem;
+    color      : $encre;
+}
+
+.montant-decimal {
+    font-family: $police-generale;
+    font-size  : 1.2rem;
+    color      : $encre;
+    font-weight: 600;
+}
+
+.monnaie {
+    font-size  : 1rem;
+    font-weight: 400;
+    color      : $encre-claire;
+}
+
+.mention-ht {
+    font-family  : $police-generale;
+    font-size    : 0.75rem;
+    color        : $encre-tres-claire;
+    align-self   : flex-end;
+    margin-bottom: 4px;
+}
+
+.prix-ttc {
+    font-family: $police-generale;
+    font-size  : 0.8rem;
+    color      : $encre-claire;
+
+    strong { color: $encre; }
+}
+
+// Description
+.description-bloc {
+    h2 {
+        font-family  : $police-soustitre;
+        font-size    : 1rem;
+        color        : $encre;
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-family: $police-generale;
+        font-size  : 0.95rem;
+        color      : $encre-claire;
+        line-height: 1.65;
+        margin     : 0;
+    }
+}
+
+// Actions 
+.action-bloc {
+    @include flex-centre;
+    gap      : 16px;
+    flex-wrap: wrap;
+}
+
+.quantite-selector {
+    display      : flex;
+    align-items  : center;
+    border       : 1px solid $bordure-fonce;
+    border-radius: $arrondi;
+    overflow     : hidden;
+    background   : $blanc;
+}
+
+.qty-btn {
+    background   : transparent;
+    border       : none;
+    border-radius: 0;
+    color        : $encre;
+    padding      : 12px 16px;
+    cursor       : pointer;
+    font-size    : 0.85rem;
+    transition   : background .15s;
+    flex-shrink  : 0;
+
+    &:hover  { background: $beige-fonce; transform: none; }
+    &:active { transform: none; }
+}
+
+.qty-val {
+    font-family: $police-soustitre;
+    font-size  : 1rem;
+    color      : $encre;
+    min-width  : 36px;
+    text-align : center;
+    user-select: none;
+}
+
+.bouton-panier {
+    flex           : 1;
+    @include flex-centre;
+    justify-content: center;
+    gap            : 10px;
+    background     : $vert-fonce;
+    color          : $beige-clair;
+    font-family    : $police-soustitre;
+    font-size      : 1rem;
+    padding        : 14px 28px;
+    border-radius  : $arrondi;
+    border         : none;
+    cursor         : pointer;
+    transition     : background .2s, transform .15s, box-shadow .2s;
+    box-shadow     : $ombre-petite;
+    white-space    : nowrap;
+
+    &:hover:not(.disabled) {
+        background: $bleu-fonce;
+        transform : scale(1.03);
+        box-shadow: $ombre-moyenne;
+    }
+
+    &:active:not(.disabled) { transform: scale(0.97); }
+
+    &.disabled {
+        background: $bordure-fonce;
+        color     : $encre-tres-claire;
+        cursor    : not-allowed;
+    }
+}
+
+// Infos livraison 
+.infos-livraison {
+    display       : flex;
+    flex-direction: column;
+    gap           : 10px;
+    padding       : 16px;
+    background    : $beige-fonce;
+    border-radius : $arrondi;
+    opacity       : 0.85;
+}
+
+.info-item {
+    @include flex-centre;
+    gap        : 10px;
+    font-family: $police-generale;
+    font-size  : 0.85rem;
+    color      : $encre-claire;
+
+    i {
+        color      : $vert-fonce;
+        width      : 18px;
+        flex-shrink: 0;
+    }
+}
+
+.image-placeholder {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 100%;
+    height         : 100%;
+    color          : $bordure-fonce;
+    font-size      : 4rem;
+}
+
+// ============================================================
+// RESPONSIVE : Media query mobile
+// ============================================================
+@media (max-width: 768px) {
+    .produit-page {
+        grid-template-columns: 1fr;
+        padding              : 16px 20px 48px;
+        gap                  : 28px;
+    }
+
+    .produit-galerie { position: static; }
+
+    .fil-ariane { padding: 12px 20px; }
+
+    .produit-nom { font-size: 1.6rem; }
+
+    .montant-entier { font-size: 2.2rem; }
+
+    .action-bloc {
+        flex-direction: column;
+        align-items   : stretch;
+    }
+
+    .bouton-panier {
+        flex  : none;
+        width : 100%;
+    }
+
+    .quantite-selector { justify-content: center; }
+}
