@@ -8,7 +8,6 @@ $data = json_decode($fetchData, true);
 $retour;
 
 // ajoute un cookie client
-ajouterClientCookie($data);
 if ($data["typeRequete"] == "creation") {
     $retour=confimerInscirption($data);
     $data["reponse"] = $retour;
