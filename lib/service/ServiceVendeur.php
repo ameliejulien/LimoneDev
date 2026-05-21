@@ -97,7 +97,6 @@
         }
         error_log("vendeur reçu : " . var_export($vendeur, true));
         $id = getVendeurId($vendeur);
-        error_log("id trouvé : " . var_export($id, true));
 
 
         $tab["mail"] = $vendeur["mail"];
@@ -142,5 +141,41 @@
          
         
     }  
+
+
+
+    /**
+     * @Brief supprime le cookie vendeur pour le déconnecter
+     * @Return retourne un booléen confirmant ou non la suppression du cooki
+     */
+    function deconnecterVendeur() {
+        setcookie("vendeur", "", time() - 1, "/");
+        unset($_COOKIE["vendeur"]);
+        
+        return !isset($_COOKIE["vendeur"]);
+    }  
+
+    /**
+     * Brief modfie le mot de passe Vendeur
+     */
+    function modificationMdpVendeur($data) {
+        $mdpCourant     = hash('sha256', $data["mdpCourant"]);
+        $nouveauMdp     = hash('sha256', $data["nouveauMdp"]);
+        $confNouveauMdp = hash('sha256', $data["confNouveauMdp"]);
+
+        // Les deux nouveaux mots de passe ne correspondent pas
+        if ($nouveauMdp !== $confNouveauMdp) {
+            return 401;
+        }
+
+        // Le nouveau mot de passe est identique à l'ancien
+        if ($mdpCourant === $nouveauMdp) {
+            return 409;
+        }
+
+        // Tout est valide → on met à jour
+        modifierMdpVendeurBDD($nouveauMdp);
+        return 200;
+    }
 
 ?>

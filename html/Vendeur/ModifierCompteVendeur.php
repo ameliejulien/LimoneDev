@@ -47,7 +47,7 @@
     </div>
 
     <input type="submit" value="Valider les modifications" class="submit"/>
-    <a href="ConsulterCompteVendeur.php"><input type="button" value="Retour"/></a>
+    <a href="ConsulterCompteVendeur.php"><input class="buttonForm" type="button" value="Retour"/></a>
 
 
     <div class="snackbar">

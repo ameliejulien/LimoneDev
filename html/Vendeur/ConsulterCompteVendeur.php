@@ -44,7 +44,8 @@
         <label for="address">Ville : </label>
         <span> <?= $infosVendeur[0]['ville_adresse'];?> </span>
       </div>
-      <a href="ModifierCompteVendeur.php"><input type="button" value="Modifier"/></a>
+      <a href="ModifierCompteVendeur.php"><input class="buttonForm" type="button" value="Modifier Compte"/></a>
+      <a href="ModifierMdpVendeur.php"><input class="buttonForm" type="button" value="Modifier mot de passe"/></a>
     </form>
   </body>
 </html>
