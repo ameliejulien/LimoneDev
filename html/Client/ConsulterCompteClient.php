@@ -1,7 +1,7 @@
 <?php
   include '../../lib/service/ServiceClient.php';
   $idClient = json_decode($_COOKIE['client'], true)['idClient'];
-  $infosClient = recupererInfosClient($idClient);
+  $infosClient = recupererInfosClient(/*$idClient*/);
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,17 @@
 
     <div class="divForm">
       <label for="picture">Photo de profil</label>
-      <img src=<?= $infosClient[0]['pp_utilisateur'] == NULL ? "../../images/image-none.jpg" : $infosClient[0]['pp_utilisateur'] ?> alt="Photo de profil" class="profile-picture" width="200" height="200">
+      <?php 
+        $imgData = $infosClient[0]['pp_utilisateur'];
+        if (is_resource($imgData)) {
+            $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
+        } elseif (!empty($imgData)) {
+            $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
+        } else {
+            $imgSrc = "../../images/image-none.jpg";
+        }
+      ?>
+      <img src="<?= $imgSrc ?>" alt="Photo de profil" class="profile-picture" width="200" height="200">
     </div>
 
     <div class="divForm">
@@ -90,7 +100,7 @@
         .then(response => response.json())  // transforme la réponse http en json exploitable
         .then(json => {
           if (json.reponse == 200) {
-            alert("Compte déconnecté!"); // alert de la création du compte
+            alert("Compte déconnecté!"); // alerte de la déconnexion du compte
             window.location.href = "../Catalogue/";
           }
         })
