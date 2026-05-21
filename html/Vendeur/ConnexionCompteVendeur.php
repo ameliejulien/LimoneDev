@@ -55,7 +55,7 @@
       .then(json => {
         if (json.reponse == 200) {
           afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
-          window.location.href = "../Vendeur/ConsulterCompteVendeur.php";
+          window.location.href = "../Catalogue/CatalogueVendeur.php";
         
         } else {
           afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion
