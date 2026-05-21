@@ -383,170 +383,361 @@ button:active {
   transform: scale(0.96);
 }
 
-body {
-  display: flex;
+.retour-catalogue {
+  display: inline-flex;
   align-items: center;
-  flex-direction: column;
-  background-color: #fffdea;
+  gap: 8px;
+  padding: 16px 48px;
+  font-family: "Farro", sans-serif;
+  font-size: 0.875rem;
+  color: #208068;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
-body h1 {
-  font-size: 3em;
-  color: #1C6D80;
-  font-family: "Lovelo", sans-serif;
-}
-
-form {
-  border: solid 1px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  padding: 2em 2em;
-  padding: 2em 5em;
-  gap: 1em;
-  margin: 0;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-family: "Farro", sans-serif, sans-serif;
-  background-color: #b3d3bc;
-}
-form .submit {
-  padding: 0.3em;
-}
-form label {
-  font-size: 1.5em;
-  font-family: "Farro", sans-serif, sans-serif;
-}
-form .divForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
-}
-form .divForm h2 {
-  font-family: "Alatsi", sans-serif;
+.retour-catalogue:hover {
+  opacity: 0.7;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
+.categorie-badge {
+  background: #b3d3bc;
+  color: #208068;
+  padding: 2px 10px;
+  border-radius: 22px;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-form .form-contact,
-form .form-livraison,
-form .form-paiement {
+.produit-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-}
-form .form-contact .code-postal-fac-input,
-form .form-livraison .code-postal-fac-input,
-form .form-paiement .code-postal-fac-input {
-  grid-column: 2;
-  grid-row: 5;
-}
-form .form-contact,
-form .form-livraison,
-form .form-paiement {
-  grid-auto-rows: minmax(50px, auto);
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 48px 64px;
+  align-items: start;
 }
 
-.nom-input {
-  grid-column: 2;
-  grid-row: 2;
+.produit-galerie {
+  position: sticky;
+  top: 100px;
 }
 
-.prenom-input {
-  grid-column: 1;
-  grid-row: 2;
+.image-principale-wrapper {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 22px;
+  border: 1px solid #e6e1d2;
+  box-shadow: 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
-.mail-input {
-  grid-column: span 2;
-  grid-row: 3;
+.image-principale {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: transform 0.4s ease;
 }
 
-.tel-input {
-  grid-column: 1;
-  grid-row: 4;
+.badge-promo {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #208068;
+  color: #fffdea;
+  font-family: "Alatsi", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 22px;
+  z-index: 2;
 }
 
-.category-titre {
-  grid-column: span 2;
-  grid-row: 1;
-  font-size: 1.5em;
-  font-family: var(--police-soustitre) sans-serif;
+.produit-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.input-group label {
-  font-family: var(--police-generale) sans-serif;
-  font-size: 1em;
+.produit-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.adresse-input {
-  grid-column: span 2;
-  grid-row: 2;
+.vendeur-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Farro", sans-serif;
+  font-size: 0.85rem;
+  color: #4a5b5e;
+}
+.vendeur-tag i {
+  color: #208068;
 }
 
-.ville-input {
-  grid-column: 1;
-  grid-row: 3;
+.categorie-tag {
+  background: #b3d3bc;
+  color: #208068;
+  padding: 3px 12px;
+  border-radius: 22px;
+  font-family: "Farro", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-.code-postal-input {
-  grid-column: 2;
-  grid-row: 3;
+.produit-nom {
+  font-family: "Alatsi", sans-serif;
+  font-size: 2rem;
+  color: #1C2D30;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.adresse-fac-input {
-  grid-column: span 2;
-  grid-row: 4;
+.stock-ligne {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Farro", sans-serif;
+  font-size: 0.875rem;
+}
+.stock-ligne i {
+  font-size: 0.6rem;
+}
+.stock-ligne.en-stock {
+  color: #208068;
+}
+.stock-ligne.rupture {
+  color: #c0392b;
 }
 
-.ville-fac-input {
-  grid-column: 1;
-  grid-row: 5;
+.stock-alerte {
+  color: #4a5b5e;
+  font-style: italic;
 }
 
-.code-postal-fac-input {
-  grid-column: 2;
-  grid-row: 5;
+.prix-bloc {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid #e6e1d2;
+  box-shadow: 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
 }
 
-.code-cb-input {
-  grid-column: 1;
-  grid-row: 2;
+.prix-barre {
+  font-family: "Farro", sans-serif;
+  font-size: 1rem;
+  color: #7d8a8c;
+  text-decoration: line-through;
 }
 
-.cvv-input {
-  grid-column: 2;
-  grid-row: 2;
+.prix-principal {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  line-height: 1;
 }
 
-.nom-titulaire-input {
-  grid-column: span 2;
-  grid-row: 3;
+.montant-entier {
+  font-family: "Lovelo", sans-serif;
+  font-size: 2.8rem;
+  color: #1C2D30;
 }
 
-input:invalid {
-  border: 1px solid rgba(255, 0, 0, 0.5);
+.montant-decimal {
+  font-family: "Farro", sans-serif;
+  font-size: 1.2rem;
+  color: #1C2D30;
+  font-weight: 600;
 }
 
-.bouton-valider {
-  width: 100px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--vert-fonce);
-  color: var(--beige-clair);
-  display: grid;
-  place-items: center;
-  transition: background 0.2s, transform 0.15s;
+.monnaie {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4a5b5e;
+}
+
+.mention-ht {
+  font-family: "Farro", sans-serif;
+  font-size: 0.75rem;
+  color: #7d8a8c;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.prix-ttc {
+  font-family: "Farro", sans-serif;
+  font-size: 0.8rem;
+  color: #4a5b5e;
+}
+.prix-ttc strong {
+  color: #1C2D30;
+}
+
+.description-bloc h2 {
+  font-family: "Alatsi", sans-serif;
+  font-size: 1rem;
+  color: #1C2D30;
+  margin-bottom: 8px;
+}
+.description-bloc p {
+  font-family: "Farro", sans-serif;
+  font-size: 0.95rem;
+  color: #4a5b5e;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.action-bloc {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.quantite-selector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d5cfbd;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: #1C2D30;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.qty-btn:hover {
+  background: #b3d3bc;
+  transform: none;
+}
+.qty-btn:active {
+  transform: none;
+}
+
+.qty-val {
+  font-family: "Alatsi", sans-serif;
+  font-size: 1rem;
+  color: #1C2D30;
+  min-width: 36px;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.bouton-panier {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #208068;
+  color: #fffdea;
+  font-family: "Alatsi", sans-serif;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
+  white-space: nowrap;
+}
+.bouton-panier:hover:not(.disabled) {
+  background: #1C6D80;
+  transform: scale(1.03);
+  box-shadow: 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
+}
+.bouton-panier:active:not(.disabled) {
+  transform: scale(0.97);
+}
+.bouton-panier.disabled {
+  background: #d5cfbd;
+  color: #7d8a8c;
+  cursor: not-allowed;
+}
+
+.infos-livraison {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: #b3d3bc;
+  border-radius: 14px;
+  opacity: 0.85;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Farro", sans-serif;
+  font-size: 0.85rem;
+  color: #4a5b5e;
+}
+.info-item i {
+  color: #208068;
+  width: 18px;
   flex-shrink: 0;
 }
 
-.bouton-valider:hover {
-  background: var(--vert-fonce);
-  transform: scale(1.06);
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #d5cfbd;
+  font-size: 4rem;
 }
 
-.bouton-valider:active {
-  transform: scale(0.96);
-}/*# sourceMappingURL=paiement.css.map */
+@media (max-width: 768px) {
+  .produit-page {
+    grid-template-columns: 1fr;
+    padding: 16px 20px 48px;
+    gap: 28px;
+  }
+  .produit-galerie {
+    position: static;
+  }
+  .fil-ariane {
+    padding: 12px 20px;
+  }
+  .produit-nom {
+    font-size: 1.6rem;
+  }
+  .montant-entier {
+    font-size: 2.2rem;
+  }
+  .action-bloc {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bouton-panier {
+    flex: none;
+    width: 100%;
+  }
+  .quantite-selector {
+    justify-content: center;
+  }
+}/*# sourceMappingURL=style.css.map */
