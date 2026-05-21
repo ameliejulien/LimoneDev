@@ -229,3 +229,59 @@ input, select { font-family: inherit; color: inherit; }
 .range-slider input[type="range"]::-moz-range-thumb:hover {
   border-color: var(--vert-fonce);
 }
+
+/* Catégories */
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.categories > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.categories input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 2px solid var(--bordure-fonce);
+  border-radius: 5px;
+  background: var(--blanc);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  position: relative;
+}
+
+.categories input[type="checkbox"]:checked {
+  background: var(--vert-fonce);
+  border-color: var(--vert-fonce);
+}
+
+.categories input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid var(--blanc);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.categories label {
+  font-family: var(--police-soustitre), sans-serif;
+  font-size: 1rem;
+  color: var(--encre);
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
