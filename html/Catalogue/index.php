@@ -1,6 +1,6 @@
 <?php
-include '../../lib/service/ServiceProduit.php';
-include '../../lib/service/ServiceVendeur.php';
+include __DIR__ . '../../lib/service/ServiceProduit.php';
+include __DIR__ . '../../lib/service/ServiceVendeur.php';
 
 $produits = recupererlesProduits();
 
