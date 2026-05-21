@@ -1,4 +1,5 @@
 @import '../Global.css';
+
 :root {
   --bleu-fonce: #1C6D80;
   --vert-fonce: #208068;
@@ -24,52 +25,54 @@
   --police-generale: Farro, sans-serif;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-.formulaire {
-  border: solid;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  padding: 1em, 5em;
-  gap: 1.75em;
-  margin: 0;
-  padding: 2em 5em;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-family: var(--texte-font);
-  background-color: #b3d3bc;
+.formulaire{
+    border:solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em, 5em;
+    gap: 1.75em;
+    margin: 0;
+    padding: 2em 5em;
+    width: fit-content;
+    font-family: var(--texte-font);
+    background-color: #b3d3bc; 
 }
 
-.divForm input {
-  height: 2em;
+
+.divForm input{
+    height: 2em;
 }
 
-.submit {
-  background-color: #fffdea;
-  padding: 0.3em;
+
+.submit { 
+    background-color: #fffdea;
+    padding: 0.3em;
 }
 
-label {
-  font-size: 1.5em;
+label{
+    font-size: 1.5em;
 }
+
 
 .divForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
+    display: flex;
+    flex-direction: column;
+    gap:0.25em;
 }
 
-h1 {
-  font-size: 3em;
-  color: #1C6D80;
-  font-family: var(--titre-font);
+h1{
+    font-size: 3em;
+    color: #1C6D80;
+    font-family: var(--titre-font);
 }
 
-body {
-  background-color: #fffdea;
-}/*# sourceMappingURL=client.css.map */
+body{
+    background-color: #fffdea;
+}
