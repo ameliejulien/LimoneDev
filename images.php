@@ -12,7 +12,6 @@
         $stmt = $PDO->prepare("INSERT INTO photo_produit (id_produit, photo_produit, photo_principale) VALUES (:id, :data, :main)");
 
         for ($i = 1; $i <= 100; $i++) {
-            $imageData = file_get_contents("./images/$i.jpg");
 
             $stmt->bindValue(":id", $i);
             $stmt->bindValue(":data", $i . '.jpg');
