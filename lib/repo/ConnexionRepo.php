@@ -5,7 +5,7 @@
         $connectBDD = connecterBDD();
         // requête
         $requete =   "SELECT email_utilisateur, type_utilisateur, id_utilisateur FROM limone.Utilisateur".
-        " WHERE email_utilisateur = '{$utilisateur["mail"]}' AND mdp_utilisateur = '{$utilisateur["motDePasse"]}'";
+        " WHERE email_utilisateur = '" . $utilisateur["mail"] . "' AND mdp_utilisateur = '" . $utilisateur["motDePasse"] . "'";
         $requetePreparee = $connectBDD->prepare($requete);
         $requetePreparee->execute(); 
         

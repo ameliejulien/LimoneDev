@@ -191,7 +191,7 @@
      * @Brief modifie les informations du vendeur
      */
     function modifierVendeurBDD($vendeur) {
-        $idVendeur = json_decode($_COOKIE['vendeur'], true)['idVendeur']; 
+        $idVendeur = json_decode($_COOKIE['vendeur'], true)['idUtilisateur']; 
         $connectBDD = connecterBDD();
         
         // récupréation de l'id de l'adresse
@@ -234,7 +234,7 @@
      */
     function modifierMdpVendeurBDD($mdp) {
         $connectBDD = connecterBDD();
-        $idVendeur = json_decode($_COOKIE['vendeur'], true)['idVendeur']; 
+        $idVendeur = json_decode($_COOKIE['vendeur'], true)['idUtilisateur']; 
 
         $requeteVendeur = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idVendeur}';";
         $requeteUpdateVendeur = $connectBDD->prepare($requeteVendeur);

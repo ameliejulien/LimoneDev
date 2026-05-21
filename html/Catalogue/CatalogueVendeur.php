@@ -93,8 +93,6 @@ $vendeurs = recupererLesVendeurs();
             <div class="grille-produit">
                 <?php
                 foreach ($produits as $row) {
-                    $imageData = stream_get_contents($row['photo_produit']);
-                    $base64 = base64_encode($imageData);
                     ?>
                     <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>"
                         data-prix="<?= $row['prix_ht_produit'] ?>" data-categorie="<?= $row['id_categorie'] ?>"
@@ -191,24 +189,6 @@ $vendeurs = recupererLesVendeurs();
         produits.forEach(produit => {
             const categorieProduit = produit.dataset.categorie;
             if ((categorie.id.split('-')[1] === '0' || categorie.id.split('-')[1] === categorieProduit) && produit.style.display !== 'none') {
-                produit.style.display = '';
-            } else if (produit.style.display === 'none') {
-                produit.style.display = 'none';
-            } else {
-                produit.style.display = 'none';
-                i--;
-            }
-        });
-
-        /////////////
-        // Vendeur //
-        /////////////
-
-        const vendeur = document.querySelector('input[name="v"]:checked');
-
-        produits.forEach(produit => {
-            const vendeurProduit = produit.dataset.vendeur;
-            if ((vendeur.id.split('-')[1] === '0' || vendeur.id.split('-')[1] === vendeurProduit) && produit.style.display !== 'none') {
                 produit.style.display = '';
             } else if (produit.style.display === 'none') {
                 produit.style.display = 'none';

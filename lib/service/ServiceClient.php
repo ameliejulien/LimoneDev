@@ -93,7 +93,7 @@ function recupererInfosClient()
     if ($_COOKIE['client'] != null) { // cookie déjà créé
         $client = json_decode($_COOKIE['client'], true);
     }
-    $idClient = $client["idClient"];
+    $idClient = $client["idUtilisateur"];
 
     $infos = trouverInfosClient($idClient);
     return $infos;
@@ -164,7 +164,7 @@ function deconnecterClient()
 function modifierMdpClientBDD($mdp)
 {
     $connectBDD = connecterBDD();
-    $idClient = json_decode($_COOKIE['client'], true)['idClient'];
+    $idClient = json_decode($_COOKIE['client'], true)['idUtilisateur'];
 
     $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
     $requeteUpdateClient = $connectBDD->prepare($requeteClient);
@@ -178,7 +178,7 @@ function obtenirIdClientConnecte()
 {
     if (isset($_COOKIE['client']) && $_COOKIE['client'] != null) { 
         $client = json_decode($_COOKIE['client'], true);
-        return $client["idClient"] ?? null;
+        return $client["idUtilisateur"] ?? null;
     }
     return null;
 }

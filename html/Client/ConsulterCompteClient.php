@@ -1,6 +1,6 @@
 <?php
   include '../../lib/service/ServiceClient.php';
-  $idClient = json_decode($_COOKIE['client'], true)['idClient'];
+  $idClient = json_decode($_COOKIE['client'], true)['idUtilisateur'];
   $infosClient = recupererInfosClient(/*$idClient*/);
 ?>
 

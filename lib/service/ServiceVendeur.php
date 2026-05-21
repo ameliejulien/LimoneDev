@@ -104,7 +104,6 @@ function creerCookieVendeur($vendeur)
     error_log("vendeur reçu : " . var_export($vendeur, true));
     $id = getVendeurId($vendeur);
 
-
     $tab["mail"] = $vendeur["mail"];
     $tab["idVendeur"] = $id["id_vendeur"];
 
@@ -123,8 +122,8 @@ function recupererInfosVendeur()
     if ($_COOKIE['vendeur'] != null) { // cookie déjà créé
         $vendeur = json_decode($_COOKIE['vendeur'], true);
     }
-    $idVendeur = $vendeur["idVendeur"];
-    error_log("idVendeur : " . var_export($vendeur['idVendeur'] ?? null, true));
+    $idVendeur = $vendeur["idUtilisateur"];
+    error_log("idVendeur : " . var_export($vendeur['idUtilisateur'] ?? null, true));
 
     $infos = infosVendeurBDD($idVendeur);
     return $infos;
@@ -139,7 +138,7 @@ function modificationVendeur($vendeur)
 {
     // TODO : uniformiser les valeurs entre les CRU vendeur
     $existant = getVendeurId($vendeur);
-    $idVendeur = json_decode($_COOKIE['vendeur'], true)["idVendeur"];
+    $idVendeur = json_decode($_COOKIE['vendeur'], true)["idUtilisateur"];
     if ($existant && $existant["id_vendeur"] != $idVendeur) {
         return 409;
     } else {

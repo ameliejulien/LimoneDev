@@ -10,7 +10,7 @@
     function creerCookieConnexion($data, $typeUtilisateur) {
     
     $tab = [
-        "mail" => $data["mail"],
+        "mail" => $data["email_utilisateur"],
         "idUtilisateur" => $data["id_utilisateur"],
         "typeUtilisateur" => $data["type_utilisateur"]
     ];

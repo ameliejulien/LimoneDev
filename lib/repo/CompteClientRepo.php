@@ -138,7 +138,7 @@
      */
     function modifierClientBDD($client, $files = []) {
 
-        $idClient = json_decode($_COOKIE['client'], true)['idClient'];
+        $idClient = json_decode($_COOKIE['client'], true)['idUtilisateur'];
         $connectBDD = connecterBDD();
 
         // Vérifier si le client a déjà une adresse
