@@ -1,3 +1,4 @@
+
 const qtyVal   = document.getElementById('quantite');
 const btnMoins = document.getElementById('btn-moins');
 const btnPlus  = document.getElementById('btn-plus');
