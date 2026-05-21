@@ -1,8 +1,11 @@
+
+<!-- Ajouter dans le head :  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
+
 <header class="header">
     <div class="header-interieur">
 
         <!-- Logo -->
-        <a href="#" class="header-logo">
+        <a href="/Catalogue/index.php" class="header-logo">
             <img src="../ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
         </a>
 
@@ -19,19 +22,25 @@
         <nav class="header-actions" aria-label="Actions utilisateur">
 
             <!-- Connexion -->
-            <a href="#" class="header-action-connexion">
+            <a href="/Client/ConnexionCompteClient.php" class="header-action-connexion">
                 <i class="fa-regular fa-user"></i>
                 <span class="header-action-libelle">Se connecter</span>
             </a>
 
+            <!-- Création de compte -->
+            <a href="/Client/CreerCompteClient.php" class="header-action-connexion">
+                <!-- <i class="fa-regular fa-user"></i> -->
+                <span class="header-action-libelle">Créer un compte</span>
+            </a>
+
             <!-- Panier -->
-            <a href="#" class="header-panier" aria-label="Mon panier">
+            <a href="/Panier/index.php" class="header-panier" aria-label="Mon panier">
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span class="header-panier-compteur">100</span>
             </a>
 
             <button class="header-burger" id="burger" aria-label="Ouvrir le menu">
-                <img src="img/navOpen.png" id="burger-img" alt="Menu" />
+                <img src="/ui/img/navOpen.png" id="burger-img" alt="Menu" />
             </button>
 
         </nav>
@@ -42,7 +51,7 @@
 
     <nav class="header-menu-lateral" id="menu-lateral">
         <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu">
-            <img src="img/navClose.png" alt="Fermer" />
+            <img src="../ui/img/navClose.png" alt="Fermer" />
         </button>
         <a href="#" class="header-menu-connexion">
             <i class="fa-regular fa-user"></i>

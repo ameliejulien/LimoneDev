@@ -18,4 +18,8 @@ function recupererPremierProduit(): array|false {
     return trouverPremierProduit();
 }
 
+function recupererlesProduitsVendeur(): array {
+    return trouverLesProduitsVendeur();
+}
+
 ?>

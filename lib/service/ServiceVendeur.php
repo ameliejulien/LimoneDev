@@ -17,7 +17,7 @@ function confimerInscription($vendeur)
     $confMdp = $vendeur["confMotDePasse"];
     $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
     $codePostal = intval($vendeur["codePostalVendeur"]);
-    $codeRetour;
+    $codeRetour = 0;
 
     // Comparaison des mots de passe
     $mdpEgaux = ($mdp == $confMdp);
@@ -124,6 +124,7 @@ function recupererInfosVendeur()
         $vendeur = json_decode($_COOKIE['vendeur'], true);
     }
     $idVendeur = $vendeur["idVendeur"];
+    error_log("idVendeur : " . var_export($vendeur['idVendeur'] ?? null, true));
 
     $infos = infosVendeurBDD($idVendeur);
     return $infos;
@@ -138,7 +139,7 @@ function modificationVendeur($vendeur)
 {
     // TODO : uniformiser les valeurs entre les CRU vendeur
     $existant = getVendeurId($vendeur);
-
+    $idVendeur = json_decode($_COOKIE['vendeur'], true)["idVendeur"];
     if ($existant && $existant["id_vendeur"] != $idVendeur) {
         return 409;
     } else {

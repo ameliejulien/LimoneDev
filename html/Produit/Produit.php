@@ -6,7 +6,12 @@
     $produit = $id > 0 ? recupererProduitParId($id) : recupererPremierProduit();
 
     if (!$produit) {
-        header('Location: Catalogue');
+        //header('Location: Catalogue');
+        exit;
+    }
+
+    if ($id <= 0) {
+        header('Location: Produit.php?id=' . $produit['id_produit']);
         exit;
     }
 
@@ -40,8 +45,6 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <script src="../js/produit.js"></script>
-        <script src="../snackbar.js"></script>
     </head>
     <body class="bg-[#fffdea]">
 
@@ -168,4 +171,6 @@
             </section>
         </main>
     </body>
+    <script src="../js/produit.js"></script>
+    <script src="../snackbar.js"></script>
 </html>
