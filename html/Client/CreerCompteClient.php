@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="client.css">
   <link rel="stylesheet" href="../Global.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>Compte Client</title>
 </head>
 <body>
@@ -42,11 +43,11 @@
       <p class="snackbarText"></p>
     </div>
 
-    <script src="../snackbar.js"></script>
+    
   </form>
+  <!--<script src="../snackbar.js"></script> -->
   <script>
     const form = document.querySelector("form");
-
     // écouteur des requêtes du formulaire
     form.addEventListener("submit", function (event) {
       
