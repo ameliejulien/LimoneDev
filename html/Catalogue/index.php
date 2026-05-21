@@ -160,6 +160,10 @@ $vendeurs = recupererLesVendeurs();
         const tri = document.querySelector('.tri');
         const compteProduits = document.querySelector('.nombre-produits');
         const produits = document.querySelectorAll('.carte-produit');
+        const searchBar = document.querySelector('.header-recherche-champ');
+
+        const params = new URLSearchParams(document.location.search);
+        const search = params.get('q');
 
         produits.forEach(produit => {
             produit.addEventListener('click', (e) => {
@@ -253,6 +257,25 @@ $vendeurs = recupererLesVendeurs();
                     i--;
                 }
             });
+
+            ///////////////
+            // Recherche //
+            ///////////////
+
+            if (search) {
+                searchBar.value = search;
+
+                produits.forEach(produit => {
+                    if ((produit.children[1].children[1].textContent.includes(search.toLowerCase())) && produit.style.display !== 'none') {
+                        produit.style.display = '';
+                    } else if (produit.style.display === 'none') {
+                        produit.style.display = 'none';
+                    } else {
+                        produit.style.display = 'none';
+                        i--;
+                    }
+                });
+            }
 
             compteProduits.textContent = i;
         }
