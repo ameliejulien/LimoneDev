@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="vendeur.css">
   <link rel="stylesheet" href="../Global.css">
+  <link rel="stylesheet" href="vendeur.css">
   <title>Compte Vendeur</title>
 </head>
 <body>
@@ -53,10 +53,9 @@
       })
       .then(response => response.json())  // transforme la réponse http en json exploitable
       .then(json => {
-        console.log(json);      // test affichage retour
         if (json.reponse == 200) {
           afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
-          window.location.href = "../Vendeur/CompteVendeur.php";
+          window.location.href = "../Vendeur/ConsulterCompteVendeur.php";
         
         } else {
           afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion

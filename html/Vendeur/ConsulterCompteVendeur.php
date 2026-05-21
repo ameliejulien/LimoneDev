@@ -44,8 +44,41 @@
         <label for="address">Ville : </label>
         <span> <?= $infosVendeur[0]['ville_adresse'];?> </span>
       </div>
-      <a href="ModifierCompteVendeur.php"><input class="buttonForm" type="button" value="Modifier Compte"/></a>
-      <a href="ModifierMdpVendeur.php"><input class="buttonForm" type="button" value="Modifier mot de passe"/></a>
+      <div class="divBtnForm">
+        <button type="button" class="buttonForm" onclick="window.location.href='ModifierCompteVendeur.php'">Modifier Compte</button>
+        <button type="button" class="buttonForm" onclick="window.location.href='ModifierMdpVendeur.php'">Modifier mot de passe</button>
+        <button type="button" class="buttonForm decoBtn">Déconnexion</button>
+      </div>
     </form>
+
+    <script>
+      const decoBtn = document.querySelector(".decoBtn");
+
+      decoBtn.addEventListener("click", function (event) {
+
+        console.log("click btn deco");
+        
+        const formData = {
+          typeRequete: "deconnexion"
+        }
+
+        // fetch vers le dossier API de création client
+        fetch("../API/Vendeur.php", {
+          method: "POST",
+          body: JSON.stringify(formData)  // fait une string JSON du tableau
+        })
+        .then(response => response.json())  // transforme la réponse http en json exploitable
+        .then(json => {
+          if (json.reponse == 200) {
+            alert("Compte déconnecté!"); // alert de la création du compte
+            window.location.href = "../Catalogue/";
+          }
+          
+        })
+        .catch(err => {
+          console.error("Erreur :", err); 
+        });
+      });
+    </script>
   </body>
 </html>
