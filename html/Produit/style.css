@@ -40,28 +40,46 @@
   src: url("../fonts/Alatsi-Regular.ttf") format("truetype");
 }
 .snackbar {
-  background-color: #b3d3bc;
-  color: #000000;
-  padding: 0.75em 1.5em;
-  justify-content: center;
+  background-color: #FFFFFF;
+  border: 1px solid #e6e1d2;
+  border-left: 4px solid #208068;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(28, 45, 48, 0.12);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
   position: fixed;
   top: 100px;
-  right: 50px;
-  border-radius: 10px;
+  right: 24px;
+  min-width: 240px;
+  max-width: 320px;
   visibility: hidden;
   z-index: 11;
 }
+.snackbar .snackbarTitle {
+  font-family: "Alatsi", sans-serif;
+  font-size: 0.95rem;
+  color: #1C2D30;
+}
+.snackbar .snackbarText {
+  font-family: "Farro", sans-serif;
+  font-size: 0.85rem;
+  color: #4a5b5e;
+}
 .snackbar.show {
   visibility: visible;
-  animation: apparition-snackbar 0.4s ease-out;
+  animation: apparition-snackbar 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes apparition-snackbar {
   0% {
-    transform: translate(200%, 0%);
+    transform: translateX(calc(100% + 32px));
+    opacity: 0;
   }
   100% {
-    transform: translate(0%, 0%);
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 .loader {
@@ -372,6 +390,7 @@ button {
   place-items: center;
   transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 button:hover {

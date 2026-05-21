@@ -95,6 +95,7 @@ CREATE TABLE limone.Produit (
     tva_produit numeric,
     produit_supprime boolean,
     vendeur_produit int,
+    nb_ventes_produit int,
 
     CONSTRAINT fk_produit FOREIGN KEY (vendeur_produit) REFERENCES limone.Vendeur(id_vendeur)
 );
