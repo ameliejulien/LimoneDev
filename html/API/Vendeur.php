@@ -18,6 +18,10 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "modification") {
     $retour=modificationVendeur($data);
     $data["reponse"] = $retour;
+
+} else if ($data["typeRequete"] == "modificationMdp") {
+    $retour=modificationMdpVendeur($data);
+    $data["reponse"] = $retour;  
 }
 
 
