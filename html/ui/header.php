@@ -31,7 +31,7 @@
             </a>
 
             <button class="header-burger" id="burger" aria-label="Ouvrir le menu">
-                <img src="img/navOpen.png" id="burger-img" alt="Menu" />
+                <img src="../ui/img/navOpen.png" id="burger-img" alt="Menu" />
             </button>
 
         </nav>
@@ -42,7 +42,7 @@
 
     <nav class="header-menu-lateral" id="menu-lateral">
         <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu">
-            <img src="img/navClose.png" alt="Fermer" />
+            <img src="../ui/img/navClose.png" alt="Fermer" />
         </button>
         <a href="#" class="header-menu-connexion">
             <i class="fa-regular fa-user"></i>
