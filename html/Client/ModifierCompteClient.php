@@ -100,13 +100,8 @@
       typeRequete: "modification"
     }
 
-<<<<<<< Updated upstream
     // fetch vers le dossier API de création client
     fetch("../API/Client.php", {
-=======
-    // Fetch vers le dossier API de création client
-    fetch("../API/CreerClient.php", {
->>>>>>> Stashed changes
       method: "POST",
       body: JSON.stringify(formData)
     })

@@ -84,7 +84,8 @@
       
       })
       .catch(err => {
-        console.error("Erreur :", err); 
+        console.error("Erreur :");
+        console.error(err);
       });
     });
 </script>

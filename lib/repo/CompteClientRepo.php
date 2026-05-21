@@ -103,7 +103,7 @@
                     "FROM Utilisateur ".
                     //"JOIN Client ON Utilisateur.id_utilisateur = Client.id_client ".
                     //"INNER JOIN Adresse on Client.addresse_client = Adresse.id_adresse ".
-                    "WHERE id_utilisateur = '{$idClient}';";
+                    "WHERE id_utilisateur = '{$idClient}' ;";
 
         $requetePreparee = $connectBDD->prepare($requete);
         $requetePreparee->execute();
@@ -135,7 +135,7 @@
         $connectBDD = connecterBDD();
 
         // Récupération de l'id adresse client
-        $requeteGetIdAdresse = "SELECT id_adresse FROM Adresse WHERE id_utilisateur = '{$idClient}' ;";
+        $requeteGetIdAdresse = "SELECT Adresse.id_adresse FROM Adresse INNER JOIN Adresse_Client ON Adresse.id_adresse = Adresse_Client.id_adresse INNER JOIN Client ON Client.id_client = Adresse_Client.id_utilisateur WHERE Client.id_client = '{$idClient}'";
         $requeteIdAdressePreparee = $connectBDD->prepare($requeteGetIdAdresse);
         $requeteIdAdressePreparee->execute();
         $rowAdresse = $requeteIdAdressePreparee->fetch(PDO::FETCH_ASSOC);

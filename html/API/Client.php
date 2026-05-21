@@ -24,9 +24,8 @@ if ($data["typeRequete"] == "creation") {
     $retour = modificationMdpClient($data);
     $data["reponse"] = $retour;
 } else if ($data["typeRequete"] == "modification") {
-    $retour=modifierClientBDD($data);
+    $retour = modifierClientBDD($data);
     $data["reponse"] = $retour;
-    ajouterClientCookie($data);
 }
 
 // code de la réponse + envoi du tableau data (réponse HTTP)
