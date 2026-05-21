@@ -19,7 +19,7 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Profil</h1>
-  <form method="POST">
+  <form class="formulaire" method="POST">
 
     <div class="divForm">
       <label for="picture">Photo de profil</label>

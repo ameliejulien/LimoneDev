@@ -17,7 +17,7 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Modification du mot de  passe vendeur</h1>
-  <form method="POST">
+  <form method="POST" class="formulaire">
     
   <div class="divForm">
       <label for="mail">Mot de passe</label>

@@ -11,7 +11,7 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte client</h1>
-  <form method="POST">
+  <form class="formulaire" method="POST">
     <div class="divForm">
       <label for="mail">Adresse mail</label>
       <input type="email" name="mail" required>

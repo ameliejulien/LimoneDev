@@ -10,7 +10,7 @@ body{
     flex-direction: column;
 }
 
-form{
+.formulaire{
     border:solid;
     border-radius: 10px;
     display: flex;

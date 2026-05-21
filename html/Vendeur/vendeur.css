@@ -14,7 +14,7 @@ body{
 
 }
 
-form{
+.formulaire{
     border:solid;
     border-radius: 10px;
     display: flex;

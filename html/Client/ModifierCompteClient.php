@@ -17,7 +17,7 @@
   <body>
     <?php require_once '../ui/header.php'; ?>
     <h1>Profil</h1>
-    <form method="POST" action="ConsulterCompteClient.php">
+    <form method="POST" action="ConsulterCompteClient.php" class="formulaire">
 
       <div class="divForm">
         <label for="picture">Photo de profil</label>

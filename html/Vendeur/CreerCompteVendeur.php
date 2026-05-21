@@ -11,7 +11,7 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte vendeur</h1>
-  <form method="POST">
+  <form method="POST" class="formulaire">
     <div class="divForm">
       <label for="mail">Adresse mail</label>
       <input type="email" name="mail" required placeholder=" exemple : test@vendeur.fr">

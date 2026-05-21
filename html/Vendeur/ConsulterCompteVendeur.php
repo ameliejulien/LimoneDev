@@ -16,7 +16,7 @@
   <body>
     <?php require_once '../ui/header.php'; ?>
     <h1>Profil Vendeur</h1>
-    <form>
+    <form class="formulaire">
       <div class="consultDiv">
         <label>Dénomination : </label>
         <span> <?= $infosVendeur[0]['denomination_vendeur'];?> </span>
