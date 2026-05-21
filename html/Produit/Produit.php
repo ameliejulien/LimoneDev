@@ -5,9 +5,8 @@
 
     $produit = $id > 0 ? recupererProduitParId($id) : recupererPremierProduit();
 
-
     if (!$produit) {
-        header('Location: Catalogue.php');
+        header('Location: Catalogue');
         exit;
     }
 
