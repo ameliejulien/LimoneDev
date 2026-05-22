@@ -40,41 +40,49 @@ $prixTotal = 0;
                 if ($art["id_produit"] == $produitId) {
                     $prixTotal = $prixTotal + ($art["prix_ht_produit"] * $quantiteProduit); ?>
 
-                    <div class="article-container" id="article-id-<?=$art["id_produit"]?>">
+                    <div class="article-container" id="article-id-<?= $art["id_produit"] ?>">
                         <div class="article-grid">
 
                             <div class="article-image">
-                                <img src=<?= $art['photo_produit'] ? "../imagesProduits/" . $art['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="image">
+                                <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
+                                    <img src=<?= $art['photo_produit'] ? "../imagesProduits/" . $art['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="image">
+                                </a>
                             </div>
 
-                            <h3 class="article-name"><?= $art["nom_produit"] ?></h3>
+                            <h3 class="article-name">
+                                <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
+                                    <?= $art["nom_produit"] ?>
+                                </a>
+                            </h3>
 
                             <span class="article-description">
-
-                                <?= $art["description_produit"] ?>
-
+                                <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
+                                    <?= $art["description_produit"] ?>
+                                </a>
                             </span>
 
                             <div class="article-price">
-                                 <span>Quantité : <?= $quantiteProduit ?></span>
-                                 <br>
-                                <span><?= $art["prix_ht_produit"]*1.2 ?>€ x <?= $quantiteProduit ?> = <?= $art["prix_ht_produit"]*1.2*$quantiteProduit ?>€</span>
+                                <span>Quantité : <?= $quantiteProduit ?></span>
+                                <br>
+                                <span><?= $art["prix_ht_produit"] * 1.2 ?>€ x <?= $quantiteProduit ?> =
+                                    <?= $art["prix_ht_produit"] * 1.2 * $quantiteProduit ?>€</span>
                                 <button onclick="supprimerArticleDuPanier(<?= $art['id_produit'] ?>)">Supprimer</button>
                             </div>
                         </div>
                     </div>
-                <?php 
+                    <?php
                 }
             }
         }
         ?>
 
         <form class="panier-options" action="/Paiement">
-            <h3>Prix avec TVA : <?= $prixTotal*1.2?>€</h3>
+            <h3>Prix avec TVA : <?= $prixTotal * 1.2 ?>€</h3>
             <button type="submit">Payer</button>
         </form>
     </div>
 </body>
 
 <script src="/Panier/script.js"></script>
+
 </html>

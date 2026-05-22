@@ -44,6 +44,11 @@ h3 {
 .article-container {
   padding: 1em;
 }
+.article-container a {
+  color: inherit;
+  text-decoration: none;
+  display: inline;
+}
 
 .article-description {
   font-size: 1em;
