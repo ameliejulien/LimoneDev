@@ -510,6 +510,7 @@ button {
     transition: background .2s, transform .15s;
     flex-shrink: 0;
     cursor: pointer;
+    font-family: var(--police-generale);
   }
 
 button:hover { background: var(--vert-fonce); transform: scale(1.06); }
