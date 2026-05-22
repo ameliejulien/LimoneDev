@@ -27,7 +27,7 @@
         <?php endif; ?>
 
         <!-- Barre de recherche -->
-        <?php if (!$typeUtilisateur !== 2): ?>
+        <?php if ($typeUtilisateur !== 2): ?>
         <form class="header-recherche" role="search" method="get">
             <button type="submit" class="header-recherche-bouton" aria-label="Lancer la recherche">
                 <i class="fa-solid fa-magnifying-glass"></i>

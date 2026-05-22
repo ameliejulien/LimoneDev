@@ -76,7 +76,7 @@
         console.log(json);      // test affichage retour
         if (json.reponse == 200) {
           alert("Compte créé !"); // alert de la création du compte
-          window.location.href = "ConnexionCompteClient.php";
+          window.location.href = "/Connexion/";
         
         } else if (json.reponse == 409) {
           afficherSnackBar('Notification','Echec de création de compte : email déjà utilisé !');
