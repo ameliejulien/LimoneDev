@@ -1,6 +1,4 @@
-<head>
-    <link rel="stylesheet" href="../Global.css">
-</head>
+
 <footer class="footer">
     <div class="footer-interieur">
         <?php if ($typeUtilisateur !== 2): ?>
