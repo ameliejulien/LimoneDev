@@ -50,7 +50,7 @@ function validerPaiement() {
         }
 
         $panier = getPanierArticles((array) getPanierIDs());
-        $quantiteMap = array_count_values((array) json_decode($_COOKIE['panier']));
+        $quantiteMap = array_count_values(getPanierIDs());
 
         // Crée une commande
         $commandeId = enregistrerCommande();

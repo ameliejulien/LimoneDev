@@ -16,8 +16,8 @@ function ajouterProduitToCookie(int $produitId, int $qte = 1)
 
     if (!$produitSupprime) {
         // Save dans les cookies
-        if (isset($_COOKIE['panier'])) { // cookie déjà créé
-            $listeProduit = (array) json_decode($_COOKIE['panier']);
+        if (!isset($_COOKIE['panier'])) { // cookie déjà créé
+            $listeProduit = (array) getPanierIDs();
         }
 
         for ($i=0; $i < $qte; $i++) { 
@@ -37,7 +37,7 @@ function ajouterProduitToCookie(int $produitId, int $qte = 1)
 function supprimerProduitDesCookies(int $produitId)
 {
     if ($_COOKIE['panier'] != null) {
-        $listeProduit = (array) json_decode($_COOKIE['panier']);
+        $listeProduit = (array) getPanierIDs();
 
         $nouvelListProduit = [];
 
@@ -59,7 +59,7 @@ function supprimerProduitDesCookies(int $produitId)
  */
 function validerPanier()
 {
-    $listeProduit = (array) json_decode($_COOKIE['panier']);
+    $listeProduit = (array) getPanierIDs();
 
     // Recupére la table des produits pour vérifier si tous les produits du panier sont présent dans la BDD
     $tousLesProduitsBDD = getTousLesProduitsBDD();
