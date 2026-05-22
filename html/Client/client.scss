@@ -37,7 +37,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 3em;
-    margin: 0;
+    margin-bottom: 1em;
     padding: 2em 5em;
     width: fit-content;
     font-family: var(--police-generale);
@@ -107,6 +107,7 @@ input.submit:active {
 }
 
 p,
-input.submit {
+input.submit,
+.divBtnForm button.buttonForm {
     font-family: var(--police-generale);
 }
