@@ -74,10 +74,10 @@
       <span> <?= $infosClient[0]['ville_adresse'] == NULL ? "Ville non renseignée" : $infosClient[0]['ville_adresse'] ?>
       </span>
     </div>
-    <a href="ModifierCompteClient.php"><input type="button" value="Modifier" /></a>
-    <a href="ModifierMdpClient.php"><input type="button" value="Modifier le mot de passe" /></a>
 
     <div class="divBtnForm">
+      <button type="button" class="buttonForm" onclick="window.location.href='ModifierCompteClient.php'">Modifier Compte</button>
+      <button type="button" class="buttonForm" onclick="window.location.href='ModifierMdpClient.php'">Modifier mot de passe</button>
       <button type="button" class="buttonForm decoBtn">Déconnexion</button>
     </div>
   </form>

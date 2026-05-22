@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/Connexion/connexion.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <title>Compte Client</title>
+  <title>Connexion au compte</title>
 </head>
 <body>
 

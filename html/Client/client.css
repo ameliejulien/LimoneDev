@@ -94,4 +94,10 @@ input.submit:hover {
 
 input.submit:active {
   transform: scale(0.96);
+}
+
+.divBtnForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }/*# sourceMappingURL=client.css.map */
