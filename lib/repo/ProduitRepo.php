@@ -18,7 +18,7 @@ function trouverLesProduits(): array {
     $PDO = connecterBDD();
 
     $query = "
-    SELECT * 
+    SELECT *, produit.id_produit
     FROM produit 
     INNER JOIN categorie_produit on produit.id_produit = categorie_produit.id_produit
     INNER JOIN categorie on categorie_produit.id_categorie = categorie.id_categorie

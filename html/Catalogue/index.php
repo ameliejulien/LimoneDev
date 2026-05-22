@@ -36,6 +36,17 @@ $vendeurs = recupererLesVendeurs();
             <p class="snackbarText"></p>
         </div>
 
+        <section class="presentation">
+            <div class="container">
+                <h1>Le meilleur de la <span class="accent">Bretagne</span>, en un seul panier.</h1>
+                <p class="lead">Pâtisseries, boissons, déco, coffrets — sélectionnés auprès de coopératives et producteurs locaux.</p>
+                <div class="presentation-stats">
+                    <div class="stat"><i class="fa-solid fa-leaf"></i> <span><strong>100%</strong> origine Bretagne</span></div>
+                    <div class="stat"><i class="fa-solid fa-truck-fast"></i> <span>Expédition sous <strong>48h</strong></span></div>
+                </div>
+            </div>
+        </section>
+
         <div class="main-frame">
             <div class="card">
                 <div>

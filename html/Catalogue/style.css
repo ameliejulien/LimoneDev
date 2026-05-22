@@ -26,6 +26,62 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* Présentation du site */
+
+.presentation {
+  background: var(--beige-clair);
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+}
+
+.presentation .container {
+  padding-block: 36px 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.presentation h1 {
+  font-family: var(--police-soustitre);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin: 0 0 6px;
+  color: var(--encre);
+  letter-spacing: 0.01em;
+}
+.presentation h1 .accent { color: var(--vert-fonce); }
+.presentation .lead {
+  font-family: var(--police-soustitre);  
+  font-size: 1.05rem;
+  color: var(--encre-claire);
+  max-width: 640px;
+  margin: 0;
+}
+
+.presentation-stats {
+  display: flex;
+  gap: 28px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.presentation-stats .stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--encre-claire);
+}
+.presentation-stats .stat i {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  color: var(--vert-fonce);
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+}
+.presentation-stats .stat strong { color: var(--encre); font-weight: 700; }
+
 /* div principal */
 
 .main-frame {
