@@ -399,7 +399,6 @@ body {
   height: 60px;
   -o-object-fit: contain;
      object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 .footer .footer-copyright {
   font-family: "Farro", sans-serif;

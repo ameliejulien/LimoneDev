@@ -385,7 +385,7 @@ body {
   background-color: #208068;
   width: 100%;
   padding: 20px 24px;
-  margin-top: 2em;
+  margin-top: 3em;
 }
 .footer .footer-interieur {
   display: flex;
@@ -399,7 +399,6 @@ body {
   height: 60px;
   -o-object-fit: contain;
      object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 .footer .footer-copyright {
   font-family: "Farro", sans-serif;
