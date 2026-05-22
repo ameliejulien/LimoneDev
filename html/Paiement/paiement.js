@@ -73,7 +73,7 @@ function validerFormulaire() {
 }
 
 // Récupère le html entity du formulaire
-var form = document.querySelector('form');
+const form = document.getElementsByClassName('formPaiement')[0];
 
 // Ajoute un écouteur pour récuperer le moment ou l'utilisateur soumet le formulaire
 form.addEventListener('submit', function (event) {

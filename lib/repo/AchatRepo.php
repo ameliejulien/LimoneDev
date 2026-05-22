@@ -23,7 +23,7 @@ function enregistrerAchat(String $commandeId, String $produitId, String $facture
         
     } else {
         $query = 
-        "INSERT INTO Facture(id_commande, 
+        "INSERT INTO Achat(id_commande, 
                              id_produit, 
                              id_facture)
         VALUES (:commandeId, 

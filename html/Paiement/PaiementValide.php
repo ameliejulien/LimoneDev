@@ -6,15 +6,17 @@
     <link rel="stylesheet" href="paiement.css">
     <title>Paiement validé</title>
 </head>
-<main>
-    <?php 
-    require('../ui/header.php');
-    require('../../lib/service/ServicePaiement.php');
-    if (validerPaiement()) { ?>
-        <h1>Paiement vaildé</h1>
-    <?php } else {?>
-        <h1>Paiement refusé</h1>
-    <?php } ?>
-</main>
-
+<body>
+    <?php require('../ui/header.php'); ?>
+    <main>
+        <?php 
+        require('../../lib/service/ServicePaiement.php');
+        if (validerPaiement()) { ?>
+            <h1>Paiement vaildé</h1>
+        <?php } else {?>
+            <h1>Paiement refusé</h1>
+        <?php } ?>
+        <button onclick="location.href = '../Catalogue'">Retourner au catalogue</button>
+    </main>
+</body>
 </html>

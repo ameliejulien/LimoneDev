@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/Paiement/paiement.css">
     <title>Paiement</title>
 </head>
+<?php require('../ui/header.php'); ?>
 <main>
     <h1>Paiement</h1>
-    <form method="POST" action="/Paiement/PaiementValide.php">
+    <form method="POST" class="formPaiement" action="/Paiement/PaiementValide.php">
         <div class="divForm form-contact">
             <h2 class="category-titre">Contact</h2>
             <div class="input-group prenom-input">
@@ -23,7 +25,7 @@
 
             <div class="input-group mail-input">
                 <label for="email">Adresse mail</label>
-                <input type="email" name="email" id="mail" required pattern="[a-z]+@[a-z]+\.[a-z]+" placeholder="example@example.com">
+                <input type="email" name="email" id="mail" required pattern="[a-zA-Z0-9\.\-]+@[a-zA-Z0-9\-\.]+\.[a-z]+" placeholder="example@example.com">
             </div>
 
             <div class="input-group tel-input">

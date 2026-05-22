@@ -26,26 +26,26 @@ function validerPaiement() {
         // Todo Verification plus profonde : chaque champs un par un
 
         // Verifie le format de l'email
-        $regex = "[a-zA-Z\.\-]*@.*";
-        if (preg_match($regex, $_POST['email']) > 1) {
+        $regex = '/^[a-zA-Z0-9.\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/';
+        if (preg_match($regex, $_POST['email']) !== 1) {
             return false;
         }
 
         // Verifie le format du numero de telephone
-        $regex = "0[0-9] ?([0-9]{2} ?){4}";
-        if (preg_match($regex, $_POST['telephone']) > 1) {
+        $regex = '/^0[0-9]( ?[0-9]{2}){4}$/';
+        if (preg_match($regex, $_POST['telephone']) !== 1) {
             return false;
         }
 
         // Verifie le format de la carte de paiement
-        $regex = "[0-9]{16}";
-        if (preg_match($regex, $_POST['carteBancaire']) > 1) {
+        $regex = '/^[0-9]{16}$/';
+        if (preg_match($regex, $_POST['carteBancaire']) !== 1) {
             return false;
         }
 
-        // Verifie le format de la carte de paiement
-        $regex = "[0-9]{3}";
-        if (preg_match($regex, $_POST['codeSecretCB']) > 1) {
+        // Verifie le format du code secret CB
+        $regex = '/^[0-9]{3}$/';
+        if (preg_match($regex, $_POST['codeSecretCB']) !== 1) {
             return false;
         }
 
