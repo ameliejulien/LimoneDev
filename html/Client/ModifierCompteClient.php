@@ -28,7 +28,7 @@
           } else if (!empty($imgData)) {
               $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
           } else {
-              $imgSrc = "../../images/image-none.jpg";
+              $imgSrc = "../../imagesProduits/image-none.jpg";
           }
         ?>
         <img id="changementImage" src="<?= $imgSrc ?>" alt="Photo de profil" class="profile-picture" width="200" height="200">
@@ -66,6 +66,9 @@
       </div>
       <input type="submit" value="Enregistrer les modifications" class="submit"/>
       <a href="ConsulterCompteClient.php"><input type="button" value="Annuler"/></a>
+      <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Modifier Compte</button>
+
+      
     </form>
   </body>
 </html>

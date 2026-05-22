@@ -30,7 +30,7 @@
         } elseif (!empty($imgData)) {
             $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
         } else {
-            $imgSrc = "../../images/image-none.jpg";
+            $imgSrc = "../../imagesProduits/image-none.jpg";
         }
       ?>
       <img src="<?= $imgSrc ?>" alt="Photo de profil" class="profile-picture" width="200" height="200">

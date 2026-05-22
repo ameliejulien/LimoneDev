@@ -11,7 +11,7 @@
 <body>
 
   <?php require_once '../ui/header.php'; ?>
-  <h1>Connexion au compte client</h1>
+  <h1>Connexion</h1>
   <form class="formulaire" method="POST">
     <div class="divForm">
       <label for="mail">Adresse mail</label>

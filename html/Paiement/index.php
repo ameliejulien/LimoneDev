@@ -86,7 +86,7 @@
             <div class="input-group code-postal-fac-input">
                 <label for="codePostalFacturation">Code postal de facturation</label>
                 <input type="text" name="codePostalFacturation" id="codepostalfac" pattern="[0-9]{5}" required
-                    value="<?= $infosClient[0]['code_postal_adresse'] == NULL ? "Adresse non rensignée" : $infosClient[0]['code_postal_adresse'] ?>"
+                    value="<?= $infosClient[0]['code_postal_adresse'] == NULL ? "" : $infosClient[0]['code_postal_adresse'] ?>"
                 >
             </div>
         </div>
