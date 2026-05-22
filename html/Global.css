@@ -385,6 +385,7 @@ body {
   background-color: #208068;
   width: 100%;
   padding: 20px 24px;
+  margin-top: 3em;
 }
 .footer .footer-interieur {
   display: flex;
