@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "../Global.css";
 .panier,
 .article-grid,
@@ -106,4 +107,31 @@ body {
 }
 .panier-options * {
   margin: auto 10px;
+}
+
+/**
+RESPONSIVITÉ
+ */
+@media (max-width: 800px) {
+  .article-image img {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  .article-image {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .article-name {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .article-description {
+    grid-row: 3;
+    grid-column: 1;
+  }
+  .article-price {
+    grid-row: 4;
+    grid-column: 1;
+    font-size: 1em;
+  }
 }/*# sourceMappingURL=style.css.map */

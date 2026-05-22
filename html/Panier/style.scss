@@ -13,6 +13,8 @@ $font-size-article-name: 1.5em;
 $font-size-article-description: 1em;
 $font-size-article-price: 1.5em;
 
+$resp-font-article-price: 1em;
+
 $padding-card: 1em;
 $padding-panier: 2em 5em;
 $padding-article-grid: 2em 2em;
@@ -33,6 +35,15 @@ $grid-column-number-price: 3;
 $grid-row-start-image: 1;
 $grid-row-end-image: 4;
 $grid-column-number-image: 1;
+
+$resp-grid-columns: 1fr;
+
+$resp-row-image: 1;
+$resp-row-name: 2;
+$resp-row-desc: 3;
+$resp-row-price: 4;
+
+$resp-columns: 1;
 
 $panier-max-width: 80%;
 $image-max-width: 300px;
@@ -131,6 +142,7 @@ h3 {
 }
 
 .image {
+
   max-width: $image-max-width;
   max-height: $image-max-height;
 }
@@ -155,3 +167,36 @@ body {
   }
 }
 
+/**
+RESPONSIVITÉ
+ */
+
+@media (max-width: 800px) {
+  .article-image img {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .article-image {
+    grid-row: $resp-row-image;
+    grid-column: $resp-columns;
+  }
+
+  .article-name {
+    grid-row: $resp-row-name;
+    grid-column: $resp-columns;
+
+  }
+
+  .article-description {
+    grid-row: $resp-row-desc;
+    grid-column: $resp-columns;
+  }
+
+  .article-price {
+    grid-row: $resp-row-price;
+    grid-column: $resp-columns;
+    font-size: $resp-font-article-price;
+  }
+
+}
