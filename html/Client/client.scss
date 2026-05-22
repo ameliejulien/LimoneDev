@@ -105,3 +105,8 @@ input.submit:active {
     gap: 0.5em;
     font-family: var(--police-generale)
 }
+
+p,
+input.submit {
+    font-family: var(--police-generale);
+}
