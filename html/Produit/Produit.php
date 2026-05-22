@@ -158,6 +158,7 @@
 
             </section>
         </main>
+        <?php require '../ui/footer.php'; ?>
     </body>
     <script src="../js/produit.js"></script>
     <script src="../snackbar.js"></script>
