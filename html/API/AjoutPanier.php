@@ -8,7 +8,7 @@
     $fetchData = file_get_contents("php://input"); 
     $data = json_decode($fetchData, true);
     if (intval($data['id_produit']) !== 0) {
-        ajouterProduitToCookie($data['id_produit']);
+        ajouterProduitToCookie($data['id_produit'], $data['quantite']);
         // code de la réponse + envoi du tableau data (réponse HTTP)
         http_response_code(200);
     } else {

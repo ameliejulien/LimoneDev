@@ -185,7 +185,7 @@ $vendeurs = recupererLesVendeurs();
 
                 fetch('../API/AjoutPanier.php', {
                     method: 'POST',
-                    body: JSON.stringify({ id_produit: e.currentTarget.getAttribute('id_produit') })
+                    body: JSON.stringify({ id_produit: e.currentTarget.getAttribute('id_produit'), quantite: 1 })
                 }).then(response => {
                     if (response.status === 200) {
                         afficherSnackBar('Succes', 'Le produit a été ajouté au panier avec succès');

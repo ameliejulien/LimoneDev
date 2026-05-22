@@ -8,10 +8,11 @@ $utilisateurId = null;
  * Prend en paramètre un produit déjà initialisé
  * @param int $produitId La variable produitId qui est à ajouter
  */
-function ajouterProduitToCookie(int $produitId)
+function ajouterProduitToCookie(int $produitId, int $qte = 1)
 {
     // Verifier si l'article existe
     $produitSupprime = getStatusDuProduit($produitId);
+    $listeProduit = [];
 
     if (!$produitSupprime) {
         // Save dans les cookies
@@ -19,7 +20,9 @@ function ajouterProduitToCookie(int $produitId)
             $listeProduit = (array) json_decode($_COOKIE['panier']);
         }
 
-        $listeProduit[] = $produitId;
+        for ($i=0; $i < $qte; $i++) { 
+            $listeProduit[] = $produitId;
+        }
 
         // Modifie la liste de produit dans le cookie
         setcookie('panier', json_encode($listeProduit), time() + 3*24*60*60, "/");
