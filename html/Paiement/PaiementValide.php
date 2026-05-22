@@ -12,7 +12,7 @@
         <?php 
         require('../../lib/service/ServicePaiement.php');
         if (validerPaiement()) { ?>
-            <h1>Paiement vaildé</h1>
+            <h1>Paiement validé</h1>
         <?php } else {?>
             <h1>Paiement refusé</h1>
         <?php } ?>
