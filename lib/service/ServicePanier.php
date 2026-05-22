@@ -90,7 +90,7 @@ function validerPanier()
 
 function getPanierIDs()
 {
-    if (isset($_COOKIE['paner'])) {
+    if (isset($_COOKIE['panier'])) {
         return (array) json_decode($_COOKIE['panier']);
     } else {
         return [];
