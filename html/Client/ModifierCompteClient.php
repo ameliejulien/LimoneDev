@@ -65,8 +65,7 @@
         <input type="text" name="ville" required value="<?= $infosClient[0]['ville_adresse'];?>">
       </div>
       <input type="submit" value="Enregistrer les modifications" class="submit"/>
-      <a href="ConsulterCompteClient.php"><input type="button" value="Annuler"/></a>
-      <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Modifier Compte</button>
+      <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Annuler</button>
 
       
     </form>
