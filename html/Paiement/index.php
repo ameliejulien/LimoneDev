@@ -1,3 +1,10 @@
+<?php
+    require_once("../../lib/service/ServiceClient.php");
+
+    $infosClient=recupererInfosClient()
+
+?>
+
 <html>
 
 <head>
@@ -15,7 +22,8 @@
             <h2 class="category-titre">Contact</h2>
             <div class="input-group prenom-input">
                 <label for="prenom">Prénom</label>
-                <input type="text" name="prenom" id="prenom" required>
+                <input type="text" name="prenom" id="prenom" required 
+                value =>
             </div>
 
             <div class="input-group nom-input">
@@ -25,12 +33,16 @@
 
             <div class="input-group mail-input">
                 <label for="email">Adresse mail</label>
-                <input type="email" name="email" id="mail" required pattern="[a-zA-Z0-9\.\-]+@[a-zA-Z0-9\-\.]+\.[a-z]+" placeholder="example@example.com">
+                <input type="email" name="email" id="mail" required pattern="[a-zA-Z0-9\.\-]+@[a-zA-Z0-9\-\.]+\.[a-z]+" placeholder="example@example.com"
+                value=" <?= $infosClient[0]['email_utilisateur'] == NULL ? "" : $infosClient[0]['email_utilisateur'] ?>"
+                >
             </div>
 
             <div class="input-group tel-input">
                 <label for="telephone">Numéro de téléphone</label>
-                <input type="tel" name="telephone" id="numtel" required placeholder="Format : 0123456789">
+                <input type="tel" name="telephone" id="numtel" required placeholder="Format : 0123456789"
+                    value="<?= $infosClient[0]['telephone_utilisateur'] == NULL ? "" : $infosClient[0]['telephone_utilisateur'] ?>"
+                >
             </div>
         </div>
 
@@ -38,32 +50,44 @@
             <h2 class="category-titre">Livraison</h2>
             <div class="input-group adresse-input">
                 <label for="adressePostal">Adresse postale</label>
-                <input type="text" name="adressePostal" id="adresse" required>
+                <input type="text" name="adressePostal" id="adresse" required
+                    value = "<?= $infosClient[0]['adresse'] == NULL ? "" : $infosClient[0]['adresse'] ?>"
+                >
             </div>
 
             <div class="input-group ville-input">
                 <label for="ville">Ville</label>
-                <input type="text" name="ville" id="ville" required>
+                <input type="text" name="ville" id="ville" required 
+                    value="<?= $infosClient[0]['ville_adresse'] == NULL ? "" : $infosClient[0]['ville_adresse'] ?>"
+                >
             </div>
 
             <div class="input-group code-postal-input">
                 <label for="codePostal">Code postal</label>
-                <input type="text" name="codePostal" id="codepostal" pattern="[0-9]{5}" required placeholder="00000">
+                <input type="text" name="codePostal" id="codepostal" pattern="[0-9]{5}" required placeholder="00000"
+                    value="<?= $infosClient[0]['code_postal_adresse'] == NULL ? "" : $infosClient[0]['code_postal_adresse'] ?>"
+                >
             </div>
 
             <div class="input-group adresse-fac-input">
                 <label for="adressePostalFacturation">Adresse de facturation</label>
-                <input type="text" name="adressePostalFacturation" id="adressefac" required>
+                <input type="text" name="adressePostalFacturation" id="adressefac" required 
+                    value = "<?= $infosClient[0]['adresse'] == NULL ? "" : $infosClient[0]['adresse'] ?>"
+                >
             </div>
 
             <div class="input-group ville-fac-input">
                 <label for="villeFacturation">Ville de facturation</label>
-                <input type="text" name="villeFacturation" id="villefac" required>
+                <input type="text" name="villeFacturation" id="villefac" required
+                    value="<?= $infosClient[0]['ville_adresse'] == NULL ? "" : $infosClient[0]['ville_adresse'] ?>"
+                >
             </div>
 
             <div class="input-group code-postal-fac-input">
                 <label for="codePostalFacturation">Code postal de facturation</label>
-                <input type="text" name="codePostalFacturation" id="codepostalfac" pattern="[0-9]{5}" required>
+                <input type="text" name="codePostalFacturation" id="codepostalfac" pattern="[0-9]{5}" required
+                    value="<?= $infosClient[0]['code_postal_adresse'] == NULL ? "Adresse non rensignée" : $infosClient[0]['code_postal_adresse'] ?>"
+                >
             </div>
         </div>
 

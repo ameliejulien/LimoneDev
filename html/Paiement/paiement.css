@@ -431,7 +431,7 @@ main h1 {
   width: -moz-fit-content;
   width: fit-content;
   font-family: "Farro", sans-serif, sans-serif;
-  background-color: #b3d3bc;
+  background-color: #FFFFFF;
 }
 .form-paiement .submit {
   padding: 0.3em;
@@ -573,4 +573,19 @@ input:invalid {
 
 .bouton-valider:active {
   transform: scale(0.96);
+}
+
+.formPaiement {
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 2em;
+  padding: 2em 5em;
+  gap: 1em;
+  margin: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: "Farro", sans-serif, sans-serif;
+  background-color: #FFFFFF;
 }/*# sourceMappingURL=paiement.css.map */
