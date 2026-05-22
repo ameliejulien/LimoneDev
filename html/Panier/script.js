@@ -18,7 +18,7 @@ form.addEventListener('submit', function (event) {
                     }
 
                 } else if (json['valides'].length == 0) {
-                    afficherSnackBar('Erreur', 'Une erreur est survenue');
+                    afficherSnackBar('Erreur', "Vous n'avez pas de produits dans votre panier");
                 } else {
                     form.submit();
                 }
@@ -28,3 +28,12 @@ form.addEventListener('submit', function (event) {
         }
     });
 });
+
+function supprimerArticleDuPanier(produitId) {
+    fetch('../API/SupprimerProduitDuPanier.php', {
+        method: "POST",
+        body: JSON.stringify(produitId)
+      }).then(response => {        
+        location.href = '../Panier'
+    });
+}

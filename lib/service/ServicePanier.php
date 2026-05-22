@@ -36,15 +36,17 @@ function supprimerProduitDesCookies(int $produitId)
     if ($_COOKIE['panier'] != null) {
         $listeProduit = (array) json_decode($_COOKIE['panier']);
 
+        $nouvelListProduit = [];
+
         // Passe à traver toutes valeurs de la liste de produit et supprime ceux qui sont égale au produit id
         for ($i = 0; $i < sizeof($listeProduit); $i++) {
-            if ($listeProduit[$i] == $produitId) {
-                unset($listeProduit[$i]);
+            if ($listeProduit[$i] != $produitId) {
+                $nouvelListProduit[] = $listeProduit[$i];
             }
         }
 
         // Sauvegarde le cookie avec le produit supprimer
-        setcookie('panier', json_encode($listeProduit));
+        setcookie('panier', json_encode($nouvelListProduit), time() + 3*24*60*60, "/");
     }
 }
 
