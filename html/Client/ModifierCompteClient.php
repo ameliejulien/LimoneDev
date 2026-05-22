@@ -116,16 +116,6 @@
     formData.append("code_postal_adresse", form.code.value);
     formData.append("ville_adresse", form.ville.value);
     formData.append("typeRequete", "modification");
-    // const formData = {
-    //   pp_utilisateur: form.picture.value,
-    //   nom_utilisateur: form.username.value,
-    //   email_utilisateur: form.mail.value,
-    //   telephone_utilisateur: form.phone.value,
-    //   adresse: form.address.value,
-    //   code_postal_adresse: form.code.value,
-    //   ville_adresse: form.ville.value,
-    //   typeRequete: "modification"
-    // }
 
     // fetch vers le dossier API de création client
     fetch("../API/Client.php", {

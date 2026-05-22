@@ -97,13 +97,6 @@
 
         $connectBDD = connecterBDD();
 
-        // $requete =  "SELECT DISTINCT pp_utilisateur, nom_utilisateur, email_utilisateur, ".
-        //             "telephone_utilisateur ". 
-        //             //"adresse, code_postal_adresse, ville_adresse ".
-        //             "FROM Utilisateur ".
-        //             //"JOIN Client ON Utilisateur.id_utilisateur = Client.id_client ".
-        //             //"INNER JOIN Adresse on Client.addresse_client = Adresse.id_adresse ".
-        //             "WHERE id_utilisateur = '{$idClient}' ;";
         $requete =  "SELECT u.pp_utilisateur, u.nom_utilisateur, u.email_utilisateur, u.telephone_utilisateur, " .
                 "a.adresse, a.code_postal_adresse, a.ville_adresse " .
                 "FROM limone.Utilisateur u " .

@@ -71,22 +71,6 @@ function connexionClient($client)
  */
 function recupererInfosClient()
 {
-    // // Vérifier l'existence du cookie
-    // if (!isset($_COOKIE['client']) || empty($_COOKIE['client'])) {
-    //     throw new Exception("Client non authentifié");
-    // }
-
-    // $client = json_decode($_COOKIE['client'], true);
-    
-    // // Vérifier que l'ID client existe
-    // // if (!isset($client['idClient']) || empty($client['idClient'])) {
-    // //     throw new Exception("ID client invalide");
-    // // }
-
-    // $idClient = $client["idClient"];
-
-    // $infos = trouverInfosClient($idClient);
-    // // return $infos;
 
     $idClient = null;
 
