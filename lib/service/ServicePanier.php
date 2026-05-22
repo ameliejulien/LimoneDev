@@ -16,7 +16,7 @@ function ajouterProduitToCookie(int $produitId, int $qte = 1)
 
     if (!$produitSupprime) {
         // Save dans les cookies
-        if ($_COOKIE['panier'] != null) { // cookie déjà créé
+        if (isset($_COOKIE['panier'])) { // cookie déjà créé
             $listeProduit = (array) json_decode($_COOKIE['panier']);
         }
 
