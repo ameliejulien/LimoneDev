@@ -1,0 +1,17 @@
+<head>
+    <link rel="stylesheet" href="../Global.css">
+</head>
+<footer class="footer">
+    <div class="footer-interieur">
+        <?php if ($typeUtilisateur !== 2): ?>
+            <a href="/Catalogue/index.php">
+                <img src="img/logo.png" alt="Logo Alizon" class="footer-logo" />
+            </a>
+        <?php else: ?>
+            <a href="/Catalogue/CatalogueVendeur.php">
+                <img src="img/logo.png" alt="Logo Alizon" class="footer-logo" />
+            </a>
+        <?php endif; ?>
+        <span class="footer-copyright">© <?= date('Y') ?> Alizon — Tous droits réservés</span>
+    </div>
+</footer>
