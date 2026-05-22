@@ -8,17 +8,15 @@
             $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
             $nbPanier = count($panier);
 
-            $clientConnecte = null;
-            $vendeurConnecte = null;
-            if (isset($_COOKIE['client']) && !empty($_COOKIE['client'])) {
-                $clientConnecte = json_decode($_COOKIE['client'], true);
-            } else if (isset($_COOKIE['vendeur']) && !empty($_COOKIE['vendeur'])) {
-                $vendeurConnecte = json_decode($_COOKIE['vendeur'], true);
+            $typeUtilisateur = null;
+            if (isset($_COOKIE['utilisateur']) && !empty($_COOKIE['utilisateur'])) {
+                $utilisateur = json_decode($_COOKIE['utilisateur'], true);
+                $typeUtilisateur = intval($utilisateur['typeUtilisateur']);
             }
         ?>
 
         <!-- Logo -->
-        <?php if (!$vendeurConnecte): ?>
+        <?php if ($typeUtilisateur !== 2): ?>
             <a href="/Catalogue/index.php" class="header-logo">
                 <img src="/ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
             </a>
@@ -29,7 +27,7 @@
         <?php endif; ?>
 
         <!-- Barre de recherche -->
-        <?php if (!$vendeurConnecte): ?>
+        <?php if (!$typeUtilisateur !== 2): ?>
         <form class="header-recherche" role="search" method="get">
             <button type="submit" class="header-recherche-bouton" aria-label="Lancer la recherche">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -42,17 +40,17 @@
         <!-- Actions utilisateur -->
         <nav class="header-actions" aria-label="Actions utilisateur">
 
-            <?php if ($vendeurConnecte): ?>
+            <?php if ($typeUtilisateur === 2): ?>
                 <!-- Vendeur connecté -->
                 <a href="/Vendeur/ConsulterCompteVendeur.php" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
-                    <span class="header-action-libelle"><?= htmlspecialchars($vendeurConnecte['mail']) ?></span>
+                    <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
                 </a>
-            <?php elseif ($clientConnecte): ?>
+            <?php elseif ($typeUtilisateur === 1): ?>
                 <!-- Client connecté -->
                 <a href="/Client/ConsulterCompteClient.php" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
-                    <span class="header-action-libelle"><?= htmlspecialchars($clientConnecte['mail']) ?></span>
+                    <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
                 </a>
             <?php else: ?>
                 <!-- Non connecté -->
@@ -66,7 +64,7 @@
             <?php endif; ?>
 
             <!-- Panier -->
-            <?php if ($clientConnecte): ?>
+            <?php if ($typeUtilisateur !== 2): ?>
                 <a href="/Panier/index.php" class="header-panier" aria-label="Mon panier">
                     <i class="fa-solid fa-basket-shopping"></i>
                     <span class="header-panier-compteur"><?= $nbPanier ?></span>
@@ -87,17 +85,17 @@
         <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu">
             <img src="/ui/img/navClose.png" alt="Fermer" />
         </button>
-        <?php if ($vendeurConnecte): ?>
+        <?php if ($typeUtilisateur === 2): ?>
             <!-- Vendeur connecté -->
             <a href="/Vendeur/ConsulterCompteVendeur.php" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
-                <span class="header-action-libelle"><?= htmlspecialchars($vendeurConnecte['mail']) ?></span>
+                <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
             </a>
-        <?php elseif ($clientConnecte): ?>
+        <?php elseif ($typeUtilisateur === 1): ?>
             <!-- Client connecté -->
             <a href="/Client/ConsulterCompteClient.php" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
-                <span class="header-action-libelle"><?= htmlspecialchars($clientConnecte['mail']) ?></span>
+                <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
             </a>
         <?php else: ?>
             <!-- Non connecté -->

@@ -191,7 +191,9 @@ $vendeurs = recupererLesVendeurs();
                         })
                     );
 
-                    document.querySelector('.header-panier-compteur').textContent = cookies.panier.length;
+                    if (cookies.panier) {
+                        document.querySelector('.header-panier-compteur').textContent = cookies.panier.length;
+                    }
                 });
             })
         });
@@ -268,7 +270,7 @@ $vendeurs = recupererLesVendeurs();
                 searchBar.value = searchParam;
 
                 produits.forEach(produit => {
-                    if ((produit.children[1].children[1].textContent.includes(searchParam.toLowerCase())) && produit.style.display !== 'none') {
+                    if ((produit.children[1].children[1].textContent.toLowerCase().includes(searchParam.toLowerCase())) && produit.style.display !== 'none') {
                         produit.style.display = '';
                     } else if (produit.style.display === 'none') {
                         produit.style.display = 'none';

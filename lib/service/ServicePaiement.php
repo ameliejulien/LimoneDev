@@ -84,8 +84,8 @@ function validerPaiement() {
 
             enreigstrerLigneCommande($commandeId, $articleId, $nomArticle, $quantite, $prixHt, $TVA);
 
-            if ($_COOKIE['client'] != null) {
-                $client = (array) json_decode($_COOKIE['client']);
+            if ($_COOKIE['utilisateur'] != null) {
+                $client = (array) json_decode($_COOKIE['utilisateur']);
                 enregistrerAchat($commandeId, $articleId, $factureId, $client["idClient"]);
             } else {
                 enregistrerAchat($commandeId, $articleId, $factureId);

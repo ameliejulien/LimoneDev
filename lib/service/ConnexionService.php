@@ -16,7 +16,7 @@
     ];
 
     setcookie(
-        $typeUtilisateur,
+        'utilisateur',
         json_encode($tab),
         time() + 3 * 24 * 60 * 60,
         "/"

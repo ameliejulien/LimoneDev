@@ -98,8 +98,8 @@ function creerCleeAuth()
  */
 function creerCookieVendeur($vendeur)
 {
-    if ($_COOKIE['vendeur'] != null) { // cookie déjà créé
-        $vendeur = json_decode($_COOKIE['vendeur'], true);
+    if ($_COOKIE['utilisateur'] != null) { // cookie déjà créé
+        $vendeur = json_decode($_COOKIE['utilisateur'], true);
     }
     error_log("vendeur reçu : " . var_export($vendeur, true));
     $id = getVendeurId($vendeur);
@@ -119,8 +119,8 @@ function creerCookieVendeur($vendeur)
 function recupererInfosVendeur()
 {
 
-    if ($_COOKIE['vendeur'] != null) { // cookie déjà créé
-        $vendeur = json_decode($_COOKIE['vendeur'], true);
+    if ($_COOKIE['utilisateur'] != null) { // cookie déjà créé
+        $vendeur = json_decode($_COOKIE['utilisateur'], true);
     }
     $idVendeur = $vendeur["idUtilisateur"];
     error_log("idVendeur : " . var_export($vendeur['idUtilisateur'] ?? null, true));
@@ -138,7 +138,7 @@ function modificationVendeur($vendeur)
 {
     // TODO : uniformiser les valeurs entre les CRU vendeur
     $existant = getVendeurId($vendeur);
-    $idVendeur = json_decode($_COOKIE['vendeur'], true)["idUtilisateur"];
+    $idVendeur = json_decode($_COOKIE['utilisateur'], true)["idUtilisateur"];
     if ($existant && $existant["id_vendeur"] != $idVendeur) {
         return 409;
     } else {
@@ -158,10 +158,10 @@ function modificationVendeur($vendeur)
  */
 function deconnecterVendeur()
 {
-    setcookie("vendeur", "", time() - 1, "/");
-    unset($_COOKIE["vendeur"]);
+    setcookie("utilisateur", "", time() - 1, "/");
+    unset($_COOKIE["utilisateur"]);
 
-    if (!isset($_COOKIE["vendeur"])) {
+    if (!isset($_COOKIE["utilisateur"])) {
         return 200;
     }
     return 400;

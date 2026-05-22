@@ -90,8 +90,8 @@ function recupererInfosClient()
 
     $idClient = null;
 
-    if ($_COOKIE['client'] != null) { // cookie déjà créé
-        $client = json_decode($_COOKIE['client'], true);
+    if ($_COOKIE['utilisateur'] != null) { // cookie déjà créé
+        $client = json_decode($_COOKIE['utilisateur'], true);
     }
     $idClient = $client["idUtilisateur"];
 
@@ -105,14 +105,14 @@ function recupererInfosClient()
  */
 function ajouterClientCookie($client)
 {
-    if ($_COOKIE['client'] != null) { // cookie déjà créé
-        $client = json_decode($_COOKIE['client'], true);
+    if (isset($_COOKIE['utilisateur'])) { // cookie déjà créé
+        $client = json_decode($_COOKIE['utilisateur'], true);
     }
 
     $id = getIdClient($client);
 
     $tab["mail"] = $client["mail"];
-    $tab["idClient"] = $id["id_client"];
+    $tab["idClient"] = $id["idUtilisateur"];
 
     // Modifie la liste de produit dans le cookie
     setcookie('client', json_encode($tab), time() + 32460 * 60, "/");
@@ -149,10 +149,10 @@ function modificationMdpClient($data)
  */
 function deconnecterClient()
 {
-    setcookie("client", "", time() - 1, "/");
-    unset($_COOKIE["client"]);
+    setcookie("utilisateur", "", time() - 1, "/");
+    unset($_COOKIE["utilisateur"]);
 
-    if (!isset($_COOKIE["client"])) {
+    if (!isset($_COOKIE["utilisateur"])) {
         return 200;
     }
     return 400;
@@ -164,7 +164,7 @@ function deconnecterClient()
 function modifierMdpClientBDD($mdp)
 {
     $connectBDD = connecterBDD();
-    $idClient = json_decode($_COOKIE['client'], true)['idUtilisateur'];
+    $idClient = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur'];
 
     $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
     $requeteUpdateClient = $connectBDD->prepare($requeteClient);
@@ -176,8 +176,8 @@ function modifierMdpClientBDD($mdp)
  */
 function obtenirIdClientConnecte()
 {
-    if (isset($_COOKIE['client']) && $_COOKIE['client'] != null) { 
-        $client = json_decode($_COOKIE['client'], true);
+    if (isset($_COOKIE['utilisateur']) && $_COOKIE['utilisateur'] != null) { 
+        $client = json_decode($_COOKIE['utilisateur'], true);
         return $client["idUtilisateur"] ?? null;
     }
     return null;
