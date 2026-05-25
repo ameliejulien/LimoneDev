@@ -26,7 +26,9 @@ INSERT INTO utilisateur
 VALUES
 ('breizhshop@contact.com','breizhShop', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0605040302),
 ('bretagneunivers@contact.com', 'bretagne_univers', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0708090100),
-('ievcorp@contact.com', 'IveCorp', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0203040506);
+('ievcorp@contact.com', 'IveCorp', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0203040506),
+('client.fidele@univ-rennes.fr', 'ClientFidele1', 'f330a8de424ca1cc4a1eb1657df23ba2db77dbdc69926ee0e5b50fade6b78f22', 1,0652696817),
+('pierre.infidele@elysee.fr', 'PierreElysee', '1f116a3a9395db65af6530fe06f710473362ae9f32f08ae8a6797fde1190e125', 1,0645281409);
 
 INSERT INTO vendeur
 (id_vendeur, denomination_vendeur, siret_vendeur, addresse_vendeur)
