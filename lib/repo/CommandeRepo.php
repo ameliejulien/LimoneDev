@@ -40,7 +40,7 @@ function enreigstrerLigneCommande(float $commandeId,
     $dbh = connecterBDD();
     $stmt = $dbh->prepare($query);
 
-    $stmt->bindValue(":commandeId", (int) $commandeId);
+    $stmt->bindValue(":commandeId", intval($commandeId));
     $stmt->bindValue(":produitId", $produitId);
     $stmt->bindValue(":nomProduit", $nomProduit);
     $stmt->bindValue(":quantite", $quantite);
