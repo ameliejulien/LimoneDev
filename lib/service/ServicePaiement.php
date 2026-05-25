@@ -86,7 +86,7 @@ function validerPaiement() {
 
             if ($_COOKIE['utilisateur'] != null) {
                 $client = (array) json_decode($_COOKIE['utilisateur']);
-                enregistrerAchat($commandeId, $articleId, $factureId, $client["idClient"]);
+                enregistrerAchat($commandeId, $articleId, $factureId, $client["idUtilisateur"]);
             } else {
                 enregistrerAchat($commandeId, $articleId, $factureId);
             }

@@ -16,7 +16,7 @@ function enregistrerCommande() {
     return $stmt->fetch(PDO::FETCH_ASSOC)["id_commande"];
 }
 
-function enreigstrerLigneCommande(int $commandeId, 
+function enreigstrerLigneCommande(float $commandeId, 
                                   String $produitId, 
                                   String $nomProduit, 
                                   int $quantite, 
@@ -40,7 +40,7 @@ function enreigstrerLigneCommande(int $commandeId,
     $dbh = connecterBDD();
     $stmt = $dbh->prepare($query);
 
-    $stmt->bindValue(":commandeId", $commandeId);
+    $stmt->bindValue(":commandeId", (int) $commandeId);
     $stmt->bindValue(":produitId", $produitId);
     $stmt->bindValue(":nomProduit", $nomProduit);
     $stmt->bindValue(":quantite", $quantite);
