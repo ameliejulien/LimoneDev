@@ -5,7 +5,7 @@ function trouverLesCategories() {
     
     $PDO = connecterBDD();
 
-    $query = "SELECT * 
+    $query = "SELECT id_categorie, nom_categorie
     FROM categorie
     ORDER BY nom_categorie;
     ";
@@ -18,7 +18,10 @@ function trouverLesProduits(): array {
     $PDO = connecterBDD();
 
     $query = "
-    SELECT *, produit.id_produit
+    SELECT produit.id_produit, produit.nom_produit, produit.description_produit,
+           produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit,
+           produit.promotion_produit, produit.reduction_produit, produit.tva_produit,
+           produit.produit_supprime, produit.vendeur_produit, produit.nb_ventes_produit
     FROM produit 
     INNER JOIN categorie_produit on produit.id_produit = categorie_produit.id_produit
     INNER JOIN categorie on categorie_produit.id_categorie = categorie.id_categorie
@@ -72,7 +75,10 @@ function trouverLesProduitsVendeur(): array {
 
 
     $query = "
-    SELECT * 
+    SELECT produit.id_produit, produit.nom_produit, produit.description_produit,
+           produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit,
+           produit.promotion_produit, produit.reduction_produit, produit.tva_produit,
+           produit.produit_supprime, produit.vendeur_produit, produit.nb_ventes_produit
     FROM produit 
     INNER JOIN categorie_produit on produit.id_produit = categorie_produit.id_produit
     INNER JOIN categorie on categorie_produit.id_categorie = categorie.id_categorie

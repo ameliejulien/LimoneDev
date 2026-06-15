@@ -100,7 +100,7 @@ function getNomProduit(string $id_produit)
     $productId = $produit->getProduitId();
 
     // todo finir la querry pour verifier si le produit est encore là
-    $query = "SELECT * from ";
+    $query = "";
 
     // todo Requete bdd pour verifier si le produit est encoer dans la bdd   
     $res = null;

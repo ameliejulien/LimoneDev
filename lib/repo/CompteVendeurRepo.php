@@ -241,10 +241,13 @@
         $rowVendeur = $requeteUpdateVendeur->execute();
     }
 
+    /**
+     * Renvoie un id_vendeur et une denomination_vendeur
+     */
     function trouverLesVendeurs() {
         $PDO = connecterBDD();
 
-        $query = "SELECT * FROM vendeur ORDER BY denomination_vendeur";
+        $query = "SELECT id_vendeur, denomination_vendeur FROM vendeur ORDER BY denomination_vendeur";
 
         return $PDO->query($query)->fetchall(); 
     }

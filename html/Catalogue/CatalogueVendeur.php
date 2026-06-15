@@ -9,8 +9,6 @@ $prixMin = (int) floor(min($prix));
 $prixMax = (int) ceil(max($prix));
 
 $categories = recupererLesCategories();
-
-$vendeurs = recupererLesVendeurs();
 ?>
 
 <!DOCTYPE html>
