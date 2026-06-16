@@ -36,6 +36,7 @@ CREATE TABLE limone.Type (
 -- ===========================
 CREATE TABLE limone.Utilisateur (
     id_utilisateur serial PRIMARY KEY,
+    uuid_utilisateur uuid DEFAULT uuidv7(),
     nom_utilisateur varchar(30),
     email_utilisateur varchar(320),
     telephone_utilisateur varchar(15),
@@ -44,17 +45,6 @@ CREATE TABLE limone.Utilisateur (
     type_utilisateur int,
 
     CONSTRAINT fk_utilisateur FOREIGN KEY(type_utilisateur) REFERENCES limone.Type(id_type)
-);
-
--- ================================
--- ======= Utilisateur UUID =======
--- ================================
-CREATE TABLE limone.Utilisateur_UUID (
-    id_utilisateur int,
-    uuid_utilisateur uuid DEFAULT uuidv7(),
-
-    CONSTRAINT pk_utilisateur_uuid PRIMARY KEY(id_utilisateur, uuid_utilisateur),
-    CONSTRAINT fk_utilisateur_uuid FOREIGN KEY(id_utilisateur) REFERENCES limone.Utilisateur(id_utilisateur)
 );
 
 -- ======================

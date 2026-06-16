@@ -216,8 +216,10 @@
     /**
      * @Brief modifie les informations du vendeur
      */
-    function modifierVendeurBDD($vendeur) {
-        $idVendeur = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur']; 
+    function modifierVendeurBDD($vendeur, ) {
+        // TODO : mettre la logique métier dans le service et faire une fonction par appel BDD
+
+        $idVendeur = trouverIDUtilisateur($_COOKIE('uuid')); 
         $connectBDD = connecterBDD();
         
         // récupréation de l'id de l'adresse
@@ -259,7 +261,7 @@
         $requeteUpdateUtilisateur->execute();
 
 
-        // MAJ de l'utilisateur
+        // MAJ du vendeur
         $requeteVendeur =   "UPDATE Vendeur SET denomination_vendeur = :denomination WHERE id_vendeur = :idVendeur";
         
         $requeteUpdateVendeur = $connectBDD->prepare($requeteVendeur);

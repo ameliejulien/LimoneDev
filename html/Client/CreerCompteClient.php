@@ -47,12 +47,12 @@
   </form>
 
   <p>Vous êtes vendeur ? : <a href="../Vendeur/CreerCompteVendeur.php">cliquez ici</a></p>
-  <!--<script src="../snackbar.js"></script> -->
+  <script src="../snackbar.js"></script>
   <script>
     const form = document.querySelector(".formulaire");
     // écouteur des requêtes du formulaire
     form.addEventListener("submit", function (event) {
-      
+        
       // empêche l'envoi du formulaire sans exécuter le code qui suit
       event.preventDefault(); 
 
@@ -71,21 +71,14 @@
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
-      .then(response => response.json())  // transforme la réponse http en json exploitable
-      .then(json => {
-        console.log(json);      // test affichage retour
-        if (json.reponse == 200) {
-          alert("Compte créé !"); // alert de la création du compte
-          window.location.href = "/Connexion/";
-        
-        } else if (json.reponse == 409) {
-          afficherSnackBar('Notification','Echec de création de compte : email déjà utilisé !');
-        
-        } else {
-          afficherSnackBar('Notification','Echec de création de compte !');
-        } 
-        
-      
+      .then(response => {
+          if (response.status == 201) {
+            window.location.href = "/Connexion/";
+          } else if (response.status == 409) {
+            afficherSnackBar('Notification','Echec de création de compte : email déjà utilisé !');
+          } else {
+            afficherSnackBar('Notification','Echec de création de compte !');
+          } 
       })
       .catch(err => {
         console.error("Erreur :");

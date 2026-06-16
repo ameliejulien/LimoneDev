@@ -1,9 +1,3 @@
-<?php
-    include '../../lib/service/ServiceClient.php';
-
-    $infosClient = recupererInfosClient();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -18,11 +12,15 @@
     <?php require_once '../ui/header.php'; ?>
     <h1>Profil</h1>
     <form method="POST" action="ConsulterCompteClient.php" class="formulaire">
-
+      
       <div class="divForm">
         <label for="picture">Photo de profil</label>
         <?php 
-          $imgData = $infosClient[0]['pp_utilisateur'];
+          include '../../lib/service/ServiceClient.php';
+          
+          $uuid = $_COOKIE['uuid'];
+          $infosClient = recupererInfosClient($uuid);
+          $imgData = $infosClient['pp_utilisateur'];
           if (is_resource($imgData)) {
               $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
           } else if (!empty($imgData)) {
@@ -37,32 +35,32 @@
 
       <div class="divForm">
         <label for="username">Nom d'utilisateur</label>
-        <input type="text" name="username" required value="<?= $infosClient[0]['nom_utilisateur'];?>">
+        <input type="text" name="username" required value="<?= $infosClient['nom_utilisateur'];?>">
       </div>
     
       <div class="divForm">
         <label for="mail">Adresse mail</label>
-        <input type="email" name="mail" required value="<?= $infosClient[0]['email_utilisateur'];?>">
+        <input type="email" name="mail" required value="<?= $infosClient['email_utilisateur'];?>">
       </div>
 
       <div class="divForm">
         <label for="phone">Numéro de téléphone</label>
-        <input type="tel" name="phone" required value="<?= $infosClient[0]['telephone_utilisateur'];?>">
+        <input type="tel" name="phone" required value="<?= $infosClient['telephone_utilisateur'];?>">
       </div>
       
       <div class="divForm">
         <label for="address">Adresse postale</label>
-        <input type="text" name="address" required value="<?= $infosClient[0]['adresse'];?>">
+        <input type="text" name="address" required value="<?= $infosClient['adresse'];?>">
       </div>
 
       <div class="divForm">
         <label for="code">Code postal</label>
-        <input type="text" name="code" required value="<?= $infosClient[0]['code_postal_adresse'];?>">
+        <input type="text" name="code" required value="<?= $infosClient['code_postal_adresse'];?>">
       </div>
 
       <div class="divForm">
         <label for="ville">Ville</label>
-        <input type="text" name="ville" required value="<?= $infosClient[0]['ville_adresse'];?>">
+        <input type="text" name="ville" required value="<?= $infosClient['ville_adresse'];?>">
       </div>
       <input type="submit" value="Enregistrer les modifications" class="submit"/>
       <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Annuler</button>
@@ -131,7 +129,6 @@
 
       // Compte modifié avec succès
       if (json.reponse == 200) {
-        alert("Compte modifié !");
         window.location.href = "ConsulterCompteClient.php";
         /*form.submit();*/
       }

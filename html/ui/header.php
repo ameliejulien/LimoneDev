@@ -1,17 +1,18 @@
-
 <!-- Ajouter dans le head :  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
 
 <header class="header">
     <div class="header-interieur">
-
+        
         <?php
+            require '../../lib/service/UtilisateurService.php';
+
             $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
             $nbPanier = count($panier);
-
+            
             $typeUtilisateur = null;
-            if (isset($_COOKIE['utilisateur']) && !empty($_COOKIE['utilisateur'])) {
-                $utilisateur = json_decode($_COOKIE['utilisateur'], true);
-                $typeUtilisateur = intval($utilisateur['typeUtilisateur']);
+            if (isset($_COOKIE['uuid']) && !empty($_COOKIE['uuid'])) {
+                $utilisateur = recupererInfosUtilisateur($_COOKIE['uuid']);
+                $typeUtilisateur = $utilisateur['type_utilisateur'];
             }
         ?>
 
@@ -44,13 +45,13 @@
                 <!-- Vendeur connecté -->
                 <a href="/Vendeur/ConsulterCompteVendeur.php" title="Mon compte vendeur" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
-                    <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
+                    <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['email_utilisateur']) ?></span>
                 </a>
             <?php elseif ($typeUtilisateur === 1): ?>
                 <!-- Client connecté -->
                 <a href="/Client/ConsulterCompteClient.php" title="Mon compte client" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
-                    <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
+                    <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['email_utilisateur']) ?></span>
                 </a>
             <?php else: ?>
                 <!-- Non connecté -->
@@ -89,13 +90,13 @@
             <!-- Vendeur connecté -->
             <a href="/Vendeur/ConsulterCompteVendeur.php" title="Mon compte vendeur" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
-                <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
+                <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['email_utilisateur']) ?></span>
             </a>
         <?php elseif ($typeUtilisateur === 1): ?>
             <!-- Client connecté -->
             <a href="/Client/ConsulterCompteClient.php" title="Mon compte client" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
-                <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
+                <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['email_utilisateur']) ?></span>
             </a>
         <?php else: ?>
             <!-- Non connecté -->

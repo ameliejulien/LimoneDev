@@ -47,25 +47,16 @@
         mail: form.mail.value,
         motDePasse : form.mdp.value,
       }
-      console.log("avant "+ JSON.stringify(formData))
 
       // fetch vers le dossier API de création client
       fetch("../API/Connexion.php", {
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
-      .then(response => response.json())  // transforme la réponse http en json exploitable
-      .then(json => {
-        console.log(json);      // test affichage retour
-        if (json.reponse == 200) {
-          afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
-          if (json["type_utilisateur"] == 2 ) {
-            window.location.href = "../Catalogue/CatalogueVendeur.php";
-          
-          } else if (json["type_utilisateur"] == 1 ) {
-            window.location.href = "../Catalogue";
-          }
-        
+      .then(response => {
+        if (response.status == 200) {
+          // afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
+          window.location.href = "../Catalogue";
         } else {
           afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion
         }

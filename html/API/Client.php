@@ -1,5 +1,6 @@
 <?php
 include "../../lib/service/ServiceClient.php";
+include "../../lib/service/ServiceUtilisateur.php";
 header('Content-Type: application/json');
 
 // décodage du fichier json envoyé
@@ -15,26 +16,14 @@ $retour = 500;
 // ajoute un cookie client
 if ($data["typeRequete"] == "creation") {
     $retour = confimerInscription($data);
-    $data["reponse"] = $retour;
-
-} else if ($data["typeRequete"] == "connexion") {
-    $retour = connexionClient($data);
-    $data["reponse"] = $retour;
-    ajouterClientCookie($data);
 } else if ($data["typeRequete"] == "deconnexion") {
-    $retour = deconnecterClient();
-    $data["reponse"] = $retour;
-
+    $retour = deconnecterUtilisateur();
 } else if ($data["typeRequete"] == "modificationMdp") {
     $retour = modificationMdpClient($data);
-    $data["reponse"] = $retour;
 } else if ($data["typeRequete"] == "modification") {
-    $idClient = obtenirIdClientConnecte();
-    $retour = modifierClientBDD($data, $_FILES, $idClient);
-    $data["reponse"] = $retour;
+    $data["reponse"] = modifierClientBDD($data, $_FILES);
 }
 
 // code de la réponse + envoi du tableau data (réponse HTTP)
 http_response_code($retour);
-echo json_encode($data);
 ?>

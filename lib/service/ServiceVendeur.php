@@ -166,22 +166,19 @@ function recupererInfosVendeur()
 
 /**
  * @Brief met à jour les informations du vendeur
- * @Return retourne un tableau contenant les informations du vendeur
+ * @Return int un tableau contenant les informations du vendeur
  */
 function modificationVendeur($vendeur)
 {
     // TODO : uniformiser les valeurs entre les CRU vendeur
-    $existant = getVendeurId($vendeur);
-    $idVendeur = json_decode($_COOKIE['utilisateur'], true)["idUtilisateur"];
-    if ($existant && $existant["id_vendeur"] != $idVendeur) {
-        return 409;
-    } else {
+
+    try {
         modifierVendeurBDD($vendeur);
+    } catch (Exception $e) {
+        return 500;
     }
 
     return 200;
-
-
 }
 
 

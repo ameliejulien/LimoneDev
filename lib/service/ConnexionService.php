@@ -1,26 +1,33 @@
 <?php
     include __DIR__ . '/../../connect_params.php';
-    include __DIR__ . '/../repo/ConnexionRepo.php';
+    include __DIR__ . '/../repo/UtilisateurRepo.php';
 
-    function connecter($data) {
-        $data["motDePasse"] = hash('sha256', $data["motDePasse"]);
-        return connexionBDD($data);
-    }   
+    function connexion($mail, $mdp): int {
+        try {
+            $mail = strtolower($mail);
+            $mdp = hash('sha256', $mdp);
+            $uuid = trouverUUID($mail, $mdp);
 
-    function creerCookieConnexion($data, $typeUtilisateur) {
-    
-    $tab = [
-        "mail" => $data["email_utilisateur"],
-        "idUtilisateur" => $data["id_utilisateur"],
-        "typeUtilisateur" => $data["type_utilisateur"]
-    ];
+            if ($uuid) {
+                creerCookieConnexion($uuid);
+            } else {
+                return 400;
+            }
+        } catch (Exception $e) {
+            return 500;
+        }
 
-    setcookie(
-        'utilisateur',
-        json_encode($tab),
-        time() + 3 * 24 * 60 * 60,
-        "/"
-    );
-}
+        return 200;
+    }
+
+    function creerCookieConnexion($uuid) {
+
+        setcookie(
+            'uuid',
+            $uuid,
+            time() + 3 * 24 * 60 * 60,
+            "/"
+        );
+    }
 
 ?>

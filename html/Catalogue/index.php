@@ -1,16 +1,4 @@
 <?php
-include '../../lib/service/ServiceProduit.php';
-include '../../lib/service/ServiceVendeur.php';
-
-$produits = recupererlesProduits();
-
-$prix = array_column($produits, 'prix_ht_produit');
-$prixMin = (int) floor(min($prix));
-$prixMax = (int) ceil(max($prix));
-
-$categories = recupererLesCategories();
-
-$vendeurs = recupererLesVendeurs();
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +12,22 @@ $vendeurs = recupererLesVendeurs();
     </head>
     <body class="bg-[#fffdea]">
 
-        <?php require_once '../ui/header.php'; ?>
+        <?php 
+            require_once '../ui/header.php'; 
+            
+            include '../../lib/service/ServiceProduit.php';
+            include '../../lib/service/ServiceVendeur.php';
+            
+            $produits = recupererlesProduits();
+            
+            $prix = array_column($produits, 'prix_ht_produit');
+            $prixMin = (int) floor(min($prix));
+            $prixMax = (int) ceil(max($prix));
+            
+            $categories = recupererLesCategories();
+            
+            $vendeurs = recupererLesVendeurs();
+        ?>
 
         <div id="loader" class="hidden">
             <span class="loader"></span>
@@ -160,5 +163,5 @@ $vendeurs = recupererLesVendeurs();
             require '../ui/footer.php';
         ?>
     </body>
-    <script src="catalogue.js"></script>
+    <script src="Catalogue/catalogue.js"></script>
 </html>
