@@ -21,7 +21,7 @@ function trouverLesProduits(): array {
     SELECT produit.id_produit, produit.nom_produit, produit.description_produit,
            produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit, 
            produit.promotion_produit, produit.reduction_produit, produit.tva_produit,
-           produit.produit_supprime, produit.vendeur_produit,produit.nb_ventes_produit,
+           produit.produit_supprime, produit.vendeur_produit, produit.nb_ventes_produit,
            categorie.id_categorie, categorie.nom_categorie, photo_produit.photo_produit, 
            photo_produit.photo_principale, vendeur.id_vendeur, vendeur.denomination_vendeur, 
            vendeur.siret_vendeur, vendeur.addresse_vendeur
