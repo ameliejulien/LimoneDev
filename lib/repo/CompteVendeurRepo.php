@@ -247,7 +247,7 @@
     function trouverLesVendeurs() {
         $PDO = connecterBDD();
 
-        $query = "SELECT id_vendeur, denomination_vendeur FROM vendeur ORDER BY denomination_vendeur";
+        $query = "SELECT id_vendeur, denomination_vendeur, siret_vendeur, addresse_vendeur FROM vendeur ORDER BY denomination_vendeur";
 
         return $PDO->query($query)->fetchall(); 
     }

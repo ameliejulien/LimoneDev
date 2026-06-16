@@ -19,9 +19,12 @@ function trouverLesProduits(): array {
 
     $query = "
     SELECT produit.id_produit, produit.nom_produit, produit.description_produit,
-           produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit,
+           produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit, 
            produit.promotion_produit, produit.reduction_produit, produit.tva_produit,
-           produit.produit_supprime, produit.vendeur_produit, produit.nb_ventes_produit
+           produit.produit_supprime, produit.vendeur_produit,produit.nb_ventes_produit,
+           categorie.id_categorie, categorie.nom_categorie, photo_produit.photo_produit, photo_produit.photo_principale,
+           vendeur.id_vendeur, vendeur.denomination_vendeur, vendeur.siret_vendeur, 
+           vendeur.addresse_vendeur
     FROM produit 
     INNER JOIN categorie_produit on produit.id_produit = categorie_produit.id_produit
     INNER JOIN categorie on categorie_produit.id_categorie = categorie.id_categorie
@@ -38,7 +41,12 @@ function trouverProduitParId(int $id): array|false {
     $PDO = connecterBDD();
 
     $query = "
-    SELECT p.*, c.nom_categorie, c.id_categorie, ph.photo_produit, v.denomination_vendeur
+    SELECT p.id_produit, p.nom_produit, p.description_produit,
+           p.prix_ht_produit, p.stock_produit, p.catalogue_produit, 
+           p.promotion_produit, p.reduction_produit, p.tva_produit,
+           p.produit_supprime, p.vendeur_produit, p.nb_ventes_produit,
+           c.nom_categorie, c.id_categorie, ph.photo_produit,
+           v.denomination_vendeur
     FROM limone.produit p
     INNER JOIN limone.categorie_produit cp ON p.id_produit = cp.id_produit
     INNER JOIN limone.categorie c ON cp.id_categorie = c.id_categorie
@@ -57,7 +65,12 @@ function trouverPremierProduit(): array|false {
     $PDO = connecterBDD();
 
     $query = "
-    SELECT p.*, c.nom_categorie, c.id_categorie, ph.photo_produit, v.denomination_vendeur
+    SELECT p.id_produit, p.nom_produit, p.description_produit,
+           p.prix_ht_produit, p.stock_produit, p.catalogue_produit, 
+           p.promotion_produit, p.reduction_produit, p.tva_produit,
+           p.produit_supprime, p.vendeur_produit, p.nb_ventes_produit,
+           c.nom_categorie, c.id_categorie, ph.photo_produit,
+           v.denomination_vendeur
     FROM limone.produit p
     INNER JOIN limone.categorie_produit cp ON p.id_produit = cp.id_produit
     INNER JOIN limone.categorie c ON cp.id_categorie = c.id_categorie
