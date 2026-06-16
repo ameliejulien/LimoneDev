@@ -46,6 +46,17 @@ CREATE TABLE limone.Utilisateur (
     CONSTRAINT fk_utilisateur FOREIGN KEY(type_utilisateur) REFERENCES limone.Type(id_type)
 );
 
+-- ================================
+-- ======= Utilisateur UUID =======
+-- ================================
+CREATE TABLE limone.Utilisateur_UUID (
+    id_utilisateur int,
+    uuid_utilisateur uuid DEFAULT uuidv7(),
+
+    CONSTRAINT pk_utilisateur_uuid PRIMARY KEY(id_utilisateur, uuid_utilisateur),
+    CONSTRAINT fk_utilisateur_uuid FOREIGN KEY(id_utilisateur) REFERENCes Utilisateur(id_utilisateur)
+);
+
 -- ======================
 -- ======= Client =======
 -- ======================
