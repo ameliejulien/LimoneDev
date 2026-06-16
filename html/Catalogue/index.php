@@ -123,6 +123,8 @@ $vendeurs = recupererLesVendeurs();
                 <div class="grille-produit">
                     <?php
                     foreach ($produits as $row) {
+                        $tva     = $row['tva_produit'] ?? 20;
+                        $prixTtc = round($row['prix_ht_produit'] * (1 + $tva / 100), 2);
                         ?>
                         <article class="carte-produit" id_produit="<?= $row['id_produit'] ?>"
                             data-prix="<?= $row['prix_ht_produit'] ?>" data-categorie="<?= $row['id_categorie'] ?>"
@@ -138,8 +140,8 @@ $vendeurs = recupererLesVendeurs();
                                 </span>
                                 <div class="pied-produit">
                                     <div class="prix-produit">
-                                        <span class="montant"><?= explode(".", strval($row['prix_ht_produit']))[0] ?>,<span
-                                                style="font-size:0.7em"><?= explode(".", strval($row['prix_ht_produit']))[1] ?><span
+                                        <span class="montant"><?= explode(".", strval($prixTtc))[0] ?>,<span
+                                                style="font-size:0.7em"><?= str_pad(explode(".", strval($prixTtc))[1] ?? '00', 2, '0') ?><span
                                                     class="monnaie"> €</span></span></span>
                                     </div>
                                     <button class="button" aria-label="Ajouter au panier"
