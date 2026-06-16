@@ -21,66 +21,67 @@ $prixTotal = 0;
 ?>
 
 <body>
-    <h1>
-        Panier
-    </h1>
 
-    <div class="snackbar">
-        <h3 class="snackbarTitle"></h3>
-        <p class="snackbarText"></p>
-    </div>
+        <h1>
+            Panier
+        </h1>
 
-    <div class="panier">
-        <h2>Articles du panier</h2>
+        <div class="snackbar">
+            <h3 class="snackbarTitle"></h3>
+            <p class="snackbarText"></p>
+        </div>
 
-        <?php
-        // N'affiche pas plusieurs fois les produits 
-        foreach ($quantiteProduitArray as $produitId => $quantiteProduit) {
-            foreach ($arts as $art) {
-                if ($art["id_produit"] == $produitId) {
-                    $prixTotal = $prixTotal + ($art["prix_ht_produit"] * $quantiteProduit); ?>
+        <div class="panier">
+            <h2>Articles du panier</h2>
 
-                    <div class="article-container" id="article-id-<?= $art["id_produit"] ?>">
-                        <div class="article-grid">
+            <?php
+            // N'affiche pas plusieurs fois les produits 
+            foreach ($quantiteProduitArray as $produitId => $quantiteProduit) {
+                foreach ($arts as $art) {
+                    if ($art["id_produit"] == $produitId) {
+                        $prixTotal = $prixTotal + ($art["prix_ht_produit"] * $quantiteProduit); ?>
 
-                            <div class="article-image">
-                                <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
-                                    <img src=<?= $art['photo_produit'] ? "../imagesProduits/" . $art['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="image">
-                                </a>
-                            </div>
+                        <div class="article-container" id="article-id-<?= $art["id_produit"] ?>">
+                            <div class="article-grid">
 
-                            <h3 class="article-name">
-                                <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
-                                    <?= $art["nom_produit"] ?>
-                                </a>
-                            </h3>
+                                <div class="article-image">
+                                    <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
+                                        <img src=<?= $art['photo_produit'] ? "../imagesProduits/" . $art['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="image">
+                                    </a>
+                                </div>
 
-                            <span class="article-description">
-                                <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
-                                    <?= $art["description_produit"] ?>
-                                </a>
-                            </span>
+                                <h3 class="article-name">
+                                    <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
+                                        <?= $art["nom_produit"] ?>
+                                    </a>
+                                </h3>
 
-                            <div class="article-price">
-                                <span>Quantité : <?= $quantiteProduit ?></span>
-                                <br>
-                                <span><?= $art["prix_ht_produit"] * 1.2 ?>€ x <?= $quantiteProduit ?> =
-                                    <?= $art["prix_ht_produit"] * 1.2 * $quantiteProduit ?>€</span>
-                                <button onclick="supprimerArticleDuPanier(<?= $art['id_produit'] ?>)">Supprimer</button>
+                                <span class="article-description">
+                                    <a href="<?= "/Produit/Produit.php?id=" . $art["id_produit"] ?>">
+                                        <?= $art["description_produit"] ?>
+                                    </a>
+                                </span>
+
+                                <div class="article-price">
+                                    <span>Quantité : <?= $quantiteProduit ?></span>
+                                    <br>
+                                    <span><?= $art["prix_ht_produit"] * 1.2 ?>€ x <?= $quantiteProduit ?> =
+                                        <?= $art["prix_ht_produit"] * 1.2 * $quantiteProduit ?>€</span>
+                                    <button onclick="supprimerArticleDuPanier(<?= $art['id_produit'] ?>)">Supprimer</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
+                    }
                 }
             }
-        }
-        ?>
+            ?>
 
-        <form class="panier-options" action="/Paiement">
-            <h3>Prix avec TVA : <?= $prixTotal * 1.2 ?>€</h3>
-            <button type="submit">Payer</button>
-        </form>
-    </div>
+            <form class="panier-options" action="/Paiement">
+                <h3>Prix avec TVA : <?= $prixTotal * 1.2 ?>€</h3>
+                <button type="submit">Payer</button>
+            </form>
+        </div>
     <?php require '../ui/footer.php'; ?>
 </body>
 

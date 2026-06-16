@@ -3,17 +3,43 @@
 include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/CompteClientRepo.php';
 
+function fix_input($input)
+{
+    $input = trim($input);
+    $input = stripslashes($input);
+    $input = htmlspecialchars($input);
+    return $input;
+
+}
+
 /**
- * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription,
- * cette fonction redirige vers la page de connexion
- * @Return Object Un object Client en base de données
+ * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription, cette fonction redirige vers la page de connexion
+ * @Return int Le code de retour
  */
 function confimerInscription($client)
 {
-    // Transformation champs formulaires
-    $client["mail"] = strtolower($client["mail"]);
+    $err = false;
+    $mail = $client["mail"];
     $mdp = $client["motDePasse"];
     $confMdp = $client["confMotDePasse"];
+    $tel = $client["telephone"];
+
+    $valid = [];
+
+    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+        $err = true;
+    } else {
+        $valid["mail"] = $mail;
+    }
+
+    if (!preg_match("/0[1-9](?: [0-9]{2}){4}/", $tel)) {
+        $err = true;
+    } else {
+        $valid["telephone"] = $tel;
+    }
+
+
+    // Transformation champs formulaires
     $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
     $codeRetour = 0;
 
@@ -21,7 +47,7 @@ function confimerInscription($client)
     $mdpEgaux = ($mdp == $confMdp);
 
     if ($mdpEgaux && !champVide($client)) {
-        $codeRetour = creerClientBdd($client);
+        $codeRetour = creerClientBdd($valid);
 
     } else {
         $codeRetour = 400;
@@ -31,7 +57,7 @@ function confimerInscription($client)
 
 /**
  * @Brief regarde si une des valeurs saisie est vide
- * @Param une instance de la classe client
+ * @Param Object instance de la classe client
  * @Return bool Un booléen confirmant si un des champs est vide
  */
 function champVide($client)
@@ -46,7 +72,7 @@ function champVide($client)
 
 /**
  * @Brief renvoie une requête dans la BDD pour vérifier si le client peut se connecter
- * @Param une map avec les valeurs du formulaire
+ * @Param Object map avec les valeurs du formulaire
  * @Return int code de réussite ou d'erreur (200 ou 400)
  */
 function connexionClient($client)
@@ -67,7 +93,7 @@ function connexionClient($client)
 
 /**
  * @Brief Récupérer les informations du client connecté
- * @Return Object Un tableau avec les informations du client connecté
+ * @Return array Un tableau avec les informations du client connecté
  */
 function recupererInfosClient()
 {
@@ -160,7 +186,7 @@ function modifierMdpClientBDD($mdp)
  */
 function obtenirIdClientConnecte()
 {
-    if (isset($_COOKIE['utilisateur']) && $_COOKIE['utilisateur'] != null) { 
+    if (isset($_COOKIE['utilisateur']) && $_COOKIE['utilisateur'] != null) {
         $client = json_decode($_COOKIE['utilisateur'], true);
         return $client["idUtilisateur"] ?? null;
     }

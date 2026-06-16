@@ -139,4 +139,7 @@ RESPONSIVITÉ
     grid-column: 1;
     font-size: 1em;
   }
+}
+main {
+  flex: 1;
 }/*# sourceMappingURL=style.css.map */
