@@ -119,6 +119,6 @@ $categories = recupererLesCategories();
         </div>
     </div>
 </body>
-<script src="catalogueVendeur.js"></script>
+<script src="Catalogue/catalogueVendeur.js"></script>
 
 </html>
