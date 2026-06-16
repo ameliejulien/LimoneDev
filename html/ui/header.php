@@ -18,21 +18,21 @@
         <!-- Logo -->
         <?php if ($typeUtilisateur !== 2): ?>
             <a href="/Catalogue/index.php" class="header-logo">
-                <img src="/ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
+                <img src="/ui/img/logo.png" alt="Logo Alizon" title="Logo Alizon" class="header-logo-image" />
             </a>
         <?php else: ?>
             <a href="/Catalogue/CatalogueVendeur.php" class="header-logo">
-                <img src="/ui/img/logo.png" alt="Logo Alizon" class="header-logo-image" />
+                <img src="/ui/img/logo.png" alt="Logo Alizon" title="Logo Alizon" class="header-logo-image" />
             </a>
         <?php endif; ?>
 
         <!-- Barre de recherche -->
         <?php if ($typeUtilisateur !== 2): ?>
         <form class="header-recherche" role="search" method="get">
-            <button type="submit" class="header-recherche-bouton" aria-label="Lancer la recherche">
+            <button type="submit" title="Rechercher" class="header-recherche-bouton" aria-label="Lancer la recherche">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <input type="search" name="q" class="header-recherche-champ" placeholder="Rechercher un produit"
+            <input type="search" name="q" title="Barre de recherche" class="header-recherche-champ" placeholder="Rechercher un produit"
                 aria-label="Rechercher un produit" />
         </form>
         <?php endif; ?>
@@ -42,36 +42,36 @@
 
             <?php if ($typeUtilisateur === 2): ?>
                 <!-- Vendeur connecté -->
-                <a href="/Vendeur/ConsulterCompteVendeur.php" class="header-action-connexion">
+                <a href="/Vendeur/ConsulterCompteVendeur.php" title="Mon compte vendeur" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
                     <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
                 </a>
             <?php elseif ($typeUtilisateur === 1): ?>
                 <!-- Client connecté -->
-                <a href="/Client/ConsulterCompteClient.php" class="header-action-connexion">
+                <a href="/Client/ConsulterCompteClient.php" title="Mon compte client" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
                     <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
                 </a>
             <?php else: ?>
                 <!-- Non connecté -->
-                <a href="/Connexion" class="header-action-connexion">
+                <a href="/Connexion" title="Bouton de connexion" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
                     <span class="header-action-libelle">Se connecter</span>
                 </a>
-                <a href="/Client/CreerCompteClient.php" class="header-action-connexion">
+                <a href="/Client/CreerCompteClient.php" title="Bouton de création de compte" class="header-action-connexion">
                     <span class="header-action-libelle">Créer un compte</span>
                 </a>
             <?php endif; ?>
 
             <!-- Panier -->
             <?php if ($typeUtilisateur !== 2): ?>
-                <a href="/Panier/index.php" class="header-panier" aria-label="Mon panier">
+                <a href="/Panier/index.php" title="Panier" class="header-panier" aria-label="Mon panier">
                     <i class="fa-solid fa-basket-shopping"></i>
-                    <span class="header-panier-compteur"><?= $nbPanier ?></span>
+                    <span title="Total des produits" class="header-panier-compteur"><?= $nbPanier ?></span>
                 </a>
             <?php endif; ?>
 
-            <button class="header-burger" id="burger" aria-label="Ouvrir le menu">
+            <button class="header-burger" id="burger" aria-label="Ouvrir le menu" title="Ouvrir le menu">
                 <img src="/ui/img/navOpen.png" id="burger-img" alt="Menu" />
             </button>
 
@@ -82,28 +82,28 @@
     <div class="header-overlay" id="overlay"></div>
 
     <nav class="header-menu-lateral" id="menu-lateral">
-        <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu">
+        <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu" title="Fermer le menu">
             <img src="/ui/img/navClose.png" alt="Fermer" />
         </button>
         <?php if ($typeUtilisateur === 2): ?>
             <!-- Vendeur connecté -->
-            <a href="/Vendeur/ConsulterCompteVendeur.php" class="header-menu-connexion">
+            <a href="/Vendeur/ConsulterCompteVendeur.php" title="Mon compte vendeur" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
                 <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
             </a>
         <?php elseif ($typeUtilisateur === 1): ?>
             <!-- Client connecté -->
-            <a href="/Client/ConsulterCompteClient.php" class="header-menu-connexion">
+            <a href="/Client/ConsulterCompteClient.php" title="Mon compte client" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
                 <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['mail']) ?></span>
             </a>
         <?php else: ?>
             <!-- Non connecté -->
-            <a href="/Connexion" class="header-menu-connexion">
+            <a href="/Connexion" title="Bouton de connexion" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
                 Se connecter
             </a>
-            <a href="/Client/CreerCompteClient.php" class="header-menu-connexion">
+            <a href="/Client/CreerCompteClient.php" title="Bouton de création de compte" class="header-menu-connexion">
                 Créer un compte
             </a>
         <?php endif; ?>
