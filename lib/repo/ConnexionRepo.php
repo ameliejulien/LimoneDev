@@ -5,8 +5,10 @@
         $connectBDD = connecterBDD();
         // requête
         $requete =   "SELECT email_utilisateur, type_utilisateur, id_utilisateur FROM limone.Utilisateur".
-        " WHERE email_utilisateur = '" . $utilisateur["mail"] . "' AND mdp_utilisateur = '" . $utilisateur["motDePasse"] . "'";
+        " WHERE email_utilisateur = :mail AND mdp_utilisateur = :mdp";
         $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->bindValue(":mail",$utilisateur["mail"]);
+        $requetePreparee->bindValue(":mdp",$utilisateur["motDePasse"]);
         $requetePreparee->execute(); 
         
         // résultat de la requête
@@ -19,9 +21,11 @@
         $dbh = connecterBDD();
 
         $requete =   "SELECT id_utilisateur FROM limone.Utilisateur".
-        " WHERE email_utilisateur = '{$utilisateur["mail"]}' AND mdp_utilisateur = '{$utilisateur["motDePasse"]}'";
+        " WHERE email_utilisateur = :mail AND mdp_utilisateur = :mdp";
 
         $requetePreparee = $dbh->prepare($requete);
+        $requetePreparee->bindValue(":mail",$utilisateur["mail"]);
+        $requetePreparee->bindValue(":mdp",$utilisateur["motDePasse"]);
         $requetePreparee->execute(); 
         
         // résultat de la requête

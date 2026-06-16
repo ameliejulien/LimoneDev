@@ -3,19 +3,25 @@
 
     /**
      * @Brief ajoute une instance dans utilisateur et client en bdd
-     * @Params prends un instance de client en paramètre
-     * @Returns un code rest retourné en cas d'erreur
+     * @Param array une map de string représdentant un client
+     * @Return int un entier correspondant au résultat de l'opération
      */
     function creerClientBdd($client) {
         if (!chercherClient($client)) {
             $codeRetour = 200;
             $connectBDD = connecterBDD();
             $requeteUtilisateur =   "INSERT INTO limone.Utilisateur (email_utilisateur, nom_utilisateur, mdp_utilisateur, type_utilisateur, telephone_utilisateur)".
-                                "VALUES ('{$client["mail"]}','{$client["nomUtilisateur"]}','{$client["motDePasse"]}','1','{$client["telephone"]}') RETURNING id_utilisateur;";
+                                "VALUES (:mail, :nomUtilisateur,:motDePasse,'1', :telephone) RETURNING id_utilisateur;";
         
         
        
             $requetePreparee = $connectBDD->prepare($requeteUtilisateur);
+            
+            // binding des valeurs
+            $requetePreparee->bindValue(":mail",$client["mail"]);
+            $requetePreparee->bindValue(":nomUtilisateur",$client["nomUtilisateur"]);
+            $requetePreparee->bindValue(":motDePasse",$client["motDePasse"]);
+            $requetePreparee->bindValue(":telephone",$client["telephone"]);
             try {
                 $requetePreparee->execute(); 
             } catch (Exception $e){
@@ -30,9 +36,10 @@
             $id = $row['id_utilisateur'];
             
             // requête création Client (dans la table Client)
-            $requeteClient = "INSERT INTO limone.Client (id_client) VALUES ('$id');";
+            $requeteClient = "INSERT INTO limone.Client (id_client) VALUES (:id);";
             
             $requeteClientPreparee = $connectBDD->prepare($requeteClient);
+            $requeteClientPreparee->bindValue(":id",$id);
             
             try {
                 $requeteClientPreparee->execute();
@@ -51,16 +58,18 @@
 
     /**
      * @Brief recherche un client par son email
-     * @Params prends un mail en paramètre
-     * @Returns le résultat de la requête
+     * @Param string prends un mail client en paramètre
+     * @Return bool le résultat de la requête
      */
     function connecterClient($client) {
         
         $connectBDD = connecterBDD();
         // requête
         $requete =   "SELECT email_utilisateur FROM limone.Utilisateur".
-        " WHERE email_utilisateur = '{$client["mail"]}' AND mdp_utilisateur = '{$client["motDePasse"]}'";
+        " WHERE email_utilisateur = :mail AND mdp_utilisateur = :mdp";
         $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->bindValue(":mail", $client["mail"]);
+        $requetePreparee->bindValue(":mdp", $client["motDePasse"]);
         $requetePreparee->execute(); 
         
         // résultat de la requête
@@ -72,15 +81,16 @@
 
     /**
      * @Brief cherche l'existence d'un client via son email
-     * @Params prends un mail en paramètre
-     * @Returns booléen dépendant de l'existance du client
+     * @Param array un client sous forme de map 
+     * @Return bool un booléen correspondant à l'existance du client
      */
     function chercherClient($client) {
         $connectBDD = connecterBDD();
         // requête
         $requete =   "SELECT email_utilisateur FROM limone.Utilisateur".
-        " WHERE email_utilisateur = '{$client["mail"]}'";
+        " WHERE email_utilisateur = :mail";
         $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->bindValue(":mail", $client["mail"]);
         $requetePreparee->execute(); 
         
         // résultat de la requête
@@ -116,9 +126,10 @@
 
         $requete =  "SELECT id_client FROM Client INNER JOIN Utilisateur ".
                     "ON Utilisateur.id_utilisateur = Client.id_client ".
-                    "WHERE email_utilisateur = '{$client["mail"]}';";
+                    "WHERE email_utilisateur = :mail;";
 
         $requetePreparee = $connectBDD->prepare($requete);
+        $requetePreparee->bindValue(":mail", $client["mail"]);
         $requetePreparee->execute(); 
         $id = $requetePreparee->fetch(PDO::FETCH_ASSOC);
         return $id;

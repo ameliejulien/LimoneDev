@@ -82,7 +82,6 @@ function trouverPremierProduit(): array|false {
     return $PDO->query($query)->fetch();
 }
 function trouverLesProduitsVendeur(): array {
-
     $PDO = connecterBDD();
     $idVendeur = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur']; 
 
@@ -100,7 +99,9 @@ function trouverLesProduitsVendeur(): array {
     WHERE vendeur.id_vendeur = '{$idVendeur}'
     ORDER BY produit.id_produit;";
 
-    return $PDO->query($query)->fetchAll();
+    $stmt = $PDO->prepare($query);
+    $stmt->execute([':idVendeur' => $idVendeur]);
+    return $stmt->fetchAll();
 }
 
 ?>

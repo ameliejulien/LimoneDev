@@ -7,17 +7,17 @@ function getDBProduitsFromPanier(array $panier)
     $dbh = connecterBDD();
     $retour = [];
     if ($panier != null) {
-        $stringListe = "(" . implode(", ", $panier) . ")";
+        $placeholders = implode(", ", array_fill(0, count($panier), "?"));
 
         $query = "select produit.id_produit, nom_produit, description_produit, prix_ht_produit,
             stock_produit, catalogue_produit, promotion_produit, reduction_produit, tva_produit, produit_supprime, photo_produit
             from produit
             join photo_produit on produit.id_produit = photo_produit.id_photo_produit
-            where produit.id_produit in $stringListe";
+            where produit.id_produit in ($placeholders)";
 
         $stmt = $dbh->prepare($query);
 
-        $stmt->execute();
+        $stmt->execute($panier);
 
         $retour = $stmt->fetchAll();
     }
@@ -42,15 +42,16 @@ function getTousLesProduitsBDD()
 
 /**
  * Get le status du produit, supprimer ou non (boolean)
- * @return Boolean si le produit est présent en bdd et non supprimer false, sinon true
+ * @return bool si le produit est présent en bdd et non supprimer false, sinon true
  */
 function getStatusDuProduit(string $id_produit)
 {
     $dbh = connecterBDD();
 
-    $query = "select produit_supprime from produit where id_produit = $id_produit";
+    $query = "select produit_supprime from produit where id_produit = :idProduit";
 
     $stmt = $dbh->prepare($query);
+    $stmt->bindParam(":idProduit", $id_produit);
 
     $stmt->execute();
 
@@ -75,9 +76,10 @@ function getNomProduit(string $id_produit)
 {
     $dbh = connecterBDD();
 
-    $query = "select distinct nom_produit from produit where id_produit = $id_produit";
+    $query = "select distinct nom_produit from produit where id_produit = :idProduit";
 
     $stmt = $dbh->prepare($query);
+    $stmt->bindValue(":idProduit", $id_produit);
 
     $stmt->execute();
 
