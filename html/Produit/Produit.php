@@ -20,15 +20,20 @@
 
     $tva       = $produit['tva_produit'] ?? 20;
     $prixTtc   = round($produit['prix_ht_produit'] * (1 + $tva / 100), 2);
+
+    $prixEntier  = explode(".", strval($prixTtc))[0];
+    $prixDecimal = explode(".", strval($prixTtc))[1] ?? '00';
+
     $enStock    = $produit['stock_produit'] > 0;
 
     $promotion  = $produit['promotion_produit'] ?? false;
     $reduction  = $produit['reduction_produit'] ?? 0;
     $prixBarre  = null;
     if ($promotion && $reduction > 0) {
-        $prixBarre = $produit['prix_ht_produit'];
+        $prixBarre = round($produit['prix_ht_produit'] * (1 + $tva / 100), 2); // barré en TTC aussi, pour rester cohérent avec le prix principal
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -104,10 +109,10 @@
                     <?php endif; ?>
                     <div class="prix-principal">
                         <span class="montant-entier"><?= $prixEntier ?></span><span class="montant-decimal">,<?= str_pad($prixDecimal, 2, '0') ?><span class="monnaie"> €</span></span>
-                        <span class="mention-ht">HT</span>
+                        <span class="mention-ht">TTC</span>
                     </div>
                     <div class="prix-ttc">
-                        soit <strong><?= number_format($prixTtc, 2, ',', ' ') ?> €</strong> TTC (TVA <?= $tva ?>%)
+                        soit <strong><?= number_format($produit['prix_ht_produit'], 2, ',', ' ') ?> €</strong> HT (TVA <?= $tva ?>%)
                     </div>
                 </div>
 

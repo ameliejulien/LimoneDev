@@ -418,6 +418,7 @@ button {
   transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
   cursor: pointer;
+  font-family: var(--police-generale);
 }
 
 button:hover {
@@ -591,7 +592,6 @@ button:active {
 .prix-principal {
   display: flex;
   align-items: baseline;
-  gap: 4px;
   line-height: 1;
 }
 
