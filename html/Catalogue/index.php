@@ -158,5 +158,5 @@ $vendeurs = recupererLesVendeurs();
             require '../ui/footer.php';
         ?>
     </body>
-    <script src="Catalogue/catalogue.js"></script>
+    <script src="catalogue.js"></script>
 </html>

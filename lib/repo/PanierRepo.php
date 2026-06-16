@@ -1,6 +1,5 @@
 <?php
 require_once '../../connect_params.php';
-require_once '../../lib/repo/PanierRepo.php';
 require_once '../../lib/repo/GlobalRepo.php';
 
 function getDBProduitsFromPanier(array $panier)
