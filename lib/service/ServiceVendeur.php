@@ -6,40 +6,74 @@ include __DIR__ . '/../repo/CompteVendeurRepo.php';
 /**
  * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription,
  * cette fonction redirige vers la page de connexion
- * @Return Un object Client en base de données
+ * @Return int
  */
 function confimerInscription($vendeur)
 {
+    try {
+        $mail = strtolower($vendeur["mail"]);
+        $denomination = $vendeur["denomination"];
+        $tel = $vendeur["telephone"];
+        $mdp = $vendeur["motDePasse"];
+        $confMdp = $vendeur["confMotDePasse"];
+        $codePostal = $vendeur["codePostalVendeur"];
+        $ville = $vendeur["villeVendeur"];
+        $adresse = $vendeur["adresseVendeur"];
+        $siret = $vendeur["siret"];
 
-    // tests ou transformations des champs du formulaire
-    $vendeur["mail"] = strtolower($vendeur["mail"]);
-    $mdp = $vendeur["motDePasse"];
-    $confMdp = $vendeur["confMotDePasse"];
-    $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
-    $codePostal = intval($vendeur["codePostalVendeur"]);
-    $codeRetour = 0;
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception(code: 401);
+        }
 
-    // Comparaison des mots de passe
-    $mdpEgaux = ($mdp == $confMdp);
+        if (!preg_match("/[ a-zA-Z'.,;:!\(\)]+/", $denomination)) {
+            throw new Exception(code: 402);
+        }
 
-    if ($mdpEgaux && !champVide($vendeur) && certifierClee($vendeur["cleAuth"]) && ($codePostal != 0)) {
-        $codeRetour = creerVendeurBdd($vendeur);
+        if (!preg_match("/0[1-9](?:[0-9]{2}){4}/", $tel)) {
+            throw new Exception(code: 403);
+        }
 
-    } else {
-        $codeRetour = 400;
+        if ($mdp != $confMdp) {
+            throw new Exception(code: 404);
+        }
+
+        $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
+
+        if (!preg_match("/[0-9]{5}/", $codePostal)) {
+            throw new Exception(code: 405);
+        }
+
+        if (!preg_match("/[ -a-zA-Z'.,\/]+/", $ville)) {
+            throw new Exception(code: 406);
+        }
+
+        if (!preg_match("/[ -a-zA-Z'.,\/]+/", $adresse)) {
+            throw new Exception(code: 407);
+        }
+
+        if (!preg_match("/[0-9]{14}/", $siret)) {
+            throw new Exception(code: 408);
+        }
+
+        if (!certifierClee($vendeur["cleAuth"])) {
+            throw new Exception(code: 409);
+        }
+
+        return creerVendeurBdd($vendeur);
+    } catch (Exception $e) {
+        return $e->getCode();
     }
-    return $codeRetour;
 }
 
 /**
  * @Brief regarde si une des valeurs saisie est vide
- * @Param une instance de la classe client
- * @Retuns unn booléen confirmant si un des champs est vide
+ * @Param Array instance de la classe client
+ * @Return bool booléen confirmant si un des champs est vide
  */
 function champVide($vendeur)
 {
-    foreach ($vendeur as $vendeur) {
-        if (empty($vendeur)) {
+    foreach ($vendeur as $v) {
+        if (empty($v)) {
             return true;
         }
     }
@@ -48,7 +82,7 @@ function champVide($vendeur)
 
 /**
  * @Brief renvoie une requête dans la BDD pour vérifier si le client peut se connecter
- * @Param une map avec les valeurs du formulaire
+ * @Param array map avec les valeurs du formulaire
  * @Retuns un code de réussite ou d'erreur (200 ou 400)
  */
 function connexionVendeur($vendeur)
@@ -191,7 +225,8 @@ function modificationMdpVendeur($data)
     return 200;
 }
 
-function recupererLesVendeurs() {
+function recupererLesVendeurs()
+{
     return trouverLesVendeurs();
 }
 

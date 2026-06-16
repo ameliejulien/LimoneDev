@@ -107,13 +107,26 @@
           window.location.href = "ConnexionCompteVendeur.php";
         
         } else if (json.reponse == 409) {
-          afficherSnackBar('Notification','Echec de création de compte : email déjà utilisé !');
-        
+          afficherSnackBar('Notification','Echec de création de compte : Clé d\'authentification invalide');
+        } else if (json.reponse == 408) {
+          afficherSnackBar('Notification','Echec de création de compte : Le SIRET est invalide. Format : 14 chiffres');
+        } else if (json.reponse == 407) {
+          afficherSnackBar('Notification','Echec de création de compte : L\'adresse contient des caractères invalides');
+        } else if (json.reponse == 406) {
+          afficherSnackBar('Notification','Echec de création de compte : La ville contient des caractères invalides');
+        } else if (json.reponse == 405) {
+          afficherSnackBar('Notification','Echec de création de compte : Code postal invalide. Format : 12345');
+        } else if (json.reponse == 404) {
+          afficherSnackBar('Notification','Echec de création de compte : Le mot de passe renseigné est différent de la confirmation');
+        } else if (json.reponse == 403) {
+          afficherSnackBar('Notification','Echec de création de compte : Numéro de téléphone invalide. Format : 0123456789');
+        } else if (json.reponse == 402) {
+          afficherSnackBar('Notification','Echec de création de compte : La dénomination contient des caractères invalides');
+        } else if (json.reponse == 401) {
+          afficherSnackBar('Notification','Echec de création de compte : E-mail invalide');
         } else {
           afficherSnackBar('Notification','Echec de création de compte !');
         } 
-        
-      
       })
       .catch(err => {
         console.error("Erreur :", err); 
