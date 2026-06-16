@@ -9,7 +9,6 @@ function fix_input($input)
     $input = stripslashes($input);
     $input = htmlspecialchars($input);
     return $input;
-
 }
 
 /**
@@ -19,12 +18,19 @@ function fix_input($input)
 function confimerInscription($client)
 {
     $err = false;
+    $username = $client["nomUtilisateur"];
     $mail = $client["mail"];
-    $mdp = $client["motDePasse"];
-    $confMdp = $client["confMotDePasse"];
+    $mdp = hash('sha256', $client["motDePasse"]);
+    $confMdp = hash('sha256', $client["confMotDePasse"]);
     $tel = $client["telephone"];
 
     $valid = [];
+
+    if (!preg_match("/[a-zA-Z0-9_-]+$/", $username)) {
+        $err = true;
+    } else {
+        $valid["nomUtilisateur"] = $username;
+    }
 
     if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
         $err = true;
@@ -32,21 +38,19 @@ function confimerInscription($client)
         $valid["mail"] = $mail;
     }
 
-    if (!preg_match("/0[1-9](?: [0-9]{2}){4}/", $tel)) {
+    if (!preg_match("/0[1-9](?: [0-9]{2}){4}/", $tel) && !preg_match("/0[1-9](?:[0-9]{2}){4}/", $tel)) {
         $err = true;
     } else {
         $valid["telephone"] = $tel;
     }
 
+    if ($mdp != $confMdp) {
+        $err = true;
+    } else {
+        $valid["motDePasse"] = $mdp;
+    }
 
-    // Transformation champs formulaires
-    $client["motDePasse"] = hash('sha256', $client["motDePasse"]);
-    $codeRetour = 0;
-
-    // Comparaison des mots de passe
-    $mdpEgaux = ($mdp == $confMdp);
-
-    if ($mdpEgaux && !champVide($client)) {
+    if (!$err && !champVide($valid)) {
         $codeRetour = creerClientBdd($valid);
 
     } else {
@@ -57,7 +61,7 @@ function confimerInscription($client)
 
 /**
  * @Brief regarde si une des valeurs saisie est vide
- * @Param Object instance de la classe client
+ * @Param Array
  * @Return bool Un booléen confirmant si un des champs est vide
  */
 function champVide($client)
@@ -178,7 +182,7 @@ function modifierMdpClientBDD($mdp)
 
     $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
     $requeteUpdateClient = $connectBDD->prepare($requeteClient);
-    $rowClient = $requeteUpdateClient->execute();
+    $requeteUpdateClient->execute();
 }
 
 /**
