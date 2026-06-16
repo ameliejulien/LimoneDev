@@ -22,9 +22,9 @@ function trouverLesProduits(): array {
            produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit, 
            produit.promotion_produit, produit.reduction_produit, produit.tva_produit,
            produit.produit_supprime, produit.vendeur_produit,produit.nb_ventes_produit,
-           categorie.id_categorie, categorie.nom_categorie, photo_produit.photo_produit, photo_produit.photo_principale,
-           vendeur.id_vendeur, vendeur.denomination_vendeur, vendeur.siret_vendeur, 
-           vendeur.addresse_vendeur
+           categorie.id_categorie, categorie.nom_categorie, photo_produit.photo_produit, 
+           photo_produit.photo_principale, vendeur.id_vendeur, vendeur.denomination_vendeur, 
+           vendeur.siret_vendeur, vendeur.addresse_vendeur
     FROM produit 
     INNER JOIN categorie_produit on produit.id_produit = categorie_produit.id_produit
     INNER JOIN categorie on categorie_produit.id_categorie = categorie.id_categorie
