@@ -54,7 +54,7 @@ CREATE TABLE limone.Utilisateur_UUID (
     uuid_utilisateur uuid DEFAULT uuidv7(),
 
     CONSTRAINT pk_utilisateur_uuid PRIMARY KEY(id_utilisateur, uuid_utilisateur),
-    CONSTRAINT fk_utilisateur_uuid FOREIGN KEY(id_utilisateur) REFERENCes Utilisateur(id_utilisateur)
+    CONSTRAINT fk_utilisateur_uuid FOREIGN KEY(id_utilisateur) REFERENCES limone.Utilisateur(id_utilisateur)
 );
 
 -- ======================
