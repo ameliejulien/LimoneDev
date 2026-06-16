@@ -1,5 +1,5 @@
 <?php 
-    require __DIR__ . '/../repo/UtilisateurRepo.php';
+    require_once __DIR__ . '/../repo/UtilisateurRepo.php';
 
     function recupererInfosUtilisateur($uuid) {
         return trouverInfosUtilisateur($uuid);

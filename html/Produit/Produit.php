@@ -47,7 +47,7 @@
     </head>
     <body class="bg-[#fffdea]">
 
-        <?php require '../ui/header.php'; ?>
+        <?php require_once '../ui/header.php'; ?>
 
         <div id="loader" class="hidden">
             <span class="loader"></span>
@@ -163,7 +163,7 @@
 
             </section>
         </main>
-        <?php require '../ui/footer.php'; ?>
+        <?php require_once '../ui/footer.php'; ?>
     </body>
     <script src="../js/produit.js"></script>
     <script src="../snackbar.js"></script>

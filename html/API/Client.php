@@ -1,6 +1,6 @@
 <?php
-include "../../lib/service/ServiceClient.php";
-include "../../lib/service/ServiceUtilisateur.php";
+require_once "../../lib/service/ServiceClient.php";
+require_once "../../lib/service/ServiceUtilisateur.php";
 header('Content-Type: application/json');
 
 // décodage du fichier json envoyé
@@ -21,7 +21,7 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "modificationMdp") {
     $retour = modificationMdpClient($data);
 } else if ($data["typeRequete"] == "modification") {
-    $data["reponse"] = modifierClientBDD($data, $_FILES);
+    $retour = modifierClientBDD($data, $_FILES);
 }
 
 // code de la réponse + envoi du tableau data (réponse HTTP)

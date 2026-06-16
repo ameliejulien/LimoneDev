@@ -122,19 +122,11 @@
       method: "POST",
       body: formData //JSON.stringify(formData)
     })
-
-    .then(response => response.json()) // http vers json
-    .then(json => {
-      console.log(json); // Test affichage
-
-      // Compte modifié avec succès
-      if (json.reponse == 200) {
+    .then(response => {
+      if (response.status === 200) {
         window.location.href = "ConsulterCompteClient.php";
-        /*form.submit();*/
       }
-      
-    })
-    
+    }) 
     .catch(err => {
       console.error("Erreur :", err); 
     });

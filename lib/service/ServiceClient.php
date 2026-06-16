@@ -1,8 +1,8 @@
 <?php
 
-include __DIR__ . '/../../connect_params.php';
-include __DIR__ . '/../repo/CompteClientRepo.php';
-include __DIR__ . '/../repo/UtilisateurRepo.php';
+require_once __DIR__ . '/../../connect_params.php';
+require_once __DIR__ . '/../repo/CompteClientRepo.php';
+require_once __DIR__ . '/../repo/UtilisateurRepo.php';
 
 function fix_input($input)
 {

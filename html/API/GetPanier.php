@@ -1,5 +1,5 @@
 <?php
-require "../../lib/service/servicePanier.php";
+require_once "../../lib/service/servicePanier.php";
 
 header('Content-Type: application/json');
 // autoriser les requêtes cross-origin

@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../repo/ProduitRepo.php';
+require_once __DIR__ . '/../repo/ProduitRepo.php';
 
 function recupererlesProduits(): array {
     return trouverLesProduits();

@@ -68,19 +68,12 @@
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
-      .then(response => response.json())  // transforme la réponse http en json exploitable
-      .then(json => {
-        if (json.reponse == 200) {
-          alert("Mot de passe modifié !"); // alert de la création du compte
+      .then(response => {
+        if (response.status == 200) {
           window.location.href = "ConsulterCompteVendeur.php";
-        
-        } else  if (json.reponse == 409) {
+        } else if (response.status == 409) {
           afficherSnackBar('Notification','Echec de modification : nouveau mot de passe et ancien mot de passe identiques!'); // alert de la création du compte        
-        
-        } else if (json.reponse == 400) {
-            console.log(json);
         }
-        
       })
       .catch(err => {
         console.error("Erreur :", err); 

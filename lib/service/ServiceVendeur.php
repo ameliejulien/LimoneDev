@@ -126,38 +126,13 @@ function creerCleeAuth()
     return $clee;
 }
 
-
-/**
- * @Brief génère un cookie pour la connexion vendeur
- */
-function creerCookieVendeur($vendeur)
-{
-    if ($_COOKIE['utilisateur'] != null) { // cookie déjà créé
-        $vendeur = json_decode($_COOKIE['utilisateur'], true);
-    }
-    error_log("vendeur reçu : " . var_export($vendeur, true));
-    $id = getVendeurId($vendeur);
-
-    $tab["mail"] = $vendeur["mail"];
-    $tab["idVendeur"] = $id["id_vendeur"];
-
-    // Modifie la liste de produit dans le cookie
-    setcookie('vendeur', json_encode($tab), time() + 3 * 24 * 60 * 60, "/");
-}
-
-
 /**
  * @Brief récupère les informations du vendeur connecté
  * @Return retourne un tableau contenant les informations du vendeur
  */
 function recupererInfosVendeur()
 {
-
-    if ($_COOKIE['utilisateur'] != null) { // cookie déjà créé
-        $vendeur = json_decode($_COOKIE['utilisateur'], true);
-    }
-    $idVendeur = $vendeur["idUtilisateur"];
-    error_log("idVendeur : " . var_export($vendeur['idUtilisateur'] ?? null, true));
+    $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
 
     $infos = infosVendeurBDD($idVendeur);
     return $infos;
@@ -179,23 +154,6 @@ function modificationVendeur($vendeur)
     }
 
     return 200;
-}
-
-
-
-/**
- * @Brief supprime le cookie vendeur pour le déconnecter
- * @Return retourne un booléen confirmant ou non la suppression du cooki
- */
-function deconnecterVendeur()
-{
-    setcookie("utilisateur", "", time() - 1, "/");
-    unset($_COOKIE["utilisateur"]);
-
-    if (!isset($_COOKIE["utilisateur"])) {
-        return 200;
-    }
-    return 400;
 }
 
 /**

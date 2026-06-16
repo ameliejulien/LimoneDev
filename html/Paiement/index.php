@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/Paiement/paiement.css">
     <title>Paiement</title>
 </head>
-<?php require('../ui/header.php'); ?>
+<?php require_once('../ui/header.php'); ?>
 <main>
     <h1>Paiement</h1>
     <form method="POST" class="formPaiement" action="/Paiement/PaiementValide.php">

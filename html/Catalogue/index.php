@@ -160,8 +160,8 @@
             </div>
         </div>
         <?php 
-            require '../ui/footer.php';
+            require_once '../ui/footer.php';
         ?>
     </body>
-    <script src="Catalogue/catalogue.js"></script>
+    <script src="catalogue.js"></script>
 </html>

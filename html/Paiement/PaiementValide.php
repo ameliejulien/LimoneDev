@@ -7,10 +7,10 @@
     <title>Paiement validé</title>
 </head>
 <body>
-    <?php require('../ui/header.php'); ?>
+    <?php require_once('../ui/header.php'); ?>
     <main>
         <?php 
-        require('../../lib/service/ServicePaiement.php');
+        require_once('../../lib/service/ServicePaiement.php');
         if (validerPaiement()) { ?>
             <h1>Paiement validé</h1>
         <?php } else {?>

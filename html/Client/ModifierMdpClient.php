@@ -1,7 +1,7 @@
 <?php
     include '../../lib/service/ServiceClient.php';
 
-    $infosClient = recupererInfosClient();
+    $infosClient = recupererInfosClient($_COOKIE['uuid']);
 ?>
 
 <!DOCTYPE html>
@@ -68,20 +68,13 @@
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
-      .then(response => response.json())  // transforme la réponse http en json exploitable
-      .then(json => {
-        if (json.reponse == 200) {
-          alert("Mot de passe modifié !"); // alert de la création du compte
-          window.location.href = "ConsulterCompteClient.php";
-        
-        } else  if (json.reponse == 409) {
+      .then(response => {
+        if (response.status == 200) {
+          window.location.href = "ConsulterCompteClient.php";        
+        } else if (response.status == 409) {
           afficherSnackBar('Notification','Echec de modification : nouveau mot de passe et ancien mot de passe identiques!'); // alert de la création du compte        
-        
-        } else if (json.reponse == 400) {
-            console.log(json);
         }
-        
-      })
+      })  // transforme la réponse http en json exploitable
       .catch(err => {
         console.error("Erreur :", err); 
       });

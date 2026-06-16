@@ -1,5 +1,6 @@
 <?php
 include "../../lib/service/ServiceVendeur.php";
+include "../../lib/service/ServiceUtilisateur.php";
 header('Content-Type: application/json');
 
 // décodage du fichier json envoyé

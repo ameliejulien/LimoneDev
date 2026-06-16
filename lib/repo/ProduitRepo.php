@@ -83,7 +83,7 @@ function trouverPremierProduit(): array|false {
 }
 function trouverLesProduitsVendeur(): array {
     $PDO = connecterBDD();
-    $idVendeur = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur']; 
+    $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']); 
 
 
     $query = "

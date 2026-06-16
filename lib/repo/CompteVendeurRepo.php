@@ -1,6 +1,7 @@
 <?php
 
     require_once "GlobalRepo.php";
+    require_once __DIR__ . "/UtilisateurRepo.php";
 
     /**
      * @Brief ajoute une instance dans utilisateur et vendeur en bdd
@@ -219,7 +220,7 @@
     function modifierVendeurBDD($vendeur, ) {
         // TODO : mettre la logique métier dans le service et faire une fonction par appel BDD
 
-        $idVendeur = trouverIDUtilisateur($_COOKIE('uuid')); 
+        $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']); 
         $connectBDD = connecterBDD();
         
         // récupréation de l'id de l'adresse
@@ -279,7 +280,7 @@
      */
     function modifierMdpVendeurBDD($mdp) {
         $connectBDD = connecterBDD();
-        $idVendeur = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur']; 
+        $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']); 
 
         $requeteVendeur = "UPDATE Utilisateur SET mdp_utilisateur = :mdp WHERE id_utilisateur = :idVendeur;";
         $requeteUpdateVendeur = $connectBDD->prepare($requeteVendeur);

@@ -4,7 +4,7 @@
     <div class="header-interieur">
         
         <?php
-            require '../../lib/service/UtilisateurService.php';
+            require_once '../../lib/service/ServiceUtilisateur.php';
 
             $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
             $nbPanier = count($panier);

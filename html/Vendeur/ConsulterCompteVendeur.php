@@ -57,8 +57,6 @@
       const decoBtn = document.querySelector(".decoBtn");
 
       decoBtn.addEventListener("click", function (event) {
-
-        console.log("click btn deco");
         
         const formData = {
           typeRequete: "deconnexion"
@@ -69,13 +67,10 @@
           method: "POST",
           body: JSON.stringify(formData)  // fait une string JSON du tableau
         })
-        .then(response => response.json())  // transforme la réponse http en json exploitable
-        .then(json => {
-          if (json.reponse == 200) {
-            alert("Compte déconnecté!"); // alert de la création du compte
+        .then(response => {
+          if (response.status === 200) {
             window.location.href = "../Catalogue/";
           }
-          
         })
         .catch(err => {
           console.error("Erreur :", err); 

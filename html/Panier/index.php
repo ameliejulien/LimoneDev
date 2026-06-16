@@ -82,7 +82,7 @@ $prixTotal = 0;
                 <button type="submit">Payer</button>
             </form>
         </div>
-    <?php require '../ui/footer.php'; ?>
+    <?php require_once '../ui/footer.php'; ?>
 </body>
 
 <script src="/Panier/script.js"></script>

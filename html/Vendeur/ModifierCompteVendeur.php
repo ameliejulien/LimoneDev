@@ -84,22 +84,16 @@
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
-      .then(response => response.json())  // transforme la réponse http en json exploitable
-      .then(json => {
-        console.log(json);      // test affichage retour
-        if (json.reponse == 200) {
-          alert("Compte modifié !"); // alert de la création du compte
+      .then(response => {
+        if (response.status == 200) {
           window.location.href = "ConsulterCompteVendeur.php";
-        
-        } else  if (json.reponse == 409) {
+          window.location.href = "ConsulterCompteVendeur.php";
+        } else if (response.status == 409) {
           afficherSnackBar('Notification','Echec de modification : email déjà utilisé !'); // alert de la création du compte
-          window.location.href = "ConsulterCompteVendeur.php";
-        
         } else {
           afficherSnackBar('Notification','Echec de modification !');
         } 
-        
-      })
+      }) 
       .catch(err => {
         console.error("Erreur :", err); 
       });

@@ -1,5 +1,5 @@
 <?php
-    require "GlobalRepo.php";
+    require_once "GlobalRepo.php";
 
     function trouverUUID($mail, $mdp) {
         $connectBDD = connecterBDD();

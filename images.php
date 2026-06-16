@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-    require './connect_params.php';
+    require_once './connect_params.php';
 
     try {
         $PDO = new PDO("pgsql:host=$server;dbname=$dbName", "$dbUser", "$dbPassword");
