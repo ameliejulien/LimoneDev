@@ -32,7 +32,7 @@
             <button type="submit" class="header-recherche-bouton" aria-label="Lancer la recherche">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <input type="search" name="q" class="header-recherche-champ" placeholder="Rechercher"
+            <input type="search" name="q" class="header-recherche-champ" placeholder="Rechercher un produit"
                 aria-label="Rechercher un produit" />
         </form>
         <?php endif; ?>
