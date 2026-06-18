@@ -4,6 +4,26 @@ include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/CompteVendeurRepo.php';
 
 /**
+ * @brief modifie ou ajoute des informations d'un vendeur
+ */
+function modifierVendeurBDD($vendeur) {
+    try {
+        $idVendeur  = trouverIDUtilisateur($_COOKIE['uuid']);
+        $connectBDD = connecterBDD();
+
+        $idAdresse = obtenirIdAdresseVendeur($connectBDD, $idVendeur);
+        mettreAJourAdresseVendeur($connectBDD, $idAdresse, $vendeur);
+        mettreAJourUtilisateurVendeur($connectBDD, $idVendeur, $vendeur);
+        mettreAJourVendeur($connectBDD, $idVendeur, $vendeur);
+
+    } catch (Exception $e) {
+        return 500;
+    }
+
+    return 200;
+}
+
+/**
  * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription,
  * cette fonction redirige vers la page de connexion
  * @Return int

@@ -4,14 +4,6 @@ require_once __DIR__ . '/../../connect_params.php';
 require_once __DIR__ . '/../repo/CompteClientRepo.php';
 require_once __DIR__ . '/../repo/UtilisateurRepo.php';
 
-function fix_input($input)
-{
-    $input = trim($input);
-    $input = stripslashes($input);
-    $input = htmlspecialchars($input);
-    return $input;
-}
-
 /**
  * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription, cette fonction redirige vers la page de connexion
  * @Return int Le code de retour
@@ -50,21 +42,6 @@ function confimerInscription($client) {
 }
 
 /**
- * @Brief regarde si une des valeurs saisie est vide
- * @Param Array
- * @Return bool Un booléen confirmant si un des champs est vide
- */
-function champVide($client)
-{
-    foreach ($client as $value) {
-        if (empty($value)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-/**
  * @Brief Récupérer les informations du client connecté
  * @Return array | null Un tableau avec les informations du client connecté ou null si pas de cookie
  */
@@ -97,16 +74,35 @@ function modificationMdpClient($data)
 }
 
 /**
- * @Brief modifie le mot de passe client
+ * @Brief Changer ou ajouter les informations du client
  */
-function modifierMdpClientBDD($mdp)
+function modifierClientBDD($client, $files = [])
 {
-    $connectBDD = connecterBDD();
-    $idClient = trouverIDUtilisateur($_COOKIE['uuid']);
+    try {
+        $idClient = trouverIDUtilisateur($_COOKIE['uuid']);
+        $connectBDD = connecterBDD();
 
-    $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
-    $requeteUpdateClient = $connectBDD->prepare($requeteClient);
-    $requeteUpdateClient->execute();
+        // adress e: mise à jour ou création + liaison
+        $idAdresse = obtenirIdAdresseClient($connectBDD, $idClient);
+        if ($idAdresse !== null) {
+            mettreAJourAdresse($connectBDD, $idAdresse, $client);
+        } else {
+            $idAdresse = insererAdresse($connectBDD, $client);
+            lierAdresseClient($connectBDD, $idClient, $idAdresse);
+        }
+
+        // utilisateur : avec ou sans nouvelle photo
+        if (isset($files['picture']) && $files['picture']['error'] == UPLOAD_ERR_OK) {
+            mettreAJourUtilisateurAvecPhoto($connectBDD, $idClient, $client, $files['picture']);
+        } else {
+            mettreAJourUtilisateurSansPhoto($connectBDD, $idClient, $client);
+        }
+
+    } catch (Exception $e) {
+        return 500;
+    }
+
+    return 200;
 }
 
 ?>
