@@ -1,4 +1,18 @@
 <?php
+
+    require_once ('../../lib/service/ServiceProduit.php');
+    require_once ('../../lib/service/ServiceVendeur.php');
+
+    $produits = recupererlesProduits();
+
+    $prix = array_column($produits, 'prix_ht_produit');
+    $prixMin = (int) floor(min($prix));
+    $prixMax = (int) ceil(max($prix));
+
+    $categories = recupererLesCategories();
+
+    $vendeurs = recupererLesVendeurs();
+    
 ?>
 
 <!DOCTYPE html>
@@ -12,22 +26,7 @@
     </head>
     <body class="bg-[#fffdea]">
 
-        <?php 
-            require_once '../ui/header.php'; 
-            
-            include '../../lib/service/ServiceProduit.php';
-            include '../../lib/service/ServiceVendeur.php';
-            
-            $produits = recupererlesProduits();
-            
-            $prix = array_column($produits, 'prix_ht_produit');
-            $prixMin = (int) floor(min($prix));
-            $prixMax = (int) ceil(max($prix));
-            
-            $categories = recupererLesCategories();
-            
-            $vendeurs = recupererLesVendeurs();
-        ?>
+        <?php require_once '../ui/header.php'; ?>
 
         <div id="loader" class="hidden">
             <span class="loader"></span>

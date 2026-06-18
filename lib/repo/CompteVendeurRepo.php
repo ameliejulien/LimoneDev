@@ -217,7 +217,7 @@
     /**
      * @Brief modifie les informations du vendeur
      */
-    function modifierVendeurBDD($vendeur, ) {
+    function modifierVendeurBDD($vendeur) {
         // TODO : mettre la logique métier dans le service et faire une fonction par appel BDD
 
         $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']); 

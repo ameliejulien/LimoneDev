@@ -73,4 +73,18 @@
         return $prepare->fetch(PDO::FETCH_ASSOC)['id_utilisateur'];
     }
 
+    function trouverTypeUtilisateur($uuid) {
+        $connectBDD = connecterBDD();
+        $requete =            
+        "SELECT utilisateur.type_utilisateur
+        FROM utilisateur
+        WHERE uuid_utilisateur = :id";
+
+        $prepare = $connectBDD->prepare($requete);
+        $prepare->bindValue(":id", $uuid);
+        $prepare->execute();
+
+        return $prepare->fetch(PDO::FETCH_ASSOC);
+    }
+
 ?>

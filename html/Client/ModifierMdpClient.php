@@ -1,7 +1,12 @@
 <?php
-    include '../../lib/service/ServiceClient.php';
 
-    $infosClient = recupererInfosClient($_COOKIE['uuid']);
+  require_once ('../../lib/service/ServiceClient.php');
+  require_once ('../../lib/service/ServiceUtilisateur.php');
+
+  droitsAccesPage($_COOKIE['uuid'], 1);
+
+  $infosClient = recupererInfosClient($_COOKIE['uuid']);
+
 ?>
 
 <!DOCTYPE html>

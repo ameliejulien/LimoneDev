@@ -1,7 +1,12 @@
 <?php
-    include '../../lib/service/ServiceVendeur.php';
 
-    $infosVendeur = recupererInfosVendeur();
+  require_once ("../../lib/service/ServiceVendeur.php");
+  require_once ("../../lib/service/ServiceUtilisateur.php");
+
+  droitsAccesPage($_COOKIE['uuid'], 2);
+
+  $infosVendeur = recupererInfosVendeur();
+
 ?>
 
 <!DOCTYPE html>

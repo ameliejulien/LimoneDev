@@ -1,14 +1,19 @@
 <?php
-include '../../lib/service/ServiceProduit.php';
-include '../../lib/service/ServiceVendeur.php';
 
-$produits = recupererlesProduitsVendeur();
+    require_once ("../../lib/service/ServiceProduit.php");
+    require_once ("../../lib/service/ServiceVendeur.php");
+    require_once ("../../lib/service/ServiceUtilisateur.php");
 
-$prix = array_column($produits, 'prix_ht_produit');
-$prixMin = (int) floor(min($prix));
-$prixMax = (int) ceil(max($prix));
+    droitsAccesPage($_COOKIE['uuid'], 2);
 
-$categories = recupererLesCategories();
+    $produits = recupererlesProduitsVendeur();
+
+    $prix = array_column($produits, 'prix_ht_produit');
+    $prixMin = (int) floor(min($prix));
+    $prixMax = (int) ceil(max($prix));
+
+    $categories = recupererLesCategories();
+
 ?>
 
 <!DOCTYPE html>

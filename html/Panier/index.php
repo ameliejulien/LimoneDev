@@ -1,3 +1,11 @@
+<?php
+
+    require_once ("../../lib/service/ServiceUtilisateur.php");
+
+    droitsAccesPage($_COOKIE['uuid'], 1);
+
+?>
+
 <!DOCTYPE html>
 <html>
 

@@ -1,4 +1,13 @@
 <?php
+
+  require_once ('../../lib/service/ServiceClient.php');
+  require_once ('../../lib/service/ServiceUtilisateur.php');
+
+  droitsAccesPage($_COOKIE['uuid'], 1);
+
+  $idClient = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur'];
+  $infosClient = recupererInfosClient($_COOKIE['uuid']);
+
 ?>
 
 <!DOCTYPE html>

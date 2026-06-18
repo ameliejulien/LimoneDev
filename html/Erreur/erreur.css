@@ -1,0 +1,27 @@
+h1 {
+  font-size: 3em;
+  color: #1C6D80;
+  font-family: var(--police-titre);
+  text-align: center;
+}
+
+body {
+  background-color: #fffdea;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formulaire {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 2em 5em;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-family: var(--police-generale);
+  background-color: white;
+  margin-top: 15%;
+}
