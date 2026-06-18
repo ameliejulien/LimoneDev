@@ -22,41 +22,41 @@ function confimerInscription($vendeur)
         $siret = $vendeur["siret"];
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception(code: 401);
+            throw new Exception(code: 601);
         }
 
         if (!preg_match("/[ a-zA-Z'.,;:!\(\)]+/", $denomination)) {
-            throw new Exception(code: 402);
+            throw new Exception(code: 602);
         }
 
         if (!preg_match("/0[1-9](?:[0-9]{2}){4}/", $tel)) {
-            throw new Exception(code: 403);
+            throw new Exception(code: 603);
         }
 
         if ($mdp != $confMdp) {
-            throw new Exception(code: 404);
+            throw new Exception(code: 604);
         }
 
         $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
 
         if (!preg_match("/[0-9]{5}/", $codePostal)) {
-            throw new Exception(code: 405);
+            throw new Exception(code: 605);
         }
 
         if (!preg_match("/[ -a-zA-Z'.,\/]+/", $ville)) {
-            throw new Exception(code: 406);
+            throw new Exception(code: 606);
         }
 
         if (!preg_match("/[ -a-zA-Z'.,\/]+/", $adresse)) {
-            throw new Exception(code: 407);
+            throw new Exception(code: 607);
         }
 
         if (!preg_match("/[0-9]{14}/", $siret)) {
-            throw new Exception(code: 408);
+            throw new Exception(code: 608);
         }
 
         if (!certifierClee($vendeur["cleAuth"])) {
-            throw new Exception(code: 409);
+            throw new Exception(code: 609);
         }
 
         return creerVendeurBdd($vendeur);

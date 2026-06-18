@@ -19,15 +19,15 @@ function fix_input($input)
 function confimerInscription($client) {
     try {
         if (!preg_match("/[a-zA-Z0-9_-]+$/", $client['nomUtilisateur'])) {
-            throw new Exception();
+            throw new Exception(code: 600);
         }
             
         if (!filter_var($client['mail'], FILTER_VALIDATE_EMAIL)) {
-            throw new Exception();
+            throw new Exception(code: 601);
         }
     
         if ($client['motDePasse'] !== $client['confMotDePasse']) {
-            throw new Exception();
+            throw new Exception(code: 604);
         }
         
         if (!preg_match("/0[1-9](?: [0-9]{2}){4}/", $client['telephone']) && !preg_match("/0[1-9](?:[0-9]{2}){4}/", $client['telephone'])) {
