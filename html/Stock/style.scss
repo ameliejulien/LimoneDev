@@ -1,0 +1,131 @@
+@import '../Global.css';
+
+:root {
+  --bleu-fonce: #1C6D80;
+  --vert-fonce: #208068;
+  --blanc: #FFFFFF;
+  --noir: #000000;
+  --bleu-clair: #47c1d7;
+  --vert-clair: #9ac821;
+  --beige-fonce: #b3d3bc;
+  --beige-clair: #fffdea;
+  --encre: #1C2D30;
+  --encre-claire: #4a5b5e;
+  --encre-tres-claire: #7d8a8c;
+  --bordure: #e6e1d2;
+  --bordure-fonce: #d5cfbd;
+  --arrondi: 14px;
+  --arrondi-petit: 8px;
+  --arrondi-grand: 22px;
+  --ombre-petite: 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
+  --ombre-moyenne: 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
+  --ombre-grande: 0 14px 40px rgba(28, 45, 48, 0.12);
+  --police-titre: Lovelo, sans-serif;
+  --police-soustitre: Alatsi, sans-serif;
+  --police-generale: Farro, sans-serif;
+}
+
+
+table{
+  border-collapse: collapse;
+  font-family: var(--police-generale);
+  font-size: smaller;
+  display: flex;
+  justify-content: center;
+}
+th, td {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: fit-content;
+  padding: 1em;
+  text-align: center;
+}
+
+.ligne_qte{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap:1em;
+
+}
+
+h1{
+  font-size: 3em;
+  color: #1C6D80;
+  font-family: var(--police-titre);
+  text-align:center;
+  padding: 1em 0em;
+}
+
+input.submit {
+  width: auto;
+  height: auto;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  display: grid;
+  place-items: center;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+input.submit:hover {
+  background: var(--vert-fonce);
+  transform: scale(1.06);
+}
+
+input.submit:active {
+  transform: scale(0.96);
+}
+
+.qte{
+  field-sizing: content;
+}
+
+.tableNav{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: center;
+  padding-top: 1em;
+}
+
+
+.sumbitDiv{
+  justify-content: center;
+}
+
+.qte {
+  background-color: white;
+  border: 2px solid var(--vert-fonce);
+  border-radius: var(--arrondi-petit);
+  padding: 0.25em;
+  min-width: 50px;
+  text-align: center;
+}
+
+.btn-moins, .btn-plus {
+  height: 0.75em;
+  align-content: center;
+}
+
+
+.sumbitDiv {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.numPage{
+  max-width: 50px;
+  text-align: center;
+}
+
+.tableNav button {
+  height: 1.5em;
+  font-size: smaller;
+  align-content: center;
+  min-width: 3em;
+}
