@@ -8,6 +8,7 @@
     $fetchData = file_get_contents("php://input");
     $data = json_decode($fetchData, true);
 
+    $retour = 500;
     if ($data["typeRequete"] == "update") {
         $retour = updateStock($data['lignesModifiees']);
     } 

@@ -11,7 +11,10 @@
     }
 
     function updateStock($lignesModifiees){
-        updateStockBDD($lignesModifiees);
+        $codeRetour = updateStockBDD($lignesModifiees);
+        error_log("code retour ".$codeRetour);
+        return $codeRetour;
+
     }
 
 ?>

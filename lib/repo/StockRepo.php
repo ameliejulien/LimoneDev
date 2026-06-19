@@ -31,30 +31,30 @@
     /**
      * Fait une MAJ des lignes modifiées dans le stock
      * @param array $lignesModifiees un tableau contenant les lignes modifiées
-     * 
-     * TODO : faire un try / catch et voir sil y n'y a pas des solutions moins coûteuses
+     * @return int un code d'erreur indiquant la réussite ou l'échec de l'opération
      */
     function updateStockBDD($lignesModifiees) {
         $connectBDD = connecterBDD();
-        $query = "UPDATE produit";
-        
-        foreach ($lignesModifiees as $ligne) {
-            $query.=" SET stock_produit = :stock, catalogue_produit = :catalogue
+        $query = "UPDATE produit SET stock_produit = :stock, catalogue_produit = :catalogue
             WHERE id_produit = :id";
-        }
-
         $requeteStockUpdate = $connectBDD->prepare($query);
 
-        foreach ($lignesModifiees as $ligne) {
-            $requeteStockUpdate -> execute([
-                ':stock' => $ligne['stock'],
-                ':catalogue'=> $ligne['catalogue'],
-                ':id' => $ligne['id'],
-            ]); 
+        try {
+
+        
+            foreach ($lignesModifiees as $ligne) {
+                $requeteStockUpdate -> execute([
+                    ':stock' => $ligne['stock'],
+                    ':catalogue'=> $ligne['catalogue'],
+                    ':id' => $ligne['id'],
+                ]); 
+                
+            }
+        return 200;
+        } catch (PDOException $e) {
+            return $e->getCode();
         }
-
+        
     }
-
-
 
 ?>

@@ -9,7 +9,6 @@ let nbPages;
 window.onload = function() {
     lignes = document.querySelectorAll("table tr:not(:first-child)");
     nbPages = Math.ceil(lignes.length / lignesParPage);
-    console.log(lignes);
 
     afficherPage(1);
 
@@ -53,8 +52,10 @@ function getLignes() {
     let tabRetour = Array.from(tab).map(ligne => ({
         id: ligne.querySelector("td:nth-child(1)").textContent.trim(),
         stock: ligne.querySelector(".qte").value,
-        catalogue: ligne.querySelector("input[type='checkbox']").checked
+        catalogue: ligne.querySelector("input[type='checkbox']").checked.toString()
     }));
+
+    console.log(tabRetour);
     return tabRetour;
 }
 

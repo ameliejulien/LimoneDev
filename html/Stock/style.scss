@@ -34,10 +34,23 @@ table{
   justify-content: center;
 }
 th, td {
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--vert-fonce);
   width: fit-content;
   padding: 1em;
   text-align: center;
+}
+
+th{
+  background-color: var(--vert-fonce);
+  color: white;
+}
+
+td{
+  background-color: white;
+}
+
+tr:hover td {
+  background-color: var(--beige-fonce);
 }
 
 .ligne_qte{
@@ -69,6 +82,7 @@ input.submit {
   transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
   cursor: pointer;
+  font-family: var(--police-generale);
 }
 
 input.submit:hover {
@@ -93,10 +107,6 @@ input.submit:active {
 }
 
 
-.sumbitDiv{
-  justify-content: center;
-}
-
 .qte {
   background-color: white;
   border: 2px solid var(--vert-fonce);
@@ -114,8 +124,13 @@ input.submit:active {
 
 .sumbitDiv {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   padding: 1em;
+  gap: 1em;
+}
+.sumbitDiv button, .sumbitDiv input {
+  width: 8em;
 }
 
 .numPage{
@@ -125,7 +140,21 @@ input.submit:active {
 
 .tableNav button {
   height: 1.5em;
-  font-size: smaller;
   align-content: center;
-  min-width: 3em;
+  width: 11em;
+}
+
+.photoProduit {
+  width: 4em;
+  height: 4em;
+  object-fit: contain;
+  margin: auto;
+  padding: 0.4em;
+}
+
+input[type="checkbox"] {
+  width: 1.3em;
+  height: 1.3em;
+  accent-color: var(--vert-fonce);
+  cursor: pointer;
 }

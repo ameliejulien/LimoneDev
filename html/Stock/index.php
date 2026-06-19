@@ -14,17 +14,12 @@
         require_once '../ui/header.php'; 
         require_once __DIR__ . '/../../lib/service/ServiceStock.php';
         require_once __DIR__ . '/../../lib/repo/UtilisateurRepo.php';
+        require_once __DIR__ . '/../../lib/service/ServiceUtilisateur.php';
+
+        droitsAccesPage($_COOKIE['uuid'], 2);
+
         $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
         $lstArticles = getStock($idVendeur);
-
-        $pageCourante = 1;
-        $ligneParPage = 7;
-
-        $nbPage =  intdiv(count($lstArticles), $ligneParPage);
-        if (count($lstArticles) % $ligneParPage != 0) {
-            $nbPage = $nbPage + 1;
-        }
-
     ?>
 
     <h1>Stock des produits</h1>
@@ -33,6 +28,7 @@
         <table>
             <tr>
                 <th>Identifiant produit</th>
+                <th>Image produit</th>
                 <th>Nom produit</th>
                 <th>Quantité produit</th>
                 <th>Catalogué</th>
@@ -43,12 +39,13 @@
             ?>
                     <tr>
                         <td><?= $article['id_produit'] ?></td>
+                        <td><img src=<?= $article['photo_produit'] ? "../imagesProduits/" . $article['photo_produit'] : '../imagesProduits/placeholder.png' ?> class="photoProduit"></td>
                         <td><?= $article['nom_produit']?></td>
                         <td>
                             <div class="ligne_qte">
-                                <button class="btn-moins" onclick="diminuerQuantite(this, 1)">−</button>
+                                <button type="button" class="btn-moins" onclick="diminuerQuantite(this, 1)">−</button>
                                 <input type="text" class="qte" value="<?= intval($article['stock_produit']) ?>" min="0">
-                                <button class="btn-plus" onclick="augmenterQuantite(this, 4)">+</button>
+                                <button type="button" class="btn-plus" onclick="augmenterQuantite(this, 4)">+</button>
                             </div>
                         </td>
                         <td><input type="checkbox" <?= boolval($article['catalogue_produit']) ? 'checked' : '' ?>></td>
@@ -62,56 +59,62 @@
 
         
         <div class="tableNav">
-            <button onclick="pagePrecedente(this)">Page précedente</button>
+            <button type="button" onclick="pagePrecedente(this)">Page précedente</button>
             <input type="text" class="numPage" value="1">
-            <button onclick="pageSuivante(this)">Page suivante</button>
+            <button type="button" onclick="pageSuivante(this)">Page suivante</button>
         </div>
     
         <div class="sumbitDiv">
             <input type="submit" value="Enregistrer" class="submit"/>
+            <button type="button" onclick="window.location.href = '../Vendeur/ConsulterCompteVendeur.php';">Retour</button>
         </div>
 
-</form>
+    </form>
+        <div class="snackbar">
+        <h3 class="snackbarTitle"></h3>
+        <p class="snackbarText"></p>
+    </div>
+
+    <script src="../snackbar.js"></script>
     <script src="stock.js"></script>
     <script>
-    // récupération des lignes du tableau
-    let lignesDepart = getLignes();
-    const tableau = document.querySelector(".tableau");
-    
-    // écouteur des requêtes du formulaire
-    tableau.addEventListener("submit", function (event) {
-      
-      // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault(); 
-
-      let lignesSubmit = getLignes();
-      let lignesModifiees = compareLignes(lignesDepart,lignesSubmit);
-
-      // TODO => mettre la valeur de l'input du nombre du stock
-      const formData = {
-        lignesModifiees: lignesModifiees,
-        typeRequete: "update"
-      }
-
-      // fetch vers le dossier API de création client
-      
-      fetch("../API/Stock.php", {
-        method: "POST",
-        body: JSON.stringify(formData)  // fait une string JSON du tableau
-      })
-      .then(response => response.json())  // transforme la réponse http en json exploitable
-      .then(json => {
-        if (json.reponse == 200) {
-          afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
-          window.location.href = "../Vendeur/ConsulterCompteVendeur.php";
+        // récupération des lignes du tableau
+        let lignesDepart = getLignes();
+        const form = document.querySelector("form");
         
-        } else {
-          afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion
-        }
-      })
+        // écouteur des requêtes du formulaire
+        form.addEventListener("submit", function (event){
         
-    });
-</script>
+            // empêche l'envoi du formulaire sans exécuter le code qui suit
+            event.preventDefault(); 
+
+            let lignesSubmit = getLignes();
+            let lignesModifiees = compareLignes(lignesDepart,lignesSubmit);
+
+            const formData = {
+                lignesModifiees: lignesModifiees,
+                typeRequete: "update"
+            }
+
+            // fetch vers le dossier API de création client
+            
+            fetch("../API/Stock.php", {
+                method: "POST",
+                body: JSON.stringify(formData)  // fait une string JSON du tableau
+            })
+            .then(response => {
+                    console.log(response.status)
+                    if (response.status == 200) {
+                        afficherSnackBar('Notification','Mise à jour des données réussie !'); // alerte de la création du compte
+                        window.location.href = "../Catalogue";
+                    } else {
+                        afficherSnackBar('Notification','Mise à jour des données échouée !'); // alerte de l'échec de la connexion
+                    }
+            
+                });
+        });
+    </script>
+    <?php require_once '../ui/footer.php' ?> 
 </body>
 
 </html>
