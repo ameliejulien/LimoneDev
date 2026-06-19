@@ -1,5 +1,6 @@
 <?php
-    include '../../lib/service/ServiceProduit.php';
+    require_once ("../../lib/service/ServiceProduit.php");
+    require_once ("../../lib/service/ServiceUtilisateur.php");
 
     $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
@@ -32,6 +33,9 @@
     if ($promotion && $reduction > 0) {
         $prixBarre = round($produit['prix_ht_produit'] * (1 + $tva / 100), 2); // barré en TTC aussi, pour rester cohérent avec le prix principal
     }
+
+    droitsAccesPageProduit($_COOKIE['uuid'], 2);
+
 ?>
 
 <!DOCTYPE html>
@@ -126,7 +130,12 @@
 
                 <!-- Quantité + Ajout panier -->
                 <div class="action-bloc">
+                    <!-- Si l'utilisateur est connecté en tant que vendeur, il n'a pas de bouton ajout au panier, mais il peut modifier le produit -->
+                    <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == true): ?>
+                    <div class="quantite-selector hide">
+                    <?php else: ?>
                     <div class="quantite-selector">
+                    <?php endif; ?>
                         <button type="button" class="qty-btn" id="btn-moins" aria-label="Diminuer la quantité">
                             <i class="fa-solid fa-minus"></i>
                         </button>
@@ -135,7 +144,14 @@
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
-
+                    
+                    <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == true): ?>
+                    <button type="button" class="bouton-panier" data-id="<?= $produit['id_produit'] ?>">
+                        <a href="CreerProduit.php">
+                            Modifier le produit
+                        </a>
+                    </button>
+                    <?php else: ?>
                     <button
                         type="button"
                         class="bouton-panier <?= !$enStock ? 'disabled' : '' ?>"
@@ -147,10 +163,15 @@
                         <i class="fa-solid fa-basket-shopping"></i>
                         <?= $enStock ? 'Ajouter au panier' : 'Indisponible' ?>
                     </button>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Infos livraison -->
+                <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == true): ?>
+                <div class="infos-livraison hide">
+                <?php else: ?>
                 <div class="infos-livraison">
+                <?php endif; ?>
                     <div class="info-item">
                         <i class="fa-solid fa-truck"></i>
                         <span>Livraison estimée sous 3 à 5 jours ouvrés</span>

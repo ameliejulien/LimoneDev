@@ -757,6 +757,10 @@ button:active {
   font-size: 4rem;
 }
 
+.hide {
+    display: none;
+}
+
 @media (max-width: 768px) {
   .produit-page {
     grid-template-columns: 1fr;
