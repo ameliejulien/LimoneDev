@@ -9,20 +9,22 @@
   <title>Connexion au compte</title>
 </head>
 <body>
-
   <?php require_once '../ui/header.php'; ?>
   <h1>Connexion</h1>
   <form class="formulaire" method="POST">
-    <div class="divForm">
-      <label for="mail">Adresse mail</label>
-      <input type="email" name="mail" required>
+    <div class="form__group">
+      <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
+      <label for="mail" class="form__label">Adresse mail</label>
+      <small class="form__hint">Exemple : test@utilisateur.fr</small>
     </div>
-    
-    <div class="divForm">
-      <label for="mdp">Mot de passe</label>
-      <input type="password" name="mdp" required minlength="8">
+
+    <div class="form__group">
+      <input type="password" id="mdp" name="mdp" class="form__field" placeholder=" " required minlength="8">
+      <label for="mdp" class="form__label">Mot de passe</label>
     </div>
-    
+
+    <br>
+
     <input type="submit" value="Se connecter" class="submit"/>
   </form>
 
@@ -31,38 +33,9 @@
     <p class="snackbarText"></p>
   </div>
 
-  <script src="../snackbar.js"></script>
+<script src="../snackbar.js"></script>
+<script>src="../js/form.js"></script>
 
-  <script>
-    const form = document.querySelector(".formulaire");
-
-    // écouteur des requêtes du formulaire
-    form.addEventListener("submit", function (event) {
-      
-      // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault(); 
-
-      // récupération des infos du formulaire
-      const formData = {
-        mail: form.mail.value,
-        motDePasse : form.mdp.value,
-      }
-
-      // fetch vers le dossier API de création client
-      fetch("../API/Connexion.php", {
-        method: "POST",
-        body: JSON.stringify(formData)  // fait une string JSON du tableau
-      })
-      .then(response => {
-        if (response.status == 200) {
-          // afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
-          window.location.href = "../Catalogue";
-        } else {
-          afficherSnackBar('Notification','Connexion échouée !'); // alerte de l'échec de la connexion
-        }
-      })
-    });
-</script>
-
+<?php require_once '../ui/footer.php'; ?>
 </body>
 </html>

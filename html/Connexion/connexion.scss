@@ -25,34 +25,108 @@
   --police-generale: Farro, sans-serif;
 }
 
-body{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+html {
+  height: 100%;
 }
 
-.formulaire{
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 1em, 5em;
-    gap: 1.75em;
-    margin: 0;
-    padding: 2em 5em;
-    width: fit-content;
-    font-family: var(--police-generale);
-    background-color: var(--blanc); 
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fffdea;
+  min-height: 100vh;
 }
 
-
-.divForm input{
-    height: 2em;
+footer.footer {
+  margin-top: auto;
 }
 
+h1 {
+  font-size: 3em;
+  color: #1C6D80;
+  font-family: var(--police-titre);
+}
 
-.submit { 
-    width: auto;
+.formulaire {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 5em;
+  gap: 2.2em;
+  margin: 0;
+  margin-bottom: 1em;
+  width: min(760px, 90vw);
+  font-family: var(--police-generale);
+  background-color: var(--blanc);
+}
+
+/* ----- Champs avec label flottant (même style que la page client) ----- */
+
+.form__group {
+  position: relative;
+  padding: 18px 0 0;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--encre-tres-claire);
+  outline: 0;
+  font-size: 1.2rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  color: var(--encre-claire);
+  pointer-events: none;
+}
+
+.form__field:focus {
+  border-bottom: 3px solid var(--vert-fonce);
+  border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+  border-image-slice: 1;
+  padding-bottom: 7px;
+}
+
+.form__field:focus ~ .form__label {
+  top: 0;
+  font-size: 0.95rem;
+  color: var(--vert-fonce);
+  font-weight: 700;
+}
+
+.form__field:required:invalid {
+  box-shadow: none;
+}
+
+/* ----- Bouton d'envoi ----- */
+
+.submit {
+  width: auto;
   height: auto;
   padding: 15px;
   border-radius: 12px;
@@ -66,23 +140,18 @@ body{
   font-family: var(--police-generale);
 }
 
-label{
-    font-size: 1.5em;
+.submit:hover {
+  background: var(--vert-fonce);
+  transform: scale(1.06);
 }
 
-
-.divForm {
-    display: flex;
-    flex-direction: column;
-    gap:0.25em;
+.submit:active {
+  transform: scale(0.96);
 }
 
-h1{
-    font-size: 3em;
-    color: #1C6D80;
-    font-family: var(--police-titre);
-}
-
-body{
-    background-color: #fffdea;
+.form__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--encre-tres-claire);
 }
