@@ -34,6 +34,19 @@
     }
 
     /**
+     * @Brief vérifie si l'utilisateur a les droits d'accès à la page en fonction de son rôle
+     * @Return redirige vers la page d'erreur si l'utilisateur n'a pas les droits d'accès
+     */
+
+    function droitsAccesPagePanier($uuid, $typeUtilisateurAttendu) {
+        $typeUtilisateur = trouverTypeUtilisateur($uuid);
+        if ($typeUtilisateur['type_utilisateur'] == $typeUtilisateurAttendu) {
+            header('Location: /Erreur/index.php');
+            exit();
+        }
+    }
+
+    /**
      * @Brief vérifie si le vendeur a les droits d'accès à la page produit en fonction des produits qui lui sont associés
      * @Return redirige vers la page d'erreur si le vendeur n'a pas les droits d'accès
      */

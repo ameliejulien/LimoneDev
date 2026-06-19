@@ -2,7 +2,7 @@
 
     require_once ("../../lib/service/ServiceUtilisateur.php");
 
-    droitsAccesPage($_COOKIE['uuid'], 1);
+    droitsAccesPagePanier($_COOKIE['uuid'], 2);
 
 ?>
 
