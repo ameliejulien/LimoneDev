@@ -211,7 +211,7 @@ function restreindreSaisieChiffres(...selectors) {
     });
   });
 }
-
+restreindreSaisieChiffres('#numtel', '#codepostal', '#codepostalfac', '#cartebancaire', '#codesecret');
 restreindreSaisieChiffres('#telephone', '#siret', '#codePostalVendeur', '#cleAuth');
 initCreationCompteVendeurForm();
 initConnexionForm();

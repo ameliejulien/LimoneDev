@@ -29,7 +29,7 @@
       <div class="form__group form__group--grow-2">
         <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required minlength="10" maxlength="10">
         <label for="telephone" class="form__label">Numéro de téléphone</label>
-        <small class="form__hint">Exemple : 0612345678</small>
+        <small class="form__hint">Exemple : 06 12 34 56 78</small>
       </div>
     </div>
 
