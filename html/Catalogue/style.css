@@ -204,6 +204,18 @@ img {
   padding: 0;
 }
 
+/* Partie gauche */
+
+.partie-gauche {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: sticky;
+  top: 100px;
+  flex: 0;
+  align-self: start;
+}
+
 /* Slider */
 
 .card {
@@ -215,9 +227,6 @@ img {
   padding: 28px 36px 32px;
   border-radius: 18px;
   box-shadow: var(--ombre-moyenne);
-  align-self: start;
-  top: 100px;
-  position: sticky;
 }
 
 .card-titre {
@@ -365,4 +374,8 @@ input[type="radio"] {
   cursor: pointer;
   user-select: none;
   letter-spacing: 0.02em;
+}
+
+#map {
+  height: 300px;
 }

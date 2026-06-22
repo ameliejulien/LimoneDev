@@ -9,6 +9,8 @@ CREATE TABLE limone.Adresse (
     adresse varchar(50),
     ville_adresse varchar (30),
     code_postal_adresse varchar(5),
+    latitude numeric,
+    longitude numeric,
     facturation_adresse boolean
 );
 
@@ -137,20 +139,6 @@ CREATE TABLE limone.Adresse_Client (
     CONSTRAINT fk2_adresse_client FOREIGN KEY (id_adresse) REFERENCES limone.Adresse(id_adresse),
     CONSTRAINT pk_adresse_client PRIMARY KEY (id_utilisateur, id_adresse)
 );
-
-
--- ====================================================
--- ======= Addresse Vendeur (Vendeur <-> Adresse) =======
--- ====================================================
-CREATE TABLE limone.Adresse_Vendeur (
-    id_utilisateur integer,
-    id_adresse integer,
-
-    CONSTRAINT fk1_adresse_vendeur FOREIGN KEY (id_utilisateur) REFERENCES limone.Utilisateur(id_utilisateur),
-    CONSTRAINT fk2_adresse_vendeur FOREIGN KEY (id_adresse) REFERENCES limone.Adresse(id_adresse),
-    CONSTRAINT pk_adresse_vendeur PRIMARY KEY (id_utilisateur, id_adresse)
-);
-
 
 -- ====================================================
 -- ======= Carte Client (Client <-> Adresse) ==========
