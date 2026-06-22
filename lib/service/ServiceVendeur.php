@@ -2,6 +2,7 @@
 
 include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/CompteVendeurRepo.php';
+include __DIR__ . '/../../html/Constants.php';
 
 /**
  * @brief modifie ou ajoute des informations d'un vendeur
@@ -43,41 +44,41 @@ function confimerInscription($vendeur)
         $siret = $vendeur["siret"];
 
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception(code: 601);
+            throw new Exception(code: HTTP_EMAIL_INVALIDE);
         }
 
         if (!preg_match("/[ a-zA-Z'.,;:!\(\)]+/", $denomination)) {
-            throw new Exception(code: 602);
+            throw new Exception(code: HTTP_DENOMINATION_INVALIDE);
         }
 
         if (!preg_match("/0[1-9](?:[0-9]{2}){4}/", $tel)) {
-            throw new Exception(code: 603);
+            throw new Exception(code: HTTP_TEL_INVALIDE);
         }
 
         if ($mdp != $confMdp) {
-            throw new Exception(code: 604);
+            throw new Exception(code: HTTP_MDP_CONFIRM_DIFF);
         }
 
         $vendeur["motDePasse"] = password_hash($vendeur["motDePasse"], PASSWORD_DEFAULT);
 
         if (!preg_match("/[0-9]{5}/", $codePostal)) {
-            throw new Exception(code: 605);
+            throw new Exception(code: HTTP_CODE_POSTAL_INVALIDE);
         }
 
         if (!preg_match("/[ -a-zA-Z'.,\/]+/", $ville)) {
-            throw new Exception(code: 606);
+            throw new Exception(code: HTTP_VILLE_INVALIDE);
         }
 
         if (!preg_match("/[ -a-zA-Z'.,\/]+/", $adresse)) {
-            throw new Exception(code: 607);
+            throw new Exception(code: HTTP_ADRESSE_INVALIDE);
         }
 
         if (!preg_match("/[0-9]{14}/", $siret)) {
-            throw new Exception(code: 608);
+            throw new Exception(code: HTTP_SIRET_INVALIDE);
         }
 
         if (!certifierClee($vendeur["cleAuth"])) {
-            throw new Exception(code: 609);
+            throw new Exception(code: HTTP_CLE_AUTH_INVALIDE);
         }
 
         return creerVendeurBdd($vendeur);
