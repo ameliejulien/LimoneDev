@@ -6,9 +6,10 @@ include __DIR__ . '/../repo/CompteVendeurRepo.php';
 /**
  * @brief modifie ou ajoute des informations d'un vendeur
  */
-function modifierVendeurBDD($vendeur) {
+function modifierVendeurBDD($vendeur)
+{
     try {
-        $idVendeur  = trouverIDUtilisateur($_COOKIE['uuid']);
+        $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
         $connectBDD = connecterBDD();
 
         $idAdresse = obtenirIdAdresseVendeur($connectBDD, $idVendeur);
@@ -57,7 +58,7 @@ function confimerInscription($vendeur)
             throw new Exception(code: 604);
         }
 
-        $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
+        $vendeur["motDePasse"] = password_hash($vendeur["motDePasse"], PASSWORD_DEFAULT);
 
         if (!preg_match("/[0-9]{5}/", $codePostal)) {
             throw new Exception(code: 605);
@@ -108,7 +109,7 @@ function champVide($vendeur)
 function connexionVendeur($vendeur)
 {
     $vendeur["mail"] = strtolower($vendeur["mail"]);
-    $vendeur["motDePasse"] = hash('sha256', $vendeur["motDePasse"]);
+    $vendeur["motDePasse"] = password_hash($vendeur["motDePasse"], PASSWORD_DEFAULT);
     $retour = connecterVendeur($vendeur);
 
     if ($retour == false) {
@@ -177,27 +178,33 @@ function modificationVendeur($vendeur)
 }
 
 /**
- * Brief modfie le mot de passe Vendeur
+ * @Brief modfie le mot de passe Vendeur
  */
 function modificationMdpVendeur($data)
 {
-    $mdpCourant = hash('sha256', $data["mdpCourant"]);
-    $nouveauMdp = hash('sha256', $data["nouveauMdp"]);
-    $confNouveauMdp = hash('sha256', $data["confNouveauMdp"]);
+    $mdpCourant = $data["mdpCourant"];
+    $nouveauMdp = $data["nouveauMdp"];
+    $confNouveauMdp = $data["confNouveauMdp"];
 
-    // Les deux nouveaux mots de passe ne correspondent pas
-    if ($nouveauMdp !== $confNouveauMdp) {
-        return 401;
+    $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
+
+    if (password_verify($mdpCourant, getVendeurMdpHash($idVendeur))) {
+        // Les deux nouveaux mots de passe ne correspondent pas
+        if ($nouveauMdp !== $confNouveauMdp) {
+            return 401;
+        }
+
+        // Le nouveau mot de passe est identique à l'ancien
+        if ($mdpCourant === $nouveauMdp) {
+            return 409;
+        }
+
+        // Tout est valide → on met à jour
+        modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT));
+        return 200;
+    } else {
+        return 400;
     }
-
-    // Le nouveau mot de passe est identique à l'ancien
-    if ($mdpCourant === $nouveauMdp) {
-        return 409;
-    }
-
-    // Tout est valide → on met à jour
-    modifierMdpVendeurBDD($nouveauMdp);
-    return 200;
 }
 
 function recupererLesVendeurs()

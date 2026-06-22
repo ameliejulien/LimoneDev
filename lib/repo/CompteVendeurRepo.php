@@ -200,6 +200,20 @@ function getVendeurId($vendeur)
     return $id;
 }
 
+function getVendeurMdpHash($idVendeur)
+{
+    $connectBDD = connecterBDD();
+
+    $requete = "select id_vendeur, mdp_utilisateur from Vendeur inner join limone.Utilisateur
+    on utilisateur.id_utilisateur = Vendeur.id_vendeur
+    where id_vendeur = :idVendeur";
+
+    $requete = $connectBDD->prepare($requete);
+    $requete->bindValue(":idVendeur", $idVendeur);
+
+    $row = $requete->fetch(PDO::FETCH_ASSOC);
+    return $row["mdp_utilisateur"] ?? null;
+}
 
 /**
  * @Brief récupère les informations du vendeur en fonction de l'id passé en paramètre
@@ -212,9 +226,10 @@ function infosVendeurBDD($idVendeur)
         "denomination_vendeur, siret_vendeur, adresse, ville_adresse, code_postal_adresse " .
         "FROM Utilisateur JOIN Vendeur ON Utilisateur.id_utilisateur = Vendeur.id_vendeur " .
         "INNER JOIN Adresse on Vendeur.addresse_vendeur = Adresse.id_adresse " .
-        "WHERE id_vendeur = '{$idVendeur}';";
+        "WHERE id_vendeur = :idVendeur;";
 
     $requetePreparee = $connectBDD->prepare($requete);
+    $requetePreparee->bindValue(":idVendeur", $idVendeur);
     $requetePreparee->execute();
     $infosVendeur = $requetePreparee->fetchall();
     return $infosVendeur;

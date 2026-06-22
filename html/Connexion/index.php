@@ -48,6 +48,8 @@
         motDePasse : form.mdp.value,
       }
 
+      console.log(formData);
+
       // fetch vers le dossier API de création client
       fetch("../API/Connexion.php", {
         method: "POST",
