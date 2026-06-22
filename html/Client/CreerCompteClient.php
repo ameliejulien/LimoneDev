@@ -51,7 +51,7 @@
 </form>
   
 <script src="../snackbar.js"></script>
-<script>src="../js/form.js"></script>
+<script src="../js/form.js"></script>
 <?php require_once '../ui/footer.php'; ?>
 </body>
 </html>

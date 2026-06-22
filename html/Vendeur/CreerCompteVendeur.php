@@ -27,7 +27,7 @@
       </div>
 
       <div class="form__group form__group--grow-2">
-        <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required>
+        <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required minlength="8" maxlength="8">
         <label for="telephone" class="form__label">Numéro de téléphone</label>
         <small class="form__hint">Exemple : 0612345678</small>
       </div>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="form__group form__group--grow-1">
-        <input type="text" id="codePostalVendeur" name="codePostalVendeur" class="form__field" placeholder=" " required maxlength="5">
+        <input type="text" id="codePostalVendeur" name="codePostalVendeur" class="form__field" placeholder=" " required minlength="5" maxlength="5">
         <label for="codePostalVendeur" class="form__label">Code postal du vendeur</label>
         <small class="form__hint">Exemple : 29000</small>
       </div>
@@ -59,7 +59,7 @@
       </div>
 
       <div class="form__group form__group--grow-3">
-        <input type="text" id="cleAuth" name="cleAuth" class="form__field" placeholder=" " required maxlength="10">
+        <input type="text" id="cleAuth" name="cleAuth" class="form__field" placeholder=" " required minlength="10" maxlength="10">
         <label for="cleAuth" class="form__label">Clé d'authentification</label>
         <small class="form__hint">Exemple : 0123456789</small>
       </div>
@@ -87,8 +87,8 @@
     </div>
   </form>
 
-  <script src="../snackbar.js"></script>
-  <script src="../js/form.js"></script>
+<script src="../snackbar.js"></script>
+<script src="../js/form.js"></script>
 <?php require_once '../ui/footer.php'; ?>
 </body>
 
