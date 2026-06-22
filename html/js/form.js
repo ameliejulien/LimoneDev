@@ -179,6 +179,40 @@ function initCreationCompteVendeurForm(formSelector = ".formulaire") {
   });
 }
 
+/**
+ * Restreint la saisie d'un ou plusieurs champs à des chiffres uniquement.
+ * Bloque toute touche non numérique et nettoie les valeurs collées (coller/copier).
+ *
+ * @param {...string} selectors
+ *
+ */
+function restreindreSaisieChiffres(...selectors) {
+  selectors.forEach(function (selector) {
+    const champ = document.querySelector(selector);
+    if (!champ) return;
+
+    // Bloque les touches non numériques à la frappe
+    champ.addEventListener("keydown", function (event) {
+      const touchesAutorisees = [
+        "Backspace", "Delete", "Tab", "Escape", "Enter",
+        "ArrowLeft", "ArrowRight", "Home", "End"
+      ];
+      if (touchesAutorisees.includes(event.key)) return;
+      if (event.ctrlKey || event.metaKey) return; // autorise Ctrl+C, Ctrl+V...
+      if (!/^\d$/.test(event.key)) event.preventDefault();
+    });
+
+    // Nettoie les valeurs collées (copier-coller)
+    champ.addEventListener("paste", function (event) {
+      event.preventDefault();
+      const texte = (event.clipboardData || window.clipboardData).getData("text");
+      const chiffresUniquement = texte.replace(/\D/g, "");
+      document.execCommand("insertText", false, chiffresUniquement);
+    });
+  });
+}
+
+restreindreSaisieChiffres('#telephone', '#siret', '#codePostalVendeur', '#cleAuth');
 initCreationCompteVendeurForm();
 initConnexionForm();
 initCreationCompteClientForm();
