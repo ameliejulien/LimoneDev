@@ -24,11 +24,11 @@ VALUES
 INSERT INTO utilisateur
 (email_utilisateur, nom_utilisateur, mdp_utilisateur, type_utilisateur, telephone_utilisateur)
 VALUES
-('breizhshop@contact.com','breizhShop', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0605040302),
-('bretagneunivers@contact.com', 'bretagne_univers', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0708090100),
-('ievcorp@contact.com', 'IveCorp', 'd8a02530689675a443ecf27cdf532c5275327742b9fe6c1bbf8fe77423180044', 2,0203040506),
-('client.fidele@univ-rennes.fr', 'ClientFidele1', 'f330a8de424ca1cc4a1eb1657df23ba2db77dbdc69926ee0e5b50fade6b78f22', 1,0652696817),
-('pierre.infidele@elysee.fr', 'PierreElysee', '1f116a3a9395db65af6530fe06f710473362ae9f32f08ae8a6797fde1190e125', 1,0645281409);
+('breizhshop@contact.com','breizhShop', '$2y$10$1IeKAwiXmv1gUh/RI3dHaOQ/Pc8/C0j4ghJX.8qhPQarfUrYkQKJy', 2,0605040302),
+('bretagneunivers@contact.com', 'bretagne_univers', '$2y$10$f2g7g0mH/DPXJ45IDv6ZCuuXnA.96jK9nlYMzmb2F8YdkrODNUvCq', 2,0708090100),
+('ievcorp@contact.com', 'IveCorp', '$2y$10$gdlrLVKUrGKP6/GA605MqegRHdpBX6WwRotoROyvsxWiRz.tJ2Mse', 2,0203040506),
+('client.fidele@univ-rennes.fr', 'ClientFidele1', '$2y$10$nhj1mSyHY/bDfWVa9kBX1ONjFoRwCPq8yMBCm2/w3uKiBQRX8nfC2', 1,0652696817),
+('pierre.infidele@elysee.fr', 'PierreElysee', '$2y$10$g96ZVdf7v7jfkePzZS//E.lz.MBcwQgij2Us5ouZUXk9Sdbt1gr3K', 1,0645281409);
 
 INSERT INTO vendeur
 (id_vendeur, denomination_vendeur, siret_vendeur, addresse_vendeur)
