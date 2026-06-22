@@ -87,10 +87,12 @@ function trouverLesProduitsVendeur(): array {
 
 
     $query = "
-    SELECT produit.id_produit, produit.nom_produit, produit.description_produit,
-           produit.prix_ht_produit, produit.stock_produit, produit.catalogue_produit,
-           produit.promotion_produit, produit.reduction_produit, produit.tva_produit,
-           produit.produit_supprime, produit.vendeur_produit, produit.nb_ventes_produit
+    SELECT produit.id_produit, nom_produit, description_produit,
+           prix_ht_produit, stock_produit, catalogue_produit,
+           promotion_produit, reduction_produit, tva_produit,
+           produit_supprime, vendeur_produit, nb_ventes_produit,
+           vendeur.denomination_vendeur, vendeur.id_vendeur,
+           categorie.id_categorie, photo_produit.photo_produit
     FROM produit 
     INNER JOIN categorie_produit on produit.id_produit = categorie_produit.id_produit
     INNER JOIN categorie on categorie_produit.id_categorie = categorie.id_categorie
