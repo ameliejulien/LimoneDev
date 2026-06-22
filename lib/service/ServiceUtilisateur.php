@@ -52,9 +52,13 @@
      */
 
     // TODO : faire une fonction qui regarde si l'utilisateur a des articles dans son panier
-    function droitsAccesPagePaiement($uuid, $typeUtilisateurAttendu) {
+    function droitsAccesPagePaiement($uuid, $typeUtilisateurAttendu, $quantiteProduitArray) {
         $typeUtilisateur = trouverTypeUtilisateur($uuid);
         if ($typeUtilisateur['type_utilisateur'] == $typeUtilisateurAttendu) {
+            header('Location: /Erreur/index.php');
+            exit();
+        }
+        else if (empty($quantiteProduitArray)){
             header('Location: /Erreur/index.php');
             exit();
         }

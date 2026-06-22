@@ -104,7 +104,11 @@ $prixTotalTtc = 0;
                         soit <?= number_format($prixTotalHt, 2, ',', ' ') ?> € HT
                     </div>
                 </div>
-                <button type="submit">Payer</button>
+                <?php if (empty($quantiteProduitArray)):?>
+                    <p>Votre panier est vide.</p>
+                <?php else: ?>
+                    <button type="submit">Payer</button>
+                <?php endif; ?>
             </form>
         </div>
     <?php require '../ui/footer.php'; ?>

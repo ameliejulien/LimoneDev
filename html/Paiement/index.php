@@ -2,10 +2,14 @@
 
     require_once("../../lib/service/ServiceClient.php");
     require_once ("../../lib/service/ServiceUtilisateur.php");
+    require_once ("../../lib/service/ServicePanier.php");
 
-    droitsAccesPagePanier($_COOKIE['uuid'], 2);
+    $panier = getPanierIDs();
+    $quantiteProduitArray = array_count_values($panier);
 
-    $infosClient=recupererInfosClient($_COOKIE['uuid'])
+    droitsAccesPagePaiement($_COOKIE['uuid'], 2, $quantiteProduitArray);
+
+    $infosClient=recupererInfosClient($_COOKIE['uuid']);
 
 ?>
 
