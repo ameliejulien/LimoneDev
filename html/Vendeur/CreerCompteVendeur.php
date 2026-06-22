@@ -27,7 +27,7 @@
       </div>
 
       <div class="form__group form__group--grow-2">
-        <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required minlength="8" maxlength="8">
+        <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required minlength="10" maxlength="10">
         <label for="telephone" class="form__label">Numéro de téléphone</label>
         <small class="form__hint">Exemple : 0612345678</small>
       </div>
@@ -59,7 +59,7 @@
       </div>
 
       <div class="form__group form__group--grow-3">
-        <input type="text" id="cleAuth" name="cleAuth" class="form__field" placeholder=" " required minlength="10" maxlength="10">
+        <input type="text" id="cleAuth" name="cleAuth" class="form__field" placeholder=" " required minlength="9" maxlength="9">
         <label for="cleAuth" class="form__label">Clé d'authentification</label>
         <small class="form__hint">Exemple : 0123456789</small>
       </div>
