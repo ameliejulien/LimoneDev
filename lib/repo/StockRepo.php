@@ -15,7 +15,8 @@
         FROM produit
         LEFT JOIN photo_produit ON produit.id_produit = photo_produit.id_produit AND photo_produit.photo_principale = TRUE
         INNER JOIN utilisateur ON produit.vendeur_produit = utilisateur.id_utilisateur 
-        WHERE utilisateur.id_utilisateur = :idVendeur";
+        WHERE utilisateur.id_utilisateur = :idVendeur
+        AND produit.produit_supprime = FALSE";
 
         $requeteStockPreparee = $connectBDD->prepare($query);
         $requeteStockPreparee -> bindValue(":idVendeur", $idVendeur);
@@ -55,6 +56,22 @@
             return $e->getCode();
         }
         
+    }
+
+
+
+    function deleteProduitBDD($idProduit) {
+                $connectBDD = connecterBDD();
+        $query = "UPDATE produit SET catalogue_produit = FALSE, produit_supprime = TRUE
+            WHERE id_produit = :id";
+        $requeteDelete = $connectBDD->prepare($query);
+
+        try {
+            $requeteDelete -> execute([":id" => $idProduit]);
+            return 200;
+        } catch (PDOException $e) {
+            return $e->getCode();
+        }
     }
 
 ?>

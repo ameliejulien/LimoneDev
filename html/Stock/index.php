@@ -5,6 +5,7 @@
     <title>Stock vendeur</title>
     <link rel="stylesheet" type="text/css" href="/Stock/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../snackbar.js"></script>
 </head>
@@ -52,6 +53,7 @@
                                 </div>
                             </td>
                             <td><input type="checkbox" <?= boolval($article['catalogue_produit']) ? 'checked' : '' ?>></td>
+                            <td><button type="button" class="deleteButton" onclick="popupSuppression(this)"><i class="material-icons">delete</i></button></td>
                         </tr>
                 <?php
                     }
@@ -73,9 +75,17 @@
         <?php }?>
 
     </form>
-        <div class="snackbar">
+    <div class="snackbar">
         <h3 class="snackbarTitle"></h3>
         <p class="snackbarText"></p>
+    </div>
+
+    <div class="deleteConfirmation" hidden="true">
+        <h2>Voulez vous supprimer l'article ?</h2>
+        <div>
+            <button type="button" onclick="confirmerSuppression()">Oui</button>
+            <button type="button" onclick="cancelSuppression()">Non</button>
+        </div>
     </div>
 
     <script src="../snackbar.js"></script>

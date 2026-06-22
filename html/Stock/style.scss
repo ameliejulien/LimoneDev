@@ -158,3 +158,41 @@ input[type="checkbox"] {
   accent-color: var(--vert-fonce);
   cursor: pointer;
 }
+
+
+.deleteButton {
+  padding: none;
+  height: auto;
+  width: auto;
+}
+
+.deleteConfirmation {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--beige-clair);
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  padding: 4em 2em;
+  border-style: solid;
+  border-color: var(--vert-fonce);
+  border-radius: 3em;
+  border-width: 0.25em;
+  gap: 2em;
+}
+
+.deleteConfirmation h2{
+  color: var(--vert-fonce);
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+.deleteConfirmation div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap:2em;
+
+}
+

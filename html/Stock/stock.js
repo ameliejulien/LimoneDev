@@ -3,6 +3,8 @@ const lignesParPage = 5;
 let pageCourante = 1;
 let nbPages;
 
+let idArtSuppression = null;
+
 /**
  * réupère lees lignes et affiche le tableau au chargement de la page
  */
@@ -124,3 +126,43 @@ function afficherPage(page) {
     document.querySelector(".numPage").value = page + " / " + nbPages;
 }
 
+function popupSuppression(node) {
+    const confirmation = document.getElementsByClassName("deleteConfirmation")[0];
+    confirmation.hidden = false;
+
+    idArtSuppression = node.closest("tr").querySelector("td:nth-child(1)").textContent.trim();
+    console.log("id : "+idArtSuppression)
+}
+
+
+function confirmerSuppression(){
+    const confirmation = document.getElementsByClassName("deleteConfirmation")[0];
+    confirmation.hidden = true;
+    const formData = {
+                idArt: idArtSuppression,
+                typeRequete: "delete"
+            }
+    // TODO faire le fetch 
+    fetch("../API/Stock.php", {
+                method: "POST",
+                body: JSON.stringify(formData)  // fait une string JSON du tableau
+            })
+            .then(response => {
+                    console.log(response.status)
+                    if (response.status == 200) {
+                        afficherSnackBar('Notification','Suppression réussie !'); // alerte de la création du compte
+                        window.location.reload();
+                    } else {
+                        afficherSnackBar('Notification','Supression échouée !'); // alerte de l'échec de la connexion
+                    }
+            
+                });
+    idArtSuppression = null
+
+}
+
+
+function cancelSuppression(){
+    const confirmation = document.getElementsByClassName("deleteConfirmation")[0];
+    confirmation.hidden = true;
+}

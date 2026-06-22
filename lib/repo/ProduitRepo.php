@@ -31,6 +31,7 @@ function trouverLesProduits(): array {
     LEFT JOIN photo_produit on produit.id_produit = photo_produit.id_produit
     INNER JOIN vendeur on produit.vendeur_produit = vendeur.id_vendeur
     WHERE produit.catalogue_produit = TRUE
+    AND produit.produit_supprime = FALSE
     ORDER BY produit.id_produit;";
 
     return $PDO->query($query)->fetchAll();
@@ -101,6 +102,7 @@ function trouverLesProduitsVendeur(): array {
     INNER JOIN vendeur on produit.vendeur_produit = vendeur.id_vendeur
     WHERE vendeur.id_vendeur = :idVendeur
     AND produit.catalogue_produit = TRUE
+    AND produit.produit_supprime = FALSE
     ORDER BY produit.id_produit;";
 
     $stmt = $PDO->prepare($query);
