@@ -1,18 +1,18 @@
 SET SCHEMA 'limone';
 
 INSERT INTO adresse
-(adresse, ville_adresse, code_postal_adresse, facturation_adresse)
+(adresse, ville_adresse, code_postal_adresse, latitude, longitude, facturation_adresse)
 VALUES
-('56 rue du Château', 'Saint-germain-en-laye', '78100', false),
-('9 rue de la République', 'Lyon', '69004', false),
-('48 rue du Château', 'Saint-Etienne-du-rouvray', '76800', true),
-('67 rue du Clair Bocage', 'La Teste-de-buch', '33260', false),
-('44 Place Napoléon', 'Laval', '53000', false),
-('1 Rue Jean Jaures', 'Quimper', '29000', false),
-('9 Rue Saint-Marc', 'Brest', '29200', false),
-('2 Place du Guesclin', 'Saint-Brieuc', '22000', false),
-('2 Rue des Fosses', 'Rennes', '35000', false),
-('70 rue Beauvau', 'Marseille', '13004', true);
+('56 rue du Château', 'Saint-germain-en-laye', '78100', null, null, false),
+('9 rue de la République', 'Lyon', '69004', null, null, false),
+('48 rue du Château', 'Saint-Etienne-du-rouvray', '76800', null, null, true),
+('67 rue du Clair Bocage', 'La Teste-de-buch', '33260', null, null, false),
+('44 Place Napoléon', 'Laval', '53000', null, null, false),
+('1 Rue Jean Jaures', 'Quimper', '29000', 47.993491, -4.096177, false),
+('9 Rue Saint-Marc', 'Brest', '29200', 48.396449, -4.475460, false),
+('2 Place du Guesclin', 'Saint-Brieuc', '22000', 48.511881, -2.758806, false),
+('2 Rue des Fosses', 'Rennes', '35000', null, null, false),
+('70 rue Beauvau', 'Marseille', '13004', null, null, true);
 
 INSERT into type 
 (nom_type)
@@ -36,6 +36,12 @@ VALUES
 (1, 'BREIZH-SHOP', 67676767676767, 6),
 (2, 'BRETAGNE-UNIVERS', 12458409162345, 7),
 (3, 'IEV-CORP', 08678429865878, 8);
+
+INSERT INTO adresse_client
+(id_utilisateur, id_adresse)
+VALUES
+(4, 5),
+(5, 9);
 
 INSERT INTO produit
 (nom_produit, description_produit, prix_ht_produit, stock_produit, catalogue_produit, promotion_produit, reduction_produit, tva_produit, produit_supprime, vendeur_produit, nb_ventes_produit)

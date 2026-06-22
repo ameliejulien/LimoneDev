@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Catalogue</title>
+    <title>Stock vendeur</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>

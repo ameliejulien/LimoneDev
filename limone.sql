@@ -1,6 +1,8 @@
 DROP SCHEMA IF EXISTS  limone CASCADE;
 CREATE SCHEMA limone;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- =======================
 -- ======= Adresse =======
 -- =======================
@@ -9,6 +11,8 @@ CREATE TABLE limone.Adresse (
     adresse varchar(50),
     ville_adresse varchar (30),
     code_postal_adresse varchar(5),
+    latitude numeric,
+    longitude numeric,
     facturation_adresse boolean
 );
 
@@ -36,7 +40,7 @@ CREATE TABLE limone.Type (
 -- ===========================
 CREATE TABLE limone.Utilisateur (
     id_utilisateur serial PRIMARY KEY,
-    uuid_utilisateur uuid DEFAULT uuidv7(),
+    uuid_utilisateur uuid DEFAULT uuid_generate_v4(),
     nom_utilisateur varchar(30),
     email_utilisateur varchar(320),
     telephone_utilisateur varchar(15),
@@ -137,20 +141,6 @@ CREATE TABLE limone.Adresse_Client (
     CONSTRAINT fk2_adresse_client FOREIGN KEY (id_adresse) REFERENCES limone.Adresse(id_adresse),
     CONSTRAINT pk_adresse_client PRIMARY KEY (id_utilisateur, id_adresse)
 );
-
-
--- ====================================================
--- ======= Addresse Vendeur (Vendeur <-> Adresse) =======
--- ====================================================
-CREATE TABLE limone.Adresse_Vendeur (
-    id_utilisateur integer,
-    id_adresse integer,
-
-    CONSTRAINT fk1_adresse_vendeur FOREIGN KEY (id_utilisateur) REFERENCES limone.Utilisateur(id_utilisateur),
-    CONSTRAINT fk2_adresse_vendeur FOREIGN KEY (id_adresse) REFERENCES limone.Adresse(id_adresse),
-    CONSTRAINT pk_adresse_vendeur PRIMARY KEY (id_utilisateur, id_adresse)
-);
-
 
 -- ====================================================
 -- ======= Carte Client (Client <-> Adresse) ==========

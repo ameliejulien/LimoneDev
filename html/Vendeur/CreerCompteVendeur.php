@@ -14,127 +14,82 @@
   <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte vendeur</h1>
   <form method="POST" class="formulaire">
-    <div class="divForm">
-      <label for="mail">Adresse mail</label>
-      <input type="email" name="mail" required placeholder=" exemple : test@vendeur.fr">
+    <div class="form__group">
+      <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
+      <label for="mail" class="form__label">Adresse mail</label>
+      <small class="form__hint">Exemple : test@vendeur.fr</small>
     </div>
 
-    <div class="divForm">
-      <label for="denomination">Dénomination vendeur</label>
-      <input type="text" name="denomination" required>
+    <div class="form__row">
+      <div class="form__group form__group--grow-3">
+        <input type="text" id="denomination" name="denomination" class="form__field" placeholder=" " required>
+        <label for="denomination" class="form__label">Dénomination vendeur</label>
+      </div>
+
+      <div class="form__group form__group--grow-2">
+        <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required>
+        <label for="telephone" class="form__label">Numéro de téléphone</label>
+        <small class="form__hint">Exemple : 0612345678</small>
+      </div>
     </div>
 
-    <div class="divForm">
-      <label for="telephone">Numéro de téléphone</label>
-      <input type="tel" name="telephone" required placeholder="exemple : 0606060606">
+    <div class="form__group">
+      <input type="text" id="adresseVendeur" name="adresseVendeur" class="form__field" placeholder=" " required>
+      <label for="adresseVendeur" class="form__label">Adresse du vendeur</label>
     </div>
 
-    <div class="divForm">
-      <label for="siret">Siret vendeur</label>
-      <input type="text" name="siret" required minlength="14" maxlength="14" placeholder="exemple : 12121212121212">
+    <div class="form__row">
+      <div class="form__group form__group--grow-2">
+        <input type="text" id="villeVendeur" name="villeVendeur" class="form__field" placeholder=" " required>
+        <label for="villeVendeur" class="form__label">Ville du vendeur</label>
+      </div>
+
+      <div class="form__group form__group--grow-1">
+        <input type="text" id="codePostalVendeur" name="codePostalVendeur" class="form__field" placeholder=" " required maxlength="5">
+        <label for="codePostalVendeur" class="form__label">Code postal du vendeur</label>
+        <small class="form__hint">Exemple : 29000</small>
+      </div>
     </div>
 
-    <div class="divForm">
-      <label for="adresseVendeur">Adresse du vendeur</label>
-      <input type="text" name="adresseVendeur" required>
+    <div class="form__row">
+      <div class="form__group form__group--grow-2">
+        <input type="text" id="siret" name="siret" class="form__field" placeholder=" " required minlength="14" maxlength="14">
+        <label for="siret" class="form__label">Siret vendeur</label>
+        <small class="form__hint">Exemple : 12345678900012</small>
+      </div>
+
+      <div class="form__group form__group--grow-3">
+        <input type="text" id="cleAuth" name="cleAuth" class="form__field" placeholder=" " required maxlength="10">
+        <label for="cleAuth" class="form__label">Clé d'authentification</label>
+        <small class="form__hint">Exemple : 0123456789</small>
+      </div>
     </div>
 
-    <div class="divForm">
-      <label for="villeVendeur">Ville du vendeur</label>
-      <input type="text" name="villeVendeur" required>
+    <div class="form__row">
+      <div class="form__group form__group--grow-1">
+        <input type="password" id="mdp" name="mdp" class="form__field" placeholder=" " required minlength="8">
+        <label for="mdp" class="form__label">Mot de passe</label>
+      </div>
+
+      <div class="form__group form__group--grow-1">
+        <input type="password" id="confMdp" name="confMdp" class="form__field" placeholder=" " required minlength="8">
+        <label for="confMdp" class="form__label">Confirmation du mot de passe</label>
+      </div>
     </div>
 
-    <div class="divForm">
-      <label for="codePostalVendeur">Code postal du vendeur</label>
-      <input type="text" name="codePostalVendeur" required maxlength="5">
-    </div>
+    <br>
 
-    <div class="divForm">
-      <label for="cleAuth">Clé d'authentification</label>
-      <input type="text" name="cleAuth" required>
-    </div>
-
-    <div class="divForm">
-      <label for="mdp">Mot de passe</label>
-      <input type="password" name="mdp" required minlength="8">
-    </div>
-
-    <div class="divForm">
-      <label for="confMdp">Confirmation du mot de passe</label>
-      <input type="password" name="confMdp" required minlength="8">
-    </div>
     <input type="submit" value="S'inscrire" class="submit" />
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>
       <p class="snackbarText"></p>
     </div>
-
-    <script src="../snackbar.js"></script>
   </form>
-  <script>
-    const form = document.querySelector(".formulaire");
 
-    // écouteur des requêtes du formulaire
-    form.addEventListener("submit", function (event) {
-
-      // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault();
-
-      // récupération des infos du formulaire
-      const formData = {
-        mail: form.mail.value,
-        denomination: form.denomination.value,
-        telephone: form.telephone.value,
-        cleAuth: form.cleAuth.value,
-        siret: form.siret.value,
-        adresseVendeur: form.adresseVendeur.value,
-        villeVendeur: form.villeVendeur.value,
-        codePostalVendeur: form.codePostalVendeur.value,
-        motDePasse: form.mdp.value,
-        confMotDePasse: form.confMdp.value,
-        typeRequete: "creation"
-      }
-
-      // fetch vers le dossier API de création client
-      fetch("../API/Vendeur.php", {
-        method: "POST",
-        body: JSON.stringify(formData) // fait une string JSON du tableau
-      }).then(response => {
-        console.log("RESPONSE = ");
-        console.log(response); // test affichage retour
-
-        if (response.status == 200) {
-          alert("Compte créé !"); // alert de la création du compte
-          window.location.href = "ConnexionCompteVendeur.php";
-
-        } else if (response.status == 609) {
-          afficherSnackBar('Notification', 'Echec de création de compte : Clé d\'authentification invalide');
-        } else if (response.status == 608) {
-          afficherSnackBar('Notification', 'Echec de création de compte : Le SIRET est invalide. Format : 14 chiffres');
-        } else if (response.status == 607) {
-          afficherSnackBar('Notification', 'Echec de création de compte : L\'adresse contient des caractères invalides');
-        } else if (response.status == 606) {
-          afficherSnackBar('Notification', 'Echec de création de compte : La ville contient des caractères invalides');
-        } else if (response.status == 605) {
-          afficherSnackBar('Notification', 'Echec de création de compte : Code postal invalide. Format : 12345');
-        } else if (response.status == 604) {
-          afficherSnackBar('Notification', 'Echec de création de compte : Le mot de passe renseigné est différent de la confirmation');
-        } else if (response.status == 603) {
-          afficherSnackBar('Notification', 'Echec de création de compte : Numéro de téléphone invalide. Format : 0123456789');
-        } else if (response.status == 602) {
-          afficherSnackBar('Notification', 'Echec de création de compte : La dénomination contient des caractères invalides');
-        } else if (response.status == 601) {
-          afficherSnackBar('Notification', 'Echec de création de compte : E-mail invalide');
-        } else {
-          afficherSnackBar('Notification', 'Echec de création de compte !');
-        }
-      })
-        .catch(err => {
-          console.error("Erreur :", err);
-        });
-    });
-  </script>
+  <script src="../snackbar.js"></script>
+  <script src="../js/form.js"></script>
+<?php require_once '../ui/footer.php'; ?>
 </body>
 
 </html>

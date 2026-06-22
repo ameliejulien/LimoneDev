@@ -28,39 +28,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.formulaire {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 3em;
-  margin-bottom: 1em;
-  padding: 2em 5em;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-family: var(--police-generale);
-  background-color: white;
-}
-
-.divForm input {
-  height: 2em;
-}
-
-.submit {
   background-color: #fffdea;
-  padding: 0.3em;
-}
-
-label {
-  font-size: 1.5em;
-}
-
-.divForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
 }
 
 h1 {
@@ -69,10 +37,106 @@ h1 {
   font-family: var(--police-titre);
 }
 
-body {
-  background-color: #fffdea;
+/* ----- Conteneur du formulaire : occupe plus d'espace sur la page ----- */
+.formulaire {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2em;
+  margin-bottom: 1em;
+  padding: 3em 5em;
+  width: min(760px, 90vw);
+  font-family: var(--police-generale);
+  background-color: white;
 }
 
+.formulaire__vendeur {
+  text-align: center;
+}
+
+/* ----- Champs avec label flottant ----- */
+.form__group {
+  position: relative;
+  padding: 18px 0 0;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--encre-tres-claire);
+  outline: 0;
+  font-size: 1.2rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+}
+
+.form__field::-moz-placeholder {
+  color: transparent;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:-moz-placeholder ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  color: var(--encre-claire);
+  pointer-events: none;
+}
+
+.form__field:focus {
+  border-bottom: 3px solid var(--vert-fonce);
+  -o-border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+     border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+  border-image-slice: 1;
+  padding-bottom: 7px;
+}
+
+.form__field:focus ~ .form__label {
+  top: 0;
+  font-size: 0.95rem;
+  color: var(--vert-fonce);
+  font-weight: 700;
+}
+
+.form__field:required:invalid {
+  box-shadow: none;
+}
+
+.form__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--encre-tres-claire);
+}
+
+/* ----- Bouton d'envoi ----- */
 input.submit {
   width: auto;
   height: auto;
@@ -85,6 +149,8 @@ input.submit {
   transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
   cursor: pointer;
+  font-family: var(--police-generale);
+  font-size: 1.05rem;
 }
 
 input.submit:hover {

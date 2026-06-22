@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="client.css">
-  <link rel="stylesheet" href="../Global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>Compte Client</title>
 </head>
@@ -12,79 +11,47 @@
   <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte client</h1>
   <form class="formulaire">
-    <div class="divForm">
-      <label for="mail">Adresse mail</label>
-      <input type="email" name="mail" required>
+    <div class="form__group">
+      <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
+      <label for="mail" class="form__label">Adresse mail</label>
+      <small class="form__hint">Exemple : test@client.fr</small>
     </div>
 
-    <div class="divForm">
-      <label for="username">Nom d'utilisateur</label>
-      <input type="text" name="username" required>
+    <div class="form__group">
+      <input type="text" id="username" name="username" class="form__field" placeholder=" " required>
+      <label for="username" class="form__label">Nom d'utilisateur</label>
     </div>
 
-    <div class="divForm">
-      <label for="telephone">Numéro de téléphone</label>
-      <input type="tel" name="telephone" required placeholder="exemple : 0606060606">
+    <div class="form__group">
+      <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required>
+      <label for="telephone" class="form__label">Numéro de téléphone</label>
+      <small class="form__hint">Exemple : 0612345678</small>
     </div>
+
+    <div class="form__group">
+      <input type="password" id="mdp" name="mdp" class="form__field" placeholder=" " required minlength="8">
+      <label for="mdp" class="form__label">Mot de passe</label>
+    </div>
+
+    <div class="form__group">
+      <input type="password" id="confMdp" name="confMdp" class="form__field" placeholder=" " required minlength="8">
+      <label for="confMdp" class="form__label">Confirmation du mot de passe</label>
+    </div>
+
+    <br>
     
-    <div class="divForm">
-      <label for="mdp">Mot de passe</label>
-      <input type="password" name="mdp" required minlength="8">
-    </div>
-    
-    <div class="divForm">
-      <label for="confMdp">Confirmation du mot de passe</label>
-      <input type="password" name="confMdp" required  minlength="8">
-    </div>
-    <input type="submit" value="S'inscrire" class="submit"/>
+    <input type="submit" title="Bouton d'inscription" value="S'inscrire" class="submit"/>
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>
       <p class="snackbarText"></p>
     </div>
 
-    
-  </form>
-
-  <p>Vous êtes vendeur ? : <a href="../Vendeur/CreerCompteVendeur.php">cliquez ici</a></p>
-  <script src="../snackbar.js"></script>
-  <script>
-    const form = document.querySelector(".formulaire");
-    // écouteur des requêtes du formulaire
-    form.addEventListener("submit", function (event) {
-        
-      // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault(); 
-
-      // récupération des infos du formulaire
-      const formData = {
-        mail: form.mail.value,
-        nomUtilisateur: form.username.value,
-        telephone: form.telephone.value,
-        motDePasse : form.mdp.value,
-        confMotDePasse: form.confMdp.value,
-        typeRequete: "creation"
-      }
-
-      // fetch vers le dossier API de création client
-      fetch("../API/Client.php", {
-        method: "POST",
-        body: JSON.stringify(formData)  // fait une string JSON du tableau
-      })
-      .then(response => {
-          if (response.status == 201) {
-            window.location.href = "/Connexion/";
-          } else if (response.status == 409) {
-            afficherSnackBar('Notification','Echec de création de compte : email déjà utilisé !');
-          } else {
-            afficherSnackBar('Notification','Echec de création de compte !');
-          } 
-      })
-      .catch(err => {
-        console.error("Erreur :");
-        console.error(err);
-      });
-    });
-</script>
+    <p class="formulaire__vendeur">Vous êtes vendeur ? : <a href="../Vendeur/CreerCompteVendeur.php" title="Page de création compte vendeur" >Cliquez ici</a></p>
+</form>
+  
+<script src="../snackbar.js"></script>
+<script>src="../js/form.js"></script>
+<?php require_once '../ui/footer.php'; ?>
 </body>
 </html>

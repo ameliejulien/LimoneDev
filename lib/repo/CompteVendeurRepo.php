@@ -310,11 +310,33 @@ function modifierMdpVendeurBDD($mdp)
 /**
  * @brief renvoie un id_vendeur et une denomination_vendeur
  */
-function trouverLesVendeurs()
-{
+function trouverLesVendeurs() {
     $PDO = connecterBDD();
 
-    $query = "SELECT id_vendeur, denomination_vendeur, siret_vendeur, addresse_vendeur FROM vendeur ORDER BY denomination_vendeur";
+    $query =
+    "SELECT
+    vendeur.id_vendeur,
+    vendeur.denomination_vendeur
+    FROM vendeur
+    ORDER BY denomination_vendeur";
+
+    return $PDO->query($query)->fetchall();
+}
+    
+function trouverAdressesVendeurs() {
+    $PDO = connecterBDD();
+
+    $query =
+    "SELECT
+        vendeur.id_vendeur,
+        vendeur.denomination_vendeur,
+        adresse.adresse,
+        adresse.ville_adresse,
+        code_postal_adresse,
+        adresse.latitude,
+        adresse.longitude
+    FROM vendeur
+    INNER JOIN adresse ON vendeur.addresse_vendeur = adresse.id_adresse";
 
     return $PDO->query($query)->fetchall();
 }

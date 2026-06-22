@@ -25,35 +25,142 @@
   --police-generale: Farro, sans-serif;
 }
 
-body{
-    display: flex;
-    align-items: center;
+html, body {
+  overflow-x: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fffdea;
+  min-height: 100vh;
+}
+
+footer.footer {
+  margin-top: auto;
+}
+
+h1 {
+  font-size: 3em;
+  color: #1C6D80;
+  font-family: var(--police-titre);
+}
+
+.formulaire {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 3em 5em;
+  gap: 2.2em;
+  margin: 0;
+  margin-bottom: 1em;
+  width: min(760px, 90vw);
+  font-family: var(--police-generale);
+  background-color: var(--blanc);
+}
+
+/* ----- Champs avec label flottant (même style que les pages client et connexion) ----- */
+
+.form__group {
+  position: relative;
+  padding: 18px 0 0;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--encre-tres-claire);
+  outline: 0;
+  font-size: 1.2rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  color: var(--encre-claire);
+  pointer-events: none;
+}
+
+.form__field:focus {
+  border-bottom: 3px solid var(--vert-fonce);
+  border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+  border-image-slice: 1;
+  padding-bottom: 7px;
+}
+
+.form__field:focus ~ .form__label {
+  top: 0;
+  font-size: 0.95rem;
+  color: var(--vert-fonce);
+  font-weight: 700;
+}
+
+.form__field:required:invalid {
+  box-shadow: none;
+}
+
+.form__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--encre-tres-claire);
+}
+
+/* ----- Champs côte à côte ----- */
+
+.form__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5em;
+  width: 100%;
+}
+
+.form__row .form__group {
+  width: auto;
+}
+
+.form__group--grow-1 { flex: 1; }
+.form__group--grow-2 { flex: 2; }
+.form__group--grow-3 { flex: 3; }
+
+@media (max-width: 600px) {
+  .form__row {
     flex-direction: column;
-    background-color: #fffdea;
-
+    gap: 0;
+  }
 }
 
-.formulaire{
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 1em, 5em;
-    gap: 1.75em;
-    margin: 0;
-    padding: 2em 5em;
-    width: fit-content;
-    font-family: var(--police-generale);
-    background-color: var(--blanc); 
-}
+/* ----- Bouton d'envoi ----- */
 
-
-
-.divForm input{
-    height: 2em;
-}
-
-.submit{ 
+.submit {
   width: auto;
   height: auto;
   padding: 15px;
@@ -65,31 +172,27 @@ body{
   transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
   cursor: pointer;
+  font-family: var(--police-generale);
 }
 
-label{
-    font-size: 1.5em;
+.submit:hover {
+  background: var(--vert-fonce);
+  transform: scale(1.06);
 }
+
+.submit:active {
+  transform: scale(0.96);
+}
+
+/* ----- Classes encore utilisées ailleurs sur les pages vendeur ----- */
 
 .divBtnForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-.divForm {
-    display: flex;
-    flex-direction: column;
-    gap:0.25em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .consultDiv {
-    display: flex;
-    flex-direction: column;
-}
-
-h1{
-    font-size: 3em;
-    color: #1C6D80;
-    font-family: var(--police-titre);
+  display: flex;
+  flex-direction: column;
 }

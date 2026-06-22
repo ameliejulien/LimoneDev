@@ -14,13 +14,13 @@
     $vendeurs = recupererLesVendeurs();
     
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
         <title>Catalogue</title>
         <link rel="stylesheet" type="text/css" href="/Catalogue/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script src="../snackbar.js"></script>
     </head>
@@ -50,70 +50,71 @@
         </section>
 
         <div class="main-frame">
-            <div class="card">
-                <div>
-                    <div class="card-titre">
-                        <h4>Prix</h4>
-                        <span class="card-prix-display"><span class="prix-min-val"><?= $prixMin ?></span> € — <span
-                                class="prix-max-val"><?= $prixMax ?></span> €</span>
-                    </div>
-                    <div class="range-slider">
-                        <div class="range-fill"></div>
-                        <input type="range" class="min-price" min="<?= $prixMin ?>" max="<?= $prixMax ?>"
-                            value="<?= $prixMin ?>" step="1">
-                        <input type="range" class="max-price" min="<?= $prixMin ?>" max="<?= $prixMax ?>"
-                            value="<?= $prixMax ?>" step="1">
-                    </div>
-                </div>
-
-                <div>
-                    <div class="card-titre">
-                        <h4>Catégories</h4>
-                    </div>
-                    <div class="categories">
-                        <div class="categorie">
-                            <input type="radio" id="c-0" name="c" value="Tous" checked>
-                            <label for="c-0">Tous</label>
+            <div class="partie-gauche">
+                <div class="card">
+                    <div>
+                        <div class="card-titre">
+                            <h4>Prix</h4>
+                            <span class="card-prix-display">
+                                <span class="prix-min-val"><?= $prixMin ?></span> € — 
+                                <span class="prix-max-val"><?= $prixMax ?></span> €</span>
                         </div>
-                        <?php
-                        foreach ($categories as $c) {
-                            ?>
-                            <div class="categorie">
-                                <input type="radio" id="c-<?= $c['id_categorie'] ?>" name="c"
-                                    value="<?= $c['nom_categorie'] ?>">
-                                <label for="c-<?= $c['id_categorie'] ?>"><?= $c['nom_categorie'] ?></label>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="card-titre">
-                        <h4>Vendeurs</h4>
-                    </div>
-                    <div class="vendeurs">
-                        <div class="vendeur">
-                            <input type="radio" id="v-0" name="v" value="Tous" checked>
-                            <label for="v-0">Tous</label>
+                        <div class="range-slider">
+                            <div class="range-fill"></div>
+                                <input type="range" class="min-price" min="<?= $prixMin ?>" max="<?= $prixMax ?>" value="<?= $prixMin ?>" step="1">
+                                <input type="range" class="max-price" min="<?= $prixMin ?>" max="<?= $prixMax ?>" value="<?= $prixMax ?>" step="1">
                         </div>
-                        <?php
-                        foreach ($vendeurs as $v) {
+                    </div>
+
+                    <div>
+                        <div class="card-titre">
+                            <h4>Catégories</h4>
+                        </div>
+
+                        <div class="categories">
+                                <div class="categorie">
+                                    <input type="radio" id="c-0" name="c" value="Tous" checked>
+                                    <label for="c-0">Tous</label>
+                                </div>
+                            <?php
+                                foreach ($categories as $c) {
                             ?>
+                                <div class="categorie">
+                                    <input type="radio" id="c-<?= $c['id_categorie'] ?>" name="c" value="<?= $c['nom_categorie'] ?>">
+                                    <label for="c-<?= $c['id_categorie'] ?>"><?= $c['nom_categorie'] ?></label>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card-titre">
+                            <h4>Vendeurs</h4>
+                        </div>
+                        <div class="vendeurs">
                             <div class="vendeur">
-                                <input type="radio" id="v-<?= $v['id_vendeur'] ?>" name="v"
-                                    value="<?= $v['denomination_vendeur'] ?>">
-                                <label for="v-<?= $v['id_vendeur'] ?>"><?= $v['denomination_vendeur'] ?></label>
+                                <input type="radio" id="v-0" name="v" value="Tous" checked>
+                                <label for="v-0">Tous</label>
                             </div>
-                        <?php } ?>
+                            <?php
+                                foreach ($vendeurs as $v) {
+                            ?>
+                                <div class="vendeur">
+                                    <input type="radio" id="v-<?= $v['id_vendeur'] ?>" name="v" value="<?= $v['denomination_vendeur'] ?>">
+                                    <label for="v-<?= $v['id_vendeur'] ?>"><?= $v['denomination_vendeur'] ?></label>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
+
+                <div id="map"></div>
             </div>
 
             <div class="affichage-produits">
 
                 <div class="tete-produits">
-                    <h2 class="compte-produits"><strong class="nombre-produits"><?= count($produits) ?></strong> produits
-                        trouvés</h2>
+                    <h2 class="compte-produits"><strong class="nombre-produits"><?= count($produits) ?></strong> produits trouvés</h2>
                     <select class="tri">
                         <option value="dec">Prix décroissant</option>
                         <option value="cro">Prix croissant</option>
@@ -162,5 +163,7 @@
             require_once '../ui/footer.php';
         ?>
     </body>
-    <script src="catalogue.js"></script>
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/Catalogue/catalogue.js"></script>
 </html>

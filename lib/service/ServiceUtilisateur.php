@@ -34,11 +34,25 @@
     }
 
     /**
-     * @Brief vérifie si l'utilisateur a les droits d'accès à la page en fonction de son rôle
+     * @Brief vérifie si l'utilisateur est un vendeur, qui n'a pas les droits d'accès aux pages panier, paiement et paiement validé
      * @Return redirige vers la page d'erreur si l'utilisateur n'a pas les droits d'accès
      */
 
     function droitsAccesPagePanier($uuid, $typeUtilisateurAttendu) {
+        $typeUtilisateur = trouverTypeUtilisateur($uuid);
+        if ($typeUtilisateur['type_utilisateur'] == $typeUtilisateurAttendu) {
+            header('Location: /Erreur/index.php');
+            exit();
+        }
+    }
+
+    /**
+     * @Brief vérifie si l'utilisateur a des articles dans son panier, sinon il n'a pas les droits d'accès aux pages paiement et paiement validé
+     * @Return redirige vers la page d'erreur si l'utilisateur n'a pas les droits d'accès
+     */
+
+    // TODO : faire une fonction qui regarde si l'utilisateur a des articles dans son panier
+    function droitsAccesPagePaiement($uuid, $typeUtilisateurAttendu) {
         $typeUtilisateur = trouverTypeUtilisateur($uuid);
         if ($typeUtilisateur['type_utilisateur'] == $typeUtilisateurAttendu) {
             header('Location: /Erreur/index.php');

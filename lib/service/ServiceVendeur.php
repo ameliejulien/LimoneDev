@@ -207,9 +207,27 @@ function modificationMdpVendeur($data)
     }
 }
 
-function recupererLesVendeurs()
-{
+function recupererLesVendeurs() {
     return trouverLesVendeurs();
+}
+
+function recupererAdressesVendeurs() {
+    $adresses = trouverAdressesVendeurs();
+    $tabFormate = [];
+
+    foreach ($adresses as $a) {
+        $tabFormate[] = [
+            'id_vendeur' => $a['id_vendeur'],
+            'nom' => $a['denomination_vendeur'],
+            'adresse' => $a['adresse'],
+            'ville' => $a['ville_adresse'],
+            'cp' => $a['code_postal_adresse'],
+            'lat' => $a['latitude'],
+            'long' => $a['longitude']
+        ]; 
+    }
+
+    return $tabFormate;
 }
 
 ?>
