@@ -21,69 +21,42 @@
 </head>
 <body>
   <?php require_once '../ui/header.php'; ?>
-  <h1>Modification du mot de passe client</h1>
+  <h1>Modification du mot de passe</h1>
+
   <form method="POST" class="formulaire">
-    
-  <div class="divForm">
-      <label for="mail">Mot de passe</label>
-      <input type="password" name="mdpCourant" required >
+
+    <div class="form__group">
+      <input type="password" name="mdpCourant" id="mdpCourant" class="form__field"
+            placeholder="Mot de passe" required>
+      <label for="mdpCourant" class="form__label">Mot de passe</label>
     </div>
 
-    <div class="divForm">
-      <label for="mail">Nouveau mot de passe</label>
-      <input type="password" name="nouveauMdp" required >
+    <div class="form__group">
+      <input type="password" name="nouveauMdp" id="nouveauMdp" class="form__field"
+            placeholder="Nouveau mot de passe" required>
+      <label for="nouveauMdp" class="form__label">Nouveau mot de passe</label>
     </div>
 
-    <div class="divForm">
-      <label for="mail">Confirmer nouveau mot de passe</label>
-      <input type="password" name="confNouveauMdp" required >
+    <div class="form__group">
+      <input type="password" name="confNouveauMdp" id="confNouveauMdp" class="form__field"
+            placeholder="Confirmer nouveau mot de passe" required>
+      <label for="confNouveauMdp" class="form__label">Confirmer nouveau mot de passe</label>
     </div>
 
-
-    <input type="submit" value="Valider les modifications" class="submit"/>
-    <a href="ConsulterCompteClient.php"><input class="buttonForm" type="button" value="Retour"/></a>
-
+    <div class="divBtnForm">
+      <input type="submit" value="Valider les modifications" class="submit">
+      <button type="button" class="buttonForm"
+              onclick="window.location.href='ConsulterCompteClient.php'">Retour</button>
+    </div>
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>
       <p class="snackbarText"></p>
     </div>
 
-    <script src="../snackbar.js"></script>
   </form>
-  <script>
-    const form = document.querySelector(".formulaire");
-
-    // écouteur des requêtes du formulaire
-    form.addEventListener("submit", function (event) {
-      
-      // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault(); 
-
-      // récupération des infos du formulaire
-      const formData = {
-        mdpCourant: form.mdpCourant.value,
-        nouveauMdp: form.nouveauMdp.value,
-        confNouveauMdp: form.confNouveauMdp.value,
-        typeRequete: "modificationMdp"
-      }
-
-      // fetch vers le dossier API de création client
-      fetch("../API/Client.php", {
-        method: "POST",
-        body: JSON.stringify(formData)  // fait une string JSON du tableau
-      })
-      .then(response => {
-        if (response.status == 200) {
-          window.location.href = "ConsulterCompteClient.php";        
-        } else if (response.status == 409) {
-          afficherSnackBar('Notification','Echec de modification : nouveau mot de passe et ancien mot de passe identiques!'); // alert de la création du compte        
-        }
-      })  // transforme la réponse http en json exploitable
-      .catch(err => {
-        console.error("Erreur :", err); 
-      });
-    });
-</script>
+<script src="../snackbar.js"></script>  
+<script src="../js/form.js"></script>
+<?php require_once '../ui/footer.php'; ?>
 </body>
 </html>

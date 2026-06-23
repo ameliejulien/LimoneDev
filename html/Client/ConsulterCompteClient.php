@@ -8,15 +8,25 @@
   $idClient = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur'];
   $infosClient = recupererInfosClient($_COOKIE['uuid']);
 
+  $uuid = $_COOKIE['uuid'];
+  $imgData = $infosClient['pp_utilisateur'];
+  if (is_resource($imgData)) {
+      $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
+  } elseif (!empty($imgData)) {
+      $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
+  } else {
+      $imgSrc = "../../imagesProduits/image-none.jpg";
+  }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-  
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="client.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="client.css">
   <link rel="stylesheet" href="../Global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>Profil client</title>
@@ -25,96 +35,65 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Profil</h1>
-  <form class="formulaire" method="POST">
-    
-    <div class="divForm">
-      <label for="picture">Photo de profil</label>
-      <?php 
-        require_once '../../lib/service/ServiceClient.php';
 
-        $uuid = $_COOKIE['uuid'];
-        $infosClient = recupererInfosClient($uuid);
-        $imgData = $infosClient['pp_utilisateur'];
-        if (is_resource($imgData)) {
-            $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
-        } elseif (!empty($imgData)) {
-            $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
-        } else {
-            $imgSrc = "../../imagesProduits/image-none.jpg";
-        }
-      ?>
-      <img src="<?= $imgSrc ?>" alt="Photo de profil" class="profile-picture" width="200" height="200">
+  <div class="profil__carte">
+
+    <div class="profil__champ">
+      <img src="<?= $imgSrc ?>" alt="Photo de profil" class="profil__photo">
     </div>
 
-    <div class="divForm">
-      <label for="username">Nom utilisateur</label>
-      <span>
-        <?= $infosClient['nom_utilisateur'] == NULL ? "Pseudo non renseigné" : $infosClient['nom_utilisateur'] ?>
+    <div class="profil__champ">
+      <span class="profil__label">Nom utilisateur</span>
+      <span class="profil__valeur">
+        <?= $infosClient['nom_utilisateur'] ?? 'Pseudo non renseigné' ?>
       </span>
     </div>
 
-    <div class="divForm">
-      <label for="mail">Adresse mail</label>
-      <span>
-        <?= $infosClient['email_utilisateur'] == NULL ? "Mail non renseigné" : $infosClient['email_utilisateur'] ?>
+    <div class="profil__champ">
+      <span class="profil__label">Adresse mail</span>
+      <span class="profil__valeur">
+        <?= $infosClient['email_utilisateur'] ?? 'Mail non renseigné' ?>
       </span>
     </div>
 
-    <div class="divForm">
-      <label for="phone">Numéro de téléphone</label>
-      <span>
-        <?= $infosClient['telephone_utilisateur'] == NULL ? "Téléphone non renseigné" : $infosClient['telephone_utilisateur'] ?>
+    <div class="profil__champ">
+      <span class="profil__label">Numéro de téléphone</span>
+      <span class="profil__valeur">
+        <?= $infosClient['telephone_utilisateur'] ?? 'Téléphone non renseigné' ?>
       </span>
     </div>
 
-    <div class="divForm">
-      <label for="address">Adresse postale</label>
-      <span> <?= $infosClient['adresse'] == NULL ? "Adresse non renseignée" : $infosClient['adresse'] ?> </span>
-    </div>
-
-    <div class="divForm">
-      <label for="address">Code postal</label>
-      <span>
-        <?= $infosClient['code_postal_adresse'] == NULL ? "Code postal non renseigné" : $infosClient['code_postal_adresse'] ?>
+    <div class="profil__champ">
+      <span class="profil__label">Adresse postale</span>
+      <span class="profil__valeur">
+        <?= $infosClient['adresse'] ?? 'Adresse non renseignée' ?>
       </span>
     </div>
 
-    <div class="divForm">
-      <label for="address">Ville</label>
-      <span> <?= $infosClient['ville_adresse'] == NULL ? "Ville non renseignée" : $infosClient['ville_adresse'] ?>
+    <div class="profil__champ">
+      <span class="profil__label">Code postal</span>
+      <span class="profil__valeur">
+        <?= $infosClient['code_postal_adresse'] ?? 'Code postal non renseigné' ?>
       </span>
     </div>
 
-    <div class="divBtnForm">
-      <button type="button" class="buttonForm" onclick="window.location.href='ModifierCompteClient.php'">Modifier Compte</button>
-      <button type="button" class="buttonForm" onclick="window.location.href='ModifierMdpClient.php'">Modifier mot de passe</button>
-      <button type="button" class="buttonForm decoBtn">Déconnexion</button>
+    <div class="profil__champ">
+      <span class="profil__label">Ville</span>
+      <span class="profil__valeur">
+        <?= $infosClient['ville_adresse'] ?? 'Ville non renseignée' ?>
+      </span>
     </div>
-  </form>
 
-  <script>
-    const decoBtn = document.querySelector(".decoBtn");
+    <div class="profil__actions">
+      <button type="button" class="profil__bouton" onclick="window.location.href='ModifierCompteClient.php'">Modifier Compte</button>
+      <button type="button" class="profil__bouton" onclick="window.location.href='ModifierMdpClient.php'">Modifier mot de passe</button>
+      <button type="button" class="profil__bouton profil__bouton--deco">Déconnexion</button>
+    </div>
 
-    decoBtn.addEventListener("click", function (event) {
-      const formData = {
-        typeRequete: "deconnexion"
-      }
+  </div>
 
-      // fetch vers le dossier API de création client
-      fetch("../API/Client.php", {
-        method: "POST",
-        body: JSON.stringify(formData)  // fait une string JSON du tableau
-      })
-      .then(response => {
-          if (response.status == 200) {
-            window.location.href = "../Catalogue/";
-          }
-      }) 
-      .catch(err => {
-        console.error("Erreur :", err);
-      });
-    });
-  </script>
+<script src="../js/form.js"></script>
+<?php require_once '../ui/footer.php'; ?>
 </body>
 
 </html>

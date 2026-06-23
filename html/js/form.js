@@ -180,6 +180,31 @@ function initCreationCompteVendeurForm(formSelector = ".formulaire") {
 }
 
 /**
+ * Initialise le bouton de déconnexion.
+ *
+ * @param {string} selector - sélecteur CSS du bouton de déconnexion (par défaut ".profil__bouton--deco")
+ */
+function initDeconnexion(selector = ".profil__bouton--deco") {
+  const decoBtn = document.querySelector(selector);
+  if (!decoBtn) return;
+
+  decoBtn.addEventListener("click", function () {
+    fetch("../API/Client.php", {
+      method: "POST",
+      body: JSON.stringify({ typeRequete: "deconnexion" })
+    })
+      .then(response => {
+        if (response.status == 200) {
+          window.location.href = "../Catalogue/";
+        }
+      })
+      .catch(err => {
+        console.error("Erreur :", err);
+      });
+  });
+}
+
+/**
  * Restreint la saisie d'un ou plusieurs champs à des chiffres uniquement.
  * Bloque toute touche non numérique et nettoie les valeurs collées (coller/copier).
  *
@@ -211,8 +236,104 @@ function restreindreSaisieChiffres(...selectors) {
     });
   });
 }
+
+/**
+ * Initialise le formulaire de modification du compte client.
+ * Gère la prévisualisation de l'image et l'envoi multipart vers l'API.
+ *
+ * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
+ */
+function initModificationCompteClientForm(formSelector = ".formulaire") {
+  const form = document.querySelector(formSelector);
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+
+    const fileInput = form.picture;
+    if (fileInput.files.length > 0) {
+      formData.append("picture", fileInput.files[0]);
+    }
+
+    formData.append("nom_utilisateur",       form.username.value);
+    formData.append("email_utilisateur",     form.mail.value);
+    formData.append("telephone_utilisateur", form.phone.value);
+    formData.append("adresse",               form.address.value);
+    formData.append("code_postal_adresse",   form.code.value);
+    formData.append("ville_adresse",         form.ville.value);
+    formData.append("typeRequete",           "modification");
+
+    fetch("../API/Client.php", {
+      method: "POST",
+      body: formData
+    })
+      .then(response => {
+        if (response.status === 200) {
+          window.location.href = "ConsulterCompteClient.php";
+        } else {
+          afficherSnackBar("Notification", "Échec de la modification du compte !");
+        }
+      })
+      .catch(err => console.error("Erreur :", err));
+  });
+}
+
+function changerImage(event) {
+  const fichier = event.target.files[0];
+  if (!fichier) return;
+
+  const lecture = new FileReader();
+  lecture.onload = function (selec) {
+    document.getElementById("changementImage").src = selec.target.result;
+  };
+  lecture.readAsDataURL(fichier);
+}
+
+
+/**
+ * Initialise le formulaire de modification du mot de passe client.
+ *
+ * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
+ */
+function initModificationMdpClientForm(formSelector = ".formulaire") {
+  const form = document.querySelector(formSelector);
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = {
+      mdpCourant:     form.mdpCourant.value,
+      nouveauMdp:     form.nouveauMdp.value,
+      confNouveauMdp: form.confNouveauMdp.value,
+      typeRequete:    "modificationMdp"
+    };
+
+    fetch("../API/Client.php", {
+      method: "POST",
+      body: JSON.stringify(formData)
+    })
+      .then(response => {
+        if (response.status === 200) {
+          window.location.href = "ConsulterCompteClient.php";
+        } else if (response.status === 409) {
+          afficherSnackBar("Notification", "Échec : nouveau mot de passe identique à l'ancien !");
+        } else {
+          afficherSnackBar("Notification", "Échec de la modification du mot de passe !");
+        }
+      })
+      .catch(err => console.error("Erreur :", err));
+  });
+}
+
 restreindreSaisieChiffres('#numtel', '#codepostal', '#codepostalfac', '#cartebancaire', '#codesecret');
 restreindreSaisieChiffres('#telephone', '#siret', '#codePostalVendeur', '#cleAuth');
+
 initCreationCompteVendeurForm();
 initConnexionForm();
 initCreationCompteClientForm();
+initDeconnexion();
+initModificationCompteClientForm();
+initModificationMdpClientForm();

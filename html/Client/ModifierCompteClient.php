@@ -7,6 +7,15 @@
 
   $infosClient = recupererInfosClient($_COOKIE['uuid']);
 
+  $uuid = $_COOKIE['uuid'];
+  $imgData = $infosClient['pp_utilisateur'];
+  if (is_resource($imgData)) {
+      $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
+  } elseif (!empty($imgData)) {
+      $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
+  } else {
+      $imgSrc = "../../imagesProduits/image-none.jpg";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -22,126 +31,61 @@
   <body>
     <?php require_once '../ui/header.php'; ?>
     <h1>Profil</h1>
-    <form method="POST" action="ConsulterCompteClient.php" class="formulaire">
-      
-      <div class="divForm">
-        <label for="picture">Photo de profil</label>
-        <?php 
-          include '../../lib/service/ServiceClient.php';
-          
-          $uuid = $_COOKIE['uuid'];
-          $infosClient = recupererInfosClient($uuid);
-          $imgData = $infosClient['pp_utilisateur'];
-          if (is_resource($imgData)) {
-              $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
-          } else if (!empty($imgData)) {
-              $imgSrc = "data:image/jpeg;base64," . base64_encode($imgData);
-          } else {
-              $imgSrc = "../../imagesProduits/image-none.jpg";
-          }
-        ?>
-        <img id="changementImage" src="<?= $imgSrc ?>" alt="Photo de profil" class="profile-picture" width="200" height="200">
-        <input type="file" name="picture" accept="image/*" onchange="changerImage(event)">
+    <form method="POST" action="ConsulterCompteClient.php" class="formulaire" enctype="multipart/form-data">
+
+      <!-- Photo de profil -->
+      <div class="modifier__photo-wrapper">
+        <img id="changementImage" src="<?= $imgSrc ?>" alt="Photo de profil" class="modifier__photo">
+        <label class="modifier__photo-label" for="picture">
+          <i class="fa fa-camera"></i> Changer la photo
+        </label>
+        <input type="file" id="picture" name="picture" accept="image/*" onchange="changerImage(event)" class="modifier__photo-input">
       </div>
 
-      <div class="divForm">
-        <label for="username">Nom d'utilisateur</label>
-        <input type="text" name="username" required value="<?= $infosClient['nom_utilisateur'];?>">
-      </div>
-    
-      <div class="divForm">
-        <label for="mail">Adresse mail</label>
-        <input type="email" name="mail" required value="<?= $infosClient['email_utilisateur'];?>">
+      <div class="form__group">
+        <input type="text" name="username" id="username" class="form__field"
+              placeholder="Nom d'utilisateur" required value="<?= $infosClient['nom_utilisateur'] ?>">
+        <label for="username" class="form__label">Nom d'utilisateur</label>
       </div>
 
-      <div class="divForm">
-        <label for="phone">Numéro de téléphone</label>
-        <input type="tel" name="phone" required value="<?= $infosClient['telephone_utilisateur'];?>">
-      </div>
-      
-      <div class="divForm">
-        <label for="address">Adresse postale</label>
-        <input type="text" name="address" required value="<?= $infosClient['adresse'];?>">
+      <div class="form__group">
+        <input type="email" name="mail" id="mail" class="form__field"
+              placeholder="Adresse mail" required value="<?= $infosClient['email_utilisateur'] ?>">
+        <label for="mail" class="form__label">Adresse mail</label>
       </div>
 
-      <div class="divForm">
-        <label for="code">Code postal</label>
-        <input type="text" name="code" required value="<?= $infosClient['code_postal_adresse'];?>">
+      <div class="form__group">
+        <input type="tel" name="phone" id="phone" class="form__field"
+              placeholder="Numéro de téléphone" required value="<?= $infosClient['telephone_utilisateur'] ?>">
+        <label for="phone" class="form__label">Numéro de téléphone</label>
       </div>
 
-      <div class="divForm">
-        <label for="ville">Ville</label>
-        <input type="text" name="ville" required value="<?= $infosClient['ville_adresse'];?>">
+      <div class="form__group">
+        <input type="text" name="address" id="address" class="form__field"
+              placeholder="Adresse postale" required value="<?= $infosClient['adresse'] ?>">
+        <label for="address" class="form__label">Adresse postale</label>
       </div>
-      <input type="submit" value="Enregistrer les modifications" class="submit"/>
-      <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Annuler</button>
 
-      
+      <div class="form__group">
+        <input type="text" name="code" id="code" class="form__field"
+              placeholder="Code postal" required value="<?= $infosClient['code_postal_adresse'] ?>">
+        <label for="code" class="form__label">Code postal</label>
+      </div>
+
+      <div class="form__group">
+        <input type="text" name="ville" id="ville" class="form__field"
+              placeholder="Ville" required value="<?= $infosClient['ville_adresse'] ?>">
+        <label for="ville" class="form__label">Ville</label>
+      </div>
+
+      <div class="divBtnForm">
+        <input type="submit" value="Enregistrer les modifications" class="submit">
+        <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Annuler</button>
+      </div>
+
     </form>
+
+  <script src="../js/form.js"></script>
+  <?php require_once '../ui/footer.php'; ?>
   </body>
 </html>
-
-<script>
-
-  function changerImage(event) {
-
-    const fichier = event.target.files[0];
-
-    // Vérification qu'une image a été choisie
-    if (fichier) {
-
-      const lecture = new FileReader();
-
-      lecture.onload = function(selec) {
-
-        // Changement de la photo de profil avec l'image choisie par l'utilisateur
-        document.getElementById('changementImage').src = selec.target.result;
-
-      }
-
-      lecture.readAsDataURL(fichier);
-    }
-  }
-
-  const form = document.querySelector(".formulaire");
-
-  // Ecouteur
-  form.addEventListener("submit", function (event) {
-    
-    // Assure la bonne exécution du code avant l'envoi du formulaire
-    event.preventDefault(); 
-
-    const formData = new FormData();
-
-    // Ajout d'une image si l'utilisateur en a choisi une
-    const fileInput = form.picture;
-    if (fileInput.files.length > 0) {
-        formData.append("picture", fileInput.files[0]);
-    }
-
-    // Récupération des données du client
-    formData.append("nom_utilisateur", form.username.value);
-    formData.append("email_utilisateur", form.mail.value);
-    formData.append("telephone_utilisateur", form.phone.value);
-    formData.append("adresse", form.address.value);
-    formData.append("code_postal_adresse", form.code.value);
-    formData.append("ville_adresse", form.ville.value);
-    formData.append("typeRequete", "modification");
-
-    // fetch vers le dossier API de création client
-    fetch("../API/Client.php", {
-      method: "POST",
-      body: formData //JSON.stringify(formData)
-    })
-    .then(response => {
-      if (response.status === 200) {
-        window.location.href = "ConsulterCompteClient.php";
-      }
-    }) 
-    .catch(err => {
-      console.error("Erreur :", err); 
-    });
-
-  });
-
-</script>
