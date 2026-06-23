@@ -19,7 +19,8 @@ if ($data["typeRequete"] == "creation") {
 } else if ($data["typeRequete"] == "deconnexion") {
     $retour = deconnecterUtilisateur();
 } else if ($data["typeRequete"] == "modificationMdp") {
-    $retour = modificationMdpClient($data);
+    $idClient = trouverIDUtilisateur($_COOKIE['uuid']);
+    $retour = modificationMdpClient($data, $idClient);
 } else if ($data["typeRequete"] == "modification") {
     $retour = modifierClientBDD($data, $_FILES);
 }

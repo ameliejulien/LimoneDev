@@ -55,7 +55,7 @@ function recupererInfosClient($uuid)
 /**
  * @Brief modfie le mot de passe Client
  */
-function modificationMdpClient($data)
+function modificationMdpClient($data, $idClient)
 {
     $mdpCourant = $data["mdpCourant"];
     $nouveauMdp = $data["nouveauMdp"];
@@ -75,7 +75,7 @@ function modificationMdpClient($data)
         }
 
         // Tout est valide → on met à jour
-        modifierMdpClientBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT));
+        modifierMdpClientBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT), $idClient);
     } else {
         return 400;
     }

@@ -13,10 +13,10 @@ function creerClientBdd($idClient)
 /**
  * @Brief modifie le mot de passe client
  */
-function modifierMdpClientBDD($mdp)
+function modifierMdpClientBDD($mdp, $idClient)
 {
     $connectBDD = connecterBDD();
-    $idClient = trouverIDUtilisateur($_COOKIE['uuid']);
+    //
 
     $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
     $requeteUpdateClient = $connectBDD->prepare($requeteClient);
