@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/Stock/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../snackbar.js"></script>
 </head>
@@ -36,6 +37,7 @@
                     <th>Nom produit</th>
                     <th>Quantité produit</th>
                     <th>Catalogué</th>
+                    <th></th>
                 </tr>
 
                 <?php
@@ -53,7 +55,7 @@
                                 </div>
                             </td>
                             <td><input type="checkbox" <?= boolval($article['catalogue_produit']) ? 'checked' : '' ?>></td>
-                            <td><button type="button" class="deleteButton" onclick="popupSuppression(this)"><i class="material-icons">delete</i></button></td>
+                            <td class="deleteCase"><button type="button" class="deleteButton" onclick="popupSuppression(this)"><i class="material-icons">delete</i></button></td>
                         </tr>
                 <?php
                     }
@@ -61,14 +63,14 @@
             </table>
      
             <div class="tableNav">
-                <button type="button" onclick="pagePrecedente(this)">Page précedente</button>
+                <button type="button" onclick="pagePrecedente(this)"><i class='fas fa-angle-left'></i></button>
                 <input type="text" class="numPage" value="1">
-                <button type="button" onclick="pageSuivante(this)">Page suivante</button>
+                <button type="button" onclick="pageSuivante(this)"><i class='fas fa-angle-right'></i></button>
             </div>
         
             <div class="sumbitDiv">
-                <input type="submit" value="Enregistrer" class="submit"/>
                 <button type="button" onclick="window.location.href = '../Catalogue';">Retour</button>
+                <input type="submit" value="Enregistrer" class="submit"/>
             </div>
         <?php } else {?>
             <h1>Stock vide</h1>

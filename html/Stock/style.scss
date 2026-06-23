@@ -26,18 +26,44 @@
 }
 
 
-table{
-  border-collapse: collapse;
+.tableau {
+  width: 100%;
+  padding: 0 6em;
+}
+
+table {
+  border-collapse: separate; 
+  border: 1px solid var(--vert-fonce);
+  border-spacing: 0; 
+  overflow: hidden;           
   font-family: var(--police-generale);
   font-size: smaller;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  border-radius: var(--arrondi-grand);
+  table-layout: fixed; 
+  
 }
+
 th, td {
   border: 1px solid var(--vert-fonce);
-  width: fit-content;
+  border-right: none;  
+  border-bottom: none;
   padding: 1em;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th:last-child, td:last-child {
+  border-right:none; 
+}
+th:first-child, td:first-child {
+  border-left: none; 
+}
+
+tr:last-child td {
+  border-bottom: none; 
 }
 
 th{
@@ -116,6 +142,12 @@ input.submit:active {
   text-align: center;
 }
 
+.ligne_qte {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .btn-moins, .btn-plus {
   height: 0.75em;
   align-content: center;
@@ -125,8 +157,7 @@ input.submit:active {
 .sumbitDiv {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  padding: 1em;
+  justify-content: right;
   gap: 1em;
 }
 .sumbitDiv button, .sumbitDiv input {
@@ -141,7 +172,7 @@ input.submit:active {
 .tableNav button {
   height: 1.5em;
   align-content: center;
-  width: 11em;
+  width: fit-content;
 }
 
 .photoProduit {
@@ -164,6 +195,8 @@ input[type="checkbox"] {
   padding: none;
   height: auto;
   width: auto;
+  display: flex;
+  margin: auto;
 }
 
 .deleteConfirmation {
@@ -171,10 +204,6 @@ input[type="checkbox"] {
   flex-direction: column;
   background-color: var(--beige-clair);
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  padding: 4em 2em;
   border-style: solid;
   border-color: var(--vert-fonce);
   border-radius: 3em;
