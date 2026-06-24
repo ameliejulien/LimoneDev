@@ -10,21 +10,10 @@ CREATE TABLE limone.Adresse (
     id_adresse serial PRIMARY KEY,
     adresse varchar(50),
     ville_adresse varchar (30),
-    code_postal_adresse varchar(5),
-    latitude numeric,
-    longitude numeric,
+    code_postal_adresse char(5),
+    latitude float8,
+    longitude float8,
     facturation_adresse boolean
-);
-
--- ==============================
--- ======= Carte bancaire =======
--- ==============================
-CREATE TABLE limone.Carte_Bancaire (
-    id_carte serial PRIMARY KEY,
-    num_carte  bigint,
-    expiration_carte int,
-    ccv_carte int,
-    nom_carte varchar(30)
 );
 
 -- ===========================
@@ -43,7 +32,7 @@ CREATE TABLE limone.Utilisateur (
     uuid_utilisateur uuid DEFAULT uuid_generate_v4(),
     nom_utilisateur varchar(30),
     email_utilisateur varchar(320),
-    telephone_utilisateur varchar(15),
+    telephone_utilisateur char(10),
     mdp_utilisateur varchar(72),
     pp_utilisateur bytea,
     type_utilisateur int,
@@ -77,7 +66,7 @@ CREATE TABLE limone.Gestionnaire (
 CREATE TABLE limone.Vendeur (
     id_vendeur int,
     denomination_vendeur varchar(30),
-    siret_vendeur bigint,
+    siret_vendeur char(14),
     addresse_vendeur int,
 
     CONSTRAINT fk1_vendeur FOREIGN KEY (id_vendeur) REFERENCES limone.Utilisateur(id_utilisateur),
@@ -92,11 +81,11 @@ CREATE TABLE limone.Produit (
     id_produit serial PRIMARY KEY,
     nom_produit varchar(100),
     description_produit text,
-    prix_ht_produit numeric,
+    prix_ht_produit numeric(10,2),
     stock_produit int,
     catalogue_produit boolean,
     promotion_produit boolean,
-    reduction_produit numeric,
+    reduction_produit numeric(10,2),
     tva_produit numeric,
     produit_supprime boolean,
     vendeur_produit int,
@@ -140,18 +129,6 @@ CREATE TABLE limone.Adresse_Client (
     CONSTRAINT fk1_adresse_client FOREIGN KEY (id_utilisateur) REFERENCES limone.Utilisateur(id_utilisateur),
     CONSTRAINT fk2_adresse_client FOREIGN KEY (id_adresse) REFERENCES limone.Adresse(id_adresse),
     CONSTRAINT pk_adresse_client PRIMARY KEY (id_utilisateur, id_adresse)
-);
-
--- ====================================================
--- ======= Carte Client (Client <-> Adresse) ==========
--- ====================================================
-CREATE TABLE limone.Carte_Client (
-    id_utilisateur integer,
-    id_carte integer,
-
-    CONSTRAINT fk1_carte_client FOREIGN KEY (id_utilisateur) REFERENCES limone.Utilisateur(id_utilisateur),
-    CONSTRAINT fk2_carte_client FOREIGN KEY (id_carte) REFERENCES limone.Carte_Bancaire(id_carte),
-    CONSTRAINT pk_adresse PRIMARY KEY (id_utilisateur, id_carte)
 );
 
 -- ============================
@@ -202,17 +179,17 @@ CREATE TABLE limone.Commande (
 CREATE TABLE limone.Facture (
     id_facture serial PRIMARY KEY,
     nom_client_facture varchar(30),
-    telephone_client_facture varchar(15),
+    telephone_client_facture char(10),
     email_client_facture varchar(320),
     adresse_client_facture varchar(50),
     ville_client_facture varchar(30),
-    code_postal_client_facture varchar(5),
+    code_postal_client_facture char(5),
     adresse_facturation_client_facture varchar(50),
     ville_facturation_client_facture varchar(30),
-    code_postal_facturation_client_facture varchar(5),
+    code_postal_facturation_client_facture char(5),
     adresse_alizon_facture varchar(50),
     ville_alizon_facture varchar(30),
-    code_postal_alizon_facture varchar(5)
+    code_postal_alizon_facture char(5)
 );
 
 -- ==========================
@@ -240,7 +217,7 @@ create table limone.Ligne_Commande (
     id_produit_commande int,
     nom_produit varchar(100), 
     quantite int, 
-    prix_ht_commande numeric,
+    prix_ht_commande numeric(10,2),
     tva_commande numeric,
 
     CONSTRAINT fk1_ligne_commande FOREIGN KEY (id_commande) REFERENCES limone.Commande(id_commande),
@@ -253,6 +230,6 @@ create table limone.Ligne_Commande (
 -- ======= Clé authentification ==========
 -- =======================================
 create table limone.Cle_Authentification (
-    clee VARCHAR(10) PRIMARY KEY,
+    cle CHAR(10) PRIMARY KEY,
     utilisee BOOLEAN
 );

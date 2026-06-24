@@ -77,7 +77,7 @@ function confimerInscription($vendeur)
             throw new Exception(code: HTTP_SIRET_INVALIDE);
         }
 
-        if (!certifierClee($vendeur["cleAuth"])) {
+        if (!certifiercle($vendeur["cleAuth"])) {
             throw new Exception(code: HTTP_CLE_AUTH_INVALIDE);
         }
 
@@ -127,16 +127,16 @@ function connexionVendeur($vendeur)
  * @Param la clée à certifier
  * @Retuns un booléen déterminant la certification de la clée
  */
-function certifierClee($cle)
+function certifiercle($cle)
 {
-    return certifierCleeBDD($cle);
+    return certifiercleBDD($cle);
 }
 
 /**
  * @Brief génère une clée d'authentification vendeur
  * @Returns la clée générée
  */
-function creerCleeAuth()
+function creercleAuth()
 {
     $cle = "";
 
@@ -144,7 +144,7 @@ function creerCleeAuth()
         $cle .= rand(0, 9);
     }
 
-    ajouterCleeBDD($cle);
+    ajoutercleBDD($cle);
     return $cle;
 }
 
