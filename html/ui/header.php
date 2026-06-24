@@ -17,15 +17,9 @@
         ?>
 
         <!-- Logo -->
-        <?php if ($typeUtilisateur !== 2): ?>
-            <a href="/Catalogue/index.php" class="header-logo">
-                <img src="/ui/img/logo.png" alt="Logo Alizon" title="Logo Alizon" class="header-logo-image" />
-            </a>
-        <?php else: ?>
-            <a href="/Catalogue/CatalogueVendeur.php" class="header-logo">
-                <img src="/ui/img/logo.png" alt="Logo Alizon" title="Logo Alizon" class="header-logo-image" />
-            </a>
-        <?php endif; ?>
+        <a href="/Catalogue/index.php" class="header-logo">
+            <img src="/ui/img/logo.png" alt="Logo Alizon" title="Logo Alizon" class="header-logo-image" />
+        </a>
 
         <!-- Barre de recherche -->
         <?php if ($typeUtilisateur !== 2): ?>
