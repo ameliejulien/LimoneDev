@@ -18,8 +18,10 @@ function modifierMdpClientBDD($mdp, $idClient)
     $connectBDD = connecterBDD();
     //
 
-    $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = '{$mdp}' WHERE id_utilisateur = '{$idClient}';";
+    $requeteClient = "UPDATE Utilisateur SET mdp_utilisateur = :mdp WHERE id_utilisateur = :idClient;";
     $requeteUpdateClient = $connectBDD->prepare($requeteClient);
+    $requeteUpdateClient -> bindValue(":mdp",$mdp);
+    $requeteUpdateClient -> bindValue(":idClient",$idClient);
     $requeteUpdateClient->execute();
 }
 
