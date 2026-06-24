@@ -158,7 +158,7 @@
     text-decoration: line-through;
 }
 
-.prix-principal {
+.prix-principal, .tva-produit {
     display    : flex;
     align-items: baseline;
     line-height: 1;
@@ -257,7 +257,7 @@
     user-select: none;
 }
 
-.bouton-panier {
+.bouton-panier, .action-bloc > button[type="submit"] {
     flex           : 1;
     @include flex-centre;
     justify-content: center;
@@ -351,4 +351,113 @@
     }
 
     .quantite-selector { justify-content: center; }
+}
+
+.button  {
+  width: auto;
+  height: auto;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+  margin-top: 0.5em;
+}
+
+.button :hover {
+  background: var(--vert-fonce);
+  transform: scale(1.06);
+}
+
+.button :active {
+  transform: scale(0.96);
+}
+
+/* ----- Champs avec label flottant (même style que la page client) ----- */
+
+.form__group {
+  position: relative;
+  padding: 18px 0 0;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 75%;
+  border: 0;
+  border-bottom: 2px solid var(--encre-tres-claire);
+  outline: 0;
+  font-size: 1.2rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  color: var(--encre-claire);
+  pointer-events: none;
+}
+
+.form__field:focus {
+  border-bottom: 3px solid var(--vert-fonce);
+  border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+  border-image-slice: 1;
+  padding-bottom: 7px;
+}
+
+.form__field:focus ~ .form__label {
+  top: 0;
+  font-size: 0.95rem;
+  color: var(--vert-fonce);
+  font-weight: 700;
+}
+
+.form__field:required:invalid {
+  box-shadow: none;
+}
+
+.form__textarea {
+  width: 100%;
+}
+
+.indication_champ {
+    font-family: inherit;
+    width: 75%;
+    border: 0;
+    outline: 0;
+    font-size: 1.2rem;
+    color: var(--encre);
+    padding: 8px 0;
+    background: transparent;
+}
+
+img {
+  margin: auto;
+  object-fit: contain;
+  margin-top: 10px;
+  image-rendering: optimizeSpeed;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
 }

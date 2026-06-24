@@ -87,7 +87,7 @@ CREATE TABLE limone.Produit (
     promotion_produit boolean,
     reduction_produit numeric(10,2),
     tva_produit numeric,
-    produit_supprime boolean,
+    produit_supprime boolean DEFAULT FALSE,
     vendeur_produit int,
     nb_ventes_produit int,
 

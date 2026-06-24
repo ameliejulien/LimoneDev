@@ -109,4 +109,68 @@ function trouverLesProduitsVendeur($idVendeur): array {
     return $stmt->fetchAll();
 }
 
+
+function creerProduitBDD($nomProduit, $descriptionProduit, $prixProduit, $qteProduit, $estDansCatalogue, $tva, $idVendeur) {
+    $PDO = connecterBDD();
+
+    $query = "INSERT INTO Produit (nom_produit, description_produit, prix_ht_produit, stock_produit, catalogue_produit, tva_produit, vendeur_produit) 
+              VALUES (:nomProduit, :descriptionProduit, :prixProduit, :qteProduit, :estDansCatalogue, :tva, :idVendeur) 
+              RETURNING id_produit";
+
+    try {
+        $stmt = $PDO->prepare($query);
+
+        $stmt->bindParam(":nomProduit", $nomProduit);
+        $stmt->bindParam(":descriptionProduit", $descriptionProduit);
+        $stmt->bindParam(":prixProduit", $prixProduit);
+        $stmt->bindParam(":qteProduit", $qteProduit);
+        $stmt->bindParam(":estDansCatalogue", $estDansCatalogue);
+        $stmt->bindParam(":tva", $tva);
+        $stmt->bindParam(":idVendeur", $idVendeur);
+
+        $stmt->execute();
+        
+        return $stmt->fetch();
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function lierCategorie($idCategorie, $idVendeur) {
+    $PDO = connecterBDD();
+
+    $query = "INSERT INTO Categorie_Produit (id_produit, id_categorie) 
+              VALUES (:idVendeur, :idCategorie);";
+
+    try {
+        $stmt = $PDO->prepare($query);
+
+        $stmt->bindParam(":idCategorie", $idCategorie);
+        $stmt->bindParam(":idVendeur", $idVendeur);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function addPhoto($idProduit, $nomFichier, $estLaMain) {
+    $PDO = connecterBDD();
+
+    try {
+        $stmt = $PDO->prepare("INSERT INTO photo_produit (id_produit, photo_produit, photo_principale) 
+                               VALUES (:id, :nomFichier, :isMain)");
+
+        $stmt->bindValue(":id", $idProduit);
+        $stmt->bindValue(":nomFichier", $nomFichier);
+        $stmt->bindValue(":isMain", $estLaMain);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        return false;
+    }
+
+    
+}
+
 ?>
