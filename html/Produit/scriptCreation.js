@@ -80,9 +80,16 @@ form.addEventListener("submit", function (event) {
   }).then((response) => {
     if (response.status === 200) {
       response.json().then((jsonResponse) => {
-        console.log(jsonResponse);
-        if (!jsonResponse['succes']) {
-          afficherSnackBar("Erreur", "Une erreur est survenue lors de la création du produit")
+        if (!jsonResponse["succes"]) {
+          afficherSnackBar("Erreur", jsonResponse["message"]);
+
+          // Change la couleurs des bordures des champs invalides
+          if (jsonResponse["erreurs"]) {
+            jsonResponse["erreurs"].forEach((id) => {
+              const element = document.getElementById(id);
+              if (element) element.style.borderBottomColor = "red";
+            });
+          }
         } else {
           form.action = `../Produit/Produit.php?id=${jsonResponse["idProduit"]}`;
           form.submit();

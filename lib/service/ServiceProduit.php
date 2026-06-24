@@ -75,44 +75,52 @@ function creerProduit($arrayProduit, $uuid): array {
         $erreurs[] = 'champImageProduit';
     }
 
-    if (!empty($erreurs)) return ['succes' => false, 'erreurs' => $erreurs];
+    if (!empty($erreurs)) 
+        return ['succes' => false, 'erreurs' => $erreurs, 'message' => "Certains champs sont invalides."];
+
+    // Verifie si le nom du produit est déjà utilisé
+    if (!nomProduitExiste($arrayProduit['nomProduit'])) 
+        return ['succes' => false, 'erreurs' => ['nomProduit'], 'message' => "Le nom du produit existe déjà."];
+
+    $target_dir = basename("../imagesProduits/");
+    $file = $_FILES['champImageProduit']['name'];
+	$path = pathinfo($file);
+	$ext = $path['extension'];
+	$temp_name = $_FILES['champImageProduit']['tmp_name'];
+
+    // Le nom du fichier n'a pas besoin d'étre verifié nous le fixons nous même
+    if (preg_match("^(jpg|jpeg|jpe|png)$",$ext)) {
+        return ['succes' => false, 'message' => "Mauvais fromat d'extension d'image."];
+    }
 
     $idVendeur = trouverIDUtilisateur($uuid); 
+    
+    // Début requêtes de création en BDD
 
     // Requête de création à la BDD
     $idProduit = creerProduitBDD($arrayProduit['nomProduit'], $arrayProduit['descriptionProduit'],
                                  $arrayProduit['prixProduit'],  $arrayProduit['qteProduit'], 
                                  $arrayProduit['estDansCatalogue'], $arrayProduit['tva'], 
                                  $idVendeur);
-    if ($idProduit === false) return ['succes' => false, 'emplacement' => "Lors de l'insert"];
+    if ($idProduit === false) return ['succes' => false, 'message' => "Erreur à la création"];
 
     $idProduit = $idProduit["id_produit"];
 
     $resultLiaison = lierCategorie($arrayProduit['categorieProduit'], $idProduit);
-    if ($resultLiaison === false) return ['succes' => false, 'emplacement' => "Lors de la laison"];
+    if ($resultLiaison === false) return ['succes' => false, 'message' => "Erreur à la laison avec la catégorie"];
 
-    $target_dir = "../imagesProduits/";
-    $file = $_FILES['champImageProduit']['name'];
-	$path = pathinfo($file);
-	$ext = $path['extension'];
-	$temp_name = $_FILES['champImageProduit']['tmp_name'];
     $name_ext = $idProduit.".".$ext;
 	$path_filename_ext = $target_dir.$name_ext;
-
-    if (preg_match("^(jpg|jpeg|jpe|png)$",$ext)
-    ||  preg_match("^[-0-9A-Z_\.]{250}$",$name_ext)) {
-        return ['succes' => false, 'emplacement' => "Mauvais fromat de nom d'image", $temp_name, $path_filename_ext];
-    }
 
     // Sauvegarde du produit sur le serveur
     if (file_exists($path_filename_ext)
     ||  !move_uploaded_file($temp_name,$path_filename_ext))
-        return ['succes' => false, 'emplacement' => "Sauvegarde de l'image", $temp_name, $path_filename_ext];
+        return ['succes' => false, 'message' => "L'image n'a pas pu être sauvegardé, Pensez à la changer.", $temp_name, $path_filename_ext];
     
     // Bind de la photo avec le produit
     $resultLiaison = addPhoto($idProduit, $name_ext, true);
     if ($resultLiaison === false) 
-        return ['succes' => false, 'emplacement' => "Ajout de l'image dans la BDD"];
+        return ['succes' => false, 'message' => "L'image n'a pas pu être lié, Pensez à la changer."];
 
     return ['succes' => true, 'idProduit' => $idProduit];
 }

@@ -168,9 +168,21 @@ function addPhoto($idProduit, $nomFichier, $estLaMain) {
         return $stmt->execute();
     } catch (PDOException $e) {
         return false;
-    }
+    }    
+}
 
-    
+function nomProduitExiste($nomProduit) {
+    $PDO = connecterBDD();
+
+    try {
+        $stmt = $PDO->prepare("SELECT id_produit FROM produit where nom_produit = ':nomProduit'");
+
+        $stmt->bindValue(":nomProduit", $nomProduit);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        return false;
+    }  
 }
 
 ?>
