@@ -113,13 +113,13 @@ function chercherVendeur($vendeur)
  * @Param string la clé dans le formulaire
  * @Return bool valeur représentant la validité de la clé renseignée
  */
-function certifierCleeBDD($clee)
+function certifierCleeBDD($cle)
 {
     $connectBDD = connecterBDD();
-    $requete = "SELECT clee FROM limone.Cle_Authentification" .
-        " WHERE clee = :cleeAuth AND utilisee = false";
+    $requete = "SELECT cle FROM limone.Cle_Authentification" .
+        " WHERE cle = :cleeAuth AND utilisee = false";
     $requetePreparee = $connectBDD->prepare($requete);
-    $requetePreparee->bindValue(":cleeAuth", $clee);
+    $requetePreparee->bindValue(":cleeAuth", $cle);
     $requetePreparee->execute();
 
     $row = $requetePreparee->fetch(PDO::FETCH_ASSOC);
@@ -128,9 +128,9 @@ function certifierCleeBDD($clee)
         // update de la valeur utilisée
         $requete = "UPDATE limone.Cle_Authentification" .
             " SET utilisee = true " .
-            "WHERE clee = :cleeAuth";
+            "WHERE cle = :cleeAuth";
         $requetePreparee = $connectBDD->prepare($requete);
-        $requetePreparee->bindValue(":cleeAuth", $clee);
+        $requetePreparee->bindValue(":cleeAuth", $cle);
         try {
             $requetePreparee->execute();
         } catch (Exception $e) {
@@ -171,13 +171,13 @@ function connecterVendeur($vendeur)
 /**
  * @Brief ajoute une clée d'authentification en BDD
  */
-function ajouterCleeBDD($clee)
+function ajouterCleeBDD($cle)
 {
     $connectBDD = connecterBDD();
-    $requete = "INSERT INTO Cle_Authentification (clee, utilisee)" .
-        "VALUES (clee, false)";
+    $requete = "INSERT INTO Cle_Authentification (cle, utilisee)" .
+        "VALUES (cle, false)";
     $requetePreparee = $connectBDD->prepare($requete);
-    $requetePreparee->bindValue('clee', $clee);
+    $requetePreparee->bindValue('cle', $cle);
     $requetePreparee->execute();
 }
 

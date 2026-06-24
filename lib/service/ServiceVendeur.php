@@ -127,9 +127,9 @@ function connexionVendeur($vendeur)
  * @Param la clée à certifier
  * @Retuns un booléen déterminant la certification de la clée
  */
-function certifierClee($clee)
+function certifierClee($cle)
 {
-    return certifierCleeBDD($clee);
+    return certifierCleeBDD($cle);
 }
 
 /**
@@ -138,14 +138,14 @@ function certifierClee($clee)
  */
 function creerCleeAuth()
 {
-    $clee = "";
+    $cle = "";
 
     for ($i = 1; $i <= 9; $i++) {
-        $clee .= rand(0, 9);
+        $cle .= rand(0, 9);
     }
 
-    ajouterCleeBDD($clee);
-    return $clee;
+    ajouterCleeBDD($cle);
+    return $cle;
 }
 
 /**
