@@ -295,10 +295,9 @@ function mettreAJourVendeur($connectBDD, $idVendeur, $vendeur)
 /**
  * @Brief modifie le mot de passe vendeur
  */
-function modifierMdpVendeurBDD($mdp)
+function modifierMdpVendeurBDD($mdp, $idVendeur)
 {
     $connectBDD = connecterBDD();
-    $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
 
     $requeteVendeur = "UPDATE Utilisateur SET mdp_utilisateur = :mdp WHERE id_utilisateur = :idVendeur;";
     $requeteUpdateVendeur = $connectBDD->prepare($requeteVendeur);

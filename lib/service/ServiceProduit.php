@@ -18,8 +18,8 @@ function recupererPremierProduit(): array|false {
     return trouverPremierProduit();
 }
 
-function recupererlesProduitsVendeur(): array {
-    return trouverLesProduitsVendeur();
+function recupererlesProduitsVendeur($idVendeur): array {
+    return trouverLesProduitsVendeur($idVendeur);
 }
 
 ?>

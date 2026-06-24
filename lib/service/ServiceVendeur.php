@@ -189,7 +189,7 @@ function modificationMdpVendeur($data)
 
     $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
 
-    if (password_verify($mdpCourant, getVendeurMdpHash($idVendeur))) {
+    if (password_verify($mdpCourant,  getMdpHashFromUUID($_COOKIE['uuid']))) {
         // Les deux nouveaux mots de passe ne correspondent pas
         if ($nouveauMdp !== $confNouveauMdp) {
             return 401;
@@ -201,7 +201,7 @@ function modificationMdpVendeur($data)
         }
 
         // Tout est valide → on met à jour
-        modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT));
+        modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT), $idVendeur);
         return 200;
     } else {
         return 400;

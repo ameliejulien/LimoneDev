@@ -4,11 +4,12 @@
     require_once ('../../lib/service/ServiceVendeur.php');
 
     $typeUtilisateur = trouverTypeUtilisateur($_COOKIE['uuid'])['type_utilisateur'];
+    $idUtilisateur = trouverIDUtilisateur($_COOKIE['uuid']);
 
 
     $produitVide = false;
     if ($typeUtilisateur == 2) {
-        $produits = trouverLesProduitsVendeur();
+        $produits = trouverLesProduitsVendeur($idUtilisateur);
         if (count($produits) == 0) {
             $produitVide = true;
         }
@@ -17,7 +18,7 @@
         $produits = recupererlesProduits();
     }
 
-    if (!$lstVide) {
+    if (count($produits) > 0) {
         $prix = array_column($produits, 'prix_ht_produit');
         if ($prix != null) {
             $prixMin = (int) floor(min($prix));
