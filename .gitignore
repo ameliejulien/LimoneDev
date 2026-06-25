@@ -1,3 +1,4 @@
 .env
 .vscode
 connect_params.php
+vendor/

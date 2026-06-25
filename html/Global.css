@@ -125,6 +125,11 @@
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
+
+html, body {
+  background: var(--beige-clair);
+}
+
 body {
   margin: 0;
   padding: 0;
