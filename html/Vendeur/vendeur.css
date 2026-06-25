@@ -177,31 +177,10 @@ h1 {
   }
 }
 /* ----- Bouton d'envoi ----- */
-.submit {
-  width: auto;
-  height: auto;
-  padding: 15px;
-  border-radius: 12px;
-  background: var(--vert-fonce);
-  color: var(--beige-clair);
-  display: grid;
-  place-items: center;
-  transition: background 0.2s, transform 0.15s;
-  flex-shrink: 0;
-  cursor: pointer;
-  font-family: var(--police-generale);
+.form__row--actions {
+  align-items: stretch;
 }
 
-.submit:hover {
-  background: var(--vert-fonce);
-  transform: scale(1.06);
-}
-
-.submit:active {
-  transform: scale(0.96);
-}
-
-/* ----- Classes encore utilisées ailleurs sur les pages vendeur ----- */
 .divBtnForm {
   display: flex;
   flex-direction: column;
@@ -211,4 +190,83 @@ h1 {
 .consultDiv {
   display: flex;
   flex-direction: column;
+}
+
+/* ===== Page profil vendeur ===== */
+.profil__carte {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1em;
+  width: min(560px, 90vw);
+  font-family: var(--police-generale);
+  background-color: white;
+  overflow: hidden;
+}
+
+.profil__champ {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1em 2em;
+  border-bottom: 1px solid var(--bordure);
+  gap: 1em;
+}
+
+.profil__label {
+  font-size: 0.9rem;
+  color: var(--encre-tres-claire);
+  white-space: nowrap;
+}
+
+.profil__valeur {
+  font-size: 0.95rem;
+  color: var(--encre);
+  font-weight: 500;
+  text-align: right;
+}
+
+.profil__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  padding: 1.5em 2em;
+}
+
+.profil__bouton {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  border: none;
+  font-family: var(--police-generale);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+  text-decoration: none;
+  text-align: center;
+}
+
+.profil__bouton:hover {
+  opacity: 0.88;
+  background: var(--vert-fonce);
+  transform: scale(1.06);
+}
+
+.profil__bouton:active {
+  transform: scale(0.96);
+}
+
+.profil__bouton--deco {
+  background: transparent;
+  color: var(--encre-claire);
+  border: 1px solid var(--bordure-fonce);
+}
+
+.profil__bouton--deco:hover {
+  background: var(--bordure);
+  opacity: 1;
 }/*# sourceMappingURL=vendeur.css.map */

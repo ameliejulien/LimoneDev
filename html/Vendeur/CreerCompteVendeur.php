@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="vendeur.css">
   <link rel="stylesheet" href="../Global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Compte Vendeur</title>
+  <title>Compte</title>
 </head>
 
 <body>
   <?php require_once '../ui/header.php'; ?>
-  <h1>Création de compte vendeur</h1>
+  <h1>Création de compte</h1>
   <form method="POST" class="formulaire">
     <div class="form__group">
       <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
@@ -79,7 +79,7 @@
 
     <br>
 
-    <input type="submit" value="S'inscrire" class="submit" />
+    <input type="submit" value="S'inscrire" class="submit profil__bouton" />
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>

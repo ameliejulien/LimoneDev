@@ -136,6 +136,27 @@ h1 {
 }
 
 /* ----- Bouton d'envoi ----- */
+.profil__bouton {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  border: none;
+  font-family: var(--police-generale);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.profil__bouton:hover {
+  opacity: 0.88;
+}
+
+.profil__bouton:active {
+  transform: scale(0.98);
+}
+
 .submit {
   width: auto;
   height: auto;

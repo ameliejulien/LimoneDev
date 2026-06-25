@@ -7,6 +7,7 @@
   droitsAccesPage($_COOKIE['uuid'], 2);
 
   $infosVendeur = recupererInfosVendeur();
+  $v = $infosVendeur[0]; // raccourci
 
 ?>
 
@@ -16,72 +17,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vendeur.css">
+    <link rel="stylesheet" href="../Global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Profil vendeur</title>
+    <title>Profil</title>
   </head>
   <body>
     <?php require_once '../ui/header.php'; ?>
-    <h1>Profil Vendeur</h1>
-    <form class="formulaire">
-      <div class="consultDiv">
-        <label>Dénomination : </label>
-        <span> <?= $infosVendeur[0]['denomination_vendeur'];?> </span>
-      </div>
-    
-      <div class="consultDiv">
-        <label for="mail">Adresse mail : </label>
-        <span> <?= $infosVendeur[0]['email_utilisateur'];?> </span>
+    <h1>Profil</h1>
+
+    <div class="profil__carte">
+
+      <div class="profil__champ">
+        <span class="profil__label">Dénomination</span>
+        <span class="profil__valeur"><?= htmlspecialchars($v['denomination_vendeur']) ?></span>
       </div>
 
-      <div class="consultDiv">
-        <label for="phone">Numéro de téléphone : </label>
-        <span> <?= $infosVendeur[0]['telephone_utilisateur'];?> </span>
-      </div>
-      
-      <div class="consultDiv">
-        <label for="address">Adresse postale : </label>
-        <span> <?= $infosVendeur[0]['adresse'];?> </span>
+      <div class="profil__champ">
+        <span class="profil__label">Adresse mail</span>
+        <span class="profil__valeur"><?= $v['email_utilisateur'] ?? 'Non renseigné' ?></span>
       </div>
 
-      <div class="consultDiv">
-        <label for="address">Code postal : </label>
-        <span> <?= $infosVendeur[0]['code_postal_adresse'];?> </span>
+      <div class="profil__champ">
+        <span class="profil__label">Numéro de téléphone</span>
+        <span class="profil__valeur"><?= $v['telephone_utilisateur'] ?? 'Non renseigné' ?></span>
       </div>
 
-      <div class="consultDiv">
-        <label for="address">Ville : </label>
-        <span> <?= $infosVendeur[0]['ville_adresse'];?> </span>
+      <div class="profil__champ">
+        <span class="profil__label">SIRET</span>
+        <span class="profil__valeur"><?= $v['siret_vendeur'] ?? 'Non renseigné' ?></span>
       </div>
-      <div class="divBtnForm">
-        <button type="button" class="buttonForm" onclick="window.location.href='ModifierCompteVendeur.php'">Modifier Compte</button>
-        <button type="button" class="buttonForm" onclick="window.location.href='ModifierMdpVendeur.php'">Modifier mot de passe</button>
-        <button type="button" class="buttonForm decoBtn">Déconnexion</button>
+
+      <div class="profil__champ">
+        <span class="profil__label">Adresse postale</span>
+        <span class="profil__valeur"><?= $v['adresse'] ?? 'Non renseignée' ?></span>
       </div>
-    </form>
 
-    <script>
-      const decoBtn = document.querySelector(".decoBtn");
+      <div class="profil__champ">
+        <span class="profil__label">Ville</span>
+        <span class="profil__valeur"><?= $v['ville_adresse'] ?? 'Non renseignée' ?></span>
+      </div>
 
-      decoBtn.addEventListener("click", function (event) {
-        
-        const formData = {
-          typeRequete: "deconnexion"
-        }
+      <div class="profil__champ">
+        <span class="profil__label">Code postal</span>
+        <span class="profil__valeur"><?= $v['code_postal_adresse'] ?? 'Non renseigné' ?></span>
+      </div>
 
-        // fetch vers le dossier API de création client
-        fetch("../API/Vendeur.php", {
-          method: "POST",
-          body: JSON.stringify(formData)  // fait une string JSON du tableau
-        })
-        .then(response => {
-          if (response.status === HTTP_OK) {
-            window.location.href = "../Catalogue/";
-          }
-        })
-        .catch(err => {
-          console.error("Erreur :", err); 
-        });
-      });
-    </script>
+      <div class="profil__actions">
+        <button type="button" class="profil__bouton" onclick="window.location.href='ModifierCompteVendeur.php'">Modifier le compte</button>
+        <button type="button" class="profil__bouton" onclick="window.location.href='ModifierMdpVendeur.php'">Modifier le mot de passe</button>
+        <button type="button" class="profil__bouton profil__bouton--deco">Déconnexion</button>
+      </div>
+
+    </div>
+
+  <script src="../js/form.js"></script>
+  <?php require_once '../ui/footer.php'; ?>
   </body>
 </html>

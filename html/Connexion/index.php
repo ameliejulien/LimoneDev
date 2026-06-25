@@ -27,7 +27,7 @@
 
     <br>
 
-    <input type="submit" value="Se connecter" class="submit" />
+    <input type="submit" value="Se connecter" class="submit profil__bouton" />
   </form>
 
   <div class="snackbar">

@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="client.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Compte Client</title>
+  <title>Compte</title>
 </head>
 <body>
   <?php require_once '../ui/header.php'; ?>
-  <h1>Création de compte client</h1>
+  <h1>Création de compte</h1>
   <form class="formulaire">
     <div class="form__group">
       <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
@@ -40,7 +40,7 @@
 
     <br>
     
-    <input type="submit" title="Bouton d'inscription" value="S'inscrire" class="submit"/>
+    <input type="submit" title="Bouton d'inscription" value="S'inscrire" class="submit profil__bouton"/>
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>

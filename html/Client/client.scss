@@ -219,22 +219,30 @@ input.submit:active {
 
 .profil__bouton {
   width: 100%;
-  padding: 13px;
-  border-radius: 12px;
+  padding: 12px;
+  border-radius: 10px;
   background: var(--vert-fonce);
   color: var(--beige-clair);
   border: none;
-  display: grid;
-  place-items: center;
   font-family: var(--police-generale);
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 0.15s;
+  transition: transform 0.15s, opacity 0.15s;
 }
 
-.profil__bouton:hover  { transform: scale(1.03); }
-.profil__bouton:active { transform: scale(0.97); }
+.profil__bouton:hover  { opacity: 0.88; }
+.profil__bouton:active { transform: scale(0.98); }
 
+.profil__bouton--deco {
+  background: transparent;
+  color: var(--encre-claire);
+  border: 1px solid var(--bordure-fonce);
+}
+
+.profil__bouton--deco:hover {
+  background: var(--bordure);
+  opacity: 1;
+}
 
 /* ===== Page modifier compte ===== */
 

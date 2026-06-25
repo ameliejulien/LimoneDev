@@ -8,7 +8,8 @@
   droitsAccesPage($_COOKIE['uuid'], 2);
 
   $infosVendeur = recupererInfosVendeur();
-  
+  $v = $infosVendeur[0]; // raccourci
+
 ?>
 
 <!DOCTYPE html>
@@ -19,92 +20,68 @@
   <link rel="stylesheet" href="vendeur.css">
   <link rel="stylesheet" href="../Global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Compte Vendeur</title>
+  <title>Modifier le compte vendeur</title>
 </head>
 <body>
   <?php require_once '../ui/header.php'; ?>
-  <h1>Modification du compte vendeur</h1>
+  <h1>Modification du compte</h1>
+
   <form method="POST" class="formulaire">
-    <div class="divForm">
-      <label for="mail">Adresse mail</label>
-      <input type="email" name="mail" required value="<?= $infosVendeur[0]['email_utilisateur'];?>">
+
+    <div class="form__row">
+      <div class="form__group form__group--grow-3">
+        <input type="text" id="denomination" name="denomination" class="form__field" placeholder=" " required
+          value="<?= htmlspecialchars($v['denomination_vendeur']) ?>">
+        <label for="denomination" class="form__label">Dénomination vendeur</label>
+      </div>
+
+      <div class="form__group form__group--grow-2">
+        <input type="tel" id="telephone" name="telephone" class="form__field" placeholder=" " required
+          value="<?= htmlspecialchars($v['telephone_utilisateur']) ?>">
+        <label for="telephone" class="form__label">Numéro de téléphone</label>
+      </div>
     </div>
 
-    <div class="divForm">
-      <label for="denomination">Dénomination vendeur</label>
-      <input type="text" name="denomination" required value="<?= $infosVendeur[0]['denomination_vendeur'];?>">
+    <div class="form__group">
+      <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required
+        value="<?= htmlspecialchars($v['email_utilisateur']) ?>">
+      <label for="mail" class="form__label">Adresse mail</label>
     </div>
 
-    <div class="divForm">
-      <label for="telephone">Numéro de téléphone</label>
-      <input type="tel" name="telephone" required value="<?= $infosVendeur[0]['telephone_utilisateur'];?>">
+    <div class="form__group">
+      <input type="text" id="adresseVendeur" name="adresseVendeur" class="form__field" placeholder=" " required
+        value="<?= htmlspecialchars($v['adresse']) ?>">
+      <label for="adresseVendeur" class="form__label">Adresse postale</label>
     </div>
 
-    <div class="divForm">
-      <label for="adresseVendeur">Adresse du vendeur</label>
-      <input type="text" name="adresseVendeur" required value="<?= $infosVendeur[0]['adresse'];?>">
+    <div class="form__row">
+      <div class="form__group form__group--grow-2">
+        <input type="text" id="villeVendeur" name="villeVendeur" class="form__field" placeholder=" " required
+          value="<?= htmlspecialchars($v['ville_adresse']) ?>">
+        <label for="villeVendeur" class="form__label">Ville</label>
+      </div>
+
+      <div class="form__group form__group--grow-1">
+        <input type="text" id="codePostalVendeur" name="codePostalVendeur" class="form__field" placeholder=" " required maxlength="5"
+          value="<?= htmlspecialchars($v['code_postal_adresse']) ?>">
+        <label for="codePostalVendeur" class="form__label">Code postal</label>
+      </div>
     </div>
 
-    <div class="divForm">
-      <label for="villeVendeur">Ville du vendeur</label>
-      <input type="text" name="villeVendeur" required value="<?= $infosVendeur[0]['ville_adresse'];?>">
+    <div class="form__row form__row--actions profil__actions">
+      <a href="ConsulterCompteVendeur.php" class="profil__bouton">Retour</a>
+      <input type="submit" value="Valider les modifications" class="profil__bouton"/>
     </div>
-
-    <div class="divForm">
-      <label for="codePostalVendeur">Code postal du vendeur</label>
-      <input type="text" name="codePostalVendeur" required maxlength="5" value="<?= $infosVendeur[0]['code_postal_adresse'];?>">
-    </div>
-
-    <input type="submit" value="Valider les modifications" class="submit"/>
-    <a href="ConsulterCompteVendeur.php"><input class="buttonForm" type="button" value="Retour"/></a>
-
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>
       <p class="snackbarText"></p>
     </div>
 
-    <script src="../snackbar.js"></script>
   </form>
-  <script>
-    const form = document.querySelector(".formulaire");
 
-    // écouteur des requêtes du formulaire
-    form.addEventListener("submit", function (event) {
-      
-      // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault(); 
-
-      // récupération des infos du formulaire
-      const formData = {
-        mail: form.mail.value,
-        denomination: form.denomination.value,
-        telephone_utilisateur: form.telephone.value,
-        adresse: form.adresseVendeur.value,
-        ville_adresse: form.villeVendeur.value,
-        code_postal_adresse: form.codePostalVendeur.value,
-        typeRequete: "modification"
-      }
-
-      // fetch vers le dossier API de création client
-      fetch("../API/Vendeur.php", {
-        method: "POST",
-        body: JSON.stringify(formData)  // fait une string JSON du tableau
-      })
-      .then(response => {
-        if (response.status == HTTP_OK) {
-          window.location.href = "ConsulterCompteVendeur.php";
-          window.location.href = "ConsulterCompteVendeur.php";
-        } else if (response.status == 409) {
-          afficherSnackBar('Notification','Echec de modification : email déjà utilisé !'); // alert de la création du compte
-        } else {
-          afficherSnackBar('Notification','Echec de modification !');
-        } 
-      }) 
-      .catch(err => {
-        console.error("Erreur :", err); 
-      });
-    });
-</script>
+  <script src="../js/form.js"></script>
+  <script src="../snackbar.js"></script>
+  <?php require_once '../ui/footer.php'; ?>
 </body>
 </html>

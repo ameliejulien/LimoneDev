@@ -31,13 +31,9 @@ function initCreationCompteClientForm(formSelector = ".formulaire") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
-  // écouteur des requêtes du formulaire
   form.addEventListener("submit", function (event) {
-
-    // empêche l'envoi du formulaire sans exécuter le code qui suit
     event.preventDefault();
 
-    // récupération des infos du formulaire
     const formData = {
       mail: form.mail.value,
       nomUtilisateur: form.username.value,
@@ -47,10 +43,9 @@ function initCreationCompteClientForm(formSelector = ".formulaire") {
       typeRequete: "creation"
     };
 
-    // fetch vers le dossier API de création client
     fetch("../API/Client.php", {
       method: "POST",
-      body: JSON.stringify(formData) // fait une string JSON du tableau
+      body: JSON.stringify(formData)
     })
       .then(response => {
         if (response.status == 201) {
@@ -68,6 +63,8 @@ function initCreationCompteClientForm(formSelector = ".formulaire") {
   });
 }
 
+// ----- Soumission du formulaire de connexion -----
+
 /**
  * Initialise la soumission du formulaire de connexion.
  * Envoie les identifiants à l'API et redirige / notifie selon la réponse.
@@ -78,33 +75,29 @@ function initConnexionForm(formSelector = ".formulaire") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
-  // écouteur des requêtes du formulaire
   form.addEventListener("submit", function (event) {
-
-    // empêche l'envoi du formulaire sans exécuter le code qui suit
     event.preventDefault();
 
-    // récupération des infos du formulaire
     const formData = {
       mail: form.mail.value,
       motDePasse: form.mdp.value,
     };
 
-    // fetch vers le dossier API de connexion
     fetch("../API/Connexion.php", {
       method: "POST",
-      body: JSON.stringify(formData) // fait une string JSON du tableau
+      body: JSON.stringify(formData)
     })
       .then(response => {
         if (response.status == 200) {
-          // afficherSnackBar('Notification','Connexion réussie !'); // alerte de la création du compte
           window.location.href = "../Catalogue";
         } else {
-          afficherSnackBar('Notification', 'Connexion échouée !'); // alerte de l'échec de la connexion
+          afficherSnackBar('Notification', 'Connexion échouée !');
         }
       });
   });
 }
+
+// ----- Soumission du formulaire de création de compte vendeur -----
 
 /**
  * Initialise la soumission du formulaire de création de compte vendeur.
@@ -116,13 +109,9 @@ function initCreationCompteVendeurForm(formSelector = ".formulaire") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
-  // écouteur des requêtes du formulaire
   form.addEventListener("submit", function (event) {
-
-    // empêche l'envoi du formulaire sans exécuter le code qui suit
     event.preventDefault();
 
-    // récupération des infos du formulaire
     const formData = {
       mail: form.mail.value,
       denomination: form.denomination.value,
@@ -137,19 +126,17 @@ function initCreationCompteVendeurForm(formSelector = ".formulaire") {
       typeRequete: "creation"
     };
 
-    // fetch vers le dossier API de création vendeur
     fetch("../API/Vendeur.php", {
       method: "POST",
-      body: JSON.stringify(formData) // fait une string JSON du tableau
+      body: JSON.stringify(formData)
     })
       .then(response => {
         console.log("RESPONSE = ");
-        console.log(response); // test affichage retour
+        console.log(response);
 
         if (response.status == 200) {
-          alert("Compte créé !"); // alert de la création du compte
+          alert("Compte créé !");
           window.location.href = "ConnexionCompteVendeur.php";
-
         } else if (response.status == 609) {
           afficherSnackBar('Notification', 'Echec de création de compte : Clé d\'authentification invalide');
         } else if (response.status == 608) {
@@ -178,6 +165,51 @@ function initCreationCompteVendeurForm(formSelector = ".formulaire") {
   });
 }
 
+// ----- Modification du compte vendeur -----
+
+/**
+ * Initialise la soumission du formulaire de modification du compte vendeur.
+ *
+ * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
+ */
+function initModificationCompteVendeur(formSelector = ".formulaire") {
+  const form = document.querySelector(formSelector);
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = {
+      mail: form.mail.value,
+      denomination: form.denomination.value,
+      telephone_utilisateur: form.telephone.value,
+      adresse: form.adresseVendeur.value,
+      ville_adresse: form.villeVendeur.value,
+      code_postal_adresse: form.codePostalVendeur.value,
+      typeRequete: "modification"
+    };
+
+    fetch("../API/Vendeur.php", {
+      method: "POST",
+      body: JSON.stringify(formData)
+    })
+      .then(response => {
+        if (response.status == 200) {
+          window.location.href = "ConsulterCompteVendeur.php";
+        } else if (response.status == 409) {
+          afficherSnackBar('Notification', 'Echec de modification : email déjà utilisé !');
+        } else {
+          afficherSnackBar('Notification', 'Echec de modification !');
+        }
+      })
+      .catch(err => {
+        console.error("Erreur :", err);
+      });
+  });
+}
+
+// ----- Déconnexion client -----
+
 /**
  * Initialise le bouton de déconnexion.
  *
@@ -203,38 +235,34 @@ function initDeconnexion(selector = ".profil__bouton--deco") {
   });
 }
 
+// ----- Déconnexion vendeur -----
+
 /**
- * Restreint la saisie d'un ou plusieurs champs à des chiffres uniquement.
- * Bloque toute touche non numérique et nettoie les valeurs collées (coller/copier).
+ * Initialise le bouton de déconnexion vendeur.
  *
- * @param {...string} selectors
- *
+ * @param {string} selector - sélecteur CSS du bouton (par défaut ".profil__bouton--deco")
  */
-function restreindreSaisieChiffres(...selectors) {
-  selectors.forEach(function (selector) {
-    const champ = document.querySelector(selector);
-    if (!champ) return;
+function initDeconnexionVendeur(selector = ".profil__bouton--deco") {
+  const decoBtn = document.querySelector(selector);
+  if (!decoBtn) return;
 
-    // Bloque les touches non numériques à la frappe
-    champ.addEventListener("keydown", function (event) {
-      const touchesAutorisees = [
-        "Backspace", "Delete", "Tab", "Escape", "Enter",
-        "ArrowLeft", "ArrowRight", "Home", "End"
-      ];
-      if (touchesAutorisees.includes(event.key)) return;
-      if (event.ctrlKey || event.metaKey) return; // autorise Ctrl+C, Ctrl+V...
-      if (!/^\d$/.test(event.key)) event.preventDefault();
-    });
-
-    // Nettoie les valeurs collées (copier-coller)
-    champ.addEventListener("paste", function (event) {
-      event.preventDefault();
-      const texte = (event.clipboardData || window.clipboardData).getData("text");
-      const chiffresUniquement = texte.replace(/\D/g, "");
-      document.execCommand("insertText", false, chiffresUniquement);
-    });
+  decoBtn.addEventListener("click", function () {
+    fetch("../API/Vendeur.php", {
+      method: "POST",
+      body: JSON.stringify({ typeRequete: "deconnexion" })
+    })
+      .then(response => {
+        if (response.status === 200) {
+          window.location.href = "../Catalogue/";
+        }
+      })
+      .catch(err => {
+        console.error("Erreur :", err);
+      });
   });
 }
+
+// ----- Modification du compte client -----
 
 /**
  * Initialise le formulaire de modification du compte client.
@@ -290,6 +318,7 @@ function changerImage(event) {
   lecture.readAsDataURL(fichier);
 }
 
+// ----- Modification du mot de passe client -----
 
 /**
  * Initialise le formulaire de modification du mot de passe client.
@@ -327,12 +356,87 @@ function initModificationMdpClientForm(formSelector = ".formulaire") {
   });
 }
 
+// ----- Restriction saisie chiffres -----
+
+/**
+ * Restreint la saisie d'un ou plusieurs champs à des chiffres uniquement.
+ *
+ * @param {...string} selectors
+ */
+function restreindreSaisieChiffres(...selectors) {
+  selectors.forEach(function (selector) {
+    const champ = document.querySelector(selector);
+    if (!champ) return;
+
+    champ.addEventListener("keydown", function (event) {
+      const touchesAutorisees = [
+        "Backspace", "Delete", "Tab", "Escape", "Enter",
+        "ArrowLeft", "ArrowRight", "Home", "End"
+      ];
+      if (touchesAutorisees.includes(event.key)) return;
+      if (event.ctrlKey || event.metaKey) return;
+      if (!/^\d$/.test(event.key)) event.preventDefault();
+    });
+
+    champ.addEventListener("paste", function (event) {
+      event.preventDefault();
+      const texte = (event.clipboardData || window.clipboardData).getData("text");
+      const chiffresUniquement = texte.replace(/\D/g, "");
+      document.execCommand("insertText", false, chiffresUniquement);
+    });
+  });
+}
+
+/**
+ * Initialise le formulaire de modification du mot de passe vendeur.
+ *
+ * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
+ */
+function initModificationMdpVendeurForm(formSelector = ".formulaire") {
+  const form = document.querySelector(formSelector);
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = {
+      mdpCourant:     form.mdpCourant.value,
+      nouveauMdp:     form.nouveauMdp.value,
+      confNouveauMdp: form.confNouveauMdp.value,
+      typeRequete:    "modificationMdp"
+    };
+
+    fetch("../API/Vendeur.php", {
+      method: "POST",
+      body: JSON.stringify(formData)
+    })
+      .then(response => {
+        if (response.status === 200) {
+          window.location.href = "ConsulterCompteVendeur.php";
+        } else if (response.status === 409) {
+          afficherSnackBar("Notification", "Échec : nouveau mot de passe identique à l'ancien !");
+        } else {
+          afficherSnackBar("Notification", "Échec de la modification du mot de passe !");
+        }
+      })
+      .catch(err => console.error("Erreur :", err));
+  });
+}
+
+// ============================================================
+// Chaque fonction vérifie elle-même si son élément
+// existe sur la page, sans effet si l'élément est absent.
+// ============================================================
+
 restreindreSaisieChiffres('#numtel', '#codepostal', '#codepostalfac', '#cartebancaire', '#codesecret');
 restreindreSaisieChiffres('#telephone', '#siret', '#codePostalVendeur', '#cleAuth');
 
-initCreationCompteVendeurForm();
-initConnexionForm();
 initCreationCompteClientForm();
+initConnexionForm();
+initCreationCompteVendeurForm();
+initModificationCompteVendeur();
 initDeconnexion();
+initDeconnexionVendeur();
 initModificationCompteClientForm();
 initModificationMdpClientForm();
+initModificationMdpVendeurForm();

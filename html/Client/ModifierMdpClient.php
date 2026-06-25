@@ -46,8 +46,8 @@ $infosClient = recupererInfosClient($_COOKIE['uuid']);
     </div>
 
     <div class="divBtnForm">
-      <input type="submit" value="Valider les modifications" class="submit">
-      <button type="button" class="buttonForm"
+      <input type="submit" value="Valider les modifications" class="submit profil__bouton">
+      <button type="button" class="profil__bouton"
               onclick="window.location.href='ConsulterCompteClient.php'">Retour</button>
     </div>
 

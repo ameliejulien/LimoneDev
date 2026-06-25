@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="client.css">
   <link rel="stylesheet" href="../Global.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Profil client</title>
+  <title>Profil</title>
 </head>
 
 <body>

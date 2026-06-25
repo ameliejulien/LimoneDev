@@ -79,8 +79,8 @@
       </div>
 
       <div class="divBtnForm">
-        <input type="submit" value="Enregistrer les modifications" class="submit">
-        <button type="button" class="buttonForm" onclick="window.location.href='ConsulterCompteClient.php'">Annuler</button>
+        <input type="submit" value="Enregistrer les modifications" class="submit profil__bouton">
+        <button type="button" class="profil__bouton" onclick="window.location.href='ConsulterCompteClient.php'">Annuler</button>
       </div>
 
     </form>
