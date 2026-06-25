@@ -2,7 +2,7 @@
 
   require_once ('../../lib/service/ServiceVendeur.php');
   require_once ('../../lib/service/ServiceUtilisateur.php');
-  require_once ('/../../lib/Constantes.php');
+  require_once ('../../lib/Constantes.php');
 
   droitsAccesPage($_COOKIE['uuid'], 2);
 
