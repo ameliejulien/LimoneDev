@@ -2,7 +2,7 @@
 
 include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/CompteVendeurRepo.php';
-include __DIR__ . '/../../lib/Constantes.php';
+require_once __DIR__ . '/../../lib/Constantes.php';
 
 /**
  * @brief modifie ou ajoute des informations d'un vendeur
