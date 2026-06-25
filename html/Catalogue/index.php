@@ -207,9 +207,9 @@
             require_once '../ui/footer.php';
         ?>
     </body>
-     <?php if ($typeUtilisateur != TYPE_VENDEUR ) { ?>
+    <?php if ($typeUtilisateur != TYPE_VENDEUR ) { ?>
         <!-- Leaflet -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <script src="/Catalogue/catalogue.js"></script>
     <?php } ?>
+    <script src="/Catalogue/catalogue.js"></script>
 </html>
