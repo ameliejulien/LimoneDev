@@ -1,6 +1,8 @@
 <?php
 require_once "../../lib/service/ServiceClient.php";
 require_once "../../lib/service/ServiceUtilisateur.php";
+include __DIR__ . '/../../html/Constants.php';
+
 header('Content-Type: application/json');
 
 // décodage du fichier json envoyé
@@ -11,16 +13,16 @@ if (!$data) {
     $data = $_POST;
 }
 
-$retour = 500;
+$retour = HTTP_ERR_GENERIQUE;
 
 // ajoute un cookie client
-if ($data["typeRequete"] == "creation") {
+if ($data["typeRequete"] == REQ_CREATION) {
     $retour = confimerInscription($data);
-} else if ($data["typeRequete"] == "deconnexion") {
+} else if ($data["typeRequete"] == REQ_DECONNEXION) {
     $retour = deconnecterUtilisateur();
-} else if ($data["typeRequete"] == "modificationMdp") {
+} else if ($data["typeRequete"] == REQ_MODIF_MDP) {
     $retour = modificationMdpClient($data);
-} else if ($data["typeRequete"] == "modification") {
+} else if ($data["typeRequete"] == REQ_MODIF_INFOS) {
     $retour = modifierClientBDD($data, $_FILES);
 }
 

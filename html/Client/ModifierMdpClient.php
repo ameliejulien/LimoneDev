@@ -1,16 +1,19 @@
 <?php
 
-  require_once ('../../lib/service/ServiceClient.php');
-  require_once ('../../lib/service/ServiceUtilisateur.php');
+require_once('../../lib/service/ServiceClient.php');
+require_once('../../lib/service/ServiceUtilisateur.php');
+include __DIR__ . '/../../lib/Constants.php';
 
-  droitsAccesPage($_COOKIE['uuid'], 1);
 
-  $infosClient = recupererInfosClient($_COOKIE['uuid']);
+droitsAccesPage($_COOKIE['uuid'], 1);
+
+$infosClient = recupererInfosClient($_COOKIE['uuid']);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,29 +22,30 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>Compte Client</title>
 </head>
+
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Modification du mot de passe client</h1>
   <form method="POST" class="formulaire">
-    
-  <div class="divForm">
+
+    <div class="divForm">
       <label for="mail">Mot de passe</label>
-      <input type="password" name="mdpCourant" required >
+      <input type="password" name="mdpCourant" required>
     </div>
 
     <div class="divForm">
       <label for="mail">Nouveau mot de passe</label>
-      <input type="password" name="nouveauMdp" required >
+      <input type="password" name="nouveauMdp" required>
     </div>
 
     <div class="divForm">
       <label for="mail">Confirmer nouveau mot de passe</label>
-      <input type="password" name="confNouveauMdp" required >
+      <input type="password" name="confNouveauMdp" required>
     </div>
 
 
-    <input type="submit" value="Valider les modifications" class="submit"/>
-    <a href="ConsulterCompteClient.php"><input class="buttonForm" type="button" value="Retour"/></a>
+    <input type="submit" value="Valider les modifications" class="submit" />
+    <a href="ConsulterCompteClient.php"><input class="buttonForm" type="button" value="Retour" /></a>
 
 
     <div class="snackbar">
@@ -56,9 +60,9 @@
 
     // écouteur des requêtes du formulaire
     form.addEventListener("submit", function (event) {
-      
+
       // empêche l'envoi du formulaire sans exécuter le code qui suit
-      event.preventDefault(); 
+      event.preventDefault();
 
       // récupération des infos du formulaire
       const formData = {
@@ -73,17 +77,18 @@
         method: "POST",
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
-      .then(response => {
-        if (response.status == 200) {
-          window.location.href = "ConsulterCompteClient.php";        
-        } else if (response.status == 409) {
-          afficherSnackBar('Notification','Echec de modification : nouveau mot de passe et ancien mot de passe identiques!'); // alert de la création du compte        
-        }
-      })  // transforme la réponse http en json exploitable
-      .catch(err => {
-        console.error("Erreur :", err); 
-      });
+        .then(response => {
+          if (response.status == HTTP_OK) {
+            window.location.href = "ConsulterCompteClient.php";
+          } else if (response.status == HTTP_MDP_IDENTIQUE) {
+            afficherSnackBar('Notification', 'Echec de modification : nouveau mot de passe et ancien mot de passe identiques!'); // alert de la création du compte        
+          }
+        })  // transforme la réponse http en json exploitable
+        .catch(err => {
+          console.error("Erreur :", err);
+        });
     });
-</script>
+  </script>
 </body>
+
 </html>

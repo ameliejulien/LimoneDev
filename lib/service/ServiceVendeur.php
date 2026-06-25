@@ -2,7 +2,7 @@
 
 include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/CompteVendeurRepo.php';
-include __DIR__ . '/../../html/Constants.php';
+include __DIR__ . '/../../lib/Constants.php';
 
 /**
  * @brief modifie ou ajoute des informations d'un vendeur
@@ -19,10 +19,10 @@ function modifierVendeurBDD($vendeur)
         mettreAJourVendeur($connectBDD, $idVendeur, $vendeur);
 
     } catch (Exception $e) {
-        return 500;
+        return HTTP_ERR_GENERIQUE;
     }
 
-    return 200;
+    return HTTP_OK;
 }
 
 /**
@@ -57,6 +57,10 @@ function confimerInscription($vendeur)
 
         if ($mdp != $confMdp) {
             throw new Exception(code: HTTP_MDP_CONFIRM_DIFF);
+        }
+
+        if (password_verify($mdp, getMdpHashFromMail($mail))) {
+            throw new Exception(code: HTTP_MDP_IDENTIQUE);
         }
 
         $vendeur["motDePasse"] = password_hash($vendeur["motDePasse"], PASSWORD_DEFAULT);
@@ -114,9 +118,9 @@ function connexionVendeur($vendeur)
     $retour = connecterVendeur($vendeur);
 
     if ($retour == false) {
-        $codeRetour = 400;
+        $codeRetour = HTTP_ERR_GENERIQUE;
     } else {
-        $codeRetour = 200;
+        $codeRetour = HTTP_OK;
     }
 
     return $codeRetour;
@@ -172,10 +176,10 @@ function modificationVendeur($vendeur)
     try {
         modifierVendeurBDD($vendeur);
     } catch (Exception $e) {
-        return 500;
+        return HTTP_ERR_GENERIQUE;
     }
 
-    return 200;
+    return HTTP_OK;
 }
 
 /**
@@ -192,27 +196,29 @@ function modificationMdpVendeur($data)
     if (password_verify($mdpCourant, getVendeurMdpHash($idVendeur))) {
         // Les deux nouveaux mots de passe ne correspondent pas
         if ($nouveauMdp !== $confNouveauMdp) {
-            return 401;
+            return HTTP_MDP_CONFIRM_DIFF;
         }
 
         // Le nouveau mot de passe est identique à l'ancien
         if ($mdpCourant === $nouveauMdp) {
-            return 409;
+            return HTTP_MDP_IDENTIQUE;
         }
 
         // Tout est valide → on met à jour
         modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT));
-        return 200;
+        return HTTP_OK;
     } else {
-        return 400;
+        return HTTP_ERR_GENERIQUE;
     }
 }
 
-function recupererLesVendeurs() {
+function recupererLesVendeurs()
+{
     return trouverLesVendeurs();
 }
 
-function recupererAdressesVendeurs() {
+function recupererAdressesVendeurs()
+{
     $adresses = trouverAdressesVendeurs();
     $tabFormate = [];
 
@@ -225,7 +231,7 @@ function recupererAdressesVendeurs() {
             'cp' => $a['code_postal_adresse'],
             'lat' => $a['latitude'],
             'long' => $a['longitude']
-        ]; 
+        ];
     }
 
     return $tabFormate;
