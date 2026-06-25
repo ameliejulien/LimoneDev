@@ -1,6 +1,7 @@
 <?php
     require_once '../../lib/service/ServiceVendeur.php';
-    require_once __DIR__ . '../../lib/Constantes.php';
+    require_once __DIR__ . '/../../lib/Constantes.php';
+
 
     $returnCode = HTTP_OK;
     $returnValue;

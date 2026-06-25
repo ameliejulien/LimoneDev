@@ -1,6 +1,6 @@
 <?php
 require_once "GlobalRepo.php";
-require_once '../Constantes.php';
+require_once __DIR__ . '/../Constantes.php';
 
 function trouverUUID($mail)
 {

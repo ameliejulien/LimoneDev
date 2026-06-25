@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/UtilisateurRepo.php';
-require_once __DIR__ . '../Constantes.php';
+require_once __DIR__ . '/../Constantes.php';
 
 function connexion($mail, $mdp): int
 {

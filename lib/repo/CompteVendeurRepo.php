@@ -2,7 +2,7 @@
 
 require_once "GlobalRepo.php";
 require_once __DIR__ . "/UtilisateurRepo.php";
-require_once __DIR__ . '../Constantes.php';
+require_once __DIR__ . '/../Constantes.php';
 
 /**
  * @Brief ajoute une instance dans utilisateur et vendeur en bdd

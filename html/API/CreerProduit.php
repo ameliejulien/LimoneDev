@@ -1,7 +1,8 @@
 <?php
 include_once('../../lib/service/ServiceProduit.php');
 include_once('../../lib/service/ServiceUtilisateur.php');
-require_once __DIR__ . '../../lib/Constantes.php';
+require_once __DIR__ . '/../../lib/Constantes.php';
+
 
 
 // Verifie les droits d'accès à cette page

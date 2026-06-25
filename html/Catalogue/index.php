@@ -2,7 +2,8 @@
 
     require_once ('../../lib/service/ServiceProduit.php');
     require_once ('../../lib/service/ServiceVendeur.php');
-    require_once __DIR__ . '../../lib/Constantes.php';
+    require_once __DIR__ . '/../../lib/Constantes.php';
+
 
     $typeUtilisateur = trouverTypeUtilisateur($_COOKIE['uuid'])['type_utilisateur'];
     $idUtilisateur = trouverIDUtilisateur($_COOKIE['uuid']);

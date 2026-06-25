@@ -1,7 +1,8 @@
 <?php
 require_once "../../lib/service/ServiceClient.php";
 require_once "../../lib/service/ServiceUtilisateur.php";
-require_once __DIR__ . '../../lib/Constantes.php';
+require_once __DIR__ . '/../../lib/Constantes.php';
+
 
 header('Content-Type: application/json');
 

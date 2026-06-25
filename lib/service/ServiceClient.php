@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../connect_params.php';
 require_once __DIR__ . '/../repo/CompteClientRepo.php';
 require_once __DIR__ . '/../repo/UtilisateurRepo.php';
-require_once __DIR__ . '../Constantes.php';
+require_once __DIR__ . '/../Constantes.php';
 
 /**
  * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription, cette fonction redirige vers la page de connexion

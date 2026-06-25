@@ -1,7 +1,8 @@
 <?php
 include "../../lib/service/ServiceVendeur.php";
 include "../../lib/service/ServiceUtilisateur.php";
-require_once __DIR__ . '../../lib/Constantes.php';
+require_once __DIR__ . '/../../lib/Constantes.php';
+
 
 header('Content-Type: application/json');
 

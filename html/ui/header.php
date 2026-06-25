@@ -5,7 +5,8 @@
         
         <?php
             require_once '../../lib/service/ServiceUtilisateur.php';
-            require_once __DIR__ . '../../lib/Constantes.php';
+            require_once __DIR__ . '/../../lib/Constantes.php';
+
 
             $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
             $nbPanier = count($panier);

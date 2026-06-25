@@ -1,5 +1,6 @@
 <?php 
-require_once __DIR__ . '../../lib/Constantes.php';
+require_once __DIR__ . '/../../lib/Constantes.php';
+
 ?>
 <footer class="footer">
     <div class="footer-interieur">

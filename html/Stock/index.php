@@ -17,7 +17,8 @@
         require_once __DIR__ . '/../../lib/service/ServiceStock.php';
         require_once __DIR__ . '/../../lib/repo/UtilisateurRepo.php';
         require_once __DIR__ . '/../../lib/service/ServiceUtilisateur.php';
-        require_once __DIR__ . '../../lib/Constantes.php';
+        require_once __DIR__ . '/../../lib/Constantes.php';
+
 
         droitsAccesPage($_COOKIE['uuid'], 2);
 
