@@ -45,26 +45,12 @@ $infosClient = recupererInfosClient($_COOKIE['uuid']);
         <label for="confNouveauMdp" class="form__label">Confirmer nouveau mot de passe</label>
       </div>
 
-<<<<<<< Updated upstream
-    <div class="form__group">
-      <input type="password" name="confNouveauMdp" id="confNouveauMdp" class="form__field"
-            placeholder="Confirmer nouveau mot de passe" required>
-      <label for="confNouveauMdp" class="form__label">Confirmer nouveau mot de passe</label>
-    </div>
-
-    <div class="divBtnForm">
-      <input type="submit" value="Valider les modifications" class="submit profil__bouton">
-      <button type="button" class="profil__bouton"
-              onclick="window.location.href='ConsulterCompteClient.php'">Retour</button>
-    </div>
-=======
       <div class="divBtnForm">
         <input type="submit" value="Valider les modifications" class="submit">
         <button type="button" class="buttonForm"
                 onclick="window.location.href='ConsulterCompteClient.php'">Retour</button>
       </div>
     </main>
->>>>>>> Stashed changes
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>

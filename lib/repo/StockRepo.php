@@ -1,6 +1,6 @@
 <?php
     require_once('../../lib/repo/GlobalRepo.php');
-    require_once(__DIR__ . '../Constantes.php');
+    require_once('../../lib/Constantes.php');
     
     /**
      * Fonction qui retourne les produits d'un vendeur (en fonction de l'idVendeur)
