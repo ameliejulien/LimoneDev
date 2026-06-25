@@ -378,3 +378,13 @@ input[type="radio"] {
 #map {
   height: 300px;
 }
+
+.buttonStock button {
+  width: 11em;
+}
+
+.buttonStock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -139,14 +139,10 @@
                     <?php } else if ($typeUtilisateur == TYPE_VENDEUR) {?>
                         <div class="buttonStock">
                             <button type="button" onclick="window.location.href = '../Stock';">Consulter le stock</button>
-                        </div>
-                    <?php } ?>
-
-                    <?php if ($produitVide) {?>
-                        <div class="buttonStock">
                             <button type="button" onclick="window.location.href = '../Produit/CreerProduit.php';">Créer un produit</button>
                         </div>
                     <?php } ?>
+
                 </div>
 
                 <div id="map"></div>

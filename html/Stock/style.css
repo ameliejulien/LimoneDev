@@ -71,12 +71,10 @@ th {
 
 td {
   background-color: white;
-  transition: 0.2s;
 }
 
 tr:hover td {
-  background-color: #E9F7EF;
-  transition: 0.2s;
+  background-color: var(--beige-fonce);
 }
 
 .ligne_qte {
@@ -180,6 +178,7 @@ input.submit:active {
   -o-object-fit: contain;
      object-fit: contain;
   margin: auto;
+  padding: 0.4em;
 }
 
 input[type=checkbox] {
@@ -204,9 +203,13 @@ input[type=checkbox] {
   position: absolute;
   border-style: solid;
   border-color: var(--vert-fonce);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 3em;
   border-width: 0.25em;
   gap: 2em;
+  padding: 2em;
 }
 
 .deleteConfirmation h2 {
