@@ -23,7 +23,7 @@ try {
     if ($message === "Unauthorized") {
         $codeRetour = HTTP_UNAUTHORIZED;
     } else if ($message === "IncorrectOTP") {
-        $codeRetour = 422;
+        $codeRetour = HTTP_UNPROCESSABLE;
     } else {
         $codeRetour = HTTP_ERR_GENERIQUE;
     }

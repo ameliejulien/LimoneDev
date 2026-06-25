@@ -4,9 +4,12 @@
     require_once ('../../lib/service/ServiceVendeur.php');
     require_once __DIR__ . '/../../lib/Constantes.php';
 
+    $typeUtilisateur = 0;
 
-    $typeUtilisateur = trouverTypeUtilisateur($_COOKIE['uuid'])['type_utilisateur'];
-    $idUtilisateur = trouverIDUtilisateur($_COOKIE['uuid']);
+    if (isset($_COOKIE['uuid'])) {
+        $typeUtilisateur = trouverTypeUtilisateur($_COOKIE['uuid'])['type_utilisateur'];
+        $idUtilisateur = trouverIDUtilisateur($_COOKIE['uuid']);
+    }
 
 
     $produitVide = false;
@@ -19,6 +22,9 @@
     } else {
         $produits = recupererlesProduits();
     }
+
+    $prixMin = 0;
+    $prixMax = 1000;
 
     if (count($produits) > 0) {
         $prix = array_column($produits, 'prix_ht_produit');

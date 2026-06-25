@@ -15,6 +15,9 @@ define("HTTP_ERR_CONNEXION", 611);
 define("HTTP_EMAIL_EXISTANT", 612);
 define("HTTP_ERR_GENERIQUE", 500);
 define("HTTP_OK", 200);
+define("HTTP_CREATED", 201);
+define("HTTP_UNAUTHORIZED", 401);
+define("HTTP_UNPROCESSABLE", 422);
 
 define("TYPE_CLIENT", 1);
 define("TYPE_VENDEUR", 2);
