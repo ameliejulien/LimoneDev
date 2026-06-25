@@ -895,6 +895,16 @@ button:active {
   background: transparent;
 }
 
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  flex: 1;
+}
+
 img {
   margin: auto;
   -o-object-fit: contain;

@@ -31,4 +31,5 @@
         <button onclick="location.href = '../Catalogue'">Retourner au catalogue</button>
     </main>
 </body>
+<?php require '../ui/footer.php'; ?>
 </html>

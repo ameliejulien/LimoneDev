@@ -24,21 +24,28 @@ $infosClient = recupererInfosClient($_COOKIE['uuid']);
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Modification du mot de passe</h1>
+  <main>
+    <form method="POST" class="formulaire">
 
-  <form method="POST" class="formulaire">
+      <div class="form__group">
+        <input type="password" name="mdpCourant" id="mdpCourant" class="form__field"
+              placeholder="Mot de passe" required>
+        <label for="mdpCourant" class="form__label">Mot de passe</label>
+      </div>
 
-    <div class="form__group">
-      <input type="password" name="mdpCourant" id="mdpCourant" class="form__field"
-            placeholder="Mot de passe" required>
-      <label for="mdpCourant" class="form__label">Mot de passe</label>
-    </div>
+      <div class="form__group">
+        <input type="password" name="nouveauMdp" id="nouveauMdp" class="form__field"
+              placeholder="Nouveau mot de passe" required>
+        <label for="nouveauMdp" class="form__label">Nouveau mot de passe</label>
+      </div>
 
-    <div class="form__group">
-      <input type="password" name="nouveauMdp" id="nouveauMdp" class="form__field"
-            placeholder="Nouveau mot de passe" required>
-      <label for="nouveauMdp" class="form__label">Nouveau mot de passe</label>
-    </div>
+      <div class="form__group">
+        <input type="password" name="confNouveauMdp" id="confNouveauMdp" class="form__field"
+              placeholder="Confirmer nouveau mot de passe" required>
+        <label for="confNouveauMdp" class="form__label">Confirmer nouveau mot de passe</label>
+      </div>
 
+<<<<<<< Updated upstream
     <div class="form__group">
       <input type="password" name="confNouveauMdp" id="confNouveauMdp" class="form__field"
             placeholder="Confirmer nouveau mot de passe" required>
@@ -50,6 +57,14 @@ $infosClient = recupererInfosClient($_COOKIE['uuid']);
       <button type="button" class="profil__bouton"
               onclick="window.location.href='ConsulterCompteClient.php'">Retour</button>
     </div>
+=======
+      <div class="divBtnForm">
+        <input type="submit" value="Valider les modifications" class="submit">
+        <button type="button" class="buttonForm"
+                onclick="window.location.href='ConsulterCompteClient.php'">Retour</button>
+      </div>
+    </main>
+>>>>>>> Stashed changes
 
     <div class="snackbar">
       <h3 class="snackbarTitle"></h3>

@@ -41,6 +41,11 @@ footer.footer {
   margin-top: auto;
 }
 
+html, body{
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 h1 {
   font-size: 3em;
   color: #1C6D80;

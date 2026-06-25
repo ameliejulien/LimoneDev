@@ -36,6 +36,16 @@ body {
   background-color: #fffdea;
 }
 
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  flex: 1;
+}
+
 h1 {
   font-size: 3em;
   color: #1C6D80;
