@@ -2,7 +2,7 @@
 
 include __DIR__ . '/../../connect_params.php';
 include __DIR__ . '/../repo/CompteVendeurRepo.php';
-include __DIR__ . '/../../lib/Constants.php';
+include __DIR__ . '/../../lib/Constantes.php';
 
 /**
  * @brief modifie ou ajoute des informations d'un vendeur
@@ -109,7 +109,7 @@ function champVide($vendeur)
 /**
  * @Brief renvoie une requête dans la BDD pour vérifier si le client peut se connecter
  * @Param array map avec les valeurs du formulaire
- * @Retuns un code de réussite ou d'erreur (200 ou 400)
+ * @Retuns un code de réussite ou d'erreur (HTTP_OK ou 400)
  */
 function connexionVendeur($vendeur)
 {

@@ -1,4 +1,5 @@
 <?php
+define("HTTP_USERNAME_INVALIDE", 600);
 define("HTTP_EMAIL_INVALIDE", 601);
 define("HTTP_DENOMINATION_INVALIDE", 602);
 define("HTTP_TEL_INVALIDE", 603);
@@ -10,13 +11,16 @@ define("HTTP_SIRET_INVALIDE", 608);
 define("HTTP_CLE_AUTH_INVALIDE", 609);
 define("HTTP_MDP_IDENTIQUE", 610);
 
+define("HTTP_ERR_CONNEXION", 611);
+define("HTTP_EMAIL_EXISTANT", 612);
 define("HTTP_ERR_GENERIQUE", 500);
 define("HTTP_OK", 200);
+
+define("TYPE_CLIENT", 1);
+define("TYPE_VENDEUR", 2);
 
 define("REQ_CREATION", "creation");
 define("REQ_DECONNEXION", "deconnexion");
 define("REQ_MODIF_MDP", "modifMdp");
 define("REQ_MODIF_INFOS", "modification");
-
-define("HTTP_OK", 200);
 ?>

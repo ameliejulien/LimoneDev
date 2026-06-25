@@ -1,7 +1,9 @@
-
+<?php 
+require_once __DIR__ . '../../lib/Constantes.php';
+?>
 <footer class="footer">
     <div class="footer-interieur">
-        <?php if ($typeUtilisateur !== 2): ?>
+        <?php if ($typeUtilisateur !== TYPE_VENDEUR): ?>
             <a href="/Catalogue/index.php">
                 <img src="/ui/img/logo.png" alt="Logo Alizon" class="footer-logo" />
             </a>

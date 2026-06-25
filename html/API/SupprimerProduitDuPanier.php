@@ -1,5 +1,6 @@
 <?php
     include_once '../../lib/service/ServicePanier.php';
+    require_once '../../lib/Constantes.php';
 
     header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: *');
@@ -8,5 +9,5 @@
 
     supprimerProduitDesCookies($data);
 
-    http_response_code(200);
+    http_response_code(HTTP_OK);
 ?>

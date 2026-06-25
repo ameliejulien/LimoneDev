@@ -5,6 +5,7 @@
         
         <?php
             require_once '../../lib/service/ServiceUtilisateur.php';
+            require_once __DIR__ . '../../lib/Constantes.php';
 
             $panier = isset($_COOKIE['panier']) ? (array) json_decode($_COOKIE['panier']) : [];
             $nbPanier = count($panier);
@@ -22,7 +23,7 @@
         </a>
 
         <!-- Barre de recherche -->
-        <?php if ($typeUtilisateur !== 2): ?>
+        <?php if ($typeUtilisateur !== TYPE_VENDEUR): ?>
         <form class="header-recherche" role="search" method="get">
             <button type="submit" title="Rechercher" class="header-recherche-bouton" aria-label="Lancer la recherche">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -35,13 +36,13 @@
         <!-- Actions utilisateur -->
         <nav class="header-actions" aria-label="Actions utilisateur">
 
-            <?php if ($typeUtilisateur === 2): ?>
+            <?php if ($typeUtilisateur === TYPE_VENDEUR): ?>
                 <!-- Vendeur connecté -->
                 <a href="/Vendeur/ConsulterCompteVendeur.php" title="Mon compte vendeur" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
                     <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['email_utilisateur']) ?></span>
                 </a>
-            <?php elseif ($typeUtilisateur === 1): ?>
+            <?php elseif ($typeUtilisateur === TYPE_CLIENT): ?>
                 <!-- Client connecté -->
                 <a href="/Client/ConsulterCompteClient.php" title="Mon compte client" class="header-action-connexion">
                     <i class="fa-regular fa-user"></i>
@@ -59,7 +60,7 @@
             <?php endif; ?>
 
             <!-- Panier -->
-            <?php if ($typeUtilisateur !== 2): ?>
+            <?php if ($typeUtilisateur !== TYPE_VENDEUR): ?>
                 <a href="/Panier/index.php" title="Panier" class="header-panier" aria-label="Mon panier">
                     <i class="fa-solid fa-basket-shopping"></i>
                     <span title="Total des produits" class="header-panier-compteur"><?= $nbPanier ?></span>
@@ -80,13 +81,13 @@
         <button class="header-menu-fermer" id="fermer" aria-label="Fermer le menu" title="Fermer le menu">
             <img src="/ui/img/navClose.png" alt="Fermer" />
         </button>
-        <?php if ($typeUtilisateur === 2): ?>
+        <?php if ($typeUtilisateur === TYPE_VENDEUR): ?>
             <!-- Vendeur connecté -->
             <a href="/Vendeur/ConsulterCompteVendeur.php" title="Mon compte vendeur" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>
                 <span class="header-action-libelle"><?= htmlspecialchars($utilisateur['email_utilisateur']) ?></span>
             </a>
-        <?php elseif ($typeUtilisateur === 1): ?>
+        <?php elseif ($typeUtilisateur === TYPE_CLIENT): ?>
             <!-- Client connecté -->
             <a href="/Client/ConsulterCompteClient.php" title="Mon compte client" class="header-menu-connexion">
                 <i class="fa-regular fa-user"></i>

@@ -1,5 +1,6 @@
 <?php 
     require_once __DIR__ . '/../repo/UtilisateurRepo.php';
+    require_once __DIR__ . '../Constantes.php';
 
     function recupererInfosUtilisateur($uuid) {
         return trouverInfosUtilisateur($uuid);
@@ -15,7 +16,7 @@
         unset($_COOKIE["uuid"]);
 
         if (!isset($_COOKIE["uuid"])) {
-            return 200;
+            return HTTP_OK;
         }
         return 500;
     }

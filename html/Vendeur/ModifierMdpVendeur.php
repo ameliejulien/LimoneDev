@@ -2,6 +2,7 @@
 
   require_once ('../../lib/service/ServiceVendeur.php');
   require_once ('../../lib/service/ServiceUtilisateur.php');
+  require_once ('../../lib/Constantes.php');
 
   droitsAccesPage($_COOKIE['uuid'], 2);
 
@@ -74,7 +75,7 @@
         body: JSON.stringify(formData)  // fait une string JSON du tableau
       })
       .then(response => {
-        if (response.status == 200) {
+        if (response.status == HTTP_OK) {
           window.location.href = "ConsulterCompteVendeur.php";
         } else if (response.status == 409) {
           afficherSnackBar('Notification','Echec de modification : nouveau mot de passe et ancien mot de passe identiques!'); // alert de la création du compte        

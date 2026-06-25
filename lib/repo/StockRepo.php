@@ -1,5 +1,6 @@
 <?php
     require_once('../../lib/repo/GlobalRepo.php');
+    require_once(__DIR__ . '../Constantes.php');
     
     /**
      * Fonction qui retourne les produits d'un vendeur (en fonction de l'idVendeur)
@@ -51,7 +52,7 @@
                 ]); 
                 
             }
-        return 200;
+        return HTTP_OK;
         } catch (PDOException $e) {
             return $e->getCode();
         }
@@ -68,7 +69,7 @@
 
         try {
             $requeteDelete -> execute([":id" => $idProduit]);
-            return 200;
+            return HTTP_OK;
         } catch (PDOException $e) {
             return $e->getCode();
         }

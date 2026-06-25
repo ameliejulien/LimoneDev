@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../connect_params.php';
 require_once __DIR__ . '/../repo/CompteClientRepo.php';
 require_once __DIR__ . '/../repo/UtilisateurRepo.php';
+require_once __DIR__ . '../Constantes.php';
 
 /**
  * @Brief Fonction qui récupère les informations du formulaire pour confirmer l'inscription, cette fonction redirige vers la page de connexion
@@ -12,19 +13,19 @@ function confimerInscription($client)
 {
     try {
         if (!preg_match("/[a-zA-Z0-9_-]+$/", $client['nomUtilisateur'])) {
-            throw new Exception(code: 600);
+            throw new Exception(code: HTTP_USERNAME_INVALIDE);
         }
 
         if (!filter_var($client['mail'], FILTER_VALIDATE_EMAIL)) {
-            throw new Exception(code: 601);
+            throw new Exception(code: HTTP_EMAIL_INVALIDE);
         }
 
         if ($client['motDePasse'] !== $client['confMotDePasse']) {
-            throw new Exception(code: 604);
+            throw new Exception(code: HTTP_MDP_CONFIRM_DIFF);
         }
 
         if (!preg_match("/0[1-9](?: [0-9]{2}){4}/", $client['telephone']) && !preg_match("/0[1-9](?:[0-9]{2}){4}/", $client['telephone'])) {
-            throw new Exception();
+            throw new Exception(code: HTTP_TEL_INVALIDE);
         }
 
         error_log("utilisateur existe pas déjà");
@@ -34,13 +35,13 @@ function confimerInscription($client)
             $idUtilisateur = creerUtilisateurBdd($client);
             creerClientBdd($idUtilisateur);
         } else {
-            return 409;
+            return HTTP_EMAIL_EXISTANT;
         }
     } catch (Exception $e) {
-        return 500;
+        return HTTP_ERR_GENERIQUE;
     }
 
-    return 201;
+    return HTTP_OK;
 }
 
 /**
@@ -79,7 +80,7 @@ function modificationMdpClient($data, $idClient)
     } else {
         return 400;
     }
-    return 200;
+    return HTTP_OK;
 }
 
 /**
@@ -111,7 +112,7 @@ function modifierClientBDD($client, $files = [])
         return 500;
     }
 
-    return 200;
+    return HTTP_OK;
 }
 
 ?>

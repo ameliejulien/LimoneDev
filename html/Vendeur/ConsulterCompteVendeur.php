@@ -2,6 +2,7 @@
 
   require_once ("../../lib/service/ServiceVendeur.php");
   require_once ("../../lib/service/ServiceUtilisateur.php");
+  require_once __DIR__ . "../../lib/Constantes.php";
 
   droitsAccesPage($_COOKIE['uuid'], 2);
 
@@ -73,7 +74,7 @@
           body: JSON.stringify(formData)  // fait une string JSON du tableau
         })
         .then(response => {
-          if (response.status === 200) {
+          if (response.status === HTTP_OK) {
             window.location.href = "../Catalogue/";
           }
         })

@@ -2,8 +2,6 @@
 
 require_once('../../lib/service/ServiceClient.php');
 require_once('../../lib/service/ServiceUtilisateur.php');
-include __DIR__ . '/../../lib/Constants.php';
-
 
 droitsAccesPage($_COOKIE['uuid'], 1);
 

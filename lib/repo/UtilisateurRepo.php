@@ -1,5 +1,6 @@
 <?php
 require_once "GlobalRepo.php";
+require_once '../Constantes.php';
 
 function trouverUUID($mail)
 {
@@ -18,7 +19,7 @@ function trouverUUID($mail)
     if (is_array($utilisateur)) {
         return $utilisateur['uuid_utilisateur'];
     } else {
-        return 500;
+        return HTTP_ERR_GENERIQUE;
     }
 }
 

@@ -1,7 +1,8 @@
 <?php
     require_once '../../lib/service/ServiceVendeur.php';
+    require_once __DIR__ . '../../lib/Constantes.php';
 
-    $returnCode = 200;
+    $returnCode = HTTP_OK;
     $returnValue;
 
     try {
@@ -12,7 +13,7 @@
 
         $returnValue = recupererAdressesVendeurs();
     } catch (Exception $e) {
-        $returnCode = 500;
+        $returnCode = HTTP_ERR_GENERIQUE;
         $returnValue = ["details" => "Une erreur est survenue"];
     } finally {
         http_response_code($returnCode);

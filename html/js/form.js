@@ -1,4 +1,3 @@
-
 // ----- Labels flottants -----
 document.querySelectorAll(".form__group").forEach(function (group) {
   const field = group.querySelector(".form__field");

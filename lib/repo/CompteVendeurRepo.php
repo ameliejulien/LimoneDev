@@ -2,6 +2,7 @@
 
 require_once "GlobalRepo.php";
 require_once __DIR__ . "/UtilisateurRepo.php";
+require_once __DIR__ . '../Constantes.php';
 
 /**
  * @Brief ajoute une instance dans utilisateur et vendeur en bdd
@@ -11,7 +12,7 @@ require_once __DIR__ . "/UtilisateurRepo.php";
 function creerVendeurBdd($vendeur)
 {
     if (!chercherVendeur($vendeur)) {
-        $codeRetour = 200;
+        $codeRetour = HTTP_OK;
         $connectBDD = connecterBDD();
 
         // requête création adresse

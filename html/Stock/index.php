@@ -17,6 +17,7 @@
         require_once __DIR__ . '/../../lib/service/ServiceStock.php';
         require_once __DIR__ . '/../../lib/repo/UtilisateurRepo.php';
         require_once __DIR__ . '/../../lib/service/ServiceUtilisateur.php';
+        require_once __DIR__ . '../../lib/Constantes.php';
 
         droitsAccesPage($_COOKIE['uuid'], 2);
 
@@ -119,7 +120,7 @@
             })
             .then(response => {
                     console.log(response.status)
-                    if (response.status == 200) {
+                    if (response.status == HTTP_OK) {
                         afficherSnackBar('Notification','Mise à jour des données réussie !'); // alerte de la création du compte
                         window.location.href = "../Catalogue";
                     } else {

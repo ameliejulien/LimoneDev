@@ -2,13 +2,14 @@
 
     require_once ('../../lib/service/ServiceProduit.php');
     require_once ('../../lib/service/ServiceVendeur.php');
+    require_once __DIR__ . '../../lib/Constantes.php';
 
     $typeUtilisateur = trouverTypeUtilisateur($_COOKIE['uuid'])['type_utilisateur'];
     $idUtilisateur = trouverIDUtilisateur($_COOKIE['uuid']);
 
 
     $produitVide = false;
-    if ($typeUtilisateur == 2) {
+    if ($typeUtilisateur == TYPE_VENDEUR) {
         $produits = trouverLesProduitsVendeur($idUtilisateur);
         if (count($produits) == 0) {
             $produitVide = true;
@@ -56,7 +57,7 @@
             <p class="snackbarText"></p>
         </div>
 
-        <?php if ($typeUtilisateur != 2) { ?>
+        <?php if ($typeUtilisateur != TYPE_VENDEUR) { ?>
             <section class="presentation">
                 <div class="container">
                     <h1>Le meilleur de la <span class="accent">Bretagne</span>, en un seul panier.</h1>
@@ -113,7 +114,7 @@
                         <?php } ?>
                     </div>
 
-                    <?php if ($typeUtilisateur != 2) { ?>
+                    <?php if ($typeUtilisateur != TYPE_VENDEUR) { ?>
                         <div>
                             <div class="card-titre">
                                 <h4>Vendeurs</h4>
@@ -134,7 +135,7 @@
                             </div>
                         </div>
 
-                    <?php } else if ($typeUtilisateur == 2) {?>
+                    <?php } else if ($typeUtilisateur == TYPE_VENDEUR) {?>
                         <div class="buttonStock">
                             <button type="button" onclick="window.location.href = '../Stock';">Consulter le stock</button>
                         </div>
@@ -187,7 +188,7 @@
                                                     style="font-size:0.7em"><?= str_pad(explode(".", strval($prixTtc))[1] ?? '00', 2, '0') ?><span
                                                         class="monnaie"> €</span></span></span>
                                         </div>
-                                        <?php if ($typeUtilisateur != 2) { ?>
+                                        <?php if ($typeUtilisateur != TYPE_VENDEUR) { ?>
                                             <button class="button" aria-label="Ajouter au panier"
                                                 id_produit="<?= $row['id_produit'] ?>">
                                                 <i class="fa-solid fa-basket-shopping"></i>
@@ -206,7 +207,7 @@
             require_once '../ui/footer.php';
         ?>
     </body>
-     <?php if ($typeUtilisateur != 2 ) { ?>
+     <?php if ($typeUtilisateur != TYPE_VENDEUR ) { ?>
         <!-- Leaflet -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="/Catalogue/catalogue.js"></script>
