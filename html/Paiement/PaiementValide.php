@@ -20,7 +20,7 @@
 </head>
 <body>
     <?php require_once('../ui/header.php'); ?>
-    <main>
+    <main class="mainPaiement">
         <?php 
         require_once('../../lib/service/ServicePaiement.php');
         if (validerPaiement()) { ?>

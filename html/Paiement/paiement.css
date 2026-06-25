@@ -32,6 +32,15 @@ html {
   height: 100%;
 }
 
+.mainPaiement {
+  height: calc(100vh - 72px - hauteurFooter);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 body {
   background-color: #fffdea;
   min-height: 100vh;
