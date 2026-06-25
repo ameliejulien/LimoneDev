@@ -411,6 +411,13 @@ body {
   color: rgba(255, 253, 234, 0.75);
 }
 
+.footer a {
+  text-decoration: none;
+  font-style: var(--police-generale);
+  color: rgba(255, 253, 234, 0.75);
+  font-size: 0.8rem;
+}
+
 button {
   width: auto;
   height: auto;
