@@ -1,189 +1,232 @@
-@import "../Global.scss";
+@import "../Global.css";
 
-$bg-body: #fffdea;
-$bg-form: #FFFFFF;
-$bg-submit: #fffdea;
-$text-color: #1C6D80;
-
-// Body
-body {
-  background-color: $bg-body;
+:root {
+  --bleu-fonce: #1C6D80;
+  --vert-fonce: #208068;
+  --blanc: #FFFFFF;
+  --noir: #000000;
+  --bleu-clair: #47c1d7;
+  --vert-clair: #9ac821;
+  --beige-fonce: #b3d3bc;
+  --beige-clair: #fffdea;
+  --encre: #1C2D30;
+  --encre-claire: #4a5b5e;
+  --encre-tres-claire: #7d8a8c;
+  --bordure: #e6e1d2;
+  --bordure-fonce: #d5cfbd;
+  --arrondi: 14px;
+  --arrondi-petit: 8px;
+  --arrondi-grand: 22px;
+  --ombre-petite: 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
+  --ombre-moyenne: 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
+  --ombre-grande: 0 14px 40px rgba(28, 45, 48, 0.12);
+  --police-titre: Lovelo, sans-serif;
+  --police-soustitre: Alatsi, sans-serif;
+  --police-generale: Farro, sans-serif;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #fffdea;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer.footer {
+  margin-top: auto;
+}
+
+/* ----- Layout principal ----- */
 
 main {
   display: flex;
   align-items: center;
   flex-direction: column;
-  
-  h1 {
-    font-size: 3em;
-    color: $text-color;
-    font-family: $police-titre;
-  }
+  width: 100%;
 }
 
-// Form
-.form-paiement {
-  border: solid 1px rgba(0, 0, 0, 0.3);
+h1 {
+  font-size: 3em;
+  color: var(--bleu-fonce);
+  font-family: var(--police-titre);
+}
+
+/* ----- Conteneur du formulaire ----- */
+
+.formPaiement {
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  padding: 2em 2em;
-  padding: 2em 5em;
-  gap: 1em;
-  margin: 0;
-  width: fit-content;
-  font-family: $police-generale, sans-serif;
-  background-color: $bg-form;
-
-  .submit {
-    padding: 0.3em;
-  }
-
-  label {
-    font-size: 1.5em;
-    font-family: $police-generale, sans-serif;
-  }
-
-  .divForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25em;
-
-    h2 {
-      font-family: $police-soustitre;
-    }
-  }
+  padding: 3em 5em;
+  gap: 2.5em;
+  margin-bottom: 1em;
+  width: min(860px, 90vw);
+  font-family: var(--police-generale);
+  background-color: var(--blanc);
 }
 
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-}
-
-form .form-contact,
-form .form-livraison,
-form .form-paiement {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-
-  .code-postal-fac-input {
-    grid-column: 2;
-    grid-row: 5;
-  }
-
-  grid-auto-rows: minmax(50px, auto);
-}
-
-.nom-input {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.prenom-input {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.mail-input {
-  grid-column: span 2;
-  grid-row: 3;
-}
-
-.tel-input {
-  grid-column: 1;
-  grid-row: 4;
-}
+/* ----- Titre de section (Contact, Livraison, Paiement) ----- */
 
 .category-titre {
   grid-column: span 2;
   grid-row: 1;
-  font-size: 1.5em;
-  font-family: var(--police-soustitre) sans-serif;
+  font-size: 1.3em;
+  font-family: var(--police-soustitre);
+  color: var(--encre);
+  margin: 0;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--bordure);
 }
 
-.input-group label {
-  font-family: var(--police-generale) sans-serif;
-  font-size: 1em;
+/* ----- Grille interne de chaque section ----- */
+
+.form-contact,
+.form-livraison,
+.form-paiement {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px 24px;
+  grid-auto-rows: minmax(60px, auto);
 }
 
-.adresse-input {
-  grid-column: span 2;
-  grid-row: 2;
+/* Contact */
+.prenom-input       { grid-column: 1; grid-row: 2; }
+.nom-input          { grid-column: 2; grid-row: 2; }
+.mail-input         { grid-column: span 2; grid-row: 3; }
+.tel-input          { grid-column: 1; grid-row: 4; }
+
+/* Livraison */
+.adresse-input      { grid-column: span 2; grid-row: 2; }
+.ville-input        { grid-column: 1; grid-row: 3; }
+.code-postal-input  { grid-column: 2; grid-row: 3; }
+.adresse-fac-input  { grid-column: span 2; grid-row: 4; }
+.ville-fac-input    { grid-column: 1; grid-row: 5; }
+.code-postal-fac-input { grid-column: 2; grid-row: 5; }
+
+/* Paiement */
+.code-cb-input       { grid-column: 1; grid-row: 2; }
+.cvv-input           { grid-column: 2; grid-row: 2; }
+.nom-titulaire-input { grid-column: span 2; grid-row: 3; }
+.bouton-valider-wrap { grid-column: span 2; grid-row: 4; }
+
+/* ----- Champs avec label flottant ----- */
+
+.input-group {
+  position: relative;
+  padding-top: 18px;
 }
 
-.ville-input {
-  grid-column: 1;
-  grid-row: 3;
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--encre-tres-claire);
+  outline: 0;
+  font-size: 1.1rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+  box-sizing: border-box;
 }
 
-.code-postal-input {
-  grid-column: 2;
-  grid-row: 3;
+.form__field::placeholder {
+  color: transparent;
 }
 
-.adresse-fac-input {
-  grid-column: span 2;
-  grid-row: 4;
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.1rem;
+  cursor: text;
+  top: 26px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
 }
 
-.ville-fac-input {
-  grid-column: 1;
-  grid-row: 5;
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  color: var(--encre-claire);
+  pointer-events: none;
 }
 
-.code-postal-fac-input {
-  grid-column: 2;
-  grid-row: 5;
+.form__field:focus {
+  border-bottom: 3px solid var(--vert-fonce);
+  border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+  border-image-slice: 1;
+  padding-bottom: 7px;
 }
 
-.code-cb-input {
-  grid-column: 1;
-  grid-row: 2;
+.form__field:focus ~ .form__label {
+  top: 0;
+  font-size: 0.95rem;
+  color: var(--vert-fonce);
+  font-weight: 700;
 }
 
-.cvv-input {
-  grid-column: 2;
-  grid-row: 2;
+.form__field:required:invalid {
+  box-shadow: none;
 }
 
-.nom-titulaire-input {
-  grid-column: span 2;
-  grid-row: 3;
+/* Indication d'erreur de validation */
+.form__field:not(:placeholder-shown):invalid {
+  border-bottom-color: rgba(220, 50, 50, 0.6);
 }
 
-input:invalid
-{
-  border: 1px solid rgba(255, 0, 0, 0.5);
+.form__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--encre-tres-claire);
 }
+
+/* ----- Bouton valider ----- */
 
 .bouton-valider {
-  width: 100px;
-  height: 40px;
+  width: 100%;
+  height: auto;
+  padding: 15px;
   border-radius: 12px;
   background: var(--vert-fonce);
   color: var(--beige-clair);
   display: grid;
   place-items: center;
-  transition: background .2s, transform .15s;
+  transition: background 0.2s, transform 0.15s;
   flex-shrink: 0;
+  cursor: pointer;
+  font-family: var(--police-generale);
+  font-size: 1rem;
+  border: none;
 }
-.bouton-valider:hover { background: var(--vert-fonce); transform: scale(1.06); }
+
+.bouton-valider:hover  { transform: scale(1.06); }
 .bouton-valider:active { transform: scale(0.96); }
 
+@media (max-width: 600px) {
+  .form-contact,
+  .form-livraison,
+  .form-paiement {
+    grid-template-columns: 1fr;
+  }
 
-.formPaiement {
-  border: solid 1px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  padding: 2em 2em;
-  padding: 2em 5em;
-  gap: 1em;
-  margin: 0;
-  width: fit-content;
-  font-family: $police-generale, sans-serif;
-  background-color: $bg-form;
+  .prenom-input, .nom-input, .mail-input, .tel-input,
+  .adresse-input, .ville-input, .code-postal-input,
+  .adresse-fac-input, .ville-fac-input, .code-postal-fac-input,
+  .code-cb-input, .cvv-input, .nom-titulaire-input,
+  .bouton-valider-wrap, .category-titre {
+    grid-column: 1;
+    grid-row: auto;
+  }
 }

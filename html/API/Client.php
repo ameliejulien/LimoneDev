@@ -21,8 +21,10 @@ if ($data["typeRequete"] == REQ_CREATION) {
 } else if ($data["typeRequete"] == REQ_DECONNEXION) {
     $retour = deconnecterUtilisateur();
 } else if ($data["typeRequete"] == REQ_MODIF_MDP) {
-    $retour = modificationMdpClient($data);
+    $idClient = trouverIDUtilisateur($_COOKIE['uuid']);
+    $retour = modificationMdpClient($data, $idClient);
 } else if ($data["typeRequete"] == REQ_MODIF_INFOS) {
+
     $retour = modifierClientBDD($data, $_FILES);
 }
 

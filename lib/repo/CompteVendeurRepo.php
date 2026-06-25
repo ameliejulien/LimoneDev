@@ -113,13 +113,13 @@ function chercherVendeur($vendeur)
  * @Param string la clé dans le formulaire
  * @Return bool valeur représentant la validité de la clé renseignée
  */
-function certifierCleeBDD($clee)
+function certifiercleBDD($cle)
 {
     $connectBDD = connecterBDD();
-    $requete = "SELECT clee FROM limone.Cle_Authentification" .
-        " WHERE clee = :cleeAuth AND utilisee = false";
+    $requete = "SELECT cle FROM limone.Cle_Authentification" .
+        " WHERE cle = :cleAuth AND utilisee = false";
     $requetePreparee = $connectBDD->prepare($requete);
-    $requetePreparee->bindValue(":cleeAuth", $clee);
+    $requetePreparee->bindValue(":cleAuth", $cle);
     $requetePreparee->execute();
 
     $row = $requetePreparee->fetch(PDO::FETCH_ASSOC);
@@ -128,9 +128,9 @@ function certifierCleeBDD($clee)
         // update de la valeur utilisée
         $requete = "UPDATE limone.Cle_Authentification" .
             " SET utilisee = true " .
-            "WHERE clee = :cleeAuth";
+            "WHERE cle = :cleAuth";
         $requetePreparee = $connectBDD->prepare($requete);
-        $requetePreparee->bindValue(":cleeAuth", $clee);
+        $requetePreparee->bindValue(":cleAuth", $cle);
         try {
             $requetePreparee->execute();
         } catch (Exception $e) {
@@ -171,13 +171,13 @@ function connecterVendeur($vendeur)
 /**
  * @Brief ajoute une clée d'authentification en BDD
  */
-function ajouterCleeBDD($clee)
+function ajoutercleBDD($cle)
 {
     $connectBDD = connecterBDD();
-    $requete = "INSERT INTO Cle_Authentification (clee, utilisee)" .
-        "VALUES (clee, false)";
+    $requete = "INSERT INTO Cle_Authentification (cle, utilisee)" .
+        "VALUES (cle, false)";
     $requetePreparee = $connectBDD->prepare($requete);
-    $requetePreparee->bindValue('clee', $clee);
+    $requetePreparee->bindValue('cle', $cle);
     $requetePreparee->execute();
 }
 
@@ -295,10 +295,9 @@ function mettreAJourVendeur($connectBDD, $idVendeur, $vendeur)
 /**
  * @Brief modifie le mot de passe vendeur
  */
-function modifierMdpVendeurBDD($mdp)
+function modifierMdpVendeurBDD($mdp, $idVendeur)
 {
     $connectBDD = connecterBDD();
-    $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
 
     $requeteVendeur = "UPDATE Utilisateur SET mdp_utilisateur = :mdp WHERE id_utilisateur = :idVendeur;";
     $requeteUpdateVendeur = $connectBDD->prepare($requeteVendeur);

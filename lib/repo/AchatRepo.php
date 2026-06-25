@@ -4,9 +4,9 @@ function enregistrerAchat(String $commandeId, String $produitId, String $facture
     if ($clientId !== null) {
         $query = 
         "INSERT INTO Achat(id_commande, 
-                             id_produit, 
-                             id_facture, 
-                             id_client)
+                           id_produit, 
+                           id_facture, 
+                           id_client)
         VALUES (:commandeId, 
                 :produitId, 
                 :factureId, 
@@ -24,8 +24,8 @@ function enregistrerAchat(String $commandeId, String $produitId, String $facture
     } else {
         $query = 
         "INSERT INTO Achat(id_commande, 
-                             id_produit, 
-                             id_facture)
+                           id_produit, 
+                           id_facture)
         VALUES (:commandeId, 
                 :produitId, 
                 :factureId);";

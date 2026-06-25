@@ -26,18 +26,44 @@
 }
 
 
-table{
-  border-collapse: collapse;
+.tableau {
+  width: 100%;
+  padding: 0 6em;
+}
+
+table {
+  border-collapse: separate; 
+  border: 1px solid var(--vert-fonce);
+  border-spacing: 0; 
+  overflow: hidden;           
   font-family: var(--police-generale);
   font-size: smaller;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  border-radius: var(--arrondi-grand);
+  table-layout: fixed; 
+  
 }
+
 th, td {
   border: 1px solid var(--vert-fonce);
-  width: fit-content;
+  border-right: none;  
+  border-bottom: none;
   padding: 1em;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th:last-child, td:last-child {
+  border-right:none; 
+}
+th:first-child, td:first-child {
+  border-left: none; 
+}
+
+tr:last-child td {
+  border-bottom: none; 
 }
 
 th{
@@ -116,6 +142,12 @@ input.submit:active {
   text-align: center;
 }
 
+.ligne_qte {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .btn-moins, .btn-plus {
   height: 0.75em;
   align-content: center;
@@ -125,8 +157,7 @@ input.submit:active {
 .sumbitDiv {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  padding: 1em;
+  justify-content: right;
   gap: 1em;
 }
 .sumbitDiv button, .sumbitDiv input {
@@ -141,7 +172,7 @@ input.submit:active {
 .tableNav button {
   height: 1.5em;
   align-content: center;
-  width: 11em;
+  width: fit-content;
 }
 
 .photoProduit {
@@ -158,3 +189,39 @@ input[type="checkbox"] {
   accent-color: var(--vert-fonce);
   cursor: pointer;
 }
+
+
+.deleteButton {
+  padding: none;
+  height: auto;
+  width: auto;
+  display: flex;
+  margin: auto;
+}
+
+.deleteConfirmation {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--beige-clair);
+  position:absolute;
+  border-style: solid;
+  border-color: var(--vert-fonce);
+  border-radius: 3em;
+  border-width: 0.25em;
+  gap: 2em;
+}
+
+.deleteConfirmation h2{
+  color: var(--vert-fonce);
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+.deleteConfirmation div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap:2em;
+
+}
+

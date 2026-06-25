@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --bleu-fonce: #1C6D80;
   --vert-fonce: #208068;
@@ -589,7 +590,7 @@ button:active {
   text-decoration: line-through;
 }
 
-.prix-principal {
+.prix-principal, .tva-produit {
   display: flex;
   align-items: baseline;
   line-height: 1;
@@ -691,7 +692,7 @@ button:active {
           user-select: none;
 }
 
-.bouton-panier {
+.bouton-panier, .action-bloc > button[type=submit] {
   flex: 1;
   display: flex;
   align-items: center;
@@ -709,15 +710,15 @@ button:active {
   box-shadow: 0 1px 2px rgba(28, 45, 48, 0.06), 0 1px 1px rgba(28, 45, 48, 0.04);
   white-space: nowrap;
 }
-.bouton-panier:hover:not(.disabled) {
+.bouton-panier:hover:not(.disabled), .action-bloc > button[type=submit]:hover:not(.disabled) {
   background: #1C6D80;
   transform: scale(1.03);
   box-shadow: 0 4px 18px rgba(28, 45, 48, 0.08), 0 2px 6px rgba(28, 45, 48, 0.05);
 }
-.bouton-panier:active:not(.disabled) {
+.bouton-panier:active:not(.disabled), .action-bloc > button[type=submit]:active:not(.disabled) {
   transform: scale(0.97);
 }
-.bouton-panier.disabled {
+.bouton-panier.disabled, .action-bloc > button[type=submit].disabled {
   background: #d5cfbd;
   color: #7d8a8c;
   cursor: not-allowed;
@@ -783,4 +784,125 @@ button:active {
   .quantite-selector {
     justify-content: center;
   }
+}
+.button {
+  width: auto;
+  height: auto;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+  margin-top: 0.5em;
+}
+
+.button :hover {
+  background: var(--vert-fonce);
+  transform: scale(1.06);
+}
+
+.button :active {
+  transform: scale(0.96);
+}
+
+/* ----- Champs avec label flottant (même style que la page client) ----- */
+.form__group {
+  position: relative;
+  padding: 18px 0 0;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 75%;
+  border: 0;
+  border-bottom: 2px solid var(--encre-tres-claire);
+  outline: 0;
+  font-size: 1.2rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+}
+
+.form__field::-moz-placeholder {
+  color: transparent;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:-moz-placeholder ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.2rem;
+  cursor: text;
+  top: 28px;
+  font-weight: 400;
+  color: var(--encre-tres-claire);
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.95rem;
+  color: var(--encre-claire);
+  pointer-events: none;
+}
+
+.form__field:focus {
+  border-bottom: 3px solid var(--vert-fonce);
+  -o-border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+     border-image: linear-gradient(to right, var(--vert-fonce), var(--vert-clair));
+  border-image-slice: 1;
+  padding-bottom: 7px;
+}
+
+.form__field:focus ~ .form__label {
+  top: 0;
+  font-size: 0.95rem;
+  color: var(--vert-fonce);
+  font-weight: 700;
+}
+
+.form__field:required:invalid {
+  box-shadow: none;
+}
+
+.form__textarea {
+  width: 100%;
+}
+
+.indication_champ {
+  font-family: inherit;
+  width: 75%;
+  border: 0;
+  outline: 0;
+  font-size: 1.2rem;
+  color: var(--encre);
+  padding: 8px 0;
+  background: transparent;
+}
+
+img {
+  margin: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-top: 10px;
+  image-rendering: optimizeSpeed;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
 }/*# sourceMappingURL=style.css.map */

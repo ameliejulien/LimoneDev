@@ -11,7 +11,10 @@
     $retour = 500;
     if ($data["typeRequete"] == "update") {
         $retour = updateStock($data['lignesModifiees']);
-    } 
+    
+    } else if ($data["typeRequete"] == "delete") {
+        $retour = deleteProduit($data['idArt']);
+    }
 
     http_response_code($retour);
     echo json_encode($data);

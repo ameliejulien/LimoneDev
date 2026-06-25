@@ -178,7 +178,7 @@ VALUES
 (94,6),(95,6),(96,6),(97,6),(98,6),(99,6),(100,6);
 
 INSERT INTO Cle_Authentification
-(clee, utilisee)
+(cle, utilisee)
 VALUES
 ('100100100',false),
 ('200200200',false);

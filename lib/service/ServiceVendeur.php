@@ -81,7 +81,7 @@ function confimerInscription($vendeur)
             throw new Exception(code: HTTP_SIRET_INVALIDE);
         }
 
-        if (!certifierClee($vendeur["cleAuth"])) {
+        if (!certifiercle($vendeur["cleAuth"])) {
             throw new Exception(code: HTTP_CLE_AUTH_INVALIDE);
         }
 
@@ -131,25 +131,25 @@ function connexionVendeur($vendeur)
  * @Param la clée à certifier
  * @Retuns un booléen déterminant la certification de la clée
  */
-function certifierClee($clee)
+function certifiercle($cle)
 {
-    return certifierCleeBDD($clee);
+    return certifiercleBDD($cle);
 }
 
 /**
  * @Brief génère une clée d'authentification vendeur
  * @Returns la clée générée
  */
-function creerCleeAuth()
+function creercleAuth()
 {
-    $clee = "";
+    $cle = "";
 
     for ($i = 1; $i <= 9; $i++) {
-        $clee .= rand(0, 9);
+        $cle .= rand(0, 9);
     }
 
-    ajouterCleeBDD($clee);
-    return $clee;
+    ajoutercleBDD($cle);
+    return $cle;
 }
 
 /**
@@ -193,7 +193,7 @@ function modificationMdpVendeur($data)
 
     $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
 
-    if (password_verify($mdpCourant, getVendeurMdpHash($idVendeur))) {
+    if (password_verify($mdpCourant,  getMdpHashFromUUID($_COOKIE['uuid']))) {
         // Les deux nouveaux mots de passe ne correspondent pas
         if ($nouveauMdp !== $confNouveauMdp) {
             return HTTP_MDP_CONFIRM_DIFF;
@@ -205,7 +205,7 @@ function modificationMdpVendeur($data)
         }
 
         // Tout est valide → on met à jour
-        modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT));
+        modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT), $idVendeur);
         return HTTP_OK;
     } else {
         return HTTP_ERR_GENERIQUE;

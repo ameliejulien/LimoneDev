@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import '../Global.css';
 :root {
   --bleu-fonce: #1C6D80;
@@ -22,6 +23,10 @@
   --police-titre: Lovelo, sans-serif;
   --police-soustitre: Alatsi, sans-serif;
   --police-generale: Farro, sans-serif;
+}
+
+html, body, main {
+  overflow-x: hidden;
 }
 
 body {
@@ -169,8 +174,137 @@ input.submit:active {
   font-family: var(--police-generale);
 }
 
-p,
-input.submit,
-.divBtnForm button.buttonForm {
+/* ===== Page profil ===== */
+.profil__carte {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-bottom: 1em;
+  padding: 3em 5em;
+  width: min(760px, 90vw);
   font-family: var(--police-generale);
+  background-color: white;
+}
+
+.profil__champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.profil__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 3px solid var(--bordure-fonce);
+  align-self: center;
+  margin-bottom: 0.5em;
+}
+
+.profil__label {
+  font-size: 0.85rem;
+  color: var(--encre-tres-claire);
+  font-family: var(--police-generale);
+}
+
+.profil__valeur {
+  font-size: 1.05rem;
+  color: var(--encre);
+  font-family: var(--police-generale);
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid var(--bordure);
+}
+
+.profil__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  margin-top: 0.5em;
+  font-family: var(--police-generale);
+}
+
+.profil__bouton {
+  width: 100%;
+  padding: 13px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  border: none;
+  display: grid;
+  place-items: center;
+  font-family: var(--police-generale);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.profil__bouton:hover {
+  transform: scale(1.03);
+}
+
+.profil__bouton:active {
+  transform: scale(0.97);
+}
+
+/* ===== Page modifier compte ===== */
+.modifier__photo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.modifier__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 3px solid var(--bordure-fonce);
+}
+
+.modifier__photo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 8px 16px;
+  border-radius: var(--arrondi-petit);
+  border: 1px solid var(--bordure-fonce);
+  color: var(--encre-claire);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modifier__photo-label:hover {
+  background: var(--beige-fonce);
+}
+
+.modifier__photo-input {
+  display: none; /* caché, déclenché par le label */
+}
+
+.divBtnForm .buttonForm {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  border: none;
+  cursor: pointer;
+  font-family: var(--police-generale);
+  font-size: 1.05rem;
+  transition: transform 0.15s;
+}
+
+.divBtnForm .buttonForm:hover {
+  transform: scale(1.06);
+}
+
+.divBtnForm .buttonForm:active {
+  transform: scale(0.96);
 }/*# sourceMappingURL=client.css.map */

@@ -71,7 +71,8 @@
 
     function droitsAccesPageProduit($uuid, $typeUtilisateurAttendu) {
         $typeUtilisateur = trouverTypeUtilisateur($uuid);
-        $produits = recupererlesProduitsVendeur();
+        $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
+        $produits = recupererlesProduitsVendeur($idVendeur);
         if ($typeUtilisateur['type_utilisateur'] == $typeUtilisateurAttendu) {
             $accesAutorise = false;
             foreach ($produits as $produit) {

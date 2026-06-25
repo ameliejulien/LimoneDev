@@ -12,9 +12,10 @@
 
     function updateStock($lignesModifiees){
         $codeRetour = updateStockBDD($lignesModifiees);
-        error_log("code retour ".$codeRetour);
         return $codeRetour;
-
     }
 
+    function deleteProduit($idProduit) {
+        return deleteProduitBDD($idProduit);
+    }
 ?>
