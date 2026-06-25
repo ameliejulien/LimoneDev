@@ -29,13 +29,14 @@ CREATE TABLE limone.Type (
 -- ===========================
 CREATE TABLE limone.Utilisateur (
     id_utilisateur serial PRIMARY KEY,
-    uuid_utilisateur uuid DEFAULT uuid_generate_v4(),
+    uuid_utilisateur uuid DEFAULT uuidv7(),
     nom_utilisateur varchar(30),
     email_utilisateur varchar(320),
     telephone_utilisateur char(10),
     mdp_utilisateur varchar(72),
     pp_utilisateur bytea,
     type_utilisateur int,
+    secret_utilisateur char(103),
 
     CONSTRAINT fk_utilisateur FOREIGN KEY(type_utilisateur) REFERENCES limone.Type(id_type)
 );

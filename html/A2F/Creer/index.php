@@ -14,7 +14,7 @@
 
     $secret = $totp->getSecret(); 
 
-    $totp = $totp->withLabel('Label of your web');
+    $totp = $totp->withLabel('Alizon');
     $QRCodeUri = $totp->getQrCodeUri(
         'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
         '[DATA]'
@@ -27,8 +27,14 @@
         <link rel="stylesheet" type="text/css" href="/A2F/style.css">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <script src="../snackbar.js"></script>
     </head>
     <body class="flex flex-col min-h-screen">
+        <div class="snackbar">
+            <h3 class="snackbarTitle"></h3>
+            <p class="snackbarText"></p>
+        </div>
+
         <?php require_once '../../ui/header.php'; ?>
         <main class="flex flex-col flex-1 items-center justify-center">
                 <div class="flex flex-col items-center gap-[22px] bg-white w-[460px] mt-[32px] p-[32px] rounded-[18px] shadow-md">
@@ -48,6 +54,7 @@
                         <input type="text" maxlength="1" class="otp-input">
                     </div>
                     <p class="text-red-600 hidden" id="not-full">Veuillez remplir le mot de passe en entier</p>
+                    <p class="text-red-600 hidden" id="incorrect-otp">Mot de passe incorrect</p>
                     
                     <button class="w-full" type="submit" id="submit">Valider</button>
                 </div>

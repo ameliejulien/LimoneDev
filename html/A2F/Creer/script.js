@@ -27,23 +27,41 @@ inputs.forEach((input, index) => {
 
 const submit = document.getElementById('submit');
 const notFullError = document.getElementById('not-full');
+const incorrectOTPError = document.getElementById('incorrect-otp');
+const secret = document.getElementById('secret');
 
 submit.addEventListener('click', () => {
-    let otp = '';
+    let OTP = '';
 
     notFullError.classList.add('hidden');
+    incorrectOTPError.classList.add('hidden');
     
     try {
         inputs.forEach((input) => {
             if (input.value) {
-                otp += input.value;
+                OTP += input.value;
             } else {
                 throw new Error();
             }
         });
 
-        
-    } catch {
+        fetch('/API/A2F.php', {
+            method: 'POST',
+            body: JSON.stringify({
+                secret: secret.value, 
+                otp: OTP
+            })
+        }).then((response) => {
+            if (response.ok) {
+                window.location = "/Catalogue";
+            } else {
+                console.log('jaaj');
+                throw new Error('IncorrectOTP');
+            }
+        }).catch(() => {
+            incorrectOTPError.classList.remove('hidden');
+        })
+    } catch (e) {
         notFullError.classList.remove('hidden');
     }
 });
