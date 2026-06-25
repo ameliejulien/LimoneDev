@@ -206,9 +206,9 @@
             require_once '../ui/footer.php';
         ?>
     </body>
-     <?php if ($typeUtilisateur != 2 ) { ?>
+    <?php if ($typeUtilisateur != 2 ) { ?>
         <!-- Leaflet -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-        <script src="/Catalogue/catalogue.js"></script>
     <?php } ?>
+    <script src="/Catalogue/catalogue.js"></script>
 </html>
