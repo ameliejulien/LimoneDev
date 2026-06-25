@@ -1,6 +1,6 @@
 <?php
     include_once '../../lib/service/ServicePanier.php';
-    require_once '/../../lib/Constantes.php';
+    require_once '../../lib/Constantes.php';
 
     header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: *');
