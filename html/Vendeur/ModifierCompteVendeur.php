@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="form__row form__row--actions profil__actions">
+    <div class="form__row form__row--actions">
       <a href="ConsulterCompteVendeur.php" class="profil__bouton">Retour</a>
       <input type="submit" value="Valider les modifications" class="profil__bouton"/>
     </div>
