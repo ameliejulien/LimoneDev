@@ -22,6 +22,12 @@ function changerImage(event) {
   }
 }
 
+function resizeDescription() {
+  description = document.getElementById("descriptionProduit");
+  description.style.height = "";
+  description.style.height = description.scrollHeight + "px";
+}
+
 /**
  * Fonction pour créer un produit, elle fait une premiere verification de champs puis envoie au serveur via l'api pour une deuxième verification
  */
@@ -35,7 +41,6 @@ function creerProduit() {}
 var form = document.querySelector("form.produit-page");
 
 // Ajoute un écouteur pour récuperer le moment ou l'utilisateur soumet le formulaire
-
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -44,11 +49,16 @@ form.addEventListener("submit", function (event) {
   const aUneErreur = [...inputArray].some((element) => {
     if (element.type === "checkbox") return false;
 
-    if (element.type === "file") {
+    if (element.type === "file" && idProduit === 0) {
       return element.files.length === 0;
     }
 
-    if (element.value.trim() === "") return true;
+    if (
+      element.value.trim() === "" &&
+      element.type === "file" &&
+      idProduit === 0
+    )
+      return true;
 
     if (
       element.pattern &&
@@ -66,22 +76,50 @@ form.addEventListener("submit", function (event) {
 
   // Permet d'envoyer l'image au php
   const formData = new FormData();
-  inputArray.forEach((element) =>
-    formData.append(
-      element.id,
-      element.type === "file" ? element.files[0] : element.value,
-    ),
-  );
+  var api;
+
+  // Modification d'un produit
+  if (idProduit > 0) {
+    api = "../API/ModifierProduit.php";
+
+    const nouveauObj = {};
+    inputArray.forEach((element) => {
+      if (element.type === "file") {
+        if (element.files[0]) formData.append(element.id, element.files[0]);
+      } else {
+        nouveauObj[element.id] = element.value;
+      }
+    });
+
+    formData.append("nouveau", JSON.stringify(nouveauObj));
+    formData.append("ancien", JSON.stringify(arrayProduit));
+  } else {
+    // Création d'un produit
+    api = "../API/CreerProduit.php";
+
+    inputArray.forEach((element) =>
+      formData.append(
+        element.id,
+        element.type === "file" ? element.files[0] : element.value,
+      ),
+    );
+  }
 
   // Si le formulaire est invalide alors il ne faut pas l'envoyer
-  fetch("../API/CreerProduit.php", {
+  fetch(api, {
     method: "POST",
     body: formData,
   }).then((response) => {
-    if (response.status === 200) {
+    if (response.status === 200
+    ||  response.status === 201) {
       response.json().then((jsonResponse) => {
         if (!jsonResponse["succes"]) {
-          afficherSnackBar("Erreur", jsonResponse["message"]);
+          afficherSnackBar(
+            "Erreur",
+            jsonResponse["message"]
+              ? jsonResponse["message"]
+              : "Une erreur est survenue",
+          );
 
           // Change la couleurs des bordures des champs invalides
           if (jsonResponse["erreurs"]) {
@@ -101,6 +139,7 @@ form.addEventListener("submit", function (event) {
   });
 });
 
+// Met à jour la couleur du tag selon si une catégorie est sélectionnée
 document
   .getElementsByClassName("categorie-tag")[0]
   .addEventListener("change", function (event) {
@@ -121,24 +160,28 @@ document
     tva = document.getElementById("tva").value;
     prixHT = document.getElementById("prixProduit").value;
 
-    if (prixHT == 0 || isNaN(prixHT)) {
+    if (prixHT == 0 || isNaN(prixHT.replace(",", "."))) {
       document.getElementById("prixAvecTaxe").innerHTML = "0";
     } else {
-      document.getElementById("prixAvecTaxe").innerHTML =
-        prixHT * (1 + tva / 100);
+      document.getElementById("prixAvecTaxe").innerHTML = (
+        prixHT.replace(",", ".") *
+        (1 + tva / 100)
+      ).toFixed(2);
     }
   });
 
 document.getElementById("tva").addEventListener("keyup", function (event) {
   tva = document.getElementById("tva").value;
 
-  if (tva == 0 || isNaN(tva)) {
+  if (tva == 0 || isNaN(tva.replace(",", "."))) {
     document.getElementById("tvaAffiche").innerHTML = "0";
     document.getElementById("prixAvecTaxe").innerHTML = prixHT;
   } else {
     document.getElementById("tvaAffiche").innerHTML = tva;
-    document.getElementById("prixAvecTaxe").innerHTML =
-      prixHT * (1 + tva / 100);
+    document.getElementById("prixAvecTaxe").innerHTML = (
+      prixHT.replace(",", ".") *
+      (1 + tva / 100)
+    ).toFixed(2);
   }
 });
 document.getElementById("prixAvecTaxe").innerHTML = "0";
@@ -154,13 +197,24 @@ if (tva == 0 || isNaN(tva)) {
   document.getElementById("tvaAffiche").innerHTML = "0";
 } else {
   document.getElementById("tvaAffiche").innerHTML = tva;
-  document.getElementById("prixAvecTaxe").innerHTML = prixHT * (1 + tva / 100);
+  document.getElementById("prixAvecTaxe").innerHTML = (
+    prixHT.replace(",", ".") *
+    (1 + tva / 100)
+  ).toFixed(2);
 }
 
-if (prixHT == 0 || tva == 0 || isNaN(prixHT) || isNaN(tva)) {
+if (
+  prixHT == 0 ||
+  tva == 0 ||
+  isNaN(prixHT.replace(",", ".")) ||
+  isNaN(tva.replace(",", "."))
+) {
   document.getElementById("prixAvecTaxe").innerHTML = "0";
 } else {
-  document.getElementById("prixAvecTaxe").innerHTML = prixHT * (1 + tva / 100);
+  document.getElementById("prixAvecTaxe").innerHTML = (
+    prixHT.replace(",", ".") *
+    (1 + tva / 100)
+  ).toFixed(2);
 }
 
 categorie = document.getElementById("categorieProduit").value;
@@ -186,3 +240,6 @@ if (fichier) {
 
   lecture.readAsDataURL(fichier);
 }
+
+// Resize le champ de description
+resizeDescription();

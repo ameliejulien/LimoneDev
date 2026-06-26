@@ -146,10 +146,9 @@
                     </div>
                     
                     <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == true): ?>
-                    <button type="button" class="bouton-panier" data-id="<?= $produit['id_produit'] ?>">
-                        <a href="CreerProduit.php">
+                    <button type="button" class="bouton-panier" data-id="<?= $produit['id_produit'] ?>"
+                            onclick="window.location.href = '../Produit/GererProduit.php?id=<?= $produit['id_produit'] ?>';">
                             Modifier le produit
-                        </a>
                     </button>
                     <?php else: ?>
                     <button

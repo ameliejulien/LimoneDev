@@ -136,17 +136,33 @@ function creerProduitBDD($nomProduit, $descriptionProduit, $prixProduit, $qtePro
     }
 }
 
-function lierCategorie($idCategorie, $idVendeur) {
+function lierCategorie($idCategorie, $idProduit) {
     $PDO = connecterBDD();
 
     $query = "INSERT INTO Categorie_Produit (id_produit, id_categorie) 
-              VALUES (:idVendeur, :idCategorie);";
+              VALUES (:idProduit, :idCategorie);";
 
     try {
         $stmt = $PDO->prepare($query);
 
         $stmt->bindParam(":idCategorie", $idCategorie);
-        $stmt->bindParam(":idVendeur", $idVendeur);
+        $stmt->bindParam(":idProduit", $idProduit);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+function suppirmerCategorie($idProduit) {
+    $PDO = connecterBDD();
+
+    $query = "DELETE FROM Categorie_Produit WHERE id_produit = :idProduit;";
+
+    try {
+        $stmt = $PDO->prepare($query);
+
+        $stmt->bindParam(":idProduit", $idProduit);
 
         return $stmt->execute();
     } catch (PDOException $e) {
@@ -159,11 +175,11 @@ function addPhoto($idProduit, $nomFichier, $estLaMain) {
 
     try {
         $stmt = $PDO->prepare("INSERT INTO photo_produit (id_produit, photo_produit, photo_principale) 
-                               VALUES (:id, :nomFichier, :isMain)");
+                               VALUES (:id_produit, :photo_produit, :photo_principale)");
 
-        $stmt->bindValue(":id", $idProduit);
-        $stmt->bindValue(":nomFichier", $nomFichier);
-        $stmt->bindValue(":isMain", $estLaMain);
+        $stmt->bindValue(":id_produit", $idProduit);
+        $stmt->bindValue(":photo_produit", $nomFichier);
+        $stmt->bindValue(":photo_principale", $estLaMain);
 
         return $stmt->execute();
     } catch (PDOException $e) {
@@ -171,18 +187,64 @@ function addPhoto($idProduit, $nomFichier, $estLaMain) {
     }    
 }
 
+function supprimerPhoto($idProduit, $estLaMain) {
+    $PDO = connecterBDD();
+
+    try {
+        $stmt = $PDO->prepare("DELETE FROM photo_produit WHERE id_produit = :id_produit AND photo_principale = :photo_principale");
+
+        $stmt->bindValue(":id_produit", $idProduit);
+        $stmt->bindValue(":photo_principale", $estLaMain);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        return false;
+    }   
+}
+
 function nomProduitExiste($nomProduit) {
     $PDO = connecterBDD();
 
     try {
-        $stmt = $PDO->prepare("SELECT id_produit FROM produit where nom_produit = ':nomProduit'");
+        $stmt = $PDO->prepare("SELECT id_produit FROM produit where nom_produit = :nom_produit;");
 
-        $stmt->bindValue(":nomProduit", $nomProduit);
+        $stmt->bindValue(":nom_produit", $nomProduit);
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return $stmt->fetch();
     } catch (PDOException $e) {
         return false;
     }  
 }
 
+function modifierProduitBDD($idProduit, $nomProduit, $descriptionProduit, $prixProduit, $qteProduit, $estDansCatalogue, $tva) {
+    $PDO = connecterBDD();
+
+    $query = "UPDATE produit
+              SET nom_produit           = :nom_produit,
+                  description_produit   = :description_produit,
+                  prix_ht_produit       = :prix_ht_produit,
+                  stock_produit         = :stock_produit,
+                  catalogue_produit     = :catalogue_produit,
+                  tva_produit           = :tva_produit
+              WHERE id_produit          = :id_produit;";
+
+    try {
+        $stmt = $PDO->prepare($query);
+
+        $stmt->bindParam(":nom_produit",         $nomProduit);
+        $stmt->bindParam(":description_produit", $descriptionProduit);
+        $stmt->bindParam(":prix_ht_produit",     $prixProduit);
+        $stmt->bindParam(":stock_produit",       $qteProduit);
+        $stmt->bindParam(":catalogue_produit",   $estDansCatalogue);
+        $stmt->bindParam(":tva_produit",         $tva);
+        $stmt->bindParam(":id_produit",          $idProduit);
+        
+        return $stmt->execute();
+
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 ?>

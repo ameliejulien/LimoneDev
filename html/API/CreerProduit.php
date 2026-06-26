@@ -16,6 +16,6 @@ header('Access-Control-Allow-Origin: *');
 $data = creerProduit($_POST, $_COOKIE['uuid']);
 
 // code de la réponse + envoi du tableau data (réponse HTTP)
-http_response_code(HTTP_OK);
+http_response_code(HTTP_CREATED);
 echo json_encode($data);
 ?>

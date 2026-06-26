@@ -28,7 +28,8 @@
 
     function droitsAccesPage($uuid, $typeUtilisateurAttendu) {
         $typeUtilisateur = trouverTypeUtilisateur($uuid);
-        if ($typeUtilisateur['type_utilisateur'] != $typeUtilisateurAttendu) {
+        if (isset($typeUtilisateur['type_utilisateur'])
+        &&  $typeUtilisateur['type_utilisateur'] != $typeUtilisateurAttendu) {
             header('Location: /Erreur/index.php');
             exit();
         }
