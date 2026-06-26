@@ -16,7 +16,7 @@
         $nomProduit     = "";
         $prix           = "";
         $tva            = "";
-        $enStock        = "";
+        $stockProduit        = "";
         $descProduit    = "";
         $estCatalogue   = false;
         $vendeur        = "";
@@ -99,7 +99,7 @@
                 <div class="produit-header">
                     <span class="vendeur-tag">
                         <i class="fa-solid fa-location-dot"></i>
-                        <?= $produit['denomination_vendeur'] ?>
+                        <?php if (isset($produit['denomination_vendeur'])) $produit['denomination_vendeur']; ?>
                     </span>
                     <span class="categorie-tag">
                         <select name="categorieProduit" id="categorieProduit" required>
