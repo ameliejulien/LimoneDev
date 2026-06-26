@@ -92,9 +92,19 @@
       <?php if (!$a2fConfiguree): ?>
         <button type="button" class="profil__bouton" onclick="window.location.href='/A2F/Creer/'">Activer la double authentification</button>
       <?php endif; ?>
-      <button type="button" class="profil__bouton profil__bouton--deco">Déconnexion</button>
+      <button type="button" class="profil__bouton profil__bouton--deco" id="btnDeconnexion">Déconnexion</button>
     </div>
 
+  </div>
+
+  <div class="modal__overlay" id="modalDeco">
+    <div class="modal__boite">
+      <p class="modal__message">Souhaitez-vous vraiment vous déconnecter ?</p>
+      <div class="modal__actions">
+        <button type="button" class="profil__bouton" id="modalConfirmer">Se déconnecter</button>
+        <button type="button" class="profil__bouton profil__bouton--deco" id="modalAnnuler">Annuler</button>
+      </div>
+    </div>
   </div>
 
 <script src="../js/form.js"></script>

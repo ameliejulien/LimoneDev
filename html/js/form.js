@@ -265,22 +265,40 @@ function initModificationCompteVendeur(formSelector = ".formulaire") {
  * @param {string} selector - sélecteur CSS du bouton de déconnexion (par défaut ".profil__bouton--deco")
  */
 function initDeconnexion(selector = ".profil__bouton--deco") {
-  const decoBtn = document.querySelector(selector);
-  if (!decoBtn) return;
+  const btnDeco     = document.getElementById("btnDeconnexion");
+  const overlay     = document.getElementById("modalDeco");
+  const btnConfirm  = document.getElementById("modalConfirmer");
+  const btnAnnuler  = document.getElementById("modalAnnuler");
 
-  decoBtn.addEventListener("click", function () {
+  if (!btnDeco || !overlay) return;
+
+  // Ouvre la modale
+  btnDeco.addEventListener("click", function () {
+    overlay.classList.add("is-visible");
+  });
+
+  // Ferme sans déconnecter
+  btnAnnuler.addEventListener("click", function () {
+    overlay.classList.remove("is-visible");
+  });
+
+  // Ferme en cliquant en dehors
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) overlay.classList.remove("is-visible");
+  });
+
+  // Confirme la déconnexion
+  btnConfirm.addEventListener("click", function () {
     fetch("../API/Client.php", {
       method: "POST",
       body: JSON.stringify({ typeRequete: "deconnexion" })
     })
       .then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           window.location.href = "../Catalogue/";
         }
       })
-      .catch(err => {
-        console.error("Erreur :", err);
-      });
+      .catch(err => console.error("Erreur :", err));
   });
 }
 
@@ -291,11 +309,27 @@ function initDeconnexion(selector = ".profil__bouton--deco") {
  *
  * @param {string} selector - sélecteur CSS du bouton (par défaut ".profil__bouton--deco")
  */
-function initDeconnexionVendeur(selector = ".profil__bouton--deco") {
-  const decoBtn = document.querySelector(selector);
-  if (!decoBtn) return;
+function initDeconnexionVendeur() {
+  const btnDeco    = document.getElementById("btnDeconnexionVendeur");
+  const overlay    = document.getElementById("modalDecoVendeur");
+  const btnConfirm = document.getElementById("modalConfirmerVendeur");
+  const btnAnnuler = document.getElementById("modalAnnulerVendeur");
 
-  decoBtn.addEventListener("click", function () {
+  if (!btnDeco || !overlay) return;
+
+  btnDeco.addEventListener("click", function () {
+    overlay.classList.add("is-visible");
+  });
+
+  btnAnnuler.addEventListener("click", function () {
+    overlay.classList.remove("is-visible");
+  });
+
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) overlay.classList.remove("is-visible");
+  });
+
+  btnConfirm.addEventListener("click", function () {
     fetch("../API/Vendeur.php", {
       method: "POST",
       body: JSON.stringify({ typeRequete: "deconnexion" })
@@ -305,9 +339,7 @@ function initDeconnexionVendeur(selector = ".profil__bouton--deco") {
           window.location.href = "../Catalogue/";
         }
       })
-      .catch(err => {
-        console.error("Erreur :", err);
-      });
+      .catch(err => console.error("Erreur :", err));
   });
 }
 

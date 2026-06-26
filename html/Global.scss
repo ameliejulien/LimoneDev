@@ -521,3 +521,43 @@ button {
 
 button:hover { background: var(--vert-fonce); transform: scale(1.06); }
 button:active { transform: scale(0.96); }
+
+/* ===== Modale de confirmation ===== */
+
+.modal__overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 45, 48, 0.4);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__overlay.is-visible {
+  display: flex;
+}
+
+.modal__boite {
+  background: var(--beige-clair);
+  border-radius: var(--arrondi);
+  padding: 2em 2.5em;
+  width: min(380px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  box-shadow: var(--ombre-grande);
+}
+
+.modal__message {
+  font-size: 1.05rem;
+  color: var(--encre);
+  text-align: center;
+  font-family: $police-generale;
+}
+
+.modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
