@@ -11,8 +11,6 @@ droitsAccesPage($_COOKIE['uuid'] ?? null, 2);
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-//$fetchData = json_decode(file_get_contents("php://input"), true);
-
 $data = creerProduit($_POST, $_COOKIE['uuid']);
 
 // code de la réponse + envoi du tableau data (réponse HTTP)

@@ -86,7 +86,7 @@ function creerProduit($arrayProduit, $uuid): array {
     if (isset(nomProduitExiste($arrayProduit['nomProduit'])['id_produit'])) 
         return ['succes' => false, 'erreurs' => ['nomProduit'], 'message' => "Le nom du produit existe déjà."];
 
-    $target_dir = "../imagesProduits/";
+    $target_dir = __DIR__ . "/../../html/imagesProduits/";
     $file = $_FILES['champImageProduit']['name'];
 	$path = pathinfo($file);
 	$ext = $path['extension'];
@@ -246,7 +246,7 @@ function modifierProduit($ancienChamps, $nouveauChamps): array {
     $dbh->beginTransaction();    
     try {
         if (isset($_FILES['champImageProduit'])) {
-            $target_dir = "../imagesProduits/";
+            $target_dir = __DIR__ . "/../../html/imagesProduits/";
             $file = $_FILES['champImageProduit']['name'];
             $path = pathinfo($file);
             $ext = $path['extension'];

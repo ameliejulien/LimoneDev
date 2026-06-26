@@ -10,6 +10,12 @@
     header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: *');
 
+    if (!isset($_POST['ancien'], $_POST['nouveau'])) {
+        http_response_code(HTTP_OK);
+        echo json_encode(['succes' => false, 'message' => "Requête trop volumineuse ou incomplète."]);
+        exit;
+    }
+
     $ancien = json_decode($_POST['ancien'], true);
     $nouveau = json_decode($_POST['nouveau'], true);
     $data = modifierProduit($ancien, $nouveau);

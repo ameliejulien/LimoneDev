@@ -85,7 +85,7 @@ form.addEventListener("submit", function (event) {
     const nouveauObj = {};
     inputArray.forEach((element) => {
       if (element.type === "file") {
-        if (element.files[0]) formData.append(element.id, element.files[0]);
+        if (element.files[0]) {formData.append(element.id, element.files[0]);}
       } else {
         nouveauObj[element.id] = element.value;
       }
