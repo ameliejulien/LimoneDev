@@ -6,7 +6,6 @@
 
   droitsAccesPage($_COOKIE['uuid'], 1);
 
-  $idClient = json_decode($_COOKIE['utilisateur'], true)['idUtilisateur'];
   $infosClient = recupererInfosClient($_COOKIE['uuid']);
 
   $uuid = $_COOKIE['uuid'];
