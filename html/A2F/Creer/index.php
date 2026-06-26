@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ . '/../../../lib/service/ServiceUtilisateur.php';
 
-    droitsAccesPage($_COOKIE['uuid'] ?? null, 1);
+    droitsAccesPageClientOuVendeur($_COOKIE['uuid'] ?? null);
 
     require_once __DIR__ . '/../../../vendor/autoload.php';
 
@@ -45,6 +45,7 @@
 
                     <img class="m-auto" src=<?= $QRCodeUri ?> alt="Secret QRCode" width="300px">
                     
+                    <p class="w-[300px]">Veuillez saisir une première fois le mot de passe de double authentification</p>
                     <div class="otp-wrapper">
                         <input type="text" maxlength="1" class="otp-input">
                         <input type="text" maxlength="1" class="otp-input">

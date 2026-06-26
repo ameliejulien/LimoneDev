@@ -13,6 +13,8 @@ define("HTTP_MDP_IDENTIQUE", 610);
 
 define("HTTP_ERR_CONNEXION", 611);
 define("HTTP_EMAIL_EXISTANT", 612);
+define("HTTP_A2F_REQUISE", 613);
+define("HTTP_A2F_INVALIDE", 614);
 define("HTTP_ERR_GENERIQUE", 500);
 define("HTTP_OK", 200);
 define("HTTP_CREATED", 201);

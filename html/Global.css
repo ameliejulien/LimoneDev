@@ -441,3 +441,36 @@ button:hover {
 button:active {
   transform: scale(0.96);
 }/*# sourceMappingURL=Global.css.map */
+
+.otp-wrapper {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:  nowrap;
+}
+
+.otp-input {
+    height: 48px;
+    width: 40px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--encre);   
+    background: white;
+    border: 1px solid var(--encre-tres-claire);
+    border-radius: var(--arrondi-petit);
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.otp-input:focus {
+    border-color: var(--encre);
+    box-shadow: var(--ombre-moyenne);
+    transition: scale(1.05);
+}
+
+.otp-input.filled {
+    border-color: var(--encre);
+    background: #F5F5F5;
+}

@@ -2,6 +2,7 @@
 
   require_once ('../../lib/service/ServiceClient.php');
   require_once ('../../lib/service/ServiceUtilisateur.php');
+  require_once ('../../lib/service/ServiceA2F.php');
 
   droitsAccesPage($_COOKIE['uuid'], 1);
 
@@ -9,6 +10,7 @@
   $infosClient = recupererInfosClient($_COOKIE['uuid']);
 
   $uuid = $_COOKIE['uuid'];
+  $a2fConfiguree = utilisateurASecret($uuid);
   $imgData = $infosClient['pp_utilisateur'];
   if (is_resource($imgData)) {
       $imgSrc = "data:image/jpeg;base64," . base64_encode(stream_get_contents($imgData));
@@ -87,6 +89,9 @@
     <div class="profil__actions">
       <button type="button" class="profil__bouton" onclick="window.location.href='ModifierCompteClient.php'">Modifier Compte</button>
       <button type="button" class="profil__bouton" onclick="window.location.href='ModifierMdpClient.php'">Modifier mot de passe</button>
+      <?php if (!$a2fConfiguree): ?>
+        <button type="button" class="profil__bouton" onclick="window.location.href='/A2F/Creer/'">Activer la double authentification</button>
+      <?php endif; ?>
       <button type="button" class="profil__bouton profil__bouton--deco">Déconnexion</button>
     </div>
 

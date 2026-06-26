@@ -25,6 +25,18 @@
       <label for="mdp" class="form__label">Mot de passe</label>
     </div>
 
+    <div class="form__group otp-group" id="otp-group" style="display:none;">
+      <p class="otp-message">Entrez le code de votre application d'authentification</p>
+      <div class="otp-wrapper">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+      </div>
+    </div>
+
     <br>
 
     <input type="submit" value="Se connecter" class="submit profil__bouton" />

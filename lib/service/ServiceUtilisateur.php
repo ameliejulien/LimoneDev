@@ -34,6 +34,15 @@
         }
     }
 
+    function droitsAccesPageClientOuVendeur($uuid) {
+        $typeUtilisateur = trouverTypeUtilisateur($uuid);
+        $type = $typeUtilisateur['type_utilisateur'] ?? null;
+        if ($type != TYPE_CLIENT && $type != TYPE_VENDEUR) {
+            header('Location: /Erreur/index.php');
+            exit();
+        }
+    }
+
     /**
      * @Brief vérifie si l'utilisateur est un vendeur, qui n'a pas les droits d'accès aux pages panier, paiement et paiement validé
      * @Return redirige vers la page d'erreur si l'utilisateur n'a pas les droits d'accès

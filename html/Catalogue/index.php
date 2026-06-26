@@ -34,7 +34,6 @@
         }
     }
     
-
     $categories = recupererLesCategories();
 
     $vendeurs = recupererLesVendeurs();

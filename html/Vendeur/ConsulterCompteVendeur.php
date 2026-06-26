@@ -2,12 +2,15 @@
 
   require_once ("../../lib/service/ServiceVendeur.php");
   require_once ("../../lib/service/ServiceUtilisateur.php");
+  require_once ("../../lib/service/ServiceA2F.php");
   require_once __DIR__ . "/../../lib/Constantes.php";
 
   droitsAccesPage($_COOKIE['uuid'], 2);
 
   $infosVendeur = recupererInfosVendeur();
   $v = $infosVendeur[0]; // raccourci
+
+  $a2fConfiguree = utilisateurASecret($_COOKIE['uuid']);
 
 ?>
 
@@ -65,6 +68,9 @@
       <div class="profil__actions">
         <button type="button" class="profil__bouton" onclick="window.location.href='ModifierCompteVendeur.php'">Modifier le compte</button>
         <button type="button" class="profil__bouton" onclick="window.location.href='ModifierMdpVendeur.php'">Modifier le mot de passe</button>
+        <?php if (!$a2fConfiguree): ?>
+          <button type="button" class="profil__bouton" onclick="window.location.href='/A2F/Creer/'">Activer la double authentification</button>
+        <?php endif; ?>
         <button type="button" class="profil__bouton profil__bouton--deco">Déconnexion</button>
       </div>
 

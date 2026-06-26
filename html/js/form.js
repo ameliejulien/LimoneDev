@@ -75,12 +75,19 @@ function initConnexionForm(formSelector = ".formulaire") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
+  const otpGroup = document.getElementById("otp-group");
+  const otpInputs = form.querySelectorAll(".otp-input");
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+
+    let otp = "";
+    otpInputs.forEach(input => { otp += input.value; });
 
     const formData = {
       mail: form.mail.value,
       motDePasse: form.mdp.value,
+      otp: otp || null,
     };
 
     fetch("../API/Connexion.php", {
@@ -90,10 +97,52 @@ function initConnexionForm(formSelector = ".formulaire") {
       .then(response => {
         if (response.status == 200) {
           window.location.href = "../Catalogue";
+        } else if (response.status == 613) {
+          // A2F requise : on révèle les champs OTP sur la même page
+          if (otpGroup) {
+            otpGroup.style.display = "";
+            const premier = otpGroup.querySelector(".otp-input");
+            if (premier) premier.focus();
+          }
+          afficherSnackBar('Notification', 'Veuillez entrer votre code de double authentification.');
+        } else if (response.status == 614) {
+          afficherSnackBar('Notification', 'Code de double authentification incorrect !');
         } else {
           afficherSnackBar('Notification', 'Connexion échouée !');
         }
       });
+  });
+}
+
+// ----- Comportement des champs OTP (saisie chiffre par chiffre) -----
+
+/**
+ * Active la navigation automatique entre les champs OTP (.otp-input) :
+ * passage au champ suivant à la saisie, retour arrière sur Backspace,
+ * et restriction aux chiffres. Sans effet si aucun champ n'est présent.
+ */
+function initOtpInputs() {
+  const inputs = document.querySelectorAll(".otp-input");
+  if (!inputs.length) return;
+
+  inputs.forEach((input, index) => {
+    input.addEventListener("input", (e) => {
+      const val = e.target.value.replace(/[^0-9]/g, "");
+      e.target.value = val;
+      if (val) {
+        input.classList.add("filled");
+        if (index < inputs.length - 1) inputs[index + 1].focus();
+      } else {
+        input.classList.remove("filled");
+      }
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && !input.value && index > 0) {
+        inputs[index - 1].focus();
+        inputs[index - 1].classList.remove("filled");
+      }
+    });
   });
 }
 
@@ -433,6 +482,7 @@ restreindreSaisieChiffres('#telephone', '#siret', '#codePostalVendeur', '#cleAut
 
 initCreationCompteClientForm();
 initConnexionForm();
+initOtpInputs();
 initCreationCompteVendeurForm();
 initModificationCompteVendeur();
 initDeconnexion();

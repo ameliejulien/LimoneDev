@@ -17,4 +17,16 @@ function creationA2F($uuid, $secret, $otp) {
     }
 }
 
+function utilisateurASecret($uuid) {
+    $secret = getSecretParUUID($uuid);
+
+    return !empty($secret);
+}
+
+function verifierOTP($secret, $otp) {
+    $totp = TOTP::createFromSecret($secret);
+
+    return $totp->verify($otp);
+}
+
 ?>
