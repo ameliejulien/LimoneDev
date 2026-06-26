@@ -154,7 +154,7 @@ function initOtpInputs() {
  *
  * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
  */
-function initCreationCompteVendeurForm(formSelector = ".formulaire") {
+function initCreationCompteVendeurForm(formSelector = ".formulaireVendeur") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
@@ -184,8 +184,7 @@ function initCreationCompteVendeurForm(formSelector = ".formulaire") {
         console.log(response);
 
         if (response.status == 200) {
-          alert("Compte créé !");
-          window.location.href = "ConnexionCompteVendeur.php";
+          window.location.href = "../Connexion";
         } else if (response.status == 609) {
           afficherSnackBar('Notification', 'Echec de création de compte : Clé d\'authentification invalide');
         } else if (response.status == 608) {

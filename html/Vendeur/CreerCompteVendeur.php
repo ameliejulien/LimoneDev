@@ -13,7 +13,7 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte</h1>
-  <form method="POST" class="formulaire">
+  <form method="POST" class="formulaireVendeur">
     <div class="form__group">
       <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
       <label for="mail" class="form__label">Adresse mail</label>
