@@ -57,7 +57,6 @@ function getLignes() {
         catalogue: ligne.querySelector("input[type='checkbox']").checked.toString()
     }));
 
-    console.log(tabRetour);
     return tabRetour;
 }
 
@@ -131,7 +130,6 @@ function popupSuppression(node) {
     confirmation.classList.add("is-visible")
 
     idArtSuppression = node.closest("tr").querySelector("td:nth-child(1)").textContent.trim();
-    console.log("id : "+idArtSuppression)
 }
 
 
@@ -148,7 +146,6 @@ function confirmerSuppression(){
                 body: JSON.stringify(formData)  // fait une string JSON du tableau
             })
             .then(response => {
-                    console.log(response.status)
                     if (response.status == 200) {
                         afficherSnackBar('Notification','Suppression réussie !'); // alerte de la création du compte
                         window.location.reload();
