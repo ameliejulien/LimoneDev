@@ -4,7 +4,7 @@
     <div class="header-interieur">
         
         <?php
-            require_once __DIR__ . '../../lib/service/ServiceUtilisateur.php';
+            require_once __DIR__ . '/../../lib/service/ServiceUtilisateur.php';
             require_once __DIR__ . '/../../lib/Constantes.php';
 
 
