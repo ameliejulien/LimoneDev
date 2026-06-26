@@ -24,7 +24,7 @@ function initFiltres(map, markers, adresses) {
         });
     });
 
-    document.querySelectorAll('button').forEach(bouton => {
+    document.querySelectorAll('.button').forEach(bouton => {
         bouton.addEventListener('click', (e) => {
             e.stopPropagation();
             const loader = document.getElementById('loader');
@@ -145,18 +145,16 @@ function initFiltres(map, markers, adresses) {
 
         // Mettre les markers Leaflet à jour en fonction des filtres
         if (map && markers && adresses) {
-            for (const m of markers) {
-                map.removeLayer(m);
-            }
+            map.removeLayer(markers);
 
-            markers.length = 0;
+            markers.clearLayers();
 
             const vendeursRestant = [...produits].filter((p) => p.style.display !== 'none').map(
                 (p) => parseInt(p.dataset.vendeur)).filter(
                     (value, index, array) => array.indexOf(value) === index);
 
             adresses.filter((a) => vendeursRestant.includes(a.id_vendeur)).forEach((a) => {
-                markers.push(L.marker([a.lat, a.long]).addTo(map).bindTooltip(
+                markers.addLayer(L.marker([a.lat, a.long]).bindTooltip(
                     `<b>${a.nom}</b>
                     <br>
                     <span>${a.adresse}</span>
@@ -169,6 +167,12 @@ function initFiltres(map, markers, adresses) {
                     filtrerProduits();
                 }));
             });
+
+            map.addLayer(markers);
+
+            if (markers.getLayers().length > 0) {
+                map.fitBounds(markers.getBounds(), { padding: [30, 30] });
+            }
         }
     }
 
@@ -256,10 +260,10 @@ if (typeof L !== 'undefined') {
     }
 
     recupAdresses().then((adresses) => {
-        const markers = [];
+        const markers = new L.MarkerClusterGroup();
 
         for (const a of adresses) {
-            markers.push(L.marker([a.lat, a.long]).addTo(map).bindTooltip(
+            markers.addLayer(L.marker([a.lat, a.long]).bindTooltip(
                 `<b>${a.nom}</b>
                 <br>
                 <span>${a.adresse}</span>
@@ -269,6 +273,8 @@ if (typeof L !== 'undefined') {
                 <span>${a.cp}</span>`
             ));
         }
+
+        map.addLayer(markers);
 
         initFiltres(map, markers, adresses);
     });
