@@ -131,7 +131,7 @@
                 <!-- Quantité + Ajout panier -->
                 <div class="action-bloc">
                     <!-- Si l'utilisateur est connecté en tant que vendeur, il n'a pas de bouton ajout au panier, mais il peut modifier le produit -->
-                    <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == true): ?>
+                    <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == false): ?>
                     <div class="quantite-selector hide">
                     <?php else: ?>
                     <div class="quantite-selector">
