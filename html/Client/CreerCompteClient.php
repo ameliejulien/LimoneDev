@@ -10,7 +10,7 @@
 <body>
   <?php require_once '../ui/header.php'; ?>
   <h1>Création de compte</h1>
-  <form class="formulaire">
+  <form class="formulaire_client">
     <div class="form__group">
       <input type="email" id="mail" name="mail" class="form__field" placeholder=" " required>
       <label for="mail" class="form__label">Adresse mail</label>
