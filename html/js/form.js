@@ -472,7 +472,7 @@ function restreindreSaisieChiffres(...selectors) {
  *
  * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
  */
-function initModificationMdpVendeurForm(formSelector = ".formulaire") {
+function initModificationMdpVendeurForm(formSelector = ".formulaireMdp") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 

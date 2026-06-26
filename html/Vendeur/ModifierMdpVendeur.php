@@ -24,7 +24,7 @@
   <?php require_once '../ui/header.php'; ?>
   <h1>Modification du mot de passe</h1>
 
-  <form method="POST" class="formulaire">
+  <form method="POST" class="formulaireMdp">
 
     <div class="form__group">
       <input type="password" name="mdpCourant" id="mdpCourant" class="form__field"
