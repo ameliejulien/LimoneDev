@@ -121,11 +121,11 @@
             })
             .then(response => {
                     console.log(response.status)
-                    if (response.status == HTTP_OK) {
-                        afficherSnackBar('Notification','Mise à jour des données réussie !'); // alerte de la création du compte
+                    if (response.status == <?= HTTP_OK ?>) {
+                        afficherSnackBar('Notification','Mise à jour des données réussie !');
                         window.location.href = "../Catalogue";
                     } else {
-                        afficherSnackBar('Notification','Mise à jour des données échouée !'); // alerte de l'échec de la connexion
+                        afficherSnackBar('Notification','Mise à jour des données échouée !');
                     }
             
                 });
