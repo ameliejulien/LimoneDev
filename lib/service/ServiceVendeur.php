@@ -9,6 +9,8 @@ require_once __DIR__ . '/../../lib/Constantes.php';
  */
 function modifierVendeurBDD($vendeur)
 {
+    $dbh = connecterBDD();
+    $dbh->beginTransaction(); 
     try {
         $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
         $connectBDD = connecterBDD();
@@ -18,11 +20,13 @@ function modifierVendeurBDD($vendeur)
         mettreAJourUtilisateurVendeur($connectBDD, $idVendeur, $vendeur);
         mettreAJourVendeur($connectBDD, $idVendeur, $vendeur);
 
+        $dbh->commit();
+        return HTTP_OK;
     } catch (Exception $e) {
+        $dbh->rollBack();
         return HTTP_ERR_GENERIQUE;
     }
 
-    return HTTP_OK;
 }
 
 /**
@@ -148,8 +152,15 @@ function creercleAuth()
         $cle .= rand(0, 9);
     }
 
-    ajoutercleBDD($cle);
-    return $cle;
+    $dbh = connecterBDD();
+    $dbh->beginTransaction(); 
+    try {
+        ajoutercleBDD($cle);
+        $dbh->commit();
+        return $cle;
+    } catch (Exception $e) {
+        $dbh->rollBack();
+    }
 }
 
 /**
@@ -173,13 +184,16 @@ function modificationVendeur($vendeur)
 {
     // TODO : uniformiser les valeurs entre les CRU vendeur
 
+    $dbh = connecterBDD();
+    $dbh->beginTransaction(); 
     try {
         modifierVendeurBDD($vendeur);
+        $dbh->commit();
+        return HTTP_OK;
     } catch (Exception $e) {
+        $dbh->rollBack();
         return HTTP_ERR_GENERIQUE;
     }
-
-    return HTTP_OK;
 }
 
 /**
@@ -193,21 +207,30 @@ function modificationMdpVendeur($data)
 
     $idVendeur = trouverIDUtilisateur($_COOKIE['uuid']);
 
-    if (password_verify($mdpCourant,  getMdpHashFromUUID($_COOKIE['uuid']))) {
-        // Les deux nouveaux mots de passe ne correspondent pas
-        if ($nouveauMdp !== $confNouveauMdp) {
-            return HTTP_MDP_CONFIRM_DIFF;
-        }
+    $dbh = connecterBDD();
+    $dbh->beginTransaction(); 
+    try {
+        if (password_verify($mdpCourant,  getMdpHashFromUUID($_COOKIE['uuid']))) {
+            // Les deux nouveaux mots de passe ne correspondent pas
+            if ($nouveauMdp !== $confNouveauMdp) {
+                return HTTP_MDP_CONFIRM_DIFF;
+            }
 
-        // Le nouveau mot de passe est identique à l'ancien
-        if ($mdpCourant === $nouveauMdp) {
-            return HTTP_MDP_IDENTIQUE;
-        }
+            // Le nouveau mot de passe est identique à l'ancien
+            if ($mdpCourant === $nouveauMdp) {
+                return HTTP_MDP_IDENTIQUE;
+            }
 
-        // Tout est valide → on met à jour
-        modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT), $idVendeur);
-        return HTTP_OK;
-    } else {
+            // Tout est valide → on met à jour
+            modifierMdpVendeurBDD(password_hash($nouveauMdp, PASSWORD_DEFAULT), $idVendeur);
+            $dbh->commit();
+            return HTTP_OK;
+        } else {
+            $dbh->rollBack();
+            return HTTP_ERR_GENERIQUE;
+        }
+    } catch (Exception $e) {
+        $dbh->rollBack();
         return HTTP_ERR_GENERIQUE;
     }
 }

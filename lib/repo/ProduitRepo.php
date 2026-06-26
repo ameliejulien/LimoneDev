@@ -132,7 +132,7 @@ function creerProduitBDD($nomProduit, $descriptionProduit, $prixProduit, $qtePro
         
         return $stmt->fetch();
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }
 }
 
@@ -150,7 +150,7 @@ function lierCategorie($idCategorie, $idProduit) {
 
         return $stmt->execute();
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }
 }
 
@@ -166,7 +166,7 @@ function suppirmerCategorie($idProduit) {
 
         return $stmt->execute();
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }
 }
 
@@ -183,7 +183,7 @@ function addPhoto($idProduit, $nomFichier, $estLaMain) {
 
         return $stmt->execute();
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }    
 }
 
@@ -198,7 +198,7 @@ function supprimerPhoto($idProduit, $estLaMain) {
 
         return $stmt->execute();
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }   
 }
 
@@ -214,7 +214,7 @@ function nomProduitExiste($nomProduit) {
 
         return $stmt->fetch();
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }  
 }
 
@@ -244,7 +244,7 @@ function modifierProduitBDD($idProduit, $nomProduit, $descriptionProduit, $prixP
         return $stmt->execute();
 
     } catch (PDOException $e) {
-        return false;
+        throw $e;
     }
 }
 ?>

@@ -6,14 +6,22 @@ require_once __DIR__ . '/../repo/A2FRepo.php';
 use OTPHP\TOTP;
 
 function creationA2F($uuid, $secret, $otp) {
-    $totp = TOTP::createFromSecret($secret);
+    $dbh = connecterBDD();
+    $dbh->beginTransaction();    
+    try {
+        $totp = TOTP::createFromSecret($secret);
 
-    if ($totp->verify($otp)) {
-        $id = trouverIDUtilisateur($uuid);
+        if ($totp->verify($otp)) {
+            $id = trouverIDUtilisateur($uuid);
 
-        mettreSecretBDD($id, $secret);
-    } else {
-        throw new Exception("IncorrectOTP");
+            mettreSecretBDD($id, $secret);
+        } else {
+            throw new Exception("IncorrectOTP");
+        }
+        $dbh->commit();
+    } catch (Exception $e) {
+        $dbh->rollBack();
+        throw $e;
     }
 }
 

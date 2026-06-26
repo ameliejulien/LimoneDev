@@ -140,7 +140,7 @@
                     <div class="tva-produit">
                         <div class="form__group field">
                             <input type="text" class="form__field" name="tva" id="tva"
-                                placeholder="TVA" pattern="^[0-9][0-9][.,]?([0-9]?){2}$" required
+                                placeholder="TVA" pattern="^[0-9]?[0-9][.,]?([0-9]?){2}$" required
                                 title="% de TVA appliqué au prix HT" value="<?= $tva ?>">
                             <label for="tva" class="form__label">TVA</label>
                             <span>%</span>

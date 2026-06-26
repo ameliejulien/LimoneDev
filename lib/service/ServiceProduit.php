@@ -102,35 +102,43 @@ function creerProduit($arrayProduit, $uuid): array {
     // Début requêtes de création en BDD //
     //////////////////////////////////////
 
-    // Requête de création à la BDD
-    $idProduit = creerProduitBDD($arrayProduit['nomProduit'], $arrayProduit['descriptionProduit'],
-                                 $arrayProduit['prixProduit'],  $arrayProduit['qteProduit'], 
-                                 $arrayProduit['estDansCatalogue'], $arrayProduit['tva'], 
-                                 $idVendeur);
-    if ($idProduit === false) return ['succes' => false, 'message' => "Erreur à la création"];
+    $path_filename_ext = "";
 
-    $idProduit = $idProduit["id_produit"];
+    $dbh = connecterBDD();
+    $dbh->beginTransaction();    
+    try {
+        // Requête de création à la BDD
+        $idProduit = creerProduitBDD($arrayProduit['nomProduit'], $arrayProduit['descriptionProduit'],
+                                    $arrayProduit['prixProduit'],  $arrayProduit['qteProduit'], 
+                                    $arrayProduit['estDansCatalogue'], $arrayProduit['tva'], 
+                                    $idVendeur);
 
-    if (lierCategorie($arrayProduit['categorieProduit'], $idProduit) === false)
-         return ['succes' => false, 'message' => "Erreur à la laison avec la catégorie"];
+        $idProduit = $idProduit["id_produit"];
 
-    $name_ext = $idProduit.".".$ext;
-	$path_filename_ext = $target_dir.$name_ext;
+        lierCategorie($arrayProduit['categorieProduit'], $idProduit);
 
-    // Sauvegarde du produit sur le serveur
-    if (file_exists($path_filename_ext)
-    ||  !move_uploaded_file($temp_name, $path_filename_ext))
-        return ['succes' => false, 'message' => "L'image n'a pas pu être sauvegardé, Pensez à la changer."];
-    
+        $name_ext = $idProduit.".".$ext;
+        $path_filename_ext = $target_dir.$name_ext;
 
-    
-    // Bind de la photo avec le produit
-    if (addPhoto($idProduit, $name_ext, true) === false) {
-        unlink($path_filename_ext);
-        return ['succes' => false, 'message' => "L'image n'a pas pu être lié, Pensez à la changer."];
+        // Sauvegarde du produit sur le serveur
+        if (file_exists($path_filename_ext)
+        ||  !move_uploaded_file($temp_name, $path_filename_ext)) {
+            $dbh->rollBack();
+            return ['succes' => false, 'message' => "L'image n'a pas pu être sauvegardé, Pensez à la changer."];
+        }
+        
+        // Bind de la photo avec le produit
+        addPhoto($idProduit, $name_ext, true);
+
+        $dbh->commit();
+        return ['succes' => true, 'idProduit' => $idProduit];
+    } catch (Exception $e) {
+        if (file_exists($path_filename_ext)) {
+            unlink($path_filename_ext);
+        }
+        $dbh->rollBack();
+        return ['succes' => true, 'message' => 'Echech à la création du produit'];
     }
-
-    return ['succes' => true, 'idProduit' => $idProduit];
 }
 
 
@@ -191,7 +199,7 @@ function modifierProduit($ancienChamps, $nouveauChamps): array {
     }
 
     if (!empty($tva) 
-    &&  !preg_match('/^[0-9][0-9][.,]?([0-9]?){2}$/', $tva)) {
+    &&  !preg_match('/^[0-9]?[0-9][.,]?([0-9]?){2}$/', $tva)) {
         $erreurs[] = 'tva';
     }
 
@@ -234,52 +242,76 @@ function modifierProduit($ancienChamps, $nouveauChamps): array {
     // Début requêtes de création en BDD //
     //////////////////////////////////////
 
-    if (isset($_FILES['champImageProduit'])) {
-        $target_dir = "../imagesProduits/";
-        $file = $_FILES['champImageProduit']['name'];
-        $path = pathinfo($file);
-        $ext = $path['extension'];
-        $temp_name = $_FILES['champImageProduit']['tmp_name'];
+    $dbh = connecterBDD();
+    $dbh->beginTransaction();    
+    try {
+        if (isset($_FILES['champImageProduit'])) {
+            $target_dir = "../imagesProduits/";
+            $file = $_FILES['champImageProduit']['name'];
+            $path = pathinfo($file);
+            $ext = $path['extension'];
+            $temp_name = $_FILES['champImageProduit']['tmp_name'];
 
-        // Le nom du fichier n'a pas besoin d'étre verifié nous le fixons nous même
-        if (!preg_match("/^(jpg|jpeg|jpe|png)$/", $ext))
-            return ['succes' => false, 'message' => "Mauvais fromat d'extension d'image."];
+            // Le nom du fichier n'a pas besoin d'étre verifié nous le fixons nous même
+            if (!preg_match("/^(jpg|jpeg|jpe|png)$/", $ext)) {
+                $dbh->rollBack();
+                return ['succes' => false, 'message' => "Mauvais fromat d'extension d'image."];
+            }
 
-        $name_ext = $idProduit.".".$ext;
-        $path_filename_ext = $target_dir.$name_ext;
+            $name_ext = $idProduit.".".$ext;
+            $path_filename_ext = $target_dir.$name_ext;
 
-        // Sauvegarde du produit sur le serveur
-        if (file_exists($path_filename_ext)) {
-            if  (!unlink($path_filename_ext) 
-            ||   !move_uploaded_file($temp_name, $path_filename_ext))
-                return ['succes' => false, 'message' => "L'image n'a pas pu être modifié"];
-        } else {
-            if  (!move_uploaded_file($temp_name, $path_filename_ext))
-                return ['succes' => false, 'message' => "L'image n'a pas pu être sauvegardé"];
+            // Sauvegarde du produit sur le serveur
+            if (file_exists($path_filename_ext)) {
+                if  (!unlink($path_filename_ext) 
+                ||   !move_uploaded_file($temp_name, $path_filename_ext)) {
+                    $dbh->rollBack();
+                    return ['succes' => false, 'message' => "L'image n'a pas pu être modifié"];
+                }
+            } else {
+                if  (!move_uploaded_file($temp_name, $path_filename_ext)) {
+                    $dbh->rollBack();
+                    return ['succes' => false, 'message' => "L'image n'a pas pu être sauvegardé"];
+                }
+            }
+
+            // Supprime le bind de la photo avec le produit
+            if (supprimerPhoto($idProduit, true) === false){
+                $dbh->rollBack();
+                return ['succes' => false, 'message' => "L'image n'a pas pu être supprimer."];
+            }
+            
+            // Bind de la photo avec le produit
+            if (addPhoto($idProduit, $name_ext, true) === false) {
+                $dbh->rollBack();
+                return ['succes' => false, 'message' => "L'image n'a pas pu être lié, Pensez à la changer."];
+            }
         }
 
-        // Supprime le bind de la photo avec le produit
-        if (supprimerPhoto($idProduit, true) === false)
-            return ['succes' => false, 'message' => "L'image n'a pas pu être supprimer."];
-        
-        // Bind de la photo avec le produit
-        if (addPhoto($idProduit, $name_ext, true) === false)
-            return ['succes' => false, 'message' => "L'image n'a pas pu être lié, Pensez à la changer."];
+        // Requête de modification à la BDD
+        if (modifierProduitBDD($idProduit, $nomProduit, $descriptionProduit, $prixProduit, $qteProduit,$estDansCatalogue , $tva) === false) {
+            $dbh->rollBack();
+            return ['succes' => false, 'message' => "Erreur à la modification"];
+        }
+
+        if ($nouveauChamps["categorieProduit"] !== $ancienChamps["id_categorie"]) {
+            if (suppirmerCategorie($idProduit) === false) {
+                $dbh->rollBack();
+                return ['succes' => false, 'message' => "Erreur le produit n'a pas pu changer de catégorie"];
+            }
+
+            if (lierCategorie($nouveauChamps['categorieProduit'], $idProduit) === false) {
+                $dbh->rollBack();
+                return ['succes' => false, 'message' => "Erreur à la laison avec la catégorie"];
+            }
+        }
+
+        $dbh->commit();
+        return ['succes' => true, 'idProduit' => $idProduit];
+    } catch (Exception $e) {
+        $dbh->rollBack();
+        return ['succes' => false, 'message' => "Echec de la modification"];
     }
-
-    // Requête de modification à la BDD
-    if (modifierProduitBDD($idProduit, $nomProduit, $descriptionProduit, $prixProduit, $qteProduit,$estDansCatalogue , $tva) === false)
-        return ['succes' => false, 'message' => "Erreur à la modification"];
-
-    if ($nouveauChamps["categorieProduit"] !== $ancienChamps["id_categorie"]) {
-        if (suppirmerCategorie($idProduit) === false)
-            return ['succes' => false, 'message' => "Erreur le produit n'a pas pu changer de catégorie"];
-
-        if (lierCategorie($nouveauChamps['categorieProduit'], $idProduit) === false)
-            return ['succes' => false, 'message' => "Erreur à la laison avec la catégorie"];
-    }
-
-    return ['succes' => true, 'idProduit' => $idProduit];
 }
 
 ?>

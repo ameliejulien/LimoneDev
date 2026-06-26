@@ -6,16 +6,39 @@
 
 
     function getStock($idVendeur) { 
-        $lstArticles = getStockBdd($idVendeur);
-        return $lstArticles;
+        $dbh = connecterBDD();
+        $dbh->beginTransaction(); 
+        try {
+            $lstArticles = getStockBdd($idVendeur);
+            $dbh->commit();
+            return $lstArticles;
+        } catch (Exception $e) {
+            $dbh->rollBack();
+        }
+        
     }
 
     function updateStock($lignesModifiees){
-        $codeRetour = updateStockBDD($lignesModifiees);
-        return $codeRetour;
+        $dbh = connecterBDD();
+        $dbh->beginTransaction(); 
+        try {
+            $codeRetour = updateStockBDD($lignesModifiees);
+            $dbh->commit();
+            return $codeRetour;
+        } catch (Exception $e) {
+            $dbh->rollBack();
+        }
     }
 
     function deleteProduit($idProduit) {
-        return deleteProduitBDD($idProduit);
+        $dbh = connecterBDD();
+        $dbh->beginTransaction(); 
+        try {
+            $deleteResult = deleteProduitBDD($idProduit);
+            $dbh->commit();
+            return $deleteResult;
+        } catch (Exception $e) {
+            $dbh->rollBack();
+        }
     }
 ?>
