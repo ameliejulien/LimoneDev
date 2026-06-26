@@ -36,16 +36,6 @@ body {
   background-color: #fffdea;
 }
 
-body{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-main{
-  flex: 1;
-}
-
 h1 {
   font-size: 3em;
   color: #1C6D80;
@@ -53,7 +43,7 @@ h1 {
 }
 
 /* ----- Conteneur du formulaire : occupe plus d'espace sur la page ----- */
-.formulaire {
+.formulaire, .formulaire_client {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   display: flex;

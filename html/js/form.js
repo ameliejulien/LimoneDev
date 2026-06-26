@@ -27,20 +27,29 @@ document.querySelectorAll(".form__group").forEach(function (group) {
  *
  * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
  */
-function initCreationCompteClientForm(formSelector = ".formulaire") {
+function initCreationCompteClientForm(formSelector = ".formulaire_client") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    const motDePasse     = form.mdp.value;
+    const confMotDePasse = form.confMdp.value;
+
+    // Vérification correspondance mots de passe
+    if (motDePasse !== confMotDePasse) {
+      afficherSnackBar("Notification", "Les mots de passe ne correspondent pas.");
+      return;
+    }
+
     const formData = {
-      mail: form.mail.value,
+      mail:          form.mail.value,
       nomUtilisateur: form.username.value,
-      telephone: form.telephone.value,
-      motDePasse: form.mdp.value,
-      confMotDePasse: form.confMdp.value,
-      typeRequete: "creation"
+      telephone:     form.telephone.value,
+      motDePasse,
+      confMotDePasse,
+      typeRequete:   "creation"
     };
 
     fetch("../API/Client.php", {
@@ -51,9 +60,10 @@ function initCreationCompteClientForm(formSelector = ".formulaire") {
         if (response.status == 201) {
           window.location.href = "/Connexion/";
         } else if (response.status == 409) {
-          afficherSnackBar('Notification', 'Echec de création de compte : email déjà utilisé !');
+          afficherSnackBar("Notification", "Un compte existe déjà avec cette adresse mail.");
+          return;
         } else {
-          afficherSnackBar('Notification', 'Echec de création de compte !');
+          afficherSnackBar("Notification", "Echec de création de compte !");
         }
       })
       .catch(err => {
@@ -472,7 +482,7 @@ function restreindreSaisieChiffres(...selectors) {
  *
  * @param {string} formSelector - sélecteur CSS du formulaire (par défaut ".formulaire")
  */
-function initModificationMdpVendeurForm(formSelector = ".formulaire") {
+function initModificationMdpVendeurForm(formSelector = ".formulaireMdp") {
   const form = document.querySelector(formSelector);
   if (!form) return;
 
