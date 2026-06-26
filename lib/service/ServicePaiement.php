@@ -52,48 +52,70 @@ function validerPaiement() {
         $panier = getPanierArticles((array) getPanierIDs());
         $quantiteMap = array_count_values(getPanierIDs());
 
-        // Crée une commande
-        $commandeId = enregistrerCommande();
-
-        // Créer une facture
-        $factureId = enregistrerFacture(
-            $_POST['prenom']." ".$_POST['nom'],
-            $_POST['email'],
-            $_POST['telephone'],
-            $_POST['ville'],
-            $_POST['adressePostal'],
-            $_POST['codePostal'],
-            $_POST['villeFacturation'],
-            $_POST['adressePostalFacturation'],
-            $_POST['codePostalFacturation']
-        );
-
-        $nomArticle = "";
-        $prixHt = 0;
-        $TVA = 0;
-
-        // Créer une ligne de commande par produit
+        // total calculé serveur (pas confiance au client)
+        $montantTtc = 0;
         foreach ($quantiteMap as $articleId => $quantite) {
             foreach ($panier as $article) {
                 if ($article['id_produit'] == $articleId) {
-                    $nomArticle = $article["nom_produit"];
-                    $prixHt = $article["prix_ht_produit"];
-                    $TVA = ($article["prix_ht_produit"] * 1.2) - $article["prix_ht_produit"];
+                    $tva = $article['tva_produit'] ?? 20;
+                    $montantTtc += $article['prix_ht_produit'] * (1 + $tva / 100) * $quantite;
                 }
-            }
-
-            enreigstrerLigneCommande($commandeId, $articleId, $nomArticle, $quantite, $prixHt, $TVA);
-
-            if ($_COOKIE['uuid'] != null) {
-                $idClient = trouverIDUtilisateur($_COOKIE['uuid']);
-                enregistrerAchat($commandeId, $articleId, $factureId, $idClient);
-            } else {
-                enregistrerAchat($commandeId, $articleId, $factureId);
             }
         }
 
-        // Communication avec la banque
-        return true;
+        $dbh = connecterBDD();
+        $dbh->beginTransaction();
+        try {
+            $commandeId = enregistrerCommande($montantTtc, 1);
+            $factureId  = enregistrerFacture($_POST['prenom']." ".$_POST['nom'],
+                                             $_POST['email'],
+                                             $_POST['telephone'],
+                                             $_POST['ville'],
+                                             $_POST['adressePostal'],
+                                             $_POST['codePostal'],
+                                             $_POST['villeFacturation'],
+                                             $_POST['adressePostalFacturation'],
+                                             $_POST['codePostalFacturation']
+                                             );
+
+            foreach ($quantiteMap as $articleId => $quantite) {
+                $nomArticle = "";
+                $prixHt = 0;
+                $TVA = 0;
+
+                foreach ($panier as $article) {
+                    if ($article['id_produit'] == $articleId) {
+                        $nomArticle = $article["nom_produit"];
+                        $prixHt = $article["prix_ht_produit"];
+                        $TVA = ($article["prix_ht_produit"] * 1.2) - $article["prix_ht_produit"];
+                    }
+                }
+
+                if ($nomArticle !== "" && $prixHt !== 0 && $TVA !== 0) {
+                    enreigstrerLigneCommande($commandeId, 
+                                         $articleId, 
+                                         $nomArticle, 
+                                         $quantite, 
+                                         $prixHt, 
+                                         $tva);
+                    decrementerStockProduit($articleId, $quantite);   // baisse stock
+
+                    $idClient = isset($_COOKIE['uuid']) ? trouverIDUtilisateur($_COOKIE['uuid']) : null;
+                    $idClient !== null
+                        ? enregistrerAchat($commandeId, $articleId, $factureId, $idClient)
+                        : enregistrerAchat($commandeId, $articleId, $factureId);
+                }
+            }
+
+            $dbh->commit();
+            setcookie('panier', '', time() - 3600, "/");
+
+            // Mock la communication avec la banque
+            return true;
+        } catch (Throwable $e) { // rupture OU erreur SQL
+            $dbh->rollBack();   
+            return false;
+        }
     }
 }
 
