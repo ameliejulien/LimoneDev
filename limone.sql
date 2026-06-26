@@ -29,7 +29,7 @@ CREATE TABLE limone.Type (
 -- ===========================
 CREATE TABLE limone.Utilisateur (
     id_utilisateur serial PRIMARY KEY,
-    uuid_utilisateur uuid DEFAULT uuidv7(),
+    uuid_utilisateur uuid DEFAULT uuid_generate_v4(),
     nom_utilisateur varchar(30),
     email_utilisateur varchar(320),
     telephone_utilisateur char(10),
