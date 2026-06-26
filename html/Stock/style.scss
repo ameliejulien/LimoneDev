@@ -199,33 +199,35 @@ input[type="checkbox"] {
   margin: auto;
 }
 
-.deleteConfirmation {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--beige-clair);
-  position:absolute;
-  border-style: solid;
-  border-color: var(--vert-fonce);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 3em;
-  border-width: 0.25em;
-  gap: 2em;
-  padding: 2em;
+.profil__bouton {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--vert-fonce);
+  color: var(--beige-clair);
+  border: none;
+  font-family: var(--police-generale);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
 }
 
-.deleteConfirmation h2{
-  color: var(--vert-fonce);
-  font-size: 2em;
-  font-weight: bolder;
+.profil__bouton:hover {
+  opacity: 0.88;
 }
 
-.deleteConfirmation div{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap:2em;
+.profil__bouton:active {
+  transform: scale(0.98);
+}
 
+.profil__bouton--deco {
+  background: transparent;
+  color: var(--encre-claire);
+  border: 1px solid var(--bordure-fonce);
+}
+
+.profil__bouton--deco:hover {
+  background: var(--bordure);
+  opacity: 1;
 }
 

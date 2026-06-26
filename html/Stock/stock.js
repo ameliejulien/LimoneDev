@@ -127,8 +127,8 @@ function afficherPage(page) {
 }
 
 function popupSuppression(node) {
-    const confirmation = document.getElementsByClassName("deleteConfirmation")[0];
-    confirmation.hidden = false;
+    const confirmation = document.getElementsByClassName("modal__overlay")[0];
+    confirmation.classList.add("is-visible")
 
     idArtSuppression = node.closest("tr").querySelector("td:nth-child(1)").textContent.trim();
     console.log("id : "+idArtSuppression)
@@ -136,8 +136,8 @@ function popupSuppression(node) {
 
 
 function confirmerSuppression(){
-    const confirmation = document.getElementsByClassName("deleteConfirmation")[0];
-    confirmation.hidden = true;
+    const confirmation = document.getElementsByClassName("modal__overlay")[0];
+    document.getElementById("modalDeco").classList.remove("is-visible");
     const formData = {
                 idArt: idArtSuppression,
                 typeRequete: "delete"
@@ -163,6 +163,6 @@ function confirmerSuppression(){
 
 
 function cancelSuppression(){
-    const confirmation = document.getElementsByClassName("deleteConfirmation")[0];
-    confirmation.hidden = true;
+    const confirmation = document.getElementsByClassName("modal__overlay")[0];
+        document.getElementById("modalDeco").classList.remove("is-visible");
 }

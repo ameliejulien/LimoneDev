@@ -5,8 +5,9 @@
     <title>Stock vendeur</title>
     <link rel="stylesheet" type="text/css" href="/Stock/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/Global.css">   
+    <link rel="stylesheet" href="/Stock/style.css"> 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../snackbar.js"></script>
 </head>
@@ -84,11 +85,13 @@
         <p class="snackbarText"></p>
     </div>
 
-    <div class="deleteConfirmation" hidden="true">
-        <h2>Voulez vous supprimer l'article ?</h2>
-        <div>
-            <button type="button" onclick="confirmerSuppression()">Oui</button>
-            <button type="button" onclick="cancelSuppression()">Non</button>
+    <div class="modal__overlay" id="modalDeco">
+        <div class="modal__boite">
+        <p class="modal__message">Souhaitez-vous vraiment supprimer cet article ?</p>
+            <div class="modal__actions">
+                <button type="button" class="profil__bouton" id="modalConfirmer" onclick="confirmerSuppression()">Oui</button>
+                <button type="button" class="profil__bouton profil__bouton--deco" id="modalAnnuler" onclick="cancelSuppression()">Non</button>
+            </div>
         </div>
     </div>
 
