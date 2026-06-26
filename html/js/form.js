@@ -59,7 +59,7 @@ function initCreationCompteClientForm(formSelector = ".formulaire_client") {
       .then(response => {
         if (response.status == 201) {
           window.location.href = "/Connexion/";
-        } else if (response.status == 409) {
+        } else if (response.status == 612) {
           afficherSnackBar("Notification", "Un compte existe déjà avec cette adresse mail.");
           return;
         } else {

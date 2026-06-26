@@ -11,39 +11,49 @@ require_once __DIR__ . '/../Constantes.php';
  */
 function confimerInscription($client)
 {
+    error_log("AAAAAAHHHH");
     $dbh = connecterBDD();
-    $dbh->beginTransaction();    
+    error_log("la");
+    $dbh->beginTransaction();
+    error_log("ici");
     try {
         if (!preg_match("/[a-zA-Z0-9_-]+$/", $client['nomUtilisateur'])) {
+            error_log("jaaj");
             throw new Exception(code: HTTP_USERNAME_INVALIDE);
         }
 
         if (!filter_var($client['mail'], FILTER_VALIDATE_EMAIL)) {
+            error_log("juuj");
             throw new Exception(code: HTTP_EMAIL_INVALIDE);
         }
 
         if ($client['motDePasse'] !== $client['confMotDePasse']) {
+            error_log("jiij");
             throw new Exception(code: HTTP_MDP_CONFIRM_DIFF);
         }
 
         if (!preg_match("/0[1-9](?: [0-9]{2}){4}/", $client['telephone']) && !preg_match("/0[1-9](?:[0-9]{2}){4}/", $client['telephone'])) {
+            error_log("joooj");
             throw new Exception(code: HTTP_TEL_INVALIDE);
-        }
+            }
 
-        error_log("utilisateur existe pas déjà");
+        
         $client["motDePasse"] = password_hash($client['motDePasse'], PASSWORD_DEFAULT);
 
         if (!chercherClient($client['mail'])) {
             $idUtilisateur = creerUtilisateurBdd($client);
+            error_log("utilisateur existe pas déjà");
             creerClientBdd($idUtilisateur);
+            error_log("utilisateur existe pas déjà");
         } else {
             $dbh->rollBack();
             return HTTP_EMAIL_EXISTANT;
         }
         $dbh->commit();
-        return HTTP_OK;
+        return HTTP_CREATED;
     } catch (Exception $e) {
         $dbh->rollBack();
+        error_log($e);
         return HTTP_ERR_GENERIQUE;
     }
 }
