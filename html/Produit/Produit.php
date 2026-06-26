@@ -132,10 +132,7 @@
                 <div class="action-bloc">
                     <!-- Si l'utilisateur est connecté en tant que vendeur, il n'a pas de bouton ajout au panier, mais il peut modifier le produit -->
                     <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == false): ?>
-                    <div class="quantite-selector hide">
-                    <?php else: ?>
                     <div class="quantite-selector">
-                    <?php endif; ?>
                         <button type="button" class="qty-btn" id="btn-moins" aria-label="Diminuer la quantité">
                             <i class="fa-solid fa-minus"></i>
                         </button>
@@ -144,6 +141,7 @@
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
+                    <?php endif; ?>
                     
                     <?php if (droitsAccesProduit($_COOKIE['uuid'], 2) == true): ?>
                     <button type="button" class="bouton-panier" data-id="<?= $produit['id_produit'] ?>"
