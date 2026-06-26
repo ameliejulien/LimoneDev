@@ -37,7 +37,9 @@
 
         <?php require_once '../../ui/header.php'; ?>
         <main class="flex flex-col flex-1 items-center justify-center">
+                <h1>Création A2F</h1>
                 <div class="flex flex-col items-center gap-[22px] bg-white w-[460px] mt-[32px] p-[32px] rounded-[18px] shadow-md">
+
                     <div class="flex flex-col w-[300px]">
                         <label htmlFor="secret">Secret :</label>
                         <input class="focus:border-[#1C2D30] rounded-md" type="text" id="secret" name="secret" value=<?= $secret ?> readonly>

@@ -3,3 +3,10 @@
 #submit {
     width: 310px;
 }
+
+h1 {
+  font-size: 3em;
+  color: #1C6D80;
+  font-family: var(--police-titre);
+  margin-top: 30px;
+}
