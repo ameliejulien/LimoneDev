@@ -110,11 +110,9 @@ form.addEventListener("submit", function (event) {
     method: "POST",
     body: formData,
   }).then((response) => {
-    console.log("Je suis passé" + response.status, response);
     if (response.status === 200
     ||  response.status === 201) {
       response.json().then((jsonResponse) => {
-        console.log(jsonResponse);
         if (!jsonResponse["succes"]) {
           afficherSnackBar(
             "Erreur",
