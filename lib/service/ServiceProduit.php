@@ -121,8 +121,8 @@ function creerProduit($arrayProduit, $uuid): array {
         $path_filename_ext = $target_dir.$name_ext;
 
         // Sauvegarde du produit sur le serveur
-        if (file_exists($path_filename_ext)
-        ||  !move_uploaded_file($temp_name, $path_filename_ext)) {
+        if (/*file_exists($path_filename_ext)
+        || */ !move_uploaded_file($temp_name, $path_filename_ext)) {
             $dbh->rollBack();
             return ['succes' => false, 'message' => "L'image n'a pas pu être sauvegardé, Pensez à la changer."];
         }
