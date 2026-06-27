@@ -85,7 +85,9 @@ form.addEventListener("submit", function (event) {
     const nouveauObj = {};
     inputArray.forEach((element) => {
       if (element.type === "file") {
-        if (element.files[0]) {formData.append(element.id, element.files[0]);}
+        if (element.files[0]) {
+          formData.append(element.id, element.files[0]);
+        }
       } else {
         nouveauObj[element.id] = element.value;
       }
@@ -110,29 +112,35 @@ form.addEventListener("submit", function (event) {
     method: "POST",
     body: formData,
   }).then((response) => {
-    if (response.status === 200
-    ||  response.status === 201) {
-      response.json().then((jsonResponse) => {
-        if (!jsonResponse["succes"]) {
-          afficherSnackBar(
-            "Erreur",
-            jsonResponse["message"]
-              ? jsonResponse["message"]
-              : "Une erreur est survenue",
-          );
+    if (response.status === 200 || response.status === 201) {
+      try {
+        response.json().then((jsonResponse) => {
+          if (!jsonResponse["succes"]) {
+            afficherSnackBar(
+              "Erreur",
+              jsonResponse["message"]
+                ? jsonResponse["message"]
+                : "Une erreur est survenue",
+            );
 
-          // Change la couleurs des bordures des champs invalides
-          if (jsonResponse["erreurs"]) {
-            jsonResponse["erreurs"].forEach((id) => {
-              const element = document.getElementById(id);
-              if (element) element.style.borderBottomColor = "red";
-            });
+            // Change la couleurs des bordures des champs invalides
+            if (jsonResponse["erreurs"]) {
+              jsonResponse["erreurs"].forEach((id) => {
+                const element = document.getElementById(id);
+                if (element) element.style.borderBottomColor = "red";
+              });
+            }
+          } else {
+            form.action = `../Produit/Produit.php?id=${jsonResponse["idProduit"]}`;
+            form.submit();
           }
-        } else {
-          form.action = `../Produit/Produit.php?id=${jsonResponse["idProduit"]}`;
-          form.submit();
-        }
-      });
+        });
+      } catch (error) { 
+        afficherSnackBar(
+          "Erreur",
+          "Une erreur est survenue et peut être du à un problème d'autorisation sur le serveur",
+        );
+      }
     } else {
       afficherSnackBar("Erreur", "Une erreur est survenue");
     }
